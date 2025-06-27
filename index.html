@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>المساعد القانوني الذكي</title>
+<style>
+body { font-family: Tahoma; background: #f0f0f0; padding: 2em; }
+textarea { width: 100%; height: 150px; font-size: 16px; }
+button { padding: 10px 20px; font-size: 16px; }
+#answer { margin-top: 20px; background: #fff; padding: 20px; border-radius: 10px; }
+.export-links { margin-top: 15px; padding: 15px; background: #e8f5e8; border-radius: 8px; }
+.export-links a { 
+    display: inline-block; 
+    margin: 5px 10px 5px 0; 
+    padding: 8px 15px; 
+    background: #007bff; 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 5px; 
+}
+.export-links a:hover { background: #0056b3; }
+.download-link { background: #28a745 !important; }
+.download-link:hover { background: #1e7e34 !important; }
+</style>
+</head>
+<body>
+<h2>📋 اكتب سؤالك القانوني هنا</h2>
+<textarea id="query" placeholder="اكتب سؤالك هنا..."></textarea><br>
+<button onclick="sendQuestion()">🔍 أرسل السؤال</button>
+<div id="answer"></div>
+<div id="export"></div>
+
+<script>
+const API_BASE = 'http://127.0.0.1:8000';
+
+async function sendQuestion() {
+    const query = document.getElementById('query').value.trim();
+    if (!query) {
+        alert('الرجاء كتابة سؤال قبل الإرسال');
+        return;
+    }
+
+    // Show loading
+    document.getElementById('answer').innerHTML = '<p>⏳ جاري معالجة السؤال...</p>';
+    document.getElementById('export').innerHTML = '';
+
+    try {
+        const formData = new FormData();
+        formData.append('query', query);
+        
+        const response = await fetch(`${API_BASE}/ask`, {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            throw new Error(`خطأ في الخادم: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Display answer
+        document.getElementById('answer').innerHTML = `<h3>✅ الرد:</h3><div>${data.answer}</div>`;
+        
+        // Create export links with full URLs
+        const pdfPreviewUrl = `${API_BASE}/export/pdf?question=${encodeURIComponent(data.question)}&answer=${encodeURIComponent(data.answer)}`;
+        const docxPreviewUrl = `${API_BASE}/export/docx?question=${encodeURIComponent(data.question)}&answer=${encodeURIComponent(data.answer)}`;
+        
+        document.getElementById('export').innerHTML = `
+            <div class="export-links">
+                <h4>📁 تصدير الرد:</h4>
+                <a href="javascript:void(0)" onclick="downloadFile('pdf', '${encodeURIComponent(data.question)}', '${encodeURIComponent(data.answer)}')" class="download-link">📄 تحميل PDF</a>
+                <a href="javascript:void(0)" onclick="downloadFile('docx', '${encodeURIComponent(data.question)}', '${encodeURIComponent(data.answer)}')" class="download-link">📝 تحميل Word</a>
+            </div>
+        `;
+        
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('answer').innerHTML = `<p style="color: red;">❌ حدث خطأ: ${error.message}</p>`;
+    }
+}
+
+async function downloadFile(format, question, answer) {
+    try {
+        const url = `${API_BASE}/export/${format}?question=${question}&answer=${answer}`;
+        
+        // Fetch the file as blob
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`خطأ في الخادم: ${response.status}`);
+        }
+        
+        // Get the blob data
+        const blob = await response.blob();
+        
+        // Create download link with blob URL
+        const blobUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = `الرد-القانوني.${format}`;
+        document.body.appendChild(link);
+        link.click();
+        
+        // Clean up
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(blobUrl);
+        
+    } catch (error) {
+        console.error('Download error:', error);
+        alert('حدث خطأ أثناء التحميل');
+    }
+}
+
+// Allow Enter key to send question
+document.getElementById('query').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && e.ctrlKey) {
+        sendQuestion();
+    }
+});
+</script>
+</body>
+</html>
