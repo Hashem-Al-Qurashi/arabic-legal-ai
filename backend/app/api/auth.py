@@ -1,37 +1,20 @@
+"""
+Authentication API endpoints for registration, login, and token management.
+Following enterprise best practices with clean separation of concerns.
+"""
+
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+
+from app.database import get_database
+from app.schemas.auth import UserRegister, UserLogin, Token
+from app.schemas.user import User as UserSchema
+from app.services.auth_service import AuthService
 from app.core.config import settings
 from app.dependencies.auth import get_current_user
-"""
-Authentication API endpoints for registration, login, and token management.
-"""
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
-
-from app.database import get_database
-from app.schemas.auth import UserRegister, UserLogin, Token
-from app.schemas.user import User as UserSchema
-from app.services.auth_service import AuthService
-from app.core.config import settings
-from app.dependencies.auth import get_current_user  # 🔧 ADD THIS LINE
-
-router = APIRouter(prefix="/auth", tags=["authentication"])
-
-# ... rest of the file stays the same
-
-"""
-Authentication API endpoints for registration, login, and token management.
-"""
-
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
-
-from app.database import get_database
-from app.schemas.auth import UserRegister, UserLogin, Token
-from app.schemas.user import User as UserSchema
-from app.services.auth_service import AuthService
-from app.core.config import settings
-
-router = APIRouter(prefix="/auth", tags=["authentication"])
+# ✅ BEST PRACTICE: Clean router with no prefix (controlled in main.py)
+router = APIRouter(tags=["authentication"])
 
 
 @router.post("/register", response_model=UserSchema, status_code=status.HTTP_201_CREATED)
@@ -39,51 +22,65 @@ async def register_user(
     user_register: UserRegister,
     db: Session = Depends(get_database)
 ):
-    """
-    Register a new user account.
+    """Register a new user account."""
     
-    - **email**: Valid email address (will be used for login)
-    - **password**: Strong password (minimum 8 characters)  
-    - **full_name**: User's full name (Arabic names supported)
+    # 🔧 DEBUG: Print what we received
+    print(f"🔍 DEBUG: Received registration data:")
+    print(f"  Email: {user_register.email}")
+    print(f"  Full name: {user_register.full_name}")
+    print(f"  Password length: {len(user_register.password)}")
     
-    Returns the created user information (without password).
-    """
-    # Check if user already exists
-    existing_user = AuthService.authenticate_user(
-        db, user_register.email, "dummy_password"
-    )
-    
-    if existing_user is not None:
+    try:
+        # Check if user already exists
+        print(f"🔄 DEBUG: Checking if user exists...")
+        existing_user = AuthService.authenticate_user(
+            db, user_register.email, "dummy_password"
+        )
+        
+        if existing_user is not None:
+            print(f"❌ DEBUG: User already exists!")
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Email already registered"
+            )
+        
+        print(f"✅ DEBUG: User doesn't exist, proceeding with registration...")
+        
+        # Register new user
+        print(f"🔄 DEBUG: Calling AuthService.register_user...")
+        new_user = AuthService.register_user(db, user_register)
+        
+        if not new_user:
+            print(f"❌ DEBUG: AuthService.register_user returned None!")
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Registration failed"
+            )
+        
+        print(f"✅ DEBUG: User created successfully!")
+        return new_user
+        
+    except HTTPException:
+        # Re-raise HTTP exceptions as-is
+        raise
+    except Exception as e:
+        print(f"💥 DEBUG: Exception occurred: {type(e).__name__}: {str(e)}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Email already registered"
+            detail=f"Registration failed: {str(e)}"
         )
-    
-    # Register new user
-    new_user = AuthService.register_user(db, user_register)
-    
-    if not new_user:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Registration failed"
-        )
-    
-    return new_user
 
+
+# ... rest of the endpoints stay the same ...
 
 @router.post("/login", response_model=Token)
 async def login_user(
     user_login: UserLogin,
     db: Session = Depends(get_database)
 ):
-    """
-    Login with email and password to get access tokens.
-    
-    - **email**: Registered email address
-    - **password**: User password
-    
-    Returns JWT tokens for authentication.
-    """
+    """Login with email and password to get access tokens."""
     login_result = AuthService.login_user(db, user_login)
     
     if not login_result:
@@ -99,7 +96,7 @@ async def login_user(
         access_token=access_token,
         refresh_token=refresh_token,
         token_type="bearer",
-        expires_in=settings.access_token_expire_minutes * 60  # Convert to seconds
+        expires_in=settings.access_token_expire_minutes * 60
     )
 
 
@@ -108,13 +105,7 @@ async def refresh_token(
     refresh_token: str,
     db: Session = Depends(get_database)
 ):
-    """
-    Refresh access token using refresh token.
-    
-    - **refresh_token**: Valid JWT refresh token
-    
-    Returns new access and refresh tokens.
-    """
+    """Refresh access token using refresh token."""
     token_result = AuthService.refresh_access_token(db, refresh_token)
     
     if not token_result:
@@ -139,21 +130,11 @@ async def get_current_user_profile(
     db: Session = Depends(get_database),
     current_user = Depends(get_current_user)
 ):
-    """
-    Get current user profile information.
-    
-    Requires valid authentication token.
-    Returns current user details including subscription info.
-    """
+    """Get current user profile information."""
     return current_user
 
 
 @router.post("/logout")
 async def logout_user():
-    """
-    Logout user (client should discard tokens).
-    
-    Since we use stateless JWT tokens, logout is handled client-side
-    by discarding the tokens. This endpoint is for consistency.
-    """
+    """Logout user (client should discard tokens)."""
     return {"message": "Successfully logged out"}

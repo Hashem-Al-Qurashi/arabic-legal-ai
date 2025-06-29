@@ -1,5 +1,6 @@
 """
 Legal consultation API endpoints.
+Following enterprise best practices with clean separation of concerns.
 """
 
 from typing import List
@@ -12,7 +13,8 @@ from app.services.consultation_service import ConsultationService
 from app.models.user import User
 from app.schemas.consultation import ConsultationResponse
 
-router = APIRouter(prefix="/consultations", tags=["legal consultations"])
+# ✅ BEST PRACTICE: Clean router with no prefix (controlled in main.py)
+router = APIRouter(tags=["legal consultations"])
 
 
 @router.post("/ask", response_model=ConsultationResponse)

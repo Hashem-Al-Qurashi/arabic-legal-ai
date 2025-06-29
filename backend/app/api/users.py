@@ -1,9 +1,6 @@
 """
 User management API endpoints.
-"""
-
-"""
-User management API endpoints.
+Following enterprise best practices with clean separation of concerns.
 """
 
 from typing import Dict, Any
@@ -14,12 +11,11 @@ from app.database import get_database
 from app.schemas.user import User as UserSchema, UserUpdate
 from app.services.user_service import UserService
 from app.services.auth_service import AuthService
-from app.dependencies.auth import get_current_active_user  # ✅ This should be there
+from app.dependencies.auth import get_current_active_user
 from app.models.user import User
 
-# ... rest of the file
-
-router = APIRouter(prefix="/users", tags=["users"])
+# ✅ BEST PRACTICE: Clean router with no prefix (controlled in main.py)
+router = APIRouter(tags=["users"])
 
 
 @router.get("/me", response_model=UserSchema)
