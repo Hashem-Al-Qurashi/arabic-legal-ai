@@ -33,13 +33,22 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) => {
       // Success - user will be redirected by AuthContext
     } catch (error: any) {
       console.error('Register error:', error);
+      
+      // 🔧 FIXED: Safe error handling
+      let errorMessage = 'خطأ في إنشاء الحساب. حاول مرة أخرى.';
+      
       if (error.response?.data?.detail) {
-        setError(error.response.data.detail);
+        if (typeof error.response.data.detail === 'string') {
+          errorMessage = error.response.data.detail;
+        } else {
+          // Handle complex validation errors
+          errorMessage = 'خطأ في التحقق من البيانات';
+        }
       } else if (error.message) {
-        setError(error.message);
-      } else {
-        setError('خطأ في إنشاء الحساب. حاول مرة أخرى.');
+        errorMessage = error.message;
       }
+      
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
