@@ -135,5 +135,24 @@ export const legalAPI = {
     window.URL.revokeObjectURL(downloadUrl);
   }
 };
+export const chatAPI = {
+  async sendMessage(message: string, conversationId?: string): Promise<any> {
+    const formData = new FormData();
+    formData.append('message', message);
+    if (conversationId) {
+      formData.append('conversation_id', conversationId);
+    }
 
+    const response = await api.post('/api/chat/message', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    
+    return response.data;
+  },
+
+  async getConversations(): Promise<any> {
+    const response = await api.get('/api/chat/conversations');
+    return response.data;
+  }
+};
 export { getToken, removeToken };

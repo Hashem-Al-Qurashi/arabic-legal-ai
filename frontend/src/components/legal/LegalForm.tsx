@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { legalAPI } from '../../services/api';
+import { legalAPI, chatAPI } from '../../services/api';  // ← FIXED
 import type { Consultation } from '../../types/auth';
 
 // Toast notification
@@ -42,6 +42,9 @@ const LegalForm: React.FC<LegalFormProps> = ({ onNewConsultation }) => {
   const [loading, setLoading] = useState(false);
   const [charCount, setCharCount] = useState(0);
   const { user } = useAuth();
+  // ADD THESE LINES after your existing useState in LegalForm:
+  const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
+  const [conversationHistory, setConversationHistory] = useState<any[]>([]);
 
   const maxChars = 1000;
   const questionsRemaining = 3 - (user?.questions_used_this_month || 0);
@@ -55,37 +58,63 @@ const LegalForm: React.FC<LegalFormProps> = ({ onNewConsultation }) => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!question.trim()) {
-      showToast('يرجى كتابة سؤالك القانوني قبل الإرسال', 'error');
-      return;
-    }
+  e.preventDefault();
+  
+  if (!question.trim()) {
+    showToast('يرجى كتابة سؤالك القانوني قبل الإرسال', 'error');
+    return;
+  }
 
-    if (question.trim().length < 10) {
-      showToast('يرجى كتابة سؤال أكثر تفصيلاً (على الأقل 10 أحرف)', 'error');
-      return;
-    }
+  if (question.trim().length < 10) {
+    showToast('يرجى كتابة سؤال أكثر تفصيلاً (على الأقل 10 أحرف)', 'error');
+    return;
+  }
 
-    if (questionsRemaining <= 0) {
-      showToast('لقد استنفدت عدد الأسئلة المسموحة لهذا الشهر', 'error');
-      return;
-    }
+  if (questionsRemaining <= 0) {
+    showToast('لقد استنفدت عدد الأسئلة المسموحة لهذا الشهر', 'error');
+    return;
+  }
 
-    setLoading(true);
+  setLoading(true);
+  try {
+    // 🔥 NEW: Try chat API first (with memory), fallback to old API
+    let consultation;
     try {
-      const consultation = await legalAPI.askQuestion(question.trim());
-      onNewConsultation(consultation);
-      setQuestion('');
-      setCharCount(0);
-      showToast('تم الحصول على الإجابة بنجاح! 🎉', 'success');
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.detail || 'حدث خطأ في معالجة السؤال. حاول مرة أخرى.';
-      showToast(errorMessage, 'error');
-    } finally {
-      setLoading(false);
+const chatResponse = await chatAPI.sendMessage(question.trim(), currentConversationId || undefined);      
+      // Convert chat response to consultation format
+      consultation = {
+        id: chatResponse.ai_message.id,
+        question: question.trim(),
+        answer: chatResponse.ai_message.content,
+        processing_time_ms: chatResponse.ai_message.processing_time_ms || 1500,
+        timestamp: chatResponse.ai_message.timestamp,
+        user_questions_remaining: chatResponse.user_questions_remaining
+      };
+      
+      // Update conversation state
+      setCurrentConversationId(chatResponse.conversation_id);
+      setConversationHistory(prev => [...prev, {
+        user: question.trim(),
+        assistant: chatResponse.ai_message.content
+      }]);
+      
+    } catch (chatError) {
+      // Fallback to old API if chat fails
+      console.log('Chat API failed, using fallback:', chatError);
+      consultation = await legalAPI.askQuestion(question.trim());
     }
-  };
+    
+    onNewConsultation(consultation);
+    setQuestion('');
+    setCharCount(0);
+    showToast('تم الحصول على الإجابة بنجاح! 🎉', 'success');
+  } catch (error: any) {
+    const errorMessage = error.response?.data?.detail || 'حدث خطأ في معالجة السؤال. حاول مرة أخرى.';
+    showToast(errorMessage, 'error');
+  } finally {
+    setLoading(false);
+  }
+};
 
   const suggestionQuestions = [
     "ما هي حقوق الموظف عند إنهاء الخدمة؟",

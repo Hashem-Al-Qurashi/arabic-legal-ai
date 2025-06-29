@@ -1,7 +1,7 @@
 """
 Main FastAPI application with proper router separation
 """
-
+from app.api.chat import router as chat_router
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
@@ -11,6 +11,7 @@ import io
 # Import routers
 from app.api.simple_auth import router as auth_router
 from app.api.simple_consultations import router as consultations_router
+
 
 # Create FastAPI application
 app = FastAPI(
@@ -38,7 +39,7 @@ app.add_middleware(
 # Include routers with proper prefixes
 app.include_router(auth_router, prefix="/api/auth", tags=["Authentication"])
 app.include_router(consultations_router, prefix="/api/consultations", tags=["Legal Consultations"])
-
+app.include_router(chat_router, prefix="/api")
 # Document export endpoint (from your original working backend)
 @app.get("/export/docx")
 async def export_docx(question: str = Query(...), answer: str = Query(...)):
