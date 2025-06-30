@@ -153,6 +153,28 @@ export const chatAPI = {
   async getConversations(): Promise<any> {
     const response = await api.get('/api/chat/conversations');
     return response.data;
+  },
+
+  async getConversationMessages(conversationId: string): Promise<any> {
+    const response = await api.get(`/api/chat/conversations/${conversationId}/messages`);
+    return response.data;
+  },
+
+  async updateConversationTitle(conversationId: string, title: string): Promise<any> {
+    const formData = new FormData();
+    formData.append('new_title', title);
+
+    const response = await api.put(`/api/chat/conversations/${conversationId}/title`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    
+    return response.data;
+  },
+
+  async archiveConversation(conversationId: string): Promise<any> {
+    const response = await api.delete(`/api/chat/conversations/${conversationId}`);
+    return response.data;
   }
 };
+
 export { getToken, removeToken };

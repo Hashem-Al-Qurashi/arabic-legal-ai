@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+// Updated frontend/src/components/legal/LegalForm.tsx
+// Now with chat history sidebar integration
+
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { legalAPI, chatAPI } from '../../services/api';  // ← FIXED
+import { legalAPI, chatAPI } from '../../services/api';
+import ChatHistory from '../chat/ChatHistory';
 import type { Consultation } from '../../types/auth';
 
-// Toast notification
+// Toast notification (keep your existing implementation)
 const showToast = (message: string, type: 'error' | 'success' = 'error') => {
   const toast = document.createElement('div');
   const bgColor = type === 'error' 
@@ -41,10 +45,13 @@ const LegalForm: React.FC<LegalFormProps> = ({ onNewConsultation }) => {
   const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
   const [charCount, setCharCount] = useState(0);
-  const { user } = useAuth();
-  // ADD THESE LINES after your existing useState in LegalForm:
-  const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
+  
+  // 🔥 NEW: Chat history state
+  const [currentConversationId, setCurrentConversationId] = useState<string | undefined>(undefined);
+  const [showChatHistory, setShowChatHistory] = useState(false);
   const [conversationHistory, setConversationHistory] = useState<any[]>([]);
+  
+  const { user } = useAuth();
 
   const maxChars = 1000;
   const questionsRemaining = 3 - (user?.questions_used_this_month || 0);
@@ -57,64 +64,100 @@ const LegalForm: React.FC<LegalFormProps> = ({ onNewConsultation }) => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  
-  if (!question.trim()) {
-    showToast('يرجى كتابة سؤالك القانوني قبل الإرسال', 'error');
-    return;
-  }
-
-  if (question.trim().length < 10) {
-    showToast('يرجى كتابة سؤال أكثر تفصيلاً (على الأقل 10 أحرف)', 'error');
-    return;
-  }
-
-  if (questionsRemaining <= 0) {
-    showToast('لقد استنفدت عدد الأسئلة المسموحة لهذا الشهر', 'error');
-    return;
-  }
-
-  setLoading(true);
-  try {
-    // 🔥 NEW: Try chat API first (with memory), fallback to old API
-    let consultation;
+  // 🔥 NEW: Load conversation messages
+  const loadConversation = async (conversationId: string) => {
     try {
-const chatResponse = await chatAPI.sendMessage(question.trim(), currentConversationId || undefined);      
-      // Convert chat response to consultation format
-      consultation = {
-        id: chatResponse.ai_message.id,
-        question: question.trim(),
-        answer: chatResponse.ai_message.content,
-        processing_time_ms: chatResponse.ai_message.processing_time_ms || 1500,
-        timestamp: chatResponse.ai_message.timestamp,
-        user_questions_remaining: chatResponse.user_questions_remaining
-      };
+      const response = await chatAPI.getConversationMessages(conversationId);
+      setCurrentConversationId(conversationId);
+      setConversationHistory(response.messages || []);
       
-      // Update conversation state
-      setCurrentConversationId(chatResponse.conversation_id);
-      setConversationHistory(prev => [...prev, {
-        user: question.trim(),
-        assistant: chatResponse.ai_message.content
-      }]);
+      // Clear the input for new message in existing conversation
+      setQuestion('');
+      setCharCount(0);
       
-    } catch (chatError) {
-      // Fallback to old API if chat fails
-      console.log('Chat API failed, using fallback:', chatError);
-      consultation = await legalAPI.askQuestion(question.trim());
+      showToast('تم تحميل المحادثة بنجاح!', 'success');
+    } catch (error) {
+      showToast('فشل في تحميل المحادثة', 'error');
     }
-    
-    onNewConsultation(consultation);
+  };
+
+  // 🔥 NEW: Start new conversation
+  const startNewConversation = () => {
+    setCurrentConversationId(undefined);
+    setConversationHistory([]);
     setQuestion('');
     setCharCount(0);
-    showToast('تم الحصول على الإجابة بنجاح! 🎉', 'success');
-  } catch (error: any) {
-    const errorMessage = error.response?.data?.detail || 'حدث خطأ في معالجة السؤال. حاول مرة أخرى.';
-    showToast(errorMessage, 'error');
-  } finally {
-    setLoading(false);
-  }
-};
+    showToast('تم بدء محادثة جديدة', 'success');
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!question.trim()) {
+      showToast('يرجى كتابة سؤالك القانوني قبل الإرسال', 'error');
+      return;
+    }
+
+    if (question.trim().length < 10) {
+      showToast('يرجى كتابة سؤال أكثر تفصيلاً (على الأقل 10 أحرف)', 'error');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      // 🔥 NEW: Try chat API first (with memory), fallback to old API
+      let consultation;
+      try {
+        const chatResponse = await chatAPI.sendMessage(question.trim(), currentConversationId);
+        
+        // Convert chat response to consultation format
+        consultation = {
+          id: chatResponse.ai_message.id,
+          question: question.trim(),
+          answer: chatResponse.ai_message.content,
+          processing_time_ms: chatResponse.ai_message.processing_time_ms || 1500,
+          timestamp: chatResponse.ai_message.timestamp,
+          user_questions_remaining: chatResponse.user_questions_remaining
+        };
+        
+        // 🔥 NEW: Update conversation state
+        setCurrentConversationId(chatResponse.conversation_id);
+        
+        // Add messages to local history for immediate display
+        const newUserMessage = {
+          id: chatResponse.user_message.id,
+          role: 'user',
+          content: question.trim(),
+          timestamp: chatResponse.user_message.timestamp
+        };
+        
+        const newAiMessage = {
+          id: chatResponse.ai_message.id,
+          role: 'assistant',
+          content: chatResponse.ai_message.content,
+          timestamp: chatResponse.ai_message.timestamp,
+          processing_time_ms: chatResponse.ai_message.processing_time_ms
+        };
+        
+        setConversationHistory(prev => [...prev, newUserMessage, newAiMessage]);
+        
+      } catch (chatError) {
+        // Fallback to old API if chat fails
+        console.log('Chat API failed, using fallback:', chatError);
+        consultation = await legalAPI.askQuestion(question.trim());
+      }
+      
+      onNewConsultation(consultation);
+      setQuestion('');
+      setCharCount(0);
+      showToast('تم الحصول على الإجابة بنجاح! 🎉', 'success');
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.detail || 'حدث خطأ في معالجة السؤال. حاول مرة أخرى.';
+      showToast(errorMessage, 'error');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const suggestionQuestions = [
     "ما هي حقوق الموظف عند إنهاء الخدمة؟",
@@ -130,6 +173,15 @@ const chatResponse = await chatAPI.sendMessage(question.trim(), currentConversat
 
   return (
     <div className="legal-form">
+      {/* 🔥 NEW: Chat History Sidebar */}
+      <ChatHistory
+        currentConversationId={currentConversationId}
+        onConversationSelect={loadConversation}
+        onNewConversation={startNewConversation}
+        isVisible={showChatHistory}
+        onToggleVisibility={() => setShowChatHistory(!showChatHistory)}
+      />
+
       {/* User Info Header */}
       <div className="user-info">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
@@ -138,10 +190,10 @@ const chatResponse = await chatAPI.sendMessage(question.trim(), currentConversat
               👋 مرحباً، {user?.full_name}
             </p>
             <p style={{ margin: 0, fontSize: '0.9rem', opacity: 0.8 }}>
-              نحن هنا لمساعدتك في جميع استفساراتك القانونية
+              {currentConversationId ? '💬 متابعة المحادثة' : '🆕 محادثة جديدة'}
             </p>
           </div>
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             <div style={{ 
               background: questionsRemaining > 0 ? '#dcfce7' : '#fee2e2',
               color: questionsRemaining > 0 ? '#166534' : '#991b1b',
@@ -156,54 +208,114 @@ const chatResponse = await chatAPI.sendMessage(question.trim(), currentConversat
         </div>
       </div>
 
-      {/* Quick Suggestions */}
-      <div style={{ marginBottom: '2rem' }}>
-        <h3 style={{ 
-          color: '#374151', 
-          marginBottom: '1rem', 
-          fontSize: '1.1rem',
-          fontWeight: '600' 
+      {/* 🔥 NEW: Current Conversation Display */}
+      {conversationHistory.length > 0 && (
+        <div style={{
+          background: '#f8f9fa',
+          border: '1px solid #e5e7eb',
+          borderRadius: '12px',
+          padding: '1rem',
+          marginBottom: '1.5rem',
+          maxHeight: '300px',
+          overflowY: 'auto'
         }}>
-          💡 أسئلة شائعة للمساعدة:
-        </h3>
-        <div style={{ 
-          display: 'grid', 
-          gap: '0.75rem',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))'
-        }}>
-          {suggestionQuestions.map((suggestion, index) => (
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+            <h3 style={{ margin: 0, color: '#374151', fontSize: '1rem' }}>📝 المحادثة الحالية</h3>
             <button
-              key={index}
-              type="button"
-              onClick={() => handleSuggestionClick(suggestion)}
-              disabled={loading}
+              onClick={startNewConversation}
               style={{
-                background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
-                border: '1px solid #cbd5e1',
-                borderRadius: '8px',
-                padding: '0.75rem 1rem',
-                textAlign: 'right',
-                fontSize: '0.9rem',
-                color: '#475569',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease-in-out',
-                fontFamily: 'inherit',
-                lineHeight: '1.4'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)';
-                e.currentTarget.style.transform = 'translateY(-1px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)';
-                e.currentTarget.style.transform = 'translateY(0)';
+                background: '#6b7280',
+                color: 'white',
+                border: 'none',
+                borderRadius: '6px',
+                padding: '0.25rem 0.75rem',
+                fontSize: '0.75rem',
+                cursor: 'pointer'
               }}
             >
-              {suggestion}
+              محادثة جديدة
             </button>
-          ))}
+          </div>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            {conversationHistory.map((message) => (
+              <div
+                key={message.id}
+                style={{
+                  background: message.role === 'user' ? '#e3f2fd' : '#f1f8e9',
+                  padding: '0.75rem',
+                  borderRadius: '8px',
+                  borderRight: `4px solid ${message.role === 'user' ? '#2196F3' : '#4CAF50'}`
+                }}
+              >
+                <div style={{ 
+                  fontSize: '0.75rem', 
+                  color: '#666', 
+                  marginBottom: '0.5rem',
+                  fontWeight: '600'
+                }}>
+                  {message.role === 'user' ? '👤 أنت' : '🤖 المساعد القانوني'}
+                </div>
+                <div 
+                  dangerouslySetInnerHTML={{ __html: message.content }}
+                  style={{ lineHeight: '1.5', fontSize: '0.9rem' }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* Quick Suggestions - only show if no conversation */}
+      {conversationHistory.length === 0 && (
+        <div style={{ marginBottom: '2rem' }}>
+          <h3 style={{ 
+            color: '#374151', 
+            marginBottom: '1rem', 
+            fontSize: '1.1rem',
+            fontWeight: '600' 
+          }}>
+            💡 أسئلة شائعة للمساعدة:
+          </h3>
+          <div style={{ 
+            display: 'grid', 
+            gap: '0.75rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))'
+          }}>
+            {suggestionQuestions.map((suggestion, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => handleSuggestionClick(suggestion)}
+                disabled={loading}
+                style={{
+                  background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+                  border: '1px solid #cbd5e1',
+                  borderRadius: '8px',
+                  padding: '0.75rem 1rem',
+                  textAlign: 'right',
+                  fontSize: '0.9rem',
+                  color: '#475569',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease-in-out',
+                  fontFamily: 'inherit',
+                  lineHeight: '1.4'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)';
+                  e.currentTarget.style.transform = 'translateY(-1px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                {suggestion}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Main Form */}
       <form onSubmit={handleSubmit}>
@@ -215,7 +327,7 @@ const chatResponse = await chatAPI.sendMessage(question.trim(), currentConversat
             marginBottom: '0.75rem'
           }}>
             <span style={{ fontWeight: '600', fontSize: '1.1rem', color: '#374151' }}>
-              📋 اكتب سؤالك القانوني بالتفصيل:
+              {currentConversationId ? '💬 أكمل المحادثة:' : '📋 اكتب سؤالك القانوني بالتفصيل:'}
             </span>
             <span style={{ 
               fontSize: '0.85rem', 
@@ -228,7 +340,11 @@ const chatResponse = await chatAPI.sendMessage(question.trim(), currentConversat
           <textarea
             value={question}
             onChange={handleInputChange}
-            placeholder="مثال: أحتاج إلى معرفة الإجراءات المطلوبة لتأسيس شركة ذات مسؤولية محدودة في المملكة العربية السعودية، وما هي المتطلبات القانونية والمالية اللازمة؟"
+            placeholder={
+              currentConversationId 
+                ? "مثال: أريد المزيد من التفاصيل حول النقطة الأخيرة، أو قارن بين الخيارات المذكورة..."
+                : "مثال: أحتاج إلى معرفة الإجراءات المطلوبة لتأسيس شركة ذات مسؤولية محدودة في المملكة العربية السعودية، وما هي المتطلبات القانونية والمالية اللازمة؟"
+            }
             rows={6}
             disabled={loading || questionsRemaining <= 0}
             required
@@ -273,7 +389,7 @@ const chatResponse = await chatAPI.sendMessage(question.trim(), currentConversat
             </>
           ) : (
             <>
-              🔍 احصل على الاستشارة القانونية
+              {currentConversationId ? '💬 إرسال الرسالة' : '🔍 احصل على الاستشارة القانونية'}
             </>
           )}
         </button>
@@ -323,6 +439,11 @@ const chatResponse = await chatAPI.sendMessage(question.trim(), currentConversat
           <li>اذكر السياق والظروف المحيطة بالقضية</li>
           <li>حدد نوع القانون (تجاري، عمل، عقاري، إلخ)</li>
           <li>اذكر أي تواريخ أو مبالغ مالية مهمة</li>
+          {currentConversationId && (
+            <li style={{ fontWeight: '600', color: '#059669' }}>
+              💬 يمكنك الآن طرح أسئلة متابعة والمقارنات - المساعد يتذكر المحادثة!
+            </li>
+          )}
         </ul>
       </div>
     </div>
