@@ -3,9 +3,10 @@ import { useAuth } from '../../contexts/AuthContext';
 
 interface LoginFormProps {
   onSwitchToRegister: () => void;
+  onSuccess?: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister, onSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -24,7 +25,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
     setLoading(true);
     try {
       await login(email, password);
-      // Success - user will be redirected by AuthContext
+      // Success - call onSuccess callback if provided
+      if (onSuccess) {
+        onSuccess();
+      }
     } catch (error: any) {
       console.error('Login error:', error);
       if (error.response?.data?.detail) {

@@ -3,9 +3,10 @@ import { useAuth } from '../../contexts/AuthContext';
 
 interface RegisterFormProps {
   onSwitchToLogin: () => void;
+  onSuccess?: () => void;
 }
 
-const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) => {
+const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
@@ -30,18 +31,19 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) => {
     setLoading(true);
     try {
       await register(email, password, fullName);
-      // Success - user will be redirected by AuthContext
+      // Success - call onSuccess callback if provided
+      if (onSuccess) {
+        onSuccess();
+      }
     } catch (error: any) {
       console.error('Register error:', error);
       
-      // 🔧 FIXED: Safe error handling
       let errorMessage = 'خطأ في إنشاء الحساب. حاول مرة أخرى.';
       
       if (error.response?.data?.detail) {
         if (typeof error.response.data.detail === 'string') {
           errorMessage = error.response.data.detail;
         } else {
-          // Handle complex validation errors
           errorMessage = 'خطأ في التحقق من البيانات';
         }
       } else if (error.message) {
