@@ -70,9 +70,9 @@ const RenamePopup: React.FC<RenamePopupProps> = ({ isOpen, currentTitle, onSave,
         <div
           style={{
             background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%)',
-            borderRadius: '24px',
-            padding: '40px',
-            maxWidth: '440px',
+            borderRadius: '20px', // 🔧 Reduced to match rename dialog
+            padding: '32px', // 🔧 Reduced to match rename dialog
+            maxWidth: '400px', // 🔧 Reduced to match rename dialog
             width: '90%',
             boxShadow: `
               0 32px 64px rgba(0, 0, 0, 0.12),
@@ -140,29 +140,28 @@ const RenamePopup: React.FC<RenamePopupProps> = ({ isOpen, currentTitle, onSave,
           </div>
           
           <form onSubmit={handleSubmit}>
-            <div style={{ marginBottom: '32px' }}>
-              <input
+            <div style={{ marginBottom: '24px' }}> {/* 🔧 Reduced spacing */}              <input
                 ref={inputRef}
                 type="text"
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="اسم المحادثة الجديد"
-                style={{
-                  width: '100%',
-                  padding: '16px 20px',
-                  border: '2px solid #F5F5F5',
-                  borderRadius: '16px',
-                  fontSize: '16px',
-                  outline: 'none',
-                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                  direction: 'rtl',
-                  textAlign: 'right',
-                  background: 'rgba(255, 255, 255, 0.8)',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif',
-                  boxSizing: 'border-box',
-                  color: '#212121',
-                  fontWeight: '400'
+                 style={{
+                    width: '100%',
+                    padding: '14px 18px', // 🔧 Reduced padding
+                    border: '2px solid #F5F5F5',
+                    borderRadius: '12px', // 🔧 Reduced border radius
+                    fontSize: '15px', // 🔧 Slightly smaller font
+                    outline: 'none',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    direction: 'rtl',
+                    textAlign: 'right',
+                    background: 'rgba(255, 255, 255, 0.9)', // 🔧 More opaque
+                    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif',
+                    boxSizing: 'border-box',
+                    color: '#212121',
+                    fontWeight: '400'
                 }}
                 onFocus={(e) => {
                   e.target.style.borderColor = '#006C35';
@@ -181,25 +180,26 @@ const RenamePopup: React.FC<RenamePopupProps> = ({ isOpen, currentTitle, onSave,
             
             <div style={{
               display: 'flex',
-              gap: '16px',
-              justifyContent: 'flex-end'
+              gap: '12px',
+              justifyContent: 'center', // 🔧 Changed to flex-start for RTL
+              direction: 'rtl' // 🔧 Ensure RTL direction
             }}>
               {/* Cancel button */}
               <button
                 type="button"
                 onClick={onCancel}
                 style={{
-                  padding: '14px 28px',
+                  padding: '12px 24px', // 🔧 Reduced padding
                   background: 'rgba(117, 117, 117, 0.08)',
                   color: '#757575',
                   border: 'none',
-                  borderRadius: '12px',
+                  borderRadius: '10px', // 🔧 Reduced border radius
                   cursor: 'pointer',
-                  fontSize: '15px',
+                  fontSize: '14px', // 🔧 Slightly smaller font
                   fontWeight: '500',
                   transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                   fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif',
-                  minWidth: '100px',
+                  minWidth: '90px', // 🔧 Reduced from 100px
                   backdropFilter: 'blur(10px)'
                 }}
                 onMouseOver={(e) => {
@@ -320,12 +320,12 @@ const DeletePopup: React.FC<DeletePopupProps> = ({ isOpen, conversationTitle, on
         <div
           style={{
             background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%)',
-            borderRadius: '24px',
-            padding: '40px',
-            maxWidth: '460px',
+            borderRadius: '20px', // 🔧 Reduced border radius
+            padding: '32px', // 🔧 Reduced padding from 40px to 32px
+            maxWidth: '400px', // 🔧 Reduced from 440px to 400px
             width: '90%',
             boxShadow: `
-              0 32px 64px rgba(0, 0, 0, 0.15),
+              0 32px 64px rgba(0, 0, 0, 0.12),
               0 0 0 1px rgba(255, 255, 255, 0.1),
               inset 0 1px 0 rgba(255, 255, 255, 0.2)
             `,
@@ -338,7 +338,7 @@ const DeletePopup: React.FC<DeletePopupProps> = ({ isOpen, conversationTitle, on
         >
           <div style={{
             textAlign: 'center',
-            marginBottom: '32px'
+            marginBottom: '24px'
           }}>
             {/* Warning Icon with pulsing effect */}
             <div style={{
@@ -428,26 +428,28 @@ const DeletePopup: React.FC<DeletePopupProps> = ({ isOpen, conversationTitle, on
           
           <div style={{
             display: 'flex',
-            gap: '16px',
-            justifyContent: 'flex-end'
+            gap: '12px',
+            justifyContent: 'center', // 🔧 Center the buttons
+            direction: 'rtl'
           }}>
             {/* Cancel button */}
             <button
-              onClick={onCancel}
-              style={{
-                padding: '14px 28px',
-                background: 'rgba(117, 117, 117, 0.08)',
-                color: '#757575',
-                border: 'none',
-                borderRadius: '12px',
-                cursor: 'pointer',
-                fontSize: '15px',
-                fontWeight: '500',
-                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif',
-                minWidth: '100px',
-                backdropFilter: 'blur(10px)'
-              }}
+                onClick={onCancel}
+                style={{
+                  padding: '12px 24px', // 🔧 Reduced padding to match rename dialog
+                  background: 'rgba(117, 117, 117, 0.08)',
+                  color: '#757575',
+                  border: 'none',
+                  borderRadius: '10px', // 🔧 Reduced border radius to match
+                  cursor: 'pointer',
+                  fontSize: '14px', // 🔧 Smaller font to match
+                  fontWeight: '500',
+                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif',
+                  minWidth: '100px',
+                  flex: '0 0 auto', // 🔧 Prevent flex growing
+                  backdropFilter: 'blur(10px)'
+                }}
               onMouseOver={(e) => {
                 e.currentTarget.style.background = 'rgba(117, 117, 117, 0.12)';
                 e.currentTarget.style.transform = 'translateY(-1px)';
@@ -464,21 +466,22 @@ const DeletePopup: React.FC<DeletePopupProps> = ({ isOpen, conversationTitle, on
             
             {/* Delete button - Danger Red */}
             <button
-              onClick={onConfirm}
-              style={{
-                padding: '14px 28px',
-                background: 'linear-gradient(135deg, #DC2626 0%, #B91C1C 100%)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '12px',
-                cursor: 'pointer',
-                fontSize: '15px',
-                fontWeight: '500',
-                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif',
-                minWidth: '100px',
-                boxShadow: '0 8px 32px rgba(220, 38, 38, 0.25)'
-              }}
+                onClick={onConfirm}
+                style={{
+                  padding: '12px 24px', // 🔧 Reduced padding to match rename dialog
+                  background: 'linear-gradient(135deg, #DC2626 0%, #B91C1C 100%)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '10px', // 🔧 Reduced border radius to match
+                  cursor: 'pointer',
+                  fontSize: '14px', // 🔧 Smaller font to match
+                  fontWeight: '500',
+                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif',
+                  minWidth: '100px',
+                  flex: '0 0 auto', // 🔧 Prevent flex growing
+                  boxShadow: '0 8px 32px rgba(220, 38, 38, 0.25)'
+                }}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform = 'translateY(-1px)';
                 e.currentTarget.style.boxShadow = '0 12px 40px rgba(220, 38, 38, 0.35)';
@@ -755,8 +758,8 @@ const ActionsBar: React.FC<ActionsBarProps> = ({ content, isLastMessage, message
         }
       });
 
-      fullContent += '\n\nتم إنتاج هذا المستند بواسطة المساعد القانوني الذكي\n';
-      fullContent += 'استشارة قانونية ذكية مبنية على القانون السعودي';
+      fullContent += '\n\nتم إنتاج هذا المستند بواسطة معين المساعد الذكي\n';
+      fullContent += 'استشار ذكية مبنية على القانون السعودي';
 
       await legalAPI.exportDocx('المحادثة الكاملة', fullContent);
       showToast('تم تحميل المحادثة الكاملة بنجاح', 'success');
@@ -1734,10 +1737,11 @@ const AuthScreen: React.FC = () => {
 };
 
 const ChatApp: React.FC = () => {
-  const { user, logout, isGuest, guestLimits, incrementGuestMessage, incrementGuestExchange, incrementGuestExport, incrementGuestCitation, canSendMessage, canAskFollowup, canExport, canGetCitations } = useAuth();
-  const [isMobile, setIsMobile] = useState(false);
+  const { user, logout, isGuest, guestLimits, incrementGuestMessage, incrementGuestExchange, incrementGuestExport, incrementGuestCitation, canSendMessage, canAskFollowup, canExport, canGetCitations, updateUserData, refreshUserData, questionsRemaining, isInCooldown, cooldownTimeRemaining, canAskNewQuestion } = useAuth();
+  const [isMobile, setIsMobile] = useState(false); // 🔧 ADD THIS LINE
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [conversations, setConversations] = useState<Conversation[]>([]);
+  // ... rest of your state variables ...
   const [selectedConversation, setSelectedConversation] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [exchangeCount, setExchangeCount] = useState(0);
@@ -1767,6 +1771,7 @@ const ChatApp: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
+  // Detect mobile screen size
   // Detect mobile screen size
   useEffect(() => {
     const checkMobile = () => {
@@ -1805,27 +1810,45 @@ useEffect(() => {
     console.log('🔄 User authenticated, loading conversations...');
     loadConversations();
   }
-}, [user]); 
+}, [user?.id]); // Only trigger when user ID changes, not on every user update
 
   const loadConversations = async () => {
-  if (!user) return; // Safety check
-  
-  setLoadingConversations(true);
-  try {
-    console.log('🔄 Loading conversations for user:', user.email);
-    const response = await chatAPI.getConversations();
-    console.log('✅ Loaded conversations:', response.conversations?.length || 0);
-    setConversations(response.conversations || []);
-  } catch (error: any) {
-  console.log('❌ Error loading conversations:', error);
-  // Don't show auth-related errors
-  if (error.response?.status !== 401) {
-    showToast('فشل في تحميل المحادثات السابقة', 'error');
-  }
-} finally {
-  setLoadingConversations(false);
-}
-};
+    if (!user || loadingConversations) return; // Safety check + prevent multiple calls
+    
+    setLoadingConversations(true);
+    try {
+      console.log('🔄 Loading conversations for user:', user.email);
+      const response = await chatAPI.getConversations();
+      console.log('✅ Loaded conversations:', response.conversations?.length || 0);
+      
+      // Only update if conversations actually changed
+      const newConversations = response.conversations || [];
+      setConversations(prevConversations => {
+        // Simple comparison to prevent unnecessary updates
+        if (JSON.stringify(prevConversations) !== JSON.stringify(newConversations)) {
+          return newConversations;
+        }
+        return prevConversations;
+      });
+      
+      // 🔧 FIX: Update user data if provided in conversations response (but only once)
+      if (response.current_user) {
+        console.log('🔄 Updating user data from conversations response:', response.current_user);
+        updateUserData({
+          questions_used_this_month: response.current_user.questions_used_this_month,
+          subscription_tier: response.current_user.subscription_tier
+        });
+      }
+    } catch (error: any) {
+      console.log('❌ Error loading conversations:', error);
+      // Don't show auth-related errors
+      if (error.response?.status !== 401) {
+        showToast('فشل في تحميل المحادثات السابقة', 'error');
+      }
+    } finally {
+      setLoadingConversations(false);
+    }
+  };
 
   const loadConversationMessages = async (conversationId: string) => {
     try {
@@ -1938,10 +1961,14 @@ const handleDeleteCancel = () => {
   const handleSendMessage = async () => {
   if (!inputMessage.trim()) return;
   
-  // Check message limit for guests
-  if (isGuest && !canSendMessage()) {
-    setUpgradePromptType('messages');
-    setShowUpgradePrompt(true);
+  // 🔧 NEW: Check cooldown first
+  if (!canAskNewQuestion()) {
+    if (isInCooldown) {
+      showToast(`يجب الانتظار ${cooldownTimeRemaining} دقيقة قبل طرح سؤال جديد`, 'error');
+    } else {
+      setUpgradePromptType('messages');
+      setShowUpgradePrompt(true);
+    }
     return;
   }
   
@@ -2003,6 +2030,21 @@ const handleDeleteCancel = () => {
       try {
         const chatResponse = await chatAPI.sendMessage(currentMessage, selectedConversation || undefined);
         
+        // 🔧 FIX: Update user data if provided in response
+        if (chatResponse.updated_user) {
+          console.log('🔄 Updating user data from chat response:', chatResponse.updated_user);
+          updateUserData({
+            questions_used_this_month: chatResponse.updated_user.questions_used_this_month,
+            subscription_tier: chatResponse.updated_user.subscription_tier,
+            is_active: chatResponse.updated_user.is_active,
+            is_verified: chatResponse.updated_user.is_verified
+          });
+        } else {
+          // 🔧 FIX: If no user data in response, refresh from backend
+          console.log('🔄 No user data in response, refreshing from backend...');
+          await refreshUserData();
+        }
+        
         const aiMessage: Message = {
           id: chatResponse.ai_message.id,
           role: 'assistant',
@@ -2015,19 +2057,53 @@ const handleDeleteCancel = () => {
         setSelectedConversation(chatResponse.conversation_id);
         
         // Refresh conversations list
-        loadConversations();
+        // Only refresh conversations if this is a new conversation
+        if (chatResponse.conversation_id && chatResponse.conversation_id !== selectedConversation) {
+          setTimeout(() => loadConversations(), 1000);
+        }
       } catch (chatError) {
         // Fallback to old API
-        const consultation = await legalAPI.askQuestion(currentMessage);
+        console.log('Chat API failed, using fallback:', chatError);
         
-        const aiMessage: Message = {
-          id: consultation.id,
-          role: 'assistant',
-          content: consultation.answer,
-          timestamp: consultation.timestamp
-        };
-        
-        setMessages(prev => [...prev, aiMessage]);
+        // 🔧 FIX: Use the enhanced askQuestion method that returns user data
+        try {
+          const result = await legalAPI.askQuestionWithUserUpdate(currentMessage);
+          
+          // Update user data if provided
+          if (result.updatedUser && !result.updatedUser.error) {
+            console.log('🔄 Updating user data from fallback API:', result.updatedUser);
+            updateUserData({
+              questions_used_this_month: result.updatedUser.questions_used_this_month,
+              subscription_tier: result.updatedUser.subscription_tier,
+              is_active: result.updatedUser.is_active,
+              is_verified: result.updatedUser.is_verified
+            });
+          }
+          
+          const aiMessage: Message = {
+            id: result.consultation.id,
+            role: 'assistant',
+            content: result.consultation.answer,
+            timestamp: result.consultation.timestamp
+          };
+          
+          setMessages(prev => [...prev, aiMessage]);
+        } catch (fallbackError) {
+          // Ultimate fallback - just process the question without user updates
+          const consultation = await legalAPI.askQuestion(currentMessage);
+          
+          const aiMessage: Message = {
+            id: consultation.id,
+            role: 'assistant',
+            content: consultation.answer,
+            timestamp: consultation.timestamp
+          };
+          
+          setMessages(prev => [...prev, aiMessage]);
+          
+          // Try to refresh user data separately
+          await refreshUserData();
+        }
       }
     }
     
@@ -2929,14 +3005,14 @@ const handleDeleteCancel = () => {
           الاستخدام الشهري
         </div>
         <div style={{ 
-          color: '#10a37f', 
-          fontWeight: '700',
-          fontSize: '20px',
-          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
-          letterSpacing: '-0.02em'
-        }}>
-          {20 - (user?.questions_used_this_month || 0)} / 20
-        </div>
+              color: '#10a37f', 
+              fontWeight: '700',
+              fontSize: '20px',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
+              letterSpacing: '-0.02em'
+            }}>
+              {questionsRemaining} / 20
+            </div>
         <div style={{
           fontSize: '12px',
           color: 'rgba(16, 163, 127, 0.7)',
@@ -3071,14 +3147,14 @@ const handleDeleteCancel = () => {
                 <div style={{
                   fontSize: '64px',
                   marginBottom: '24px'
-                }}>⚖️</div>
+                }}></div>
                 <h2 style={{
                   fontSize: 'clamp(50px, 4vw, 26px)',
                   fontWeight: '600',
                   color: '#2d333a',
                   marginBottom: '16px'
                 }}>
-                  أهلاً بك في المساعد القانوني الذكي
+                  مرحبا بك في معين
                 </h2>
                 <p style={{
                   fontSize: 'clamp(24px, 2vw, 16px)',
@@ -3149,23 +3225,13 @@ const handleDeleteCancel = () => {
                         fontWeight: '500',
                         lineHeight: '1.5'
                       }}>
-                        {question}
+                        
                       </div>
                     </div>
                     
                   ))}
 
-                  <div className="floating-actions">
-  <button className="floating-btn" title="نسخ النص">
-    📋
-  </button>
-  <button className="floating-btn" title="مشاركة">
-    🔗
-  </button>
-  <button className="floating-btn" title="حفظ PDF">
-    📄
-  </button>
-</div>
+                  
                 </div>
               </div>
             ) : (
@@ -3196,12 +3262,24 @@ const handleDeleteCancel = () => {
     maxWidth: message.role === 'user' 
       ? (sidebarOpen ? '75%' : '65%') 
       : (sidebarOpen ? '85%' : '75%'),
-    background: message.role === 'user' ? '#006C35' : 'transparent',
+    background: message.role === 'user' 
+      ? `linear-gradient(135deg, 
+          rgba(0, 108, 53, 0.95) 0%, 
+          rgba(0, 74, 36, 0.9) 50%,
+          rgba(0, 108, 53, 0.85) 100%
+        )` 
+      : 'transparent',
     color: message.role === 'user' ? 'white' : '#2d333a',
     borderRadius: message.role === 'user' ? '20px 20px 4px 16px' : '0',
-    padding: message.role === 'user' ? '16px 20px' : '0',
-    boxShadow: message.role === 'user' ? '0 2px 8px rgba(0, 108, 53, 0.3)' : 'none',
-    border: 'none',
+    padding: message.role === 'user' ? '18px 22px' : '0',
+    boxShadow: message.role === 'user' 
+      ? `0 8px 32px rgba(0, 108, 53, 0.25),
+         0 4px 16px rgba(0, 108, 53, 0.15),
+         inset 0 1px 0 rgba(255, 255, 255, 0.1),
+         0 0 0 1px rgba(255, 255, 255, 0.05)` 
+      : 'none',
+    border: message.role === 'user' ? '1px solid rgba(255, 255, 255, 0.1)' : 'none',
+    backdropFilter: message.role === 'user' ? 'blur(20px)' : 'none',
     fontSize: message.role === 'user' ? '25px' : '25px',
     lineHeight: '1.5',
     textAlign: 'right',
@@ -3212,7 +3290,9 @@ const handleDeleteCancel = () => {
     wordBreak: 'break-word',
     overflowWrap: 'break-word',
     whiteSpace: 'normal',
-    hyphens: 'auto'
+    hyphens: 'auto',
+    position: 'relative',
+    overflow: 'hidden'
   }}
 >
                       <FormattedMessage
@@ -3440,7 +3520,7 @@ const handleDeleteCancel = () => {
         fontSize: '14px',
         fontWeight: '500'
       }}>
-        الأسئلة المتبقية: {20 - (user?.questions_used_this_month || 0)}/20
+        الأسئلة المتبقية: {questionsRemaining}/20
       </div>
               </div>
             </div>

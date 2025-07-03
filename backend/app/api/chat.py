@@ -1,6 +1,6 @@
 """
-Chat API endpoints for conversation management.
-Handles chat history, messages, and context-aware responses.
+Enhanced Chat API endpoints with proper user data updates.
+Save this as: backend/app/api/chat.py
 """
 
 from typing import List, Optional, Dict, Any
@@ -37,7 +37,7 @@ async def send_chat_message(
                 detail="No users found - please register first"
             )
         
-        print(f"🔍 DEBUG: About to call ChatService.process_chat_message")
+        print(f"🔍 DEBUG: User questions before: {current_user.questions_used_this_month}")
         
         result = await ChatService.process_chat_message(
             db=db,
@@ -46,7 +46,23 @@ async def send_chat_message(
             message_content=message.strip()
         )
         
-        print(f"🔍 DEBUG: ChatService returned: {result}")
+        # 🔧 FIX: Refresh user data after processing
+        db.refresh(current_user)
+        print(f"🔍 DEBUG: User questions after: {current_user.questions_used_this_month}")
+        
+        # 🔧 FIX: Add updated user data to response
+        result["updated_user"] = {
+            "id": current_user.id,
+            "email": current_user.email,
+            "full_name": current_user.full_name,
+            "is_active": current_user.is_active,
+            "subscription_tier": current_user.subscription_tier,
+            "questions_used_this_month": current_user.questions_used_this_month,
+            "is_verified": current_user.is_verified,
+            "questions_remaining": _calculate_questions_remaining(current_user)
+        }
+        
+        print(f"🔍 DEBUG: Response includes updated user data")
         return result
         
     except Exception as e:
@@ -57,6 +73,26 @@ async def send_chat_message(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e)
         )
+
+
+def _calculate_questions_remaining(user: User) -> int:
+    """Calculate remaining questions for user based on subscription."""
+    if user.subscription_tier == "free":
+        return max(0, 20 - user.questions_used_this_month)  # Free tier: 20 questions
+    elif user.subscription_tier == "pro":
+        return max(0, 100 - user.questions_used_this_month)  # Pro tier: 100 questions
+    else:  # enterprise
+        return 999999  # "unlimited"
+
+def _calculate_questions_remaining(user: User) -> int:
+    """Calculate remaining questions for user based on subscription."""
+    if user.subscription_tier == "free":
+        return max(0, 20 - user.questions_used_this_month)  # Free tier: 20 questions
+    elif user.subscription_tier == "pro":
+        return max(0, 100 - user.questions_used_this_month)  # Pro tier: 100 questions
+    else:  # enterprise
+        return 999999  # "unlimited"
+
 
 @router.get("/conversations")
 async def get_user_conversations(
@@ -102,7 +138,16 @@ async def get_user_conversations(
         "conversations": conversation_list,
         "total": len(conversation_list),
         "limit": limit,
-        "offset": offset
+        "offset": offset,
+        # 🔧 FIX: Include current user data in conversations response
+        "current_user": {
+            "id": current_user.id,
+            "email": current_user.email,
+            "full_name": current_user.full_name,
+            "subscription_tier": current_user.subscription_tier,
+            "questions_used_this_month": current_user.questions_used_this_month,
+            "questions_remaining": _calculate_questions_remaining(current_user)
+        }
     }
 
 
@@ -156,7 +201,13 @@ async def get_conversation_messages(
         "conversation_id": conversation_id,
         "conversation_title": conversation.title,
         "messages": message_list,
-        "total_messages": len(message_list)
+        "total_messages": len(message_list),
+        # 🔧 FIX: Include current user data
+        "current_user": {
+            "id": current_user.id,
+            "questions_used_this_month": current_user.questions_used_this_month,
+            "questions_remaining": _calculate_questions_remaining(current_user)
+        }
     }
 
 
@@ -192,6 +243,8 @@ async def archive_conversation(
         "message": "Conversation archived successfully",
         "conversation_id": conversation_id
     }
+
+
 @router.put("/conversations/{conversation_id}/title")
 async def update_conversation_title(
     conversation_id: str,
@@ -237,15 +290,11 @@ async def update_conversation_title(
     }
 
 
-@router.delete("/conversations/{conversation_id}")
-async def archive_conversation(
-    conversation_id: str,
-    db: Session = Depends(get_database),
-    
+@router.get("/stats")
+async def get_chat_stats(
+    db: Session = Depends(get_database)
 ):
-    """Archive (soft delete) a conversation."""
-    
-    print(f"🔍 DEBUG: Deleting conversation: {conversation_id}")
+    """Get user's chat statistics with updated data."""
     
     # Get first user for testing
     current_user = db.query(User).first()
@@ -255,28 +304,6 @@ async def archive_conversation(
             detail="No users found"
         )
     
-    success = ChatService.archive_conversation(db, conversation_id, current_user.id)
-    
-    if not success:
-        print(f"❌ DEBUG: Failed to delete conversation {conversation_id}")
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Conversation not found"
-        )
-    
-    print(f"✅ DEBUG: Conversation deleted successfully")
-    
-    return {
-        "message": "Conversation archived successfully",
-        "conversation_id": conversation_id
-    }
-
-@router.get("/stats")
-async def get_chat_stats(
-    db: Session = Depends(get_database),
-    current_user: User = Depends(get_current_active_user)
-):
-    """Get user's chat statistics."""
     conversations = ChatService.get_user_conversations(db, current_user.id, limit=1000)
     
     total_conversations = len(conversations)
@@ -292,5 +319,5 @@ async def get_chat_stats(
         "total_messages": total_messages,
         "questions_used_this_month": current_user.questions_used_this_month,
         "subscription_tier": current_user.subscription_tier,
-        "questions_remaining": ChatService._get_remaining_questions(current_user)
+        "questions_remaining": _calculate_questions_remaining(current_user)
     }

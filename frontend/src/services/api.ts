@@ -118,6 +118,31 @@ export const legalAPI = {
     return response.data;
   },
 
+  // 🔧 NEW: Get updated user stats after asking question
+  async askQuestionWithUserUpdate(question: string): Promise<{consultation: Consultation, updatedUser?: any}> {
+    const consultation = await this.askQuestion(question);
+    
+    // If the response includes updated user data, return it
+    if ((consultation as any).updated_user) {
+      return {
+        consultation,
+        updatedUser: (consultation as any).updated_user
+      };
+    }
+    
+    // Otherwise, fetch current user stats separately
+    try {
+      const userStats = await chatAPI.getUserStats();
+      return {
+        consultation,
+        updatedUser: userStats
+      };
+    } catch (error) {
+      console.warn('Failed to fetch updated user stats:', error);
+      return { consultation };
+    }
+  },
+
   async exportDocx(question: string, answer: string): Promise<void> {
     const response = await api.get('/export/docx', {
       params: { question, answer },
@@ -168,13 +193,22 @@ export const chatAPI = {
       headers: { 'Content-Type': 'multipart/form-data' }
     });
     
+    
     return response.data;
   },
 
+  
   async archiveConversation(conversationId: string): Promise<any> {
     const response = await api.delete(`/api/chat/conversations/${conversationId}`);
     return response.data;
+  },
+
+  async getUserStats(): Promise<any> {
+    const response = await api.get('/api/consultations/user/stats');
+    return response.data;
   }
+
+  
 };
 
 export { getToken, removeToken };

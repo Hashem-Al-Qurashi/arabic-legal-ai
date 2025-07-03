@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-import { authAPI } from '../services/api';
-
+import { authAPI, chatAPI } from '../services/api';
 interface User {
   id: string;
   email: string;
@@ -20,6 +19,8 @@ interface GuestLimits {
   maxExports: number;
   citationsUsed: number;
   maxCitations: number;
+  lastQuestionTime: number | null; // Timestamp of last question
+  cooldownMinutes: number; // Cooldown period in minutes
 }
 
 interface AuthContextType {
@@ -40,6 +41,13 @@ interface AuthContextType {
   canExport: () => boolean;
   canGetCitations: () => boolean;
   resetGuestLimits: () => void;
+  // 🔧 NEW: Methods for updating user data
+  updateUserData: (userData: Partial<User>) => void;
+  refreshUserData: () => Promise<void>;
+  questionsRemaining: number;
+   isInCooldown: boolean;
+  cooldownTimeRemaining: number; // in minutes
+  canAskNewQuestion: () => boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -68,7 +76,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     exportsUsed: 0,
     maxExports: 2,
     citationsUsed: 0,
-    maxCitations: 3
+    maxCitations: 3,
+    lastQuestionTime: null,
+    cooldownMinutes: 90 // 1.5 hours cooldown
   });
 
   useEffect(() => {
@@ -131,6 +141,93 @@ const register = async (email: string, password: string, fullName: string) => {
     resetGuestLimits();
   };
 
+  // 🔧 NEW: Method to update user data in real-time
+  // 🔧 NEW: Method to update user data in real-time (with debounce)
+  const updateUserData = (userData: Partial<User>) => {
+    if (user) {
+      console.log('🔄 Updating user data:', userData);
+      setUser(prevUser => {
+        // Only update if data actually changed
+        const hasChanged = Object.keys(userData).some(
+          key => prevUser![key as keyof User] !== userData[key as keyof User]
+        );
+        
+        if (hasChanged) {
+          return { ...prevUser!, ...userData };
+        }
+        return prevUser!;
+      });
+    }
+  };
+
+  // 🔧 NEW: Method to refresh user data from backend
+  const refreshUserData = async () => {
+    if (!isGuest) {
+      try {
+        console.log('🔄 Refreshing user data from backend...');
+        const userStats = await chatAPI.getUserStats();
+        if (userStats && !userStats.error) {
+          console.log('✅ User data refreshed:', userStats);
+          setUser(prevUser => ({
+            ...prevUser!,
+            questions_used_this_month: userStats.questions_used_this_month,
+            subscription_tier: userStats.subscription_tier,
+            is_active: userStats.is_active,
+            is_verified: userStats.is_verified
+          }));
+        }
+      } catch (error) {
+        console.warn('⚠️ Failed to refresh user data:', error);
+      }
+    }
+  };
+
+  // 🔧 ENHANCED: Calculate questions remaining in real-time
+  const questionsRemaining = user ? (() => {
+    if (user.subscription_tier === "free") {
+      return Math.max(0, 20 - user.questions_used_this_month);
+    } else if (user.subscription_tier === "pro") {
+      return Math.max(0, 100 - user.questions_used_this_month);
+    } else { // enterprise
+      return 999999;
+    }
+  })() : 0;
+
+  const isInCooldown = (() => {
+    if (isGuest && guestLimits.lastQuestionTime) {
+      const now = Date.now();
+      const timeDiff = now - guestLimits.lastQuestionTime;
+      const cooldownTime = guestLimits.cooldownMinutes * 60 * 1000; // Convert to milliseconds
+      return timeDiff < cooldownTime;
+    }
+    
+    // For authenticated users, check if they've reached their limit
+    if (user && questionsRemaining === 0) {
+      // You can implement user-specific cooldown here if needed
+      return false; // For now, no cooldown for users who haven't reached limit
+    }
+    
+    return false;
+  })();
+
+  // 🔧 NEW: Calculate remaining cooldown time in minutes
+  const cooldownTimeRemaining = (() => {
+    if (isGuest && guestLimits.lastQuestionTime && isInCooldown) {
+      const now = Date.now();
+      const timeDiff = now - guestLimits.lastQuestionTime;
+      const cooldownTime = guestLimits.cooldownMinutes * 60 * 1000;
+      const remaining = cooldownTime - timeDiff;
+      return Math.ceil(remaining / (60 * 1000)); // Convert to minutes
+    }
+    return 0;
+  })();
+
+  // 🔧 NEW: Check if user can ask a new question
+  const canAskNewQuestion = (): boolean => {
+    if (isInCooldown) return false;
+    return canSendMessage();
+  };
+
   // Guest limitation functions
   const incrementGuestMessage = (): boolean => {
     if (isGuest && guestLimits.messagesUsed >= guestLimits.maxMessages) {
@@ -139,7 +236,8 @@ const register = async (email: string, password: string, fullName: string) => {
     if (isGuest) {
       setGuestLimits(prev => ({
         ...prev,
-        messagesUsed: prev.messagesUsed + 1
+        messagesUsed: prev.messagesUsed + 1,
+        lastQuestionTime: Date.now() // 🔧 NEW: Record the time of last question
       }));
     }
     return true;
@@ -184,8 +282,14 @@ const register = async (email: string, password: string, fullName: string) => {
     return true;
   };
 
+  
+
   const canSendMessage = (): boolean => {
-    return !isGuest || guestLimits.messagesUsed < guestLimits.maxMessages;
+    if (isGuest) {
+      return guestLimits.messagesUsed < guestLimits.maxMessages;
+    } else {
+      return questionsRemaining > 0;
+    }
   };
 
   const canAskFollowup = (): boolean => {
@@ -209,7 +313,9 @@ const register = async (email: string, password: string, fullName: string) => {
       exportsUsed: 0,
       maxExports: 2,
       citationsUsed: 0,
-      maxCitations: 3
+      maxCitations: 3,
+      lastQuestionTime: null,
+      cooldownMinutes: 90
     });
   };
 
@@ -230,9 +336,16 @@ const register = async (email: string, password: string, fullName: string) => {
     canAskFollowup,
     canExport,
     canGetCitations,
-    resetGuestLimits
+    resetGuestLimits,
+    // 🔧 NEW: Expose new methods
+    updateUserData,
+    refreshUserData,
+    questionsRemaining,
+    // 🔧 NEW: Add cooldown properties
+    isInCooldown,
+    cooldownTimeRemaining,
+    canAskNewQuestion
   };
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
