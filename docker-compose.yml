@@ -1,0 +1,73 @@
+
+services:
+  # Backend service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: moaen_backend_dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - backend_data:/app/data
+    environment:
+      - DEBUG=true
+      - ENVIRONMENT=development
+      - DATABASE_URL=sqlite:///./data/arabic_legal.db
+    env_file:
+      - ./backend/.env
+    networks:
+        - moaen_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: moaen_frontend_dev
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - moaen_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Database service (for production, use AWS RDS)
+  # Uncomment for local PostgreSQL development
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: hokm_postgres_dev
+  #   environment:
+  #     POSTGRES_DB: hokm_ai
+  #     POSTGRES_USER: hokm_user
+  #     POSTGRES_PASSWORD: hokm_password
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #     - hokm_network
+  #   restart: unless-stopped
+
+volumes:
+  backend_data:
+    driver: local
+  # postgres_data:
+  #   driver: local
+
+networks:
+  moaen_network:
+    driver: bridge

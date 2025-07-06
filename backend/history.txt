@@ -1,0 +1,1000 @@
+  919  # Navigate to frontend directory
+  920  cd frontend
+  921  # Create all new directories
+  922  mkdir -p src/components/auth
+  923  mkdir -p src/components/layout
+  924  mkdir -p src/components/legal
+  925  mkdir -p src/contexts
+  926  mkdir -p src/services
+  927  mkdir -p src/types
+  928  # Create all new files
+  929  touch src/types/auth.ts
+  930  touch src/services/api.ts
+  931  touch src/contexts/AuthContext.tsx
+  932  touch src/components/auth/LoginForm.tsx
+  933  touch src/components/auth/RegisterForm.tsx
+  934  touch src/components/auth/AuthGuard.tsx
+  935  touch src/components/layout/Header.tsx
+  936  touch src/components/layout/UserProfile.tsx
+  937  touch src/components/legal/LegalForm.tsx
+  938  touch src/components/legal/ConsultationHistory.tsx
+  939  # Verify all files were created
+  940  echo "📁 Created directories:"
+  941  ls -la src/components/
+  942  ls -la src/
+  943  echo "📄 Created files:"
+  944  find src/ -name "*.ts" -o -name "*.tsx" | sort
+  945  npm run build
+  946  npm install react-hot-toast react-router-dom react-hook-form @hookform/resolvers zod
+  947  # Force install to resolve the conflict
+  948  npm install react-hot-toast react-router-dom react-hook-form @hookform/resolvers zod --legacy-peer-deps
+  949  # Test if it worked
+  950  npm run build
+  951  npm run dev
+  952  npm run build
+  953  npm run dev
+  954  npm run build
+  955  npm run dev
+  956  npm run build
+  957  npm run dev
+  958  cd ~/Desktop/arabic_legal_ai/frontend
+  959  # Check if all files exist
+  960  ls -la src/
+  961  ls -la src/components/
+  962  ls -la src/types/
+  963  npm run build
+  964  npm run dev
+  965  npm run build
+  966  npm run dev
+  967  # Delete the current file
+  968  rm src/types/auth.ts
+  969  # Create new file with correct content
+  970  cat > src/types/auth.ts << 'EOF'
+  971  export interface User {
+  972    id: string;
+  973    email: string;
+  974    full_name: string;
+  975    is_active: boolean;
+  976    subscription_tier: 'free' | 'pro' | 'enterprise';
+  977    questions_used_this_month: number;
+  978    is_verified: boolean;
+  979  }
+  980  export interface LoginRequest {
+  981    email: string;
+  982    password: string;
+  983  }
+  984  export interface RegisterRequest {
+  985    email: string;
+  986    password: string;
+  987    full_name: string;
+  988  }
+  989  export interface AuthResponse {
+  990    access_token: string;
+  991    refresh_token: string;
+  992    token_type: string;
+  993    expires_in: number;
+  994  }
+  995  export interface Consultation {
+  996    id: string;
+  997    question: string;
+  998    answer: string;
+  999    category?: string;
+ 1000    processing_time_ms: number;
+ 1001    timestamp: string;
+ 1002    user_questions_remaining: number;
+ 1003  }
+ 1004  EOF
+ 1005  # Verify the file was created correctly
+ 1006  cat src/types/auth.ts
+ 1007  # Test the app
+ 1008  npm run dev
+ 1009  head -5 src/contexts/AuthContext.tsx
+ 1010  npm run dev
+ 1011  # Stage all changes
+ 1012  git add .
+ 1013  # Commit with descriptive message
+ 1014  git commit -m "feat: Complete database layer with user/consultation models
+ 1015  - Add SQLAlchemy models for User and Consultation  
+ 1016  - Implement Alembic migrations for version control
+ 1017  - Configure SQLite database with UUID support
+ 1018  - Add proper project structure with app/ directory
+ 1019  - Set up configuration management with pydantic-settings
+ 1020  - Test all CRUD operations successfully
+ 1021  Database layer ready for authentication system."
+ 1022  # Push to GitHub
+ 1023  I 
+ 1024  git push origin main
+ 1025  cd .. 
+ 1026  # Add all files explicitly
+ 1027  git add .
+ 1028  git add -A
+ 1029  git add app/api/*.py
+ 1030  git add app/schemas/*.py  
+ 1031  git add app/services/*.py
+ 1032  git add app/core/*.py
+ 1033  # Check what's staged
+ 1034  git status
+ 1035  # Commit and push
+ 1036  git commit -m "Add all missing backend files"
+ 1037  git push origin main
+ 1038  cd backend
+ 1039  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1040  cd .. 
+ 1041  cd frontend
+ 1042  npm run dev
+ 1043  nano update2.txt
+ 1044  /usr/bin/python3 /home/sakr_quraish/.vscode/extensions/ms-python.python-2025.8.0-linux-x64/python_files/printEnvVariablesToFile.py /home/sakr_quraish/.vscode/extensions/ms-python.python-2025.8.0-linux-x64/python_files/deactivate/bash/envVars.txt
+ 1045  /usr/bin/python3 /home/sakr_quraish/.vscode/extensions/ms-python.python-2025.8.0-linux-x64/python_files/printEnvVariablesToFile.py /home/sakr_quraish/.vscode/extensions/ms-python.python-2025.8.0-linux-x64/python_files/deactivate/bash/envVars.txt
+ 1046  cd arabic_legal_ai/
+ 1047  cd frontend/
+ 1048  npm run dev
+ 1049  cd .. 
+ 1050  git add .
+ 1051  # Step 3: Commit with a meaningful message.
+ 1052  # WHY: Good commit messages help you (or your team) understand history later.
+ 1053  git commit -m "✅ Final MVP: auth + consultations + clean routes + working UI"
+ 1054  /home/sakr_quraish/Desktop/.venv/bin/python
+ 1055  cd arabic_legal_ai/
+ 1056  # Create the new directory structure
+ 1057  mkdir -p backend/app/{models,schemas,api,core,services,utils}
+ 1058  touch backend/app/{__init__.py,main.py,database.py}
+ 1059  touch backend/app/models/{__init__.py,user.py,consultation.py}
+ 1060  touch backend/app/schemas/{__init__.py,user.py,consultation.py}
+ 1061  touch backend/app/api/{__init__.py,auth.py,consultations.py,users.py}
+ 1062  touch backend/app/core/{__init__.py,config.py,security.py,database.py}
+ 1063  touch backend/app/services/{__init__.py,rag_service.py,user_service.py,consultation_service.py}
+ 1064  touch backend/app/utils/{__init__.py,chromadb_manager.py}
+ 1065  python -c "import secrets; print(secrets.token_urlsafe(32))"
+ 1066  cd backend
+ 1067  pip install -r requirements.txt
+ 1068  python main.py 
+ 1069  pip install -r requirements.txt
+ 1070  python -c "
+ 1071  print('🧪 Testing Configuration...')
+ 1072  from app.core.config import settings
+ 1073  print(f'✅ App Name: {settings.app_name}')
+ 1074  print(f'✅ Database URL: {settings.database_url}')
+ 1075  print(f'✅ Secret Key exists: {len(settings.secret_key)} characters')
+ 1076  print(f'✅ OpenAI Key exists: {settings.openai_api_key[:10]}...')
+ 1077  print('🎉 Configuration test PASSED!')
+ 1078  "
+ 1079  python -c "
+ 1080  print('🧪 Testing Model Imports...')
+ 1081  from app.models import User, Consultation
+ 1082  print('✅ User model imported')
+ 1083  print('✅ Consultation model imported')
+ 1084  print('✅ No circular import issues')
+ 1085  print('🎉 Model import test PASSED!')
+ 1086  "
+ 1087  python -c "
+ 1088  print('🧪 Testing Database Creation...')
+ 1089  from app.database import Base, engine
+ 1090  from app.models import User, Consultation
+ 1091  # Create all tables
+ 1092  Base.metadata.create_all(bind=engine)
+ 1093  print('✅ Database tables created successfully')
+ 1094  # Check what tables were created
+ 1095  from sqlalchemy import inspect
+ 1096  inspector = inspect(engine)
+ 1097  tables = inspector.get_table_names()
+ 1098  print(f'✅ Tables created: {tables}')
+ 1099  print('🎉 Database creation test PASSED!')
+ 1100  "
+ 1101  python -c "
+ 1102  import sys
+ 1103  print('🚀 Arabic Legal Assistant Foundation Test Suite')
+ 1104  print('=' * 50)
+ 1105  try:
+ 1106      # Test 1: Configuration
+ 1107      print('🧪 Test 1: Configuration Loading...')
+ 1108      from app.core.config import settings
+ 1109      assert settings.app_name == 'Arabic Legal Assistant'
+ 1110      assert len(settings.secret_key) > 10
+ 1111      assert settings.openai_api_key.startswith('sk-')
+ 1112      print('✅ Configuration: PASSED')
+ 1113      # Test 2: Models
+ 1114      print('🧪 Test 2: Model Imports...')
+ 1115      from app.models import User, Consultation
+ 1116      print('✅ Model Imports: PASSED')
+ 1117      # Test 3: Database
+ 1118      print('🧪 Test 3: Database Creation...')
+ 1119      from app.database import Base, engine, SessionLocal
+ 1120      Base.metadata.create_all(bind=engine)
+ 1121      
+ 1122      # Test connection
+ 1123      session = SessionLocal()
+ 1124      user_count = session.query(User).count()
+ 1125      consultation_count = session.query(Consultation).count()
+ 1126      session.close()
+ 1127      
+ 1128      print(f'✅ Database: PASSED (Users: {user_count}, Consultations: {consultation_count})')
+ 1129      print('=' * 50)
+ 1130      print('🎉 ALL FOUNDATION TESTS PASSED!')
+ 1131      print('✅ Ready for Step 2: Authentication System')
+ 1132      print('=' * 50)
+ 1133  except Exception as e:
+ 1134      print(f'❌ TEST FAILED: {e}')
+ 1135      print('🔧 Need to fix issues before continuing')
+ 1136      sys.exit(1)
+ 1137  "
+ 1138  python -c "
+ 1139  import sys
+ 1140  print('🚀 Arabic Legal Assistant Foundation Test Suite')
+ 1141  print('=' * 50)
+ 1142  try:
+ 1143      # Test 1: Configuration
+ 1144      print('🧪 Test 1: Configuration Loading...')
+ 1145      from app.core.config import settings
+ 1146      assert settings.app_name == 'Arabic Legal Assistant'
+ 1147      assert len(settings.secret_key) > 10
+ 1148      assert settings.openai_api_key.startswith('sk-')
+ 1149      print('✅ Configuration: PASSED')
+ 1150      # Test 2: Models
+ 1151      print('🧪 Test 2: Model Imports...')
+ 1152      from app.models import User, Consultation
+ 1153      print('✅ Model Imports: PASSED')
+ 1154      # Test 3: Database
+ 1155      print('🧪 Test 3: Database Creation...')
+ 1156      from app.database import Base, engine, SessionLocal
+ 1157      Base.metadata.create_all(bind=engine)
+ 1158      
+ 1159      # Test connection
+ 1160      session = SessionLocal()
+ 1161      user_count = session.query(User).count()
+ 1162      consultation_count = session.query(Consultation).count()
+ 1163      session.close()
+ 1164      
+ 1165      print(f'✅ Database: PASSED (Users: {user_count}, Consultations: {consultation_count})')
+ 1166      print('=' * 50)
+ 1167      print('🎉 ALL FOUNDATION TESTS PASSED!')
+ 1168      print('✅ Ready for Step 2: Authentication System')
+ 1169      print('=' * 50)
+ 1170  except Exception as e:
+ 1171      print(f'❌ TEST FAILED: {e}')
+ 1172      print('🔧 Need to fix issues before continuing')
+ 1173      sys.exit(1)
+ 1174  "
+ 1175  pip install pydantic-settings
+ 1176  # 1. Install missing package
+ 1177  pip install pydantic-settings
+ 1178  # 2. Test configuration again
+ 1179  python -c "
+ 1180  print('🧪 Testing Configuration (Fixed)...')
+ 1181  from app.core.config import settings
+ 1182  print(f'✅ App Name: {settings.app_name}')
+ 1183  print(f'✅ Database URL: {settings.database_url}')
+ 1184  print(f'✅ Secret Key exists: {len(settings.secret_key)} characters')
+ 1185  print(f'✅ DeepSeek Key exists: {settings.deepseek_api_key[:10]}...')
+ 1186  print('🎉 Configuration test PASSED!')
+ 1187  "
+ 1188  python -c "
+ 1189  import sys
+ 1190  print('🚀 Arabic Legal Assistant Foundation Test Suite (FIXED)')
+ 1191  print('=' * 50)
+ 1192  try:
+ 1193      # Test 1: Configuration
+ 1194      print('🧪 Test 1: Configuration Loading...')
+ 1195      from app.core.config import settings
+ 1196      assert settings.app_name == 'Arabic Legal Assistant'
+ 1197      assert len(settings.secret_key) > 10
+ 1198      assert settings.deepseek_api_key.startswith('sk-')
+ 1199      print('✅ Configuration: PASSED')
+ 1200      # Test 2: Models
+ 1201      print('🧪 Test 2: Model Imports...')
+ 1202      from app.models import User, Consultation
+ 1203      print('✅ Model Imports: PASSED')
+ 1204      # Test 3: Database
+ 1205      print('🧪 Test 3: Database Creation...')
+ 1206      from app.database import Base, engine, SessionLocal
+ 1207      Base.metadata.create_all(bind=engine)
+ 1208      
+ 1209      session = SessionLocal()
+ 1210      user_count = session.query(User).count()
+ 1211      consultation_count = session.query(Consultation).count()
+ 1212      session.close()
+ 1213      
+ 1214      print(f'✅ Database: PASSED (Users: {user_count}, Consultations: {consultation_count})')
+ 1215      print('=' * 50)
+ 1216      print('🎉 ALL FOUNDATION TESTS PASSED!')
+ 1217      print('✅ Ready for Step 2: Authentication System')
+ 1218      print('=' * 50)
+ 1219  except Exception as e:
+ 1220      print(f'❌ TEST FAILED: {e}')
+ 1221      print('🔧 Need to fix issues before continuing')
+ 1222      sys.exit(1)
+ 1223  "
+ 1224  python -c "
+ 1225  print('🧪 Testing Database Base Import...')
+ 1226  from app.database import Base, engine, SessionLocal
+ 1227  print('✅ Base imported successfully')
+ 1228  print('✅ Engine created')
+ 1229  print('✅ SessionLocal created')
+ 1230  print('🎉 Database import test PASSED!')
+ 1231  "
+ 1232  python -c "
+ 1233  print('🧪 Testing Model Imports...')
+ 1234  from app.models import User, Consultation
+ 1235  print('✅ User model imported')
+ 1236  print('✅ Consultation model imported')
+ 1237  print('🎉 Model import test PASSED!')
+ 1238  "
+ 1239  python -c "
+ 1240  import sys
+ 1241  print('🚀 Arabic Legal Assistant Foundation Test Suite (FINAL)')
+ 1242  print('=' * 50)
+ 1243  try:
+ 1244      # Test 1: Configuration
+ 1245      print('🧪 Test 1: Configuration Loading...')
+ 1246      from app.core.config import settings
+ 1247      assert settings.app_name == 'Arabic Legal Assistant'
+ 1248      assert len(settings.secret_key) > 10
+ 1249      assert settings.deepseek_api_key.startswith('sk-')
+ 1250      print('✅ Configuration: PASSED')
+ 1251      # Test 2: Database Base
+ 1252      print('🧪 Test 2: Database Base...')
+ 1253      from app.database import Base, engine, SessionLocal
+ 1254      print('✅ Database Base: PASSED')
+ 1255      # Test 3: Models
+ 1256      print('🧪 Test 3: Model Imports...')
+ 1257      from app.models import User, Consultation
+ 1258      print('✅ Model Imports: PASSED')
+ 1259      # Test 4: Database Creation
+ 1260      print('🧪 Test 4: Database Creation...')
+ 1261      Base.metadata.create_all(bind=engine)
+ 1262      
+ 1263      session = SessionLocal()
+ 1264      user_count = session.query(User).count()
+ 1265      consultation_count = session.query(Consultation).count()
+ 1266      session.close()
+ 1267      
+ 1268      print(f'✅ Database Creation: PASSED (Users: {user_count}, Consultations: {consultation_count})')
+ 1269      print('=' * 50)
+ 1270      print('🎉 ALL FOUNDATION TESTS PASSED!')
+ 1271      print('✅ Ready for Step 2: Authentication System')
+ 1272      print('=' * 50)
+ 1273  except Exception as e:
+ 1274      print(f'❌ TEST FAILED: {e}')
+ 1275      print('🔧 Need to fix issues before continuing')
+ 1276      import traceback
+ 1277      traceback.print_exc()
+ 1278      sys.exit(1)
+ 1279  "
+ 1280  python -c "
+ 1281  print('🧪 Testing Model Imports (Fixed)...')
+ 1282  from app.models import User, Consultation
+ 1283  print('✅ User model imported')
+ 1284  print('✅ Consultation model imported')
+ 1285  print('✅ Relationships defined')
+ 1286  print('🎉 Model import test PASSED!')
+ 1287  "
+ 1288  python -c "
+ 1289  print('🧪 Testing Model Imports (Simplified)...')
+ 1290  from app.models import User, Consultation
+ 1291  print('✅ User model imported')
+ 1292  print('✅ Consultation model imported')
+ 1293  print('🎉 Model import test PASSED!')
+ 1294  "
+ 1295  python -c "
+ 1296  print('🧪 Testing Model Imports (Simplified)...')
+ 1297  from app.models import User, Consultation
+ 1298  print('✅ User model imported')
+ 1299  print('✅ Consultation model imported')
+ 1300  print('🎉 Model import test PASSED!')
+ 1301  "
+ 1302  alembic init alembic
+ 1303  # Test if Alembic is properly configured
+ 1304  alembic check
+ 1305  alembic revision --autogenerate -m "Initial migration: create users and consultations tables"
+ 1306  # List the migration files
+ 1307  ls alembic/versions/
+ 1308  # Look at the generated migration (replace xxxxx with actual filename)
+ 1309  head -20 alembic/versions/*_initial_migration*.py
+ 1310  alembic upgrade head
+ 1311  alembic current
+ 1312  alembic check
+ 1313  python -c "
+ 1314  print('🧪 Testing Database After Migration...')
+ 1315  from app.database import SessionLocal, engine
+ 1316  from app.models import User, Consultation
+ 1317  # Test database connection
+ 1318  session = SessionLocal()
+ 1319  try:
+ 1320      user_count = session.query(User).count()
+ 1321      consultation_count = session.query(Consultation).count()
+ 1322      print(f'✅ Users table: {user_count} records')
+ 1323      print(f'✅ Consultations table: {consultation_count} records')
+ 1324      print('✅ Database tables created successfully!')
+ 1325  finally:
+ 1326      session.close()
+ 1327  # Check if database file exists
+ 1328  import os
+ 1329  if os.path.exists('arabic_legal.db'):
+ 1330      print('✅ Database file exists: arabic_legal.db')
+ 1331      print(f'✅ Database size: {os.path.getsize(\"arabic_legal.db\")} bytes')
+ 1332  else:
+ 1333      print('❌ Database file not found')
+ 1334  "
+ 1335  # Generate new migration to fix UUID types
+ 1336  alembic revision --autogenerate -m "Fix UUID types for SQLite compatibility"
+ 1337  alembic upgrade head
+ 1338  alembic check
+ 1339  python -c "
+ 1340  print('🧪 Testing Fixed Database...')
+ 1341  from app.database import SessionLocal
+ 1342  from app.models import User, Consultation
+ 1343  import uuid
+ 1344  session = SessionLocal()
+ 1345  try:
+ 1346      # Test creating a user
+ 1347      test_user = User(
+ 1348          email='test@example.com',
+ 1349          hashed_password='test_hash',
+ 1350          full_name='Test User'
+ 1351      )
+ 1352      session.add(test_user)
+ 1353      session.commit()
+ 1354      
+ 1355      print(f'✅ Created user with ID: {test_user.id}')
+ 1356      print(f'✅ User ID type: {type(test_user.id)}')
+ 1357      
+ 1358      # Test querying
+ 1359      user_count = session.query(User).count()
+ 1360      print(f'✅ Total users: {user_count}')
+ 1361      
+ 1362      # Clean up test data
+ 1363      session.delete(test_user)
+ 1364      session.commit()
+ 1365      print('✅ Test data cleaned up')
+ 1366      
+ 1367  finally:
+ 1368      session.close()
+ 1369  print('🎉 Database fully functional!')
+ 1370  "
+ 1371  # Downgrade to the working migration
+ 1372  alembic downgrade 78799b55749f
+ 1373  # Remove the failed migration file
+ 1374  rm alembic/versions/48577d11cf04_fix_uuid_types_for_sqlite_compatibility.py
+ 1375  # Delete the current database
+ 1376  rm arabic_legal.db
+ 1377  # Create fresh database with updated models
+ 1378  alembic upgrade head
+ 1379  alembic check
+ 1380  python -c "
+ 1381  print('🧪 Testing Final Clean Database...')
+ 1382  from app.database import SessionLocal
+ 1383  from app.models import User, Consultation
+ 1384  session = SessionLocal()
+ 1385  try:
+ 1386      # Test creating a user with proper UUID
+ 1387      test_user = User(
+ 1388          email='admin@arabic-legal.com',
+ 1389          hashed_password='temp_hash',
+ 1390          full_name='Admin User'
+ 1391      )
+ 1392      session.add(test_user)
+ 1393      session.commit()
+ 1394      
+ 1395      print(f'✅ Created user: {test_user.email}')
+ 1396      print(f'✅ User ID: {test_user.id}')
+ 1397      print(f'✅ User ID type: {type(test_user.id)}')
+ 1398      
+ 1399      # Test creating consultation
+ 1400      test_consultation = Consultation(
+ 1401          user_id=test_user.id,
+ 1402          question='Test legal question?',
+ 1403          answer='Test legal answer.',
+ 1404          category='test'
+ 1405      )
+ 1406      session.add(test_consultation)
+ 1407      session.commit()
+ 1408      
+ 1409      print(f'✅ Created consultation: {test_consultation.id}')
+ 1410      
+ 1411      # Verify relationships
+ 1412      user_consultations = session.query(Consultation).filter_by(user_id=test_user.id).count()
+ 1413      print(f'✅ User consultations: {user_consultations}')
+ 1414      
+ 1415      # Clean up
+ 1416      session.delete(test_consultation)
+ 1417      session.delete(test_user)
+ 1418      session.commit()
+ 1419      print('✅ Test data cleaned up')
+ 1420      
+ 1421  finally:
+ 1422      session.close()
+ 1423  print('🎉 DATABASE LAYER COMPLETE!')
+ 1424  print('✅ Ready for Step 2: Authentication System')
+ 1425  "
+ 1426  git add .
+ 1427  git commit -m "feat: Complete database layer with user/consultation models
+ 1428  - Add SQLAlchemy models for User and Consultation
+ 1429  - Implement Alembic migrations for version control
+ 1430  - Configure SQLite database with UUID support
+ 1431  - Add proper project structure with app/ directory
+ 1432  - Set up configuration management with pydantic-settings
+ 1433  - Test all CRUD operations successfully
+ 1434  Database layer ready for authentication system."
+ 1435  python -c "
+ 1436  print('🧪 Testing Security Functions...')
+ 1437  from app.core.security import (
+ 1438      get_password_hash, 
+ 1439      verify_password, 
+ 1440      create_access_token, 
+ 1441      verify_token
+ 1442  )
+ 1443  # Test password hashing
+ 1444  password = 'test_password_123'
+ 1445  hashed = get_password_hash(password)
+ 1446  print(f'✅ Password hashed: {hashed[:20]}...')
+ 1447  # Test password verification
+ 1448  is_valid = verify_password(password, hashed)
+ 1449  print(f'✅ Password verification: {is_valid}')
+ 1450  is_invalid = verify_password('wrong_password', hashed)
+ 1451  print(f'✅ Wrong password rejected: {not is_invalid}')
+ 1452  # Test JWT token creation
+ 1453  token = create_access_token(subject='test@example.com')
+ 1454  print(f'✅ JWT token created: {token[:20]}...')
+ 1455  # Test JWT token verification
+ 1456  decoded_subject = verify_token(token)
+ 1457  print(f'✅ Token verification: {decoded_subject}')
+ 1458  # Test invalid token
+ 1459  invalid_decoded = verify_token('invalid.token.here')
+ 1460  print(f'✅ Invalid token rejected: {invalid_decoded is None}')
+ 1461  print('🎉 Security functions test PASSED!')
+ 1462  "
+ 1463  python -c "
+ 1464  print('🧪 Testing Authentication Schemas...')
+ 1465  from app.schemas.auth import UserLogin, UserRegister, Token
+ 1466  from app.schemas.user import User, UserCreate
+ 1467  # Test user registration schema
+ 1468  try:
+ 1469      user_reg = UserRegister(
+ 1470          email='test@example.com',
+ 1471          password='testpass123',
+ 1472          full_name='محمد أحمد'
+ 1473      )
+ 1474      print(f'✅ User registration schema: {user_reg.email}')
+ 1475  except Exception as e:
+ 1476      print(f'❌ User registration failed: {e}')
+ 1477  # Test user login schema
+ 1478  try:
+ 1479      user_login = UserLogin(
+ 1480          email='test@example.com',
+ 1481          password='testpass123'
+ 1482      )
+ 1483      print(f'✅ User login schema: {user_login.email}')
+ 1484  except Exception as e:
+ 1485      print(f'❌ User login failed: {e}')
+ 1486  # Test token schema
+ 1487  try:
+ 1488      token = Token(
+ 1489          access_token='sample.jwt.token',
+ 1490          refresh_token='sample.refresh.token',
+ 1491          expires_in=1800
+ 1492      )
+ 1493      print(f'✅ Token schema: {token.token_type}')
+ 1494  except Exception as e:
+ 1495      print(f'❌ Token schema failed: {e}')
+ 1496  # Test user schema
+ 1497  try:
+ 1498      user = User(
+ 1499          id='123e4567-e89b-12d3-a456-426614174000',
+ 1500          email='test@example.com',
+ 1501          full_name='محمد أحمد',
+ 1502          is_active=True,
+ 1503          subscription_tier='free',
+ 1504          questions_used_this_month=5,
+ 1505          is_verified=False
+ 1506      )
+ 1507      print(f'✅ User schema: {user.full_name}')
+ 1508  except Exception as e:
+ 1509      print(f'❌ User schema failed: {e}')
+ 1510  print('🎉 Schema validation test PASSED!')
+ 1511  "
+ 1512  python -c "
+ 1513  print('🧪 Testing Authentication Service...')
+ 1514  from app.database import SessionLocal
+ 1515  from app.services.auth_service import AuthService
+ 1516  from app.services.user_service import UserService
+ 1517  from app.schemas.auth import UserRegister, UserLogin
+ 1518  db = SessionLocal()
+ 1519  try:
+ 1520      # Test user registration
+ 1521      user_reg = UserRegister(
+ 1522          email='testauth@example.com',
+ 1523          password='testpass123',
+ 1524          full_name='Test Auth User'
+ 1525      )
+ 1526      
+ 1527      new_user = AuthService.register_user(db, user_reg)
+ 1528      if new_user:
+ 1529          print(f'✅ User registration: {new_user.email}')
+ 1530          print(f'✅ User ID: {new_user.id}')
+ 1531      else:
+ 1532          print('❌ User registration failed')
+ 1533      
+ 1534      # Test user login
+ 1535      user_login = UserLogin(
+ 1536          email='testauth@example.com',
+ 1537          password='testpass123'
+ 1538      )
+ 1539      
+ 1540      login_result = AuthService.login_user(db, user_login)
+ 1541      if login_result:
+ 1542          user, access_token, refresh_token = login_result
+ 1543          print(f'✅ User login: {user.email}')
+ 1544          print(f'✅ Access token: {access_token[:20]}...')
+ 1545          print(f'✅ Refresh token: {refresh_token[:20]}...')
+ 1546          
+ 1547          # Test get current user
+ 1548          current_user = AuthService.get_current_user(db, access_token)
+ 1549          if current_user:
+ 1550              print(f'✅ Current user: {current_user.email}')
+ 1551          else:
+ 1552              print('❌ Get current user failed')
+ 1553              
+ 1554          # Test user limits
+ 1555          can_proceed, message = AuthService.check_user_limits(db, user.id)
+ 1556          print(f'✅ User limits check: {can_proceed} - {message}')
+ 1557          
+ 1558      else:
+ 1559          print('❌ User login failed')
+ 1560      
+ 1561      # Clean up test user
+ 1562      if new_user:
+ 1563          db.delete(new_user)
+ 1564          db.commit()
+ 1565          print('✅ Test user cleaned up')
+ 1566  finally:
+ 1567      db.close()
+ 1568  print('🎉 Authentication service test PASSED!')
+ 1569  "
+ 1570  python -c "
+ 1571  print('🧪 Testing API Imports...')
+ 1572  try:
+ 1573      from app.dependencies.auth import get_current_user, get_current_active_user
+ 1574      print('✅ Auth dependencies imported')
+ 1575  except Exception as e:
+ 1576      print(f'❌ Auth dependencies failed: {e}')
+ 1577  try:
+ 1578      from app.api.auth import router as auth_router
+ 1579      print('✅ Auth router imported')
+ 1580  except Exception as e:
+ 1581      print(f'❌ Auth router failed: {e}')
+ 1582  try:
+ 1583      from app.api.users import router as users_router
+ 1584      print('✅ Users router imported')
+ 1585  except Exception as e:
+ 1586      print(f'❌ Users router failed: {e}')
+ 1587  print('🎉 API imports test completed!')
+ 1588  "
+ 1589  python -c "
+ 1590  print('🧪 Testing Fixed API Imports...')
+ 1591  try:
+ 1592      from app.dependencies.auth import get_current_user, get_current_active_user
+ 1593      print('✅ Auth dependencies imported')
+ 1594  except Exception as e:
+ 1595      print(f'❌ Auth dependencies failed: {e}')
+ 1596  try:
+ 1597      from app.api.auth import router as auth_router
+ 1598      print(f'✅ Auth router imported: {len(auth_router.routes)} routes')
+ 1599  except Exception as e:
+ 1600      print(f'❌ Auth router failed: {e}')
+ 1601  try:
+ 1602      from app.api.users import router as users_router
+ 1603      print(f'✅ Users router imported: {len(users_router.routes)} routes')
+ 1604  except Exception as e:
+ 1605      print(f'❌ Users router failed: {e}')
+ 1606  try:
+ 1607      from app.main import app
+ 1608      print(f'✅ Main app imported: {app.title}')
+ 1609  except Exception as e:
+ 1610      print(f'❌ Main app failed: {e}')
+ 1611  print('🎉 All imports successful!')
+ 1612  "
+ 1613  # Create the new authenticated main
+ 1614  touch app/main.py
+ 1615  python -c "
+ 1616  print('🧪 Testing All Fixed Imports...')
+ 1617  try:
+ 1618      from app.dependencies.auth import get_current_user, get_current_active_user
+ 1619      print('✅ Auth dependencies imported')
+ 1620  except Exception as e:
+ 1621      print(f'❌ Auth dependencies failed: {e}')
+ 1622  try:
+ 1623      from app.api.auth import router as auth_router
+ 1624      print(f'✅ Auth router imported: {len(auth_router.routes)} routes')
+ 1625  except Exception as e:
+ 1626      print(f'❌ Auth router failed: {e}')
+ 1627  try:
+ 1628      from app.api.users import router as users_router
+ 1629      print(f'✅ Users router imported: {len(users_router.routes)} routes')
+ 1630  except Exception as e:
+ 1631      print(f'❌ Users router failed: {e}')
+ 1632  try:
+ 1633      from app.main import app
+ 1634      print(f'✅ Main app imported: {app.title}')
+ 1635  except Exception as e:
+ 1636      print(f'❌ Main app failed: {e}')
+ 1637  print('🎉 All imports test completed!')
+ 1638  "
+ 1639  python -c "
+ 1640  import uvicorn
+ 1641  from app.main import app
+ 1642  print('🚀 Starting Arabic Legal Assistant with Authentication...')
+ 1643  print('📡 API Server: http://localhost:8001')
+ 1644  print('📚 API Docs: http://localhost:8001/docs')
+ 1645  print('🔐 Auth: /api/auth/* | 👤 Users: /api/users/*')
+ 1646  print('💾 Database: SQLite with user accounts')
+ 1647  uvicorn.run(app, host='0.0.0.0', port=8001, reload=True)
+ 1648  "
+ 1649  # Terminal 1 - Go to backend
+ 1650  cd ~/Desktop/arabic_legal_ai/backend
+ 1651  # Start the authenticated API
+ 1652  python -c "
+ 1653  import uvicorn
+ 1654  from app.main import app
+ 1655  uvicorn.run(app, host='0.0.0.0', port=8000, reload=True)
+ 1656  "
+ 1657  cd ~/Desktop/arabic_legal_ai/backend
+ 1658  python -c "
+ 1659  import uvicorn
+ 1660  from app.main import app
+ 1661  uvicorn.run(app, host='0.0.0.0', port=8000, reload=True)
+ 1662  "
+ 1663  python -c "
+ 1664  import uvicorn
+ 1665  from app.main import app
+ 1666  uvicorn.run(app, host='0.0.0.0', port=8000, reload=True)
+ 1667  "
+ 1668  python -c "
+ 1669  import uvicorn
+ 1670  from app.main import app
+ 1671  uvicorn.run(app, host='0.0.0.0', port=8000, reload=True)
+ 1672  "
+ 1673  # Check what's running on port 8000
+ 1674  lsof -i :8000
+ 1675  # Or check all Python processes
+ 1676  ps aux | grep python
+ 1677  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1678  npm run build
+ 1679  npm run dev
+ 1680  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1681  pip uninstall bcrypt passlib -y
+ 1682  # Install compatible versions
+ 1683  pip install "bcrypt>=4.0.0,<5.0.0"
+ 1684  pip install "passlib[bcrypt]>=1.7.4"
+ 1685  # Or if that doesn't work, try this specific combination:
+ 1686  pip install bcrypt==4.0.1 passlib==1.7.4
+ 1687  pip uninstall fastapi-users bcrypt passlib python-jose -y
+ 1688  # Install with fixed requirements
+ 1689  pip install -r requirements.txt
+ 1690  python -m venv venv_new
+ 1691  source venv_new/bin/activate  # On Windows: venv_new\Scripts\activate
+ 1692  # Install fresh
+ 1693  pip install --upgrade pip
+ 1694  pip install -r requirements.txt
+ 1695  pip freeze > to_remove.txt
+ 1696  pip uninstall -r to_remove.txt -y
+ 1697  # Install fresh with fixed requirements
+ 1698  pip install -r requirements.txt
+ 1699  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1700  pytest-asyncio==0.21.1
+ 1701  pip install email-validator==2.1.0
+ 1702  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1703  # Step 1: Make sure you’re on your main branch.
+ 1704  # WHY: So you don’t accidentally push work-in-progress test branches.
+ 1705  git checkout main
+ 1706  # Step 2: Stage all your final changes.
+ 1707  # WHY: Git tracks changes in a "staging area" before committing.
+ 1708  git add .
+ 1709  # Step 3: Commit with a meaningful message.
+ 1710  # WHY: Good commit messages help you (or your team) understand history later.
+ 1711  git commit -m "✅ Final MVP: auth + consultations + clean routes + working UI"
+ 1712  # Step 4: Push your code to GitHub.
+ 1713  # WHY: So your cloud deploy service (Railway, Vercel) can pull
+ 1714  cd .. 
+ 1715  # Step 1: Make sure you’re on your main branch.
+ 1716  # WHY: So you don’t accidentally push work-in-progress test branches.
+ 1717  git checkout main
+ 1718  # Step 2: Stage all your final changes.
+ 1719  # WHY: Git tracks changes in a "staging area" before committing.
+ 1720  git add .
+ 1721  # Step 3: Commit with a meaningful message.
+ 1722  # WHY: Good commit messages help you (or your team) understand history later.
+ 1723  git commit -m "✅ Final MVP: auth + consultations + clean routes + working UI"
+ 1724  # Step 4: Push your code to GitHub.
+ 1725  # WHY: So your cloud deploy service (Railway, Vercel) can pull
+ 1726  /usr/bin/python3 /home/sakr_quraish/.vscode/extensions/ms-python.python-2025.8.0-linux-x64/python_files/printEnvVariablesToFile.py /home/sakr_quraish/.vscode/extensions/ms-python.python-2025.8.0-linux-x64/python_files/deactivate/bash/envVars.txt
+ 1727  curl -X POST -F "query=اختبار" http://127.0.0.1:8000/ask
+ 1728  nano 
+ 1729  # Test the chat endpoint (should require authentication)
+ 1730  curl -X POST "http://localhost:8000/api/chat/message"   -H "Content-Type: application/x-www-form-urlencoded"   -d "message=ما هي حقوق الموظف؟"
+ 1731  /bin/python3 /home/sakr_quraish/.vscode/extensions/ms-python.python-2025.8.0-linux-x64/python_files/printEnvVariablesToFile.py /home/sakr_quraish/.vscode/extensions/ms-python.python-2025.8.0-linux-x64/python_files/deactivate/bash/envVars.txt
+ 1732  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1733  cd backend/
+ 1734  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1735  alembic revision --autogenerate -m "Add conversations and messages tables for chat history"
+ 1736  alembic upgrade head
+ 1737  alembic current
+ 1738  alembic downgrade 78799b55749f
+ 1739  rm backend/alembic/versions/0b6c9601fbf7_add_conversations_and_messages_tables_.py
+ 1740  rm /alembic/versions/0b6c9601fbf7_add_conversations_and_messages_tables_.py
+ 1741  cd .. 
+ 1742  rm backend/alembic/versions/0b6c9601fbf7_add_conversations_and_messages_tables_.py
+ 1743  cd backend/
+ 1744  alembic downgrade 78799b55749f
+ 1745  alembic revision -m "Add chat conversations and messages tables"
+ 1746  alembic check
+ 1747  cp arabic_legal.db arabic_legal_backup.db
+ 1748  alembic upgrade head
+ 1749  rm alembic/versions/78799b55749f_initial_migration_create_users_and_.py
+ 1750  cd backend
+ 1751  alembic upgrade head
+ 1752  # We're in backend directory already
+ 1753  cp arabic_legal.db arabic_legal_backup.db
+ 1754  rm arabic_legal.db
+ 1755  alembic revision --autogenerate -m "Initial migration with chat tables"
+ 1756  alembic upgrade head
+ 1757  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1758  python -c "
+ 1759  from app.models import User, Consultation, Conversation, Message
+ 1760  print('✅ All models imported successfully!')
+ 1761  print('✅ User model:', User)
+ 1762  print('✅ Conversation model:', Conversation)
+ 1763  print('✅ Message model:', Message)
+ 1764  "
+ 1765  alembic revision --autogenerate -m "Add conversation and message tables for chat history"
+ 1766  ls alembic/versions/
+ 1767  cat alembic/versions
+ 1768  # Check if the tables actually exist in your database
+ 1769  sqlite3 arabic_legal.db ".tables"
+ 1770  ls -la alembic/versions/
+ 1771  python -c "
+ 1772  import sqlite3
+ 1773  conn = sqlite3.connect('arabic_legal.db')
+ 1774  cursor = conn.cursor()
+ 1775  cursor.execute(\"SELECT name FROM sqlite_master WHERE type='table';\")
+ 1776  tables = cursor.fetchall()
+ 1777  print('📋 Tables in database:')
+ 1778  for table in tables:
+ 1779      print(f'  - {table[0]}')
+ 1780  conn.close()
+ 1781  "
+ 1782  alembic current
+ 1783  alembic heads
+ 1784  alembic stamp b1110eeb8ea6
+ 1785  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1786  cp arabic_legal.db arabic_legal_backup.db
+ 1787  cp -r app/models app/models_backup
+ 1788  rm alembic/versions/*.py
+ 1789  rm arabic_legal.db
+ 1790  ls alembic/versions/  # Should be empty
+ 1791  alembic revision --autogenerate -m "Initial schema: users, consultations, conversations, messages"
+ 1792  alembic upgrade head
+ 1793  python -c "
+ 1794  import sqlite3
+ 1795  conn = sqlite3.connect('arabic_legal.db')
+ 1796  cursor = conn.cursor()
+ 1797  cursor.execute('SELECT name FROM sqlite_master WHERE type=\"table\";')
+ 1798  tables = [table[0] for table in cursor.fetchall()]
+ 1799  print('📋 Tables created:', tables)
+ 1800  conn.close()
+ 1801  "
+ 1802  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1803  alembic current
+ 1804  alembic history -v
+ 1805  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1806  python -c "from app.services.chat_service import ChatService; print('ChatService imported successfully')"
+ 1807  python -c "from app.api.chat import router; print('Chat API router imported successfully')"
+ 1808  python -c "from app.services.chat_service import ChatService; print('ChatService imported successfully')"
+ 1809  python -c "from app.api.chat import router; print('Chat API router imported successfully')"
+ 1810  python -c "from rag_engine import ask_question_with_context; print('Enhanced RAG engine imported successfully')"
+ 1811  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1812  python -c "
+ 1813  from app.database import SessionLocal
+ 1814  from app.models.user import User
+ 1815  db = SessionLocal()
+ 1816  user = db.query(User).filter(User.email == 'fahradnan@gmail.com').first()
+ 1817  if user:
+ 1818      user.questions_used_this_month = 0
+ 1819      db.commit()
+ 1820      print(f'✅ Reset questions for {user.email}')
+ 1821  else:
+ 1822      print('❌ User not found')
+ 1823  db.close()
+ 1824  "
+ 1825  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1826  cd .. 
+ 1827  git add .
+ 1828  git commit -m "feat: Implement conversation memory system with DeepSeek AI integration
+ 1829  🎉 Major Feature: Chat History & Conversation Memory
+ 1830  - Added conversation and message database tables with proper relationships
+ 1831  - Implemented ChatService for managing conversation context and history
+ 1832  - Enhanced RAG engine with conversation context support for DeepSeek API
+ 1833  - Added chat API endpoints (/api/chat/message, /api/chat/conversations)
+ 1834  - Frontend now supports conversation continuity and context-aware responses
+ 1835  🗄️ Database Changes:
+ 1836  - Created conversations table (id, user_id, title, timestamps)
+ 1837  - Created messages table (id, conversation_id, role, content, metadata)
+ 1838  - Added proper foreign key relationships and indexing
+ 1839  - Clean Alembic migration with SQLite compatibility
+ 1840  🤖 AI Enhancements:
+ 1841  - Enhanced rag_engine.py with ask_question_with_context() function
+ 1842  - DeepSeek now receives full conversation history for context-aware responses
+ 1843  - Improved prompt engineering for conversational legal advice
+ 1844  - Added conversation title generation from first message
+ 1845  🎨 Frontend Improvements:
+ 1846  - Updated LegalForm component with conversation state management
+ 1847  - Added fallback mechanism (chat API → legacy API)
+ 1848  - Maintained backward compatibility with existing consultation system
+ 1849  - Enhanced user experience with conversation continuity
+ 1850  🔧 Backend Architecture:
+ 1851  - Professional service layer pattern with ChatService
+ 1852  - Clean API design following REST conventions
+ 1853  - Proper error handling and validation
+ 1854  - Scalable conversation management system
+ 1855  🚀 Key Features Achieved:
+ 1856  - ✅ AI remembers previous messages in conversation
+ 1857  - ✅ Context-aware responses ('compare with previous project' works)
+ 1858  - ✅ Persistent conversation storage in database
+ 1859  - ✅ Seamless integration with existing authentication
+ 1860  - ✅ Arabic language support maintained throughout
+ 1861  📊 Technical Improvements:
+ 1862  - Separated concerns: models, services, API layers
+ 1863  - Added proper TypeScript types for chat functionality
+ 1864  - Implemented conversation threading like ChatGPT/WhatsApp
+ 1865  - Maintained zero technical debt with clean migration history
+ 1866  This implementation transforms the app from single Q&A to full conversational AI
+ 1867  while maintaining all existing functionality and Arabic legal expertise."
+ 1868  git commit -m "feat: Implement conversation memory system with DeepSeek AI integration
+ 1869  🎉 Major Feature: Chat History & Conversation Memory
+ 1870  - Added conversation and message database tables with proper relationships
+ 1871  - Implemented ChatService for managing conversation context and history
+ 1872  - Enhanced RAG engine with conversation context support for DeepSeek API
+ 1873  - Added chat API endpoints (/api/chat/message, /api/chat/conversations)
+ 1874  - Frontend now supports conversation continuity and context-aware responses
+ 1875  🗄️ Database Changes:
+ 1876  - Created conversations table (id, user_id, title, timestamps)
+ 1877  - Created messages table (id, conversation_id, role, content, metadata)
+ 1878  - Added proper foreign key relationships and indexing
+ 1879  - Clean Alembic migration with SQLite compatibility
+ 1880  🤖 AI Enhancements:
+ 1881  - Enhanced rag_engine.py with ask_question_with_context() function
+ 1882  - DeepSeek now receives full conversation history for context-aware responses
+ 1883  - Improved prompt engineering for conversational legal advice
+ 1884  - Added conversation title generation from first message
+ 1885  🎨 Frontend Improvements:
+ 1886  - Updated LegalForm component with conversation state management
+ 1887  - Added fallback mechanism (chat API → legacy API)
+ 1888  - Maintained backward compatibility with existing consultation system
+ 1889  - Enhanced user experience with conversation continuity
+ 1890  🔧 Backend Architecture:
+ 1891  - Professional service layer pattern with ChatService
+ 1892  - Clean API design following REST conventions
+ 1893  - Proper error handling and validation
+ 1894  - Scalable conversation management system
+ 1895  🚀 Key Features Achieved:
+ 1896  - ✅ AI remembers previous messages in conversation
+ 1897  - ✅ Context-aware responses ('compare with previous project' works)
+ 1898  - ✅ Persistent conversation storage in database
+ 1899  - ✅ Seamless integration with existing authentication
+ 1900  - ✅ Arabic language support maintained throughout
+ 1901  📊 Technical Improvements:
+ 1902  - Separated concerns: models, services, API layers
+ 1903  - Added proper TypeScript types for chat functionality
+ 1904  - Implemented conversation threading like ChatGPT/WhatsApp
+ 1905  - Maintained zero technical debt with clean migration history
+ 1906  This implementation transforms the app from single Q&A to full conversational AI
+ 1907  while maintaining all existing functionality and Arabic legal expertise."
+ 1908  git push origin main
+ 1909  mkdir -p frontend/src/components/chat
+ 1910  touch frontend/src/components/chat/ChatHistory.tsx
+ 1911  ls -la frontend/src/components/chat/
+ 1912  cd backend/
+ 1913  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1914  cd arabic_legal_ai/
+ 1915  cd backend/
+ 1916  uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+ 1917  history
+ 1918  history > history.txt
