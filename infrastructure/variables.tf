@@ -22,6 +22,8 @@ variable "openai_api_key" {
   default     = "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"
   sensitive   = true
 }
+
+
 variable "secret_key" {
   description = "JWT secret key"
   type        = string
