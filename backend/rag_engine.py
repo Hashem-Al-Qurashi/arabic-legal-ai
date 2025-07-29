@@ -950,26 +950,56 @@ class IntelligentLegalRAG:
 
             relevant_docs = await self.retriever.get_relevant_documents(query, top_k=3, user_intent=category)
             
-            # Stage 3: Select appropriate prompt based on AI classification
-            system_prompt = PROMPT_TEMPLATES[category]
-            
-            # Stage 4: Build intelligent prompt with documents
-            if relevant_docs:
-                legal_context = format_legal_context_naturally(relevant_docs)
-                print(f"🔥 CITATION DEBUG: Context length: {len(legal_context)}")
-                print(f"🔥 CITATION DEBUG: Contains 'مرجع قانوني': {'مرجع قانوني' in legal_context}")
-                full_prompt = f"""{legal_context}
+            # Stage 3: Dynamic prompt delivery based on processing mode
+            processing_mode = self.processing_modes.get(category, ProcessingMode.LIGHTWEIGHT)
 
-السؤال: {query}"""
-                logger.info(f"Using {len(relevant_docs)} relevant legal documents with {category} approach")
+            # Stage 4: Adaptive message construction 
+            if processing_mode == ProcessingMode.STRATEGIC:
+                # Strategic mode: Enhanced user message approach for better instruction following
+                brilliant_prompt = PROMPT_TEMPLATES[category]
+                
+                if relevant_docs:
+                    legal_context = format_legal_context_naturally(relevant_docs)
+                    enhanced_user_message = f"""{brilliant_prompt}
+            ======================================================
+            المراجع القانونية المتاحة:
+            {legal_context}
+            ======================================================
+            المهمة المحددة: {query}
+            ======================================================
+            طبق إطار التحليل أعلاه مع الاستفادة من المراجع المتاحة."""
+                else:
+                    enhanced_user_message = f"""{brilliant_prompt}
+            ======================================================
+            المهمة المحددة: {query}
+            ======================================================
+            طبق إطار التحليل أعلاه على هذه المهمة."""
+                
+                messages = [
+                    {"role": "system", "content": "أنت مساعد قانوني خبير متخصص في القانون السعودي."},
+                    {"role": "user", "content": enhanced_user_message}
+                ]
+                
+                logger.info("⚡ STRATEGIC MODE: Using enhanced user message approach")
+                
             else:
-                full_prompt = query
-                logger.info(f"No relevant documents found - using {category} approach with general knowledge")
-            
-            messages = [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": full_prompt}
-            ]
+                # Standard approach for other processing modes
+                system_prompt = PROMPT_TEMPLATES[category]
+                
+                if relevant_docs:
+                    legal_context = format_legal_context_naturally(relevant_docs)
+                    full_prompt = f"""{legal_context}
+
+            السؤال: {query}"""
+                    logger.info(f"Using {len(relevant_docs)} relevant legal documents with {category} approach")
+                else:
+                    full_prompt = query
+                    logger.info(f"No relevant documents found - using {category} approach with general knowledge")
+                
+                messages = [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": full_prompt}
+                ]
             
             # Stage 5: Stream intelligent response
             async for chunk in self._stream_ai_response(messages, category):
