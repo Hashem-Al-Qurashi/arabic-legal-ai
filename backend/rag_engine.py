@@ -237,26 +237,20 @@ async def generate_semantic_queries(original_query: str, ai_client) -> List[str]
     """
     
     semantic_prompt = f"""
-Generate 3 search queries for Arabic legal document retrieval:
+أنت محرك بحث قانوني ذكي. أنشئ 3 استعلامات بحث لهذه القضية:
 
-Original query: {original_query}
+"{original_query}"
 
-Create 3 different search queries targeting:
-1. Court memos and legal arguments (مذكرات قضائية وحجج قانونية)
-2. Legal statutes and regulations - USE FORMAL STATUTE LANGUAGE (أنظمة قانونية رسمية)
-3. Legal precedents and court decisions (سوابق قضائية وأحكام)
+هذه قضية قرض/دعوى مدنية. أنشئ استعلامات بحث محددة:
 
-For the statute query (#2), use formal legal language like:
-- "المادة الأولى التعريفات"
-- "نظام الإثبات المرسوم الملكي"
-- "أحكام النظام التكاليف القضائية"
+استعلام المذكرات: مذكرات دفاع قضايا القروض والديون المدنية
+استعلام الأنظمة: نظام الإثبات المادة إثبات الديون نظام المرافعات الشرعية
+استعلام السوابق: أحكام قضائية سوابق قضايا القروض والديون
 
-Format your response exactly like this:
-MEMO: [Arabic query for court memos]
-STATUTE: [Arabic query using formal statute language with المادة، نظام، مرسوم]
-PRECEDENT: [Arabic query for precedents]
-
-Make the STATUTE query sound like formal legal text, not case discussion.
+أجب بنفس التنسيق بالضبط:
+استعلام المذكرات: [نص الاستعلام]
+استعلام الأنظمة: [نص الاستعلام]  
+استعلام السوابق: [نص الاستعلام]
 """
 
     try:
@@ -275,16 +269,16 @@ Make the STATUTE query sound like formal legal text, not case discussion.
         lines = response_text.split('\n')
         for line in lines:
             line = line.strip()
-            if line.startswith('MEMO:'):
-                memo_query = line.replace('MEMO:', '').strip()
+            if line.startswith('استعلام المذكرات:'):
+                memo_query = line.replace('استعلام المذكرات:', '').strip()
                 if len(memo_query) > 10:
                     queries.append(memo_query)
-            elif line.startswith('STATUTE:'):
-                statute_query = line.replace('STATUTE:', '').strip()
+            elif line.startswith('استعلام الأنظمة:'):
+                statute_query = line.replace('استعلام الأنظمة:', '').strip()
                 if len(statute_query) > 10:
                     queries.append(statute_query)
-            elif line.startswith('PRECEDENT:'):
-                precedent_query = line.replace('PRECEDENT:', '').strip()
+            elif line.startswith('استعلام السوابق:'):
+                precedent_query = line.replace('استعلام السوابق:', '').strip()
                 if len(precedent_query) > 10:
                     queries.append(precedent_query)
         
@@ -1015,8 +1009,8 @@ class IntelligentLegalRAG:
             stream = await self.ai_client.chat.completions.create(
                 model=self.ai_model,
                 messages=messages,
-                temperature=0.05 if category == "ACTIVE_DISPUTE" else config.temperature,
-                max_tokens=1500,  # Reasonable length
+                temperature=0.05 if category == "ACTIVE_DISPUTE" else 0.15,
+                max_tokens=4000 if category == "ACTIVE_DISPUTE" else 1500,  # ← GIVE DISPUTES MORE SPACE!
                 stream=True
             )
             
