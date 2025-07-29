@@ -16,6 +16,7 @@ import json
 from app.storage.vector_store import VectorStore, Chunk
 from app.storage.sqlite_store import SqliteVectorStore
 
+
 # Load environment variables
 load_dotenv(".env")
 
@@ -50,7 +51,7 @@ CLASSIFICATION_PROMPT = """أنت خبير في تحليل الاستفسارا�
 ردك يجب أن يكون JSON فقط بهذا التنسيق:
 {{
     "category": "GENERAL_QUESTION | ACTIVE_DISPUTE | PLANNING_ACTION",
-    "confidence": 0.95,
+    "confidence": 0.80,
     "reasoning": "سبب التصنيف"
 }}
 
@@ -157,6 +158,49 @@ PROMPT_TEMPLATES = {
 - ملخص قوي للموقف
 - خطوة تالية واضحة
 
+## Expected Output Standards
+### Comprehensive Analysis Requirement
+- تحليل شامل يغطي كل جانب من جوانب الدعوى
+- عمق تحليلي يليق بمذكرة محكمة (2-3 صفحات)
+- تفكيك منهجي لكل عنصر ضعيف في دعوى الخصم
+
+### Natural Professional Structure
+اتبع تدفق تحليلي طبيعي:
+- ابدأ بالنقطة الأضعف في دعوى الخصم
+- قدم تحليل قانوني مفصل لكل نقطة
+- استخدم ترقيم طبيعي عند الحاجة (أولاً، ثانياً، إلخ)
+- اربط كل نقطة بالقانون والواقع مباشرة
+
+### Professional Depth Markers
+- استشهادات قانونية محددة ومبررة
+- تحليل إجرائي لنقاط الضعف
+- استراتيجية دفاع متدرجة ومفصلة
+- خطة عمل محددة للموكل
+
+### Quality Control
+- كل فقرة تخدم هدف إسقاط الدعوى
+- لا توجد جمل حشو أو تكرار
+- كل نقطة قانونية مربوطة بالواقع
+- التحليل يبني على بعضه البعض منطقياً
+## Strategic Mindset Enhancement
+### Professional Offensive Positioning
+- لا تكتف بالدفاع - اكشف نقاط ضعف الخصم بذكاء
+- استخدم أدلة المدعي لصالحك عندما تجد تناقضات
+- اطرح الأسئلة الصعبة التي تفضح الثغرات
+- فكر كمحامي محترف: "كيف أقلب هذا الدليل ضد المدعي؟"
+
+### Legal Citation Requirement
+- اربط تحليلك بالمراجع القانونية المقدمة - هذا جزء من احترافيتك
+- استخرج المواد النظامية والسوابق من المراجع المتاحة
+- اجعل كل استشهاد يخدم حجتك مباشرة
+- المراجع القانونية أسلحتك - استخدمها بذكاء
+
+### Evidence Analysis Framework  
+عند تحليل أدلة الخصم، اسأل:
+- "ما الذي لا يقوله هذا الدليل؟"
+- "كيف يمكن أن يضر هذا الدليل بالمدعي نفسه؟"
+- "ما الذي كان يجب أن يفعله لو كان صادقاً؟"
+
 ## The Ultimate Test
 بعد كتابة تحليلك، اسأل نفسك:
 "هل يبدو هذا وكأنني أحلل قضية حقيقية لموكل حقيقي، أم وكأنني أملأ استمارة؟"
@@ -186,6 +230,282 @@ PROMPT_TEMPLATES = {
 تحدث كمستشار استراتيجي يساعد في اتخاذ القرارات الذكية."""
 }
 
+async def generate_semantic_queries(original_query: str, ai_client) -> List[str]:
+    """
+    Generate semantic queries targeting different document types
+    Production-ready version with reliable parsing and better statute targeting
+    """
+    
+    semantic_prompt = f"""
+Generate 3 search queries for Arabic legal document retrieval:
+
+Original query: {original_query}
+
+Create 3 different search queries targeting:
+1. Court memos and legal arguments (مذكرات قضائية وحجج قانونية)
+2. Legal statutes and regulations - USE FORMAL STATUTE LANGUAGE (أنظمة قانونية رسمية)
+3. Legal precedents and court decisions (سوابق قضائية وأحكام)
+
+For the statute query (#2), use formal legal language like:
+- "المادة الأولى التعريفات"
+- "نظام الإثبات المرسوم الملكي"
+- "أحكام النظام التكاليف القضائية"
+
+Format your response exactly like this:
+MEMO: [Arabic query for court memos]
+STATUTE: [Arabic query using formal statute language with المادة، نظام، مرسوم]
+PRECEDENT: [Arabic query for precedents]
+
+Make the STATUTE query sound like formal legal text, not case discussion.
+"""
+
+    try:
+        response = await ai_client.chat.completions.create(
+            model="gpt-4o-mini",  # Fast and cost-effective
+            messages=[{"role": "user", "content": semantic_prompt}],
+            temperature=0.3,
+            max_tokens=250
+        )
+        
+        response_text = response.choices[0].message.content.strip()
+        
+        # Parse the structured response
+        queries = [original_query]  # Always include original
+        
+        lines = response_text.split('\n')
+        for line in lines:
+            line = line.strip()
+            if line.startswith('MEMO:'):
+                memo_query = line.replace('MEMO:', '').strip()
+                if len(memo_query) > 10:
+                    queries.append(memo_query)
+            elif line.startswith('STATUTE:'):
+                statute_query = line.replace('STATUTE:', '').strip()
+                if len(statute_query) > 10:
+                    queries.append(statute_query)
+            elif line.startswith('PRECEDENT:'):
+                precedent_query = line.replace('PRECEDENT:', '').strip()
+                if len(precedent_query) > 10:
+                    queries.append(precedent_query)
+        
+        # Log success
+        if len(queries) > 1:
+            logger.info(f"🎯 Generated {len(queries)} semantic queries for diverse retrieval")
+            for i, q in enumerate(queries):
+                logger.info(f"  Query {i}: {q[:80]}...")
+        else:
+            logger.warning("Semantic query generation failed, using original query only")
+            
+        return queries[:4]  # Limit to 4 queries for cost control
+        
+    except Exception as e:
+        logger.error(f"Semantic query generation failed: {e}")
+        return [original_query]  # Safe fallback
+    
+async def score_documents_multi_objective(documents: List[Chunk], original_query: str, user_intent: str, ai_client) -> List[Dict]:
+    """
+    Score documents on multiple objectives for intelligent selection
+    Returns list of documents with scores for different objectives
+    """
+    
+    if not documents:
+        return []
+    
+    scoring_prompt = f"""
+You are an expert legal document analyst. Score these legal documents for their value in responding to this query.
+
+Query: {original_query}
+Intent: {user_intent}
+
+For each document, provide scores (0.0-1.0) for these objectives:
+
+1. RELEVANCE: How directly related to the query topic
+2. CITATION_VALUE: Potential for legal citations (statutes > precedents > memos)  
+3. STYLE_MATCH: Fits aggressive/defensive memo style for disputes
+
+Documents to score:
+"""
+
+    # Add document previews for scoring (cleaned for JSON safety)
+    for i, doc in enumerate(documents, 1):
+        # Clean content to avoid JSON parsing issues
+        clean_content = doc.content.replace('"', "'").replace('\n', ' ').replace('\r', ' ')
+        preview = clean_content[:150] + "..." if len(clean_content) > 150 else clean_content
+        clean_title = doc.title.replace('"', "'")
+        scoring_prompt += f"\nDocument {i}: {clean_title}\nContent: {preview}\n"
+    
+    scoring_prompt += f"""
+
+Respond with ONLY a JSON array with scores for each document:
+[
+  {{
+    "document_id": 1,
+    "relevance": 0.85,
+    "citation_value": 0.3,
+    "style_match": 0.9
+  }},
+  {{
+    "document_id": 2,
+    "relevance": 0.7,
+    "citation_value": 0.9,
+    "style_match": 0.2
+  }}
+]
+
+Score all {len(documents)} documents. Higher citation_value for statutes/regulations, higher style_match for aggressive memos.
+"""
+
+    try:
+        response = await ai_client.chat.completions.create(
+            model="gpt-4o-mini",  # Fast and cost-effective
+            messages=[{"role": "user", "content": scoring_prompt}],
+            temperature=0.1,
+            max_tokens=500
+        )
+        
+        response_text = response.choices[0].message.content.strip()
+        
+        # Clean JSON response more thoroughly
+        response_text = response.choices[0].message.content.strip()
+        
+        # Remove markdown formatting
+        if response_text.startswith("```"):
+            lines = response_text.split('\n')
+            # Find JSON content between ``` markers
+            json_lines = []
+            in_json = False
+            for line in lines:
+                if line.strip().startswith("```"):
+                    in_json = not in_json
+                    continue
+                if in_json:
+                    json_lines.append(line)
+            response_text = '\n'.join(json_lines)
+        
+        # Additional cleaning for Arabic text issues
+        response_text = response_text.replace('\\', '').replace('\n', ' ').strip()
+        
+        import json
+        scores = json.loads(response_text)
+        
+        # Combine documents with their scores
+        scored_documents = []
+        for i, doc in enumerate(documents):
+            try:
+                # Find score for this document
+                doc_score = next((s for s in scores if s["document_id"] == i + 1), None)
+                if doc_score:
+                    scored_documents.append({
+                        "document": doc,
+                        "relevance": doc_score.get("relevance", 0.5),
+                        "citation_value": doc_score.get("citation_value", 0.5),
+                        "style_match": doc_score.get("style_match", 0.5),
+                        "document_id": i + 1
+                    })
+                else:
+                    # Fallback scoring
+                    scored_documents.append({
+                        "document": doc,
+                        "relevance": 0.5,
+                        "citation_value": 0.5,
+                        "style_match": 0.5,
+                        "document_id": i + 1
+                    })
+            except Exception as e:
+                logger.warning(f"Error processing document {i+1} score: {e}")
+                continue
+        
+        logger.info(f"🎯 Multi-objective scoring completed for {len(scored_documents)} documents")
+        return scored_documents
+        
+    except Exception as e:
+        logger.error(f"Multi-objective scoring failed: {e}")
+        # Fallback: return documents with default scores
+        return [{
+            "document": doc,
+            "relevance": 0.5,
+            "citation_value": 0.5,
+            "style_match": 0.5,
+            "document_id": i + 1
+        } for i, doc in enumerate(documents)]
+
+
+def select_optimal_document_mix(scored_documents: List[Dict], top_k: int = 3) -> List[Chunk]:
+    """
+    Select optimal mix of documents based on multi-objective scores
+    Ensures diversity: memos for style + statutes for citations
+    """
+    
+    if not scored_documents:
+        return []
+    
+    # Calculate composite scores with weights
+    weights = {
+        "relevance": 0.4,      # 40% - must be relevant
+        "citation_value": 0.3, # 30% - need legal citations  
+        "style_match": 0.3     # 30% - need aggressive style
+    }
+    
+    # Add composite score to each document
+    for doc_data in scored_documents:
+        composite = (
+            doc_data["relevance"] * weights["relevance"] +
+            doc_data["citation_value"] * weights["citation_value"] +
+            doc_data["style_match"] * weights["style_match"]
+        )
+        doc_data["composite_score"] = composite
+    
+    # Sort by composite score (highest first)
+    scored_documents.sort(key=lambda x: x["composite_score"], reverse=True)
+    
+    # Intelligent selection strategy with statute priority
+    selected = []
+    
+    # Strategy 1: FORCE include statute documents if available
+    statute_docs = []
+    memo_docs = []
+    
+    for doc_data in scored_documents:
+        doc_title = doc_data["document"].title
+        if any(term in doc_title for term in ["نظام", "المادة", "التعريفات", "مرسوم"]):
+            statute_docs.append(doc_data)
+        else:
+            memo_docs.append(doc_data)
+    
+    # Always include 1 statute if available
+    if statute_docs and len(selected) < top_k:
+        best_statute = max(statute_docs, key=lambda x: x["composite_score"])
+        selected.append(best_statute["document"])
+        logger.info(f"📜 FORCED statute inclusion: {best_statute['document'].title[:50]}... (composite: {best_statute['composite_score']:.2f})")
+    
+    # Strategy 2: Get highest citation value documents (likely more statutes)
+    remaining_docs = [d for d in scored_documents if d["document"] not in selected]
+    citation_docs = [d for d in remaining_docs if d["citation_value"] >= 0.7]
+    
+    while citation_docs and len(selected) < top_k:
+        best_citation = max(citation_docs, key=lambda x: x["citation_value"])
+        selected.append(best_citation["document"])
+        citation_docs.remove(best_citation)
+        remaining_docs.remove(best_citation)
+        logger.info(f"📜 Selected high-citation document: {best_citation['document'].title[:50]}... (citation: {best_citation['citation_value']:.2f})")
+    
+    # Strategy 3: Get highest style match documents (aggressive memos)
+    style_docs = [d for d in remaining_docs if d["style_match"] >= 0.7]
+    while style_docs and len(selected) < top_k:
+        best_style = max(style_docs, key=lambda x: x["style_match"])
+        selected.append(best_style["document"])
+        style_docs.remove(best_style)
+        remaining_docs.remove(best_style)
+        logger.info(f"⚔️ Selected high-style document: {best_style['document'].title[:50]}... (style: {best_style['style_match']:.2f})")
+    
+    # Strategy 4: Fill remaining with highest composite scores
+    while len(selected) < top_k and remaining_docs:
+        best_overall = remaining_docs.pop(0)  # Already sorted by composite score
+        selected.append(best_overall["document"])
+        logger.info(f"🎯 Selected high-composite document: {best_overall['document'].title[:50]}... (composite: {best_overall['composite_score']:.2f})")
+    
+    logger.info(f"🎯 Optimal mix selected: {len(selected)} documents with intelligent diversity (statutes prioritized)")
+    return selected
 
 class StorageFactory:
     """Factory for creating storage backends"""
@@ -225,11 +545,12 @@ class DocumentRetriever:
             logger.error(f"Failed to initialize retriever: {e}")
             raise
     
-    async def get_relevant_documents(self, query: str, top_k: int = 3, user_intent: str = "GENERAL_QUESTION") -> List[Chunk]:
+    async def get_relevant_documents(self, query: str, top_k: int = 3, user_intent: str = None) -> List[Chunk]:
         """
-        Enhanced document retrieval with dual-stage filtering:
-        Stage 1: Content-based retrieval (existing system)  
-        Stage 2: Style-based filtering using AI
+        Enhanced document retrieval with semantic diversification + dual-stage filtering:
+        Stage 1: Semantic diversification (NEW for ACTIVE_DISPUTE)
+        Stage 2: Content-based retrieval (your existing system)  
+        Stage 3: Style-based filtering using AI (your existing system)
         """
         if not self.initialized:
             await self.initialize()
@@ -243,79 +564,154 @@ class DocumentRetriever:
             logger.info(f"🔍 Enhanced search in {stats.total_chunks} documents for: '{query[:50]}...'")
             logger.info(f"📋 User intent: {user_intent}")
             
-            # Get query embedding
-            response = await self.ai_client.embeddings.create(
-                model="text-embedding-ada-002",
-                input=query
-            )
-            query_embedding = response.data[0].embedding
+            # STAGE 1: SEMANTIC DIVERSIFICATION (NEW!)
+            if user_intent == "ACTIVE_DISPUTE":
+                # Generate diverse semantic queries for better document coverage
+                semantic_queries = await generate_semantic_queries(query, self.ai_client)
+                logger.info(f"🎯 Generated {len(semantic_queries)} semantic queries for diverse retrieval")
+            else:
+                # For other intents, use original query only
+                semantic_queries = [query]
             
-            # STAGE 1: Content-based retrieval (your existing system)
-            logger.info("🚀 Stage 1: Content-based document retrieval")
+            # STAGE 2: MULTI-QUERY RETRIEVAL (ENHANCED)
+            # In your enhanced get_relevant_documents method, replace the multi-query retrieval section:
+
+            # STAGE 2: MULTI-QUERY RETRIEVAL (ENHANCED WITH DOMAIN BYPASS)
+            all_search_results = []
+
+            for i, semantic_query in enumerate(semantic_queries):
+                try:
+                    # Get embedding for this semantic query
+                    response = await self.ai_client.embeddings.create(
+                        model="text-embedding-ada-002",
+                        input=semantic_query
+                    )
+                    query_embedding = response.data[0].embedding
+                    
+                    # DEBUG: Check bypass condition
+                    logger.info(f"🔍 BYPASS DEBUG: i={i}, user_intent='{user_intent}', condition: {i == 2 and user_intent == 'ACTIVE_DISPUTE'}")
+                    
+                    # BYPASS DOMAIN FILTERING FOR STATUTE QUERY (Query 3)
+                    if i == 2 and user_intent == "ACTIVE_DISPUTE":  # Third query (index 2) is statute query
+                        logger.info(f"🔓 Semantic query {i+1}: Bypassing domain filter for statute search")
+                        # Search ALL documents without domain filtering
+                        search_results = await self.storage.search_similar(
+                            query_embedding, 
+                            top_k=12
+                            # No query_text, no openai_client = no domain filtering
+                        )
+                    else:
+                        # Use normal domain filtering for other queries
+                        expanded_top_k = min(top_k * 4, 15) if user_intent == "ACTIVE_DISPUTE" else top_k * 4
+                        search_results = await self.storage.search_similar(
+                            query_embedding, 
+                            top_k=expanded_top_k, 
+                            query_text=semantic_query, 
+                            openai_client=self.ai_client
+                        )
+                    
+                    # Tag results with semantic source for debugging
+                    for result in search_results:
+                        if not hasattr(result.chunk, 'metadata'):
+                            result.chunk.metadata = {}
+                        result.chunk.metadata['semantic_source'] = f"query_{i}"
+                    
+                    all_search_results.extend(search_results)
+                    logger.info(f"  Semantic query {i+1}: Found {len(search_results)} candidates")
+                    
+                except Exception as e:
+                    logger.warning(f"Semantic query {i} failed: {e}")
+                    continue
             
-            # Get more candidates for style filtering (4x the requested amount)
-            expanded_top_k = min(top_k * 4, 15)  # Get more candidates but cap at 15
-            search_results = await self.storage.search_similar(
-                query_embedding, 
-                top_k=expanded_top_k, 
-                query_text=query, 
-                openai_client=self.ai_client
-            )
+            # STAGE 3: DEDUPLICATE AND MERGE RESULTS
+            if len(semantic_queries) > 1:
+                # Remove duplicates by chunk ID while preserving best similarity scores
+                seen_ids = set()
+                unique_results = []
+                
+                # Sort all results by similarity score (best first)
+                all_search_results.sort(key=lambda x: x.similarity_score, reverse=True)
+                
+                for result in all_search_results:
+                    chunk_id = getattr(result.chunk, 'id', None)
+                    if chunk_id and chunk_id not in seen_ids:
+                        seen_ids.add(chunk_id)
+                        unique_results.append(result)
+                    elif chunk_id is None:
+                        unique_results.append(result)
+                
+                search_results = unique_results[:15]  # Cap at 15 like your original
+                logger.info(f"📊 Merged {len(all_search_results)} results into {len(search_results)} unique candidates")
+            else:
+                search_results = all_search_results
+            
             content_candidates = [result.chunk for result in search_results]
             
             if not content_candidates:
                 logger.info("No relevant documents found - using general knowledge")
                 return []
             
-            logger.info(f"📊 Stage 1: Found {len(content_candidates)} content matches")
+            logger.info(f"📊 Stage 2-3: Found {len(content_candidates)} content matches")
             
-            # STAGE 2: Style-based filtering (only if we have multiple candidates)
+            # STAGE 4: YOUR EXISTING STYLE FILTERING (UNCHANGED!)
             if len(content_candidates) > top_k and user_intent == "ACTIVE_DISPUTE":
                 try:
-                    logger.info("🎨 Stage 2: AI-powered style filtering")
+                    logger.info("🎨 Stage 4: AI-powered style filtering")
                     
-                    # Import style classifier
+                    # Your existing style filtering code (keep exactly as is)
                     from app.legal_reasoning.ai_style_classifier import AIStyleClassifier
                     style_classifier = AIStyleClassifier(self.ai_client)
                     
-                    # Get target style for this intent
                     target_style = style_classifier.get_style_for_intent(user_intent)
                     logger.info(f"🎯 Target style: {target_style}")
                     
-                    # Classify documents by style
                     styled_documents = await style_classifier.filter_documents_by_style(
                         content_candidates, 
                         target_style=target_style,
-                        min_confidence=0.6  # Lower threshold for more matches
+                        min_confidence=0.6
                     )
                     
-                    # Separate style matches from others
                     style_matches = [doc for doc in styled_documents if doc["style_match"]]
                     all_styled = styled_documents
                     
                     logger.info(f"✨ Style matches: {len(style_matches)}")
                     
-                    # Smart selection: prioritize style matches
+                    # Your existing selection logic (keep as is for now)
+                    # ENHANCED SELECTION LOGIC WITH MULTI-OBJECTIVE SCORING
                     final_documents = []
-                    
+
                     if style_matches:
-                        # Add style matches first
-                        style_docs = [doc["document"] for doc in style_matches[:top_k]]
-                        final_documents.extend(style_docs)
+                        # Get all available documents (style + content)
+                        all_available_docs = [doc["document"] for doc in styled_documents]
                         
-                        # Fill remaining with best content matches
-                        remaining = top_k - len(style_docs)
-                        if remaining > 0:
-                            other_docs = [doc["document"] for doc in all_styled 
-                                        if not doc["style_match"]][:remaining]
-                            final_documents.extend(other_docs)
+                        # Apply multi-objective scoring for intelligent selection
+                        logger.info("🎯 Stage 5: Multi-objective document scoring")
+                        scored_documents = await score_documents_multi_objective(
+                            all_available_docs, 
+                            query, 
+                            user_intent, 
+                            self.ai_client
+                        )
                         
-                        logger.info(f"🎯 Selected: {len([d for d in styled_documents[:len(final_documents)] if d['style_match']])} style + {len(final_documents) - len([d for d in styled_documents[:len(final_documents)] if d['style_match']])} content")
+                        # Select optimal mix using intelligent scoring
+                        final_documents = select_optimal_document_mix(scored_documents, top_k)
+                        
+                        logger.info(f"🎯 Intelligent selection: {len(final_documents)} documents with optimal mix")
                     else:
-                        # No style matches - use best content
-                        final_documents = [doc["document"] for doc in all_styled[:top_k]]
-                        logger.info(f"📊 No style matches - using top {len(final_documents)} content matches")
-                    
+                        # No style matches - use best content with scoring
+                        logger.info("🎯 Stage 5: Multi-objective scoring (no style matches)")
+                        all_available_docs = [doc["document"] for doc in all_styled]
+                        
+                        scored_documents = await score_documents_multi_objective(
+                            all_available_docs, 
+                            query, 
+                            user_intent, 
+                            self.ai_client
+                        )
+                        
+                        final_documents = select_optimal_document_mix(scored_documents, top_k)
+                        logger.info(f"📊 Selected {len(final_documents)} documents using multi-objective scoring")
+
                     relevant_chunks = final_documents[:top_k]
                     
                 except Exception as style_error:
@@ -326,7 +722,7 @@ class DocumentRetriever:
                 relevant_chunks = content_candidates[:top_k]
                 logger.info(f"📊 Using content-based retrieval ({user_intent})")
             
-            # Log final results (keeping your original format)
+            # STAGE 5: RESULTS LOGGING (keeping your original format)
             if relevant_chunks:
                 logger.info(f"Found {len(relevant_chunks)} relevant documents:")
                 for i, chunk in enumerate(relevant_chunks):
@@ -336,7 +732,9 @@ class DocumentRetriever:
                         if result.chunk.id == chunk.id:
                             similarity = result.similarity_score
                             break
-                    logger.info(f"  {i+1}. {chunk.title[:50]}... (similarity: {similarity:.3f})")
+                    
+                    semantic_source = chunk.metadata.get('semantic_source', 'original') if hasattr(chunk, 'metadata') and chunk.metadata else 'original'
+                    logger.info(f"  {i+1}. {chunk.title[:50]}... (similarity: {similarity:.3f}, source: {semantic_source})")
             else:
                 logger.info("No relevant documents found - using general knowledge")
             
@@ -347,6 +745,7 @@ class DocumentRetriever:
             return []
 
 
+    
 class IntentClassifier:
     """AI-powered intent classifier - no hard-coding"""
     
@@ -410,27 +809,75 @@ class IntentClassifier:
 
 
 def format_legal_context_naturally(retrieved_chunks: List[Chunk]) -> str:
-    """Format legal documents in a natural way"""
+    """
+    Format legal documents to encourage direct statute citations
+    Enhanced to extract actual legal references instead of generic placeholders
+    """
     if not retrieved_chunks:
         return ""
     
     context_parts = []
+    statute_references = []
+    
     for i, chunk in enumerate(retrieved_chunks, 1):
-        formatted_chunk = f"""
-**مرجع {i}: {chunk.title}**
-{chunk.content}
+        # Detect if this is a statute document
+        is_statute = any(term in chunk.title for term in ["نظام", "المادة", "لائحة", "مرسوم", "التعريفات"])
+        
+        if is_statute:
+            # For statute documents, extract the actual legal reference
+            statute_name = chunk.title
+            
+            # Clean and format statute content 
+            clean_content = chunk.content.replace('"', "'").replace('\n', ' ').replace('\r', ' ')
+            preview = clean_content[:300] + "..." if len(clean_content) > 300 else clean_content
+            
+            # Format with emphasis on direct citation
+            formatted_chunk = f"""
+📜 **{statute_name}**
+{preview}
+
+استخدم الاسم الكامل: "{statute_name}" في الاستشهاد
 """
+            statute_references.append(statute_name)
+        else:
+            # For memos and other documents, use standard formatting
+            clean_title = chunk.title.replace('"', "'")
+            clean_content = chunk.content.replace('"', "'").replace('\n', ' ').replace('\r', ' ')
+            preview = clean_content[:300] + "..." if len(clean_content) > 300 else clean_content
+            
+            formatted_chunk = f"""
+**مرجع {i}: {clean_title}**
+{preview}
+"""
+        
         context_parts.append(formatted_chunk)
     
-    context = f"""لديك هذه المراجع القانونية السعودية ذات الصلة:
+    # Build context with explicit citation instructions
+    context = f"""لديك هذه المراجع القانونية السعودية:
 
 {chr(10).join(context_parts)}
 
-استخدم هذه المراجع للمساعدة في إجابتك، ولكن لا تجعل ردك يبدو كآلة قانونية. تحدث بطريقة طبيعية واستشهد بالمراجع عند الحاجة فقط."""
+🎯 **تعليمات الاستشهاد:**
+"""
+    
+    if statute_references:
+        context += f"""
+📜 **للأنظمة والقوانين - استشهد مباشرة بالاسم الكامل:**
+"""
+        for ref in statute_references:
+            context += f'- "وفقاً لـ{ref}"\n'
+            context += f'- "بموجب {ref}"\n'
+        
+        context += f"""
+✅ استخدم الاسم الكامل للنظام أو اللائحة في كل استشهاد
+"""
+    
+    context += """
+⚔️ **للمذكرات القضائية:** استخدم محتواها لتعزيز حججك القانونية
+
+اربط كل استشهاد بتحليلك القانوني مباشرة"""
     
     return context
-
-
 class IntelligentLegalRAG:
     """
     Intelligent Legal RAG with AI-Powered Intent Classification
@@ -470,7 +917,8 @@ class IntelligentLegalRAG:
             confidence = classification["confidence"]
             
             # Stage 2: Get relevant documents from database
-            relevant_docs = await self.retriever.get_relevant_documents(query, top_k=3)
+            print(f"🔥 DEBUG CATEGORY: category='{category}', type={type(category)}")
+            relevant_docs = await self.retriever.get_relevant_documents(query, top_k=3, user_intent=category)
             
             # Stage 3: Select appropriate prompt based on AI classification
             system_prompt = PROMPT_TEMPLATES[category]
@@ -478,6 +926,8 @@ class IntelligentLegalRAG:
             # Stage 4: Build intelligent prompt with documents
             if relevant_docs:
                 legal_context = format_legal_context_naturally(relevant_docs)
+                print(f"🔥 CITATION DEBUG: Context length: {len(legal_context)}")
+                print(f"🔥 CITATION DEBUG: Contains 'مرجع قانوني': {'مرجع قانوني' in legal_context}")
                 full_prompt = f"""{legal_context}
 
 السؤال: {query}"""
@@ -492,7 +942,7 @@ class IntelligentLegalRAG:
             ]
             
             # Stage 5: Stream intelligent response
-            async for chunk in self._stream_ai_response(messages):
+            async for chunk in self._stream_ai_response(messages, category):
                 yield chunk
                 
         except Exception as e:
@@ -517,7 +967,8 @@ class IntelligentLegalRAG:
             confidence = classification["confidence"]
             
             # Stage 2: Get relevant documents
-            relevant_docs = await self.retriever.get_relevant_documents(query, top_k=3)
+            print(f"🔥 DEBUG CATEGORY: category='{category}', type={type(category)}")
+            relevant_docs = await self.retriever.get_relevant_documents(query, top_k=3, user_intent=category)
             
             # Stage 3: Select appropriate prompt
             system_prompt = PROMPT_TEMPLATES[category]
@@ -551,20 +1002,20 @@ class IntelligentLegalRAG:
             })
             
             # Stage 6: Stream intelligent contextual response
-            async for chunk in self._stream_ai_response(messages):
+            async for chunk in self._stream_ai_response(messages, category):
                 yield chunk
                 
         except Exception as e:
             logger.error(f"Intelligent contextual legal AI error: {e}")
             yield f"عذراً، حدث خطأ في معالجة سؤالك: {str(e)}"
     
-    async def _stream_ai_response(self, messages: List[Dict[str, str]]) -> AsyncIterator[str]:
+    async def _stream_ai_response(self, messages: List[Dict[str, str]], category: str = "GENERAL_QUESTION") -> AsyncIterator[str]:
         """Stream AI response with error handling"""
         try:
             stream = await self.ai_client.chat.completions.create(
                 model=self.ai_model,
                 messages=messages,
-                temperature=0.3,  # Balanced creativity and consistency
+                temperature=0.05 if category == "ACTIVE_DISPUTE" else config.temperature,
                 max_tokens=1500,  # Reasonable length
                 stream=True
             )

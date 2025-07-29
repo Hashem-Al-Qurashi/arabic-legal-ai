@@ -19,7 +19,6 @@ from rag_engine import ask_question_with_context
 # Add these imports at the top of your existing file
 # Add these imports at the top of your existing file
 try:
-    from nuclear_orchestrator import NuclearLegalOrchestrator
     import os
     from openai import AsyncOpenAI
     from dotenv import load_dotenv
@@ -317,7 +316,7 @@ async def process_unified_message(
             try:
                 if NUCLEAR_SYSTEM_AVAILABLE:
                     print(f"🚀 Using NUCLEAR system for authenticated user - guaranteed compliant")
-                    nuclear_orchestrator = NuclearLegalOrchestrator(nuclear_openai_client)
+                    
                     
                     chunks = []
                     
@@ -355,7 +354,6 @@ async def process_unified_message(
             try:
                 if NUCLEAR_SYSTEM_AVAILABLE:
                     print(f"🚀 Using NUCLEAR system for guest - guaranteed compliant")
-                    nuclear_orchestrator = NuclearLegalOrchestrator(nuclear_openai_client)
                     
                     chunks = []
                     
@@ -769,7 +767,6 @@ async def process_chat_message_with_multi_agent(
         
         # 🧠 MULTI-AGENT LEGAL REASONING
         try:
-            from multi_agent_legal import EnhancedRAGEngine
             
             print(f"🔄 Starting multi-agent legal analysis...")
             print(f"📚 Context messages: {len(context_messages)}")

@@ -13,11 +13,11 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "moaen-ai-terraform-state-eu"
-    key            = "production/terraform.tfstate"
+    bucket         = "mmoaen-ai-terraform-state-eu"
+    key            = "pproduction/terraform.tfstate"
     region         = "eu-central-1"
     encrypt        = true
-    dynamodb_table = "terraform-state-lock"
+    dynamodb_table = "tterraform-state-lock"
   }
 }
 

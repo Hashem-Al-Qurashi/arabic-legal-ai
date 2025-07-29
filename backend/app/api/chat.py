@@ -1,5 +1,4 @@
 # backend/app/api/chat.py - Complete Unified Chat API with Multi-Agent Integration
-from nuclear_orchestrator import NuclearLegalOrchestrator
 from typing import List, Optional, Dict, Any
 from fastapi import APIRouter, Depends, HTTPException, status, Form, Query, Header
 from fastapi.responses import StreamingResponse, JSONResponse
