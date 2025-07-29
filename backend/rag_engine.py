@@ -15,6 +15,13 @@ import json
 # Import the smart database components from old RAG
 from app.storage.vector_store import VectorStore, Chunk
 from app.storage.sqlite_store import SqliteVectorStore
+from enum import Enum
+
+class ProcessingMode(Enum):
+    """Processing modes for different query types"""
+    LIGHTWEIGHT = "lightweight"    # GENERAL_QUESTION: Fast, simple
+    STRATEGIC = "strategic"        # ACTIVE_DISPUTE: Smart but efficient  
+    COMPREHENSIVE = "comprehensive" # PLANNING_ACTION: Full analysis
 
 
 # Load environment variables
@@ -541,11 +548,18 @@ class DocumentRetriever:
     
     async def get_relevant_documents(self, query: str, top_k: int = 3, user_intent: str = None) -> List[Chunk]:
         """
-        Enhanced document retrieval with semantic diversification + dual-stage filtering:
-        Stage 1: Semantic diversification (NEW for ACTIVE_DISPUTE)
-        Stage 2: Content-based retrieval (your existing system)  
-        Stage 3: Style-based filtering using AI (your existing system)
+        Mode-aware document retrieval with strategic processing:
+        - LIGHTWEIGHT: Simple content retrieval
+        - STRATEGIC: Smart semantic queries + batch processing  
+        - COMPREHENSIVE: Full pipeline with style analysis
         """
+        # Determine processing mode
+        processing_mode = ProcessingMode.LIGHTWEIGHT  # Default
+        if hasattr(self, '_current_mode'):
+            processing_mode = self._current_mode
+        
+        logger.info(f"🎯 Processing mode: {processing_mode.value}")
+
         if not self.initialized:
             await self.initialize()
         
@@ -559,13 +573,19 @@ class DocumentRetriever:
             logger.info(f"📋 User intent: {user_intent}")
             
             # STAGE 1: SEMANTIC DIVERSIFICATION (NEW!)
-            if user_intent == "ACTIVE_DISPUTE":
-                # Generate diverse semantic queries for better document coverage
+            # STAGE 1: MODE-BASED SEMANTIC DIVERSIFICATION
+            if processing_mode == ProcessingMode.STRATEGIC and user_intent == "ACTIVE_DISPUTE":
+                # Strategic mode: Smart semantic queries but efficient processing
                 semantic_queries = await generate_semantic_queries(query, self.ai_client)
-                logger.info(f"🎯 Generated {len(semantic_queries)} semantic queries for diverse retrieval")
+                logger.info(f"⚡ STRATEGIC MODE: Generated {len(semantic_queries)} semantic queries")
+            elif processing_mode == ProcessingMode.COMPREHENSIVE and user_intent in ["ACTIVE_DISPUTE", "PLANNING_ACTION"]:
+                # Comprehensive mode: Full semantic analysis
+                semantic_queries = await generate_semantic_queries(query, self.ai_client)
+                logger.info(f"🔍 COMPREHENSIVE MODE: Generated {len(semantic_queries)} semantic queries")
             else:
-                # For other intents, use original query only
+                # Lightweight mode: Single query for efficiency
                 semantic_queries = [query]
+                logger.info(f"🚀 LIGHTWEIGHT MODE: Using single query for efficiency")
             
             # STAGE 2: MULTI-QUERY RETRIEVAL (ENHANCED)
             # In your enhanced get_relevant_documents method, replace the multi-query retrieval section:
@@ -648,7 +668,7 @@ class DocumentRetriever:
             logger.info(f"📊 Stage 2-3: Found {len(content_candidates)} content matches")
             
             # STAGE 4: YOUR EXISTING STYLE FILTERING (UNCHANGED!)
-            if len(content_candidates) > top_k and user_intent == "ACTIVE_DISPUTE":
+            if len(content_candidates) > top_k and user_intent == "ACTIVE_DISPUTE" and processing_mode != ProcessingMode.STRATEGIC:
                 try:
                     logger.info("🎨 Stage 4: AI-powered style filtering")
                     
@@ -895,8 +915,19 @@ class IntelligentLegalRAG:
             ai_client=self.ai_client,
             model=classification_model
         )
+
+        
         
         logger.info("🚀 Intelligent Legal RAG initialized - AI-powered classification + Smart retrieval!")
+
+        # Add processing mode mapping
+        self.processing_modes = {
+            "GENERAL_QUESTION": ProcessingMode.LIGHTWEIGHT,
+            "ACTIVE_DISPUTE": ProcessingMode.STRATEGIC,
+            "PLANNING_ACTION": ProcessingMode.COMPREHENSIVE
+        }
+        
+        logger.info("⚡ Processing modes configured - Strategic efficiency enabled")
     
     async def ask_question_streaming(self, query: str) -> AsyncIterator[str]:
         """
@@ -912,6 +943,11 @@ class IntelligentLegalRAG:
             
             # Stage 2: Get relevant documents from database
             print(f"🔥 DEBUG CATEGORY: category='{category}', type={type(category)}")
+            # Stage 2: Set processing mode and get relevant documents
+            processing_mode = self.processing_modes.get(category, ProcessingMode.LIGHTWEIGHT)
+            self.retriever._current_mode = processing_mode
+            logger.info(f"⚡ Using {processing_mode.value} mode for {category}")
+
             relevant_docs = await self.retriever.get_relevant_documents(query, top_k=3, user_intent=category)
             
             # Stage 3: Select appropriate prompt based on AI classification
@@ -1009,7 +1045,7 @@ class IntelligentLegalRAG:
             stream = await self.ai_client.chat.completions.create(
                 model=self.ai_model,
                 messages=messages,
-                temperature=0.05 if category == "ACTIVE_DISPUTE" else 0.15,
+                temperature=0.25 if category == "ACTIVE_DISPUTE" else 0.15,
                 max_tokens=4000 if category == "ACTIVE_DISPUTE" else 1500,  # ← GIVE DISPUTES MORE SPACE!
                 stream=True
             )
