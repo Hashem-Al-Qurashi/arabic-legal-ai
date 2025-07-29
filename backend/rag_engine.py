@@ -19,63 +19,6 @@ class SimpleCitationFixer:
     """Simple citation correction - integrated with RAG engine"""
     
     def fix_citations(self, ai_response: str, available_documents: List[Chunk]) -> str:
-        """
-        AGGRESSIVE citation fixing - forces real citations into response
-        """
-        if not available_documents:
-            return ai_response
-        
-        # Get actual document titles
-        real_titles = [doc.title for doc in available_documents]
-        
-        # Remove fake patterns (same as before)
-        import re
-        fixed_response = ai_response
-        
-        fixed_response = re.sub(r'مرجع\s*\d+[:\s]*[^".\n]*', '', fixed_response)
-        fixed_response = re.sub(r'مذكرة\s*civil[^".\n]*', '', fixed_response)
-        fixed_response = re.sub(r'نطاق تطبيق[^".\n]*', '', fixed_response)
-        fixed_response = re.sub(r'\s+', ' ', fixed_response)
-        
-        # AGGRESSIVE CITATION INJECTION
-        primary_title = real_titles[0] if real_titles else None
-        
-        if primary_title:
-            # Strategy 1: Replace incomplete citations
-            fixed_response = re.sub(
-                r'وفقاً لـ\*\*الأ[^*]*\*\*',  # Matches "وفقاً لـ **الأ..."
-                f'وفقاً لـ"{primary_title}"',
-                fixed_response
-            )
-            
-            # Strategy 2: Add citation to legal analysis sections
-            if 'تحليل' in fixed_response and primary_title not in fixed_response:
-                # Find first mention of legal analysis and inject citation
-                fixed_response = re.sub(
-                    r'(#### أولاً: تحليل[^\\n]*)',
-                    f'\\1\\n\\nاستناداً إلى "{primary_title}"',
-                    fixed_response,
-                    count=1
-                )
-            
-            # Strategy 3: Add citation to conclusion if no citations present
-            if not any(title in fixed_response for title in real_titles):
-                if 'بناءً على' in fixed_response:
-                    fixed_response = fixed_response.replace(
-                        'بناءً على',
-                        f'بناءً على "{primary_title}" و',
-                        1
-                    )
-                elif 'الخاتمة' in fixed_response or 'الخلاصة' in fixed_response:
-                    # Add citation before conclusion
-                    fixed_response = re.sub(
-                        r'(####[^\\n]*(?:الخاتمة|الخلاصة)[^\\n]*)',
-                        f'\\n\\nووفقاً لأحكام "{primary_title}"\\n\\n\\1',
-                        fixed_response,
-                        count=1
-                    )
-        
-        return fixed_response
         """Fix fake citations using actual available documents"""
         if not available_documents:
             return ai_response
@@ -759,10 +702,7 @@ class DocumentRetriever:
                     
                 except Exception as scoring_error:
                     logger.warning(f"Multi-objective scoring failed: {scoring_error}, using similarity-based selection")
-                    # Filter out fake documents before final selection
-                clean_candidates = self._filter_fake_documents(content_candidates)
-                relevant_chunks = clean_candidates[:top_k]
-                logger.info(f"🧹 Filtered {len(content_candidates) - len(clean_candidates)} fake documents")
+                    relevant_chunks = content_candidates[:top_k]
             else:
                 # Use content-based results when we have few candidates
                 relevant_chunks = content_candidates[:top_k]
@@ -790,26 +730,7 @@ class DocumentRetriever:
             logger.error(f"Error retrieving documents: {e}")
             return []
 
-    def _filter_fake_documents(self, documents: List[Chunk]) -> List[Chunk]:
-        """Filter out fake documents from retrieval results"""
-        clean_documents = []
-        
-        for doc in documents:
-            title = doc.title.lower()
-            
-            # Filter out fake document patterns
-            if 'civil' in title and 'مذكرة' in title:
-                logger.warning(f"🚨 Filtered out fake document: {doc.title}")
-                continue
-            
-            # Filter out documents with suspicious short content
-            if len(doc.content) < 200 and 'مذكرة' in title:
-                logger.warning(f"🚨 Filtered out suspicious short document: {doc.title}")
-                continue
-            
-            clean_documents.append(doc)
-        
-        return clean_documents
+
     
 class IntentClassifier:
     """AI-powered intent classifier - no hard-coding"""
@@ -946,34 +867,7 @@ class IntelligentLegalRAG:
         self.citation_fixer = SimpleCitationFixer()
         logger.info("🔧 Citation fixer initialized")
 
-
-    def test_citation_fixing(self, test_response: str, available_docs: List[Chunk]) -> str:
-        """
-        Test method for citation fixing - helps us verify it works
-        """
-        logger.info("🧪 Testing citation fixing...")
         
-        original_length = len(test_response)
-        fake_count_before = test_response.count('مرجع') + test_response.count('civil')
-        
-        # Apply citation fixing
-        fixed_response = self.citation_fixer.fix_citations(test_response, available_docs)
-        
-        fixed_length = len(fixed_response)
-        fake_count_after = fixed_response.count('مرجع') + fixed_response.count('civil')
-        
-        logger.info(f"📊 Citation fix results:")
-        logger.info(f"   Original length: {original_length} chars")
-        logger.info(f"   Fixed length: {fixed_length} chars")
-        logger.info(f"   Fake citations before: {fake_count_before}")
-        logger.info(f"   Fake citations after: {fake_count_after}")
-        
-        if available_docs:
-            real_citations_present = any(doc.title in fixed_response for doc in available_docs)
-            logger.info(f"   Real citations added: {real_citations_present}")
-        
-        return fixed_response
-
     async def ask_question_streaming(self, query: str) -> AsyncIterator[str]:
         """
         Intelligent legal consultation with AI-powered intent classification
@@ -1012,25 +906,8 @@ class IntelligentLegalRAG:
             ]
             
             # Stage 5: Stream intelligent response
-            # Store documents for citation fixing
-            self._current_documents = relevant_docs
-
-            # Stage 5: Stream intelligent response with citation fixing capability
-            response_chunks = []
             async for chunk in self._stream_ai_response(messages, category):
-                response_chunks.append(chunk)
                 yield chunk
-
-            # Apply citation fixing to complete response
-            if relevant_docs and response_chunks:
-                complete_response = ''.join(response_chunks)
-                fixed_response = self.citation_fixer.fix_citations(complete_response, relevant_docs)
-                
-                # If changes were made, log the improvement
-                if fixed_response != complete_response:
-                    fake_before = complete_response.count('مرجع') + complete_response.count('civil')
-                    fake_after = fixed_response.count('مرجع') + fixed_response.count('civil')
-                    logger.info(f"🔧 Citation fixing applied: {fake_before} → {fake_after} fake citations")
                 
         except Exception as e:
             logger.error(f"Intelligent legal AI error: {e}")
