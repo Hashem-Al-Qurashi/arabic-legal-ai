@@ -28,7 +28,14 @@ class SimpleCitationFixer:
         # Get statute titles only (no memos)
         real_titles = [doc.title for doc in available_documents]
         statute_titles = [title for title in real_titles 
-                         if any(term in title for term in ["نظام", "المادة", "لائحة", "مرسوم", "التعريفات"])]
+                 if any(term in title for term in [
+                     "نظام", "المادة", "لائحة", "مرسوم", "التعريفات",  # ONLY real laws
+                     "قانون", "قرار وزاري", "تعليمات", "ضوابط", "قواعد"  # Official regulations
+                 ]) 
+                 and 'مذكرة' not in title.lower()  # Exclude memos
+                 and 'دفع' not in title.lower()    # Exclude case defenses  
+                 and 'حجة' not in title.lower()    # Exclude case arguments
+                 and 'رقم' not in title.lower()]   # Exclude numbered cases
         
         if not statute_titles:
             return ai_response
@@ -112,6 +119,65 @@ class SimpleCitationFixer:
             fixed_response = re.sub(r'وفقاً ل([^"]+)', f'وفقاً لـ"{statute_titles[0]}"', fixed_response, count=1)
         
         # 6. Ensure we have at least one proper citation in legal responses
+        # 6. PROACTIVE CITATION INJECTION - Add citations for unused statutes
+        available_statutes = [title for title in statute_titles if title not in fixed_response]
+        if available_statutes:
+            logger.info(f"🎯 Found {len(available_statutes)} unused statutes for injection")
+            
+            # Injection points - places where we can add citations naturally
+            injection_opportunities = [
+                # After legal analysis headers
+                (r'(#### أولاً: [^\n]+)', rf'\1\nوفقاً لـ"{available_statutes[0]}"، '),
+                (r'(#### ثانياً: [^\n]+)', rf'\1\nاستناداً إلى "{available_statutes[1] if len(available_statutes) > 1 else available_statutes[0]}"، '),
+                (r'(#### ثالثاً: [^\n]+)', rf'\1\nبناءً على "{available_statutes[2] if len(available_statutes) > 2 else available_statutes[0]}"، '),
+                
+                # After conclusion headers
+                (r'(الخاتمة[^\n]*)', rf'\1\nحسب "{available_statutes[-1]}"، '),
+                (r'(الخلاصة[^\n]*)', rf'\1\nطبقاً لـ"{available_statutes[-1]}"، '),
+                
+                # Before final recommendation
+                (r'(نطلب من المحكمة)', rf'وفقاً لـ"{available_statutes[0]}"، \1'),
+                (r'(بناءً على ما سبق)', rf'\1 واستناداً إلى "{available_statutes[1] if len(available_statutes) > 1 else available_statutes[0]}"، '),
+            ]
+            
+            # Apply injections with SMART STATUTE ROTATION
+            injected_count = 0
+            used_statutes = set()
+
+            for pattern, _ in injection_opportunities:
+                if injected_count < len(available_statutes) and re.search(pattern, fixed_response):
+                    # Pick next unused statute
+                    statute_to_use = None
+                    for statute in available_statutes:
+                        if statute not in used_statutes:
+                            statute_to_use = statute
+                            break
+                    
+                    if statute_to_use:
+                        # Create citation based on section type
+                        if 'أولاً' in pattern:
+                            replacement = rf'\1\nوفقاً لـ"{statute_to_use}"، '
+                        elif 'ثانياً' in pattern:
+                            replacement = rf'\1\nاستناداً إلى "{statute_to_use}"، '
+                        elif 'ثالثاً' in pattern:
+                            replacement = rf'\1\nبناءً على "{statute_to_use}"، '
+                        elif 'رابعاً' in pattern:
+                            replacement = rf'\1\nحسب "{statute_to_use}"، '
+                        elif 'خامساً' in pattern:
+                            replacement = rf'\1\nطبقاً لـ"{statute_to_use}"، '
+                        elif 'الخاتمة' in pattern:
+                            replacement = rf'\1\nووفقاً لـ"{statute_to_use}"، '
+                        else:
+                            replacement = rf'وفقاً لـ"{statute_to_use}"، \1'
+                        
+                        fixed_response = re.sub(pattern, replacement, fixed_response, count=1)
+                        used_statutes.add(statute_to_use)
+                        injected_count += 1
+                        logger.info(f"💉 Injected citation #{injected_count}: {statute_to_use[:50]}...")
+
+            logger.info(f"✅ Successfully injected {injected_count} DIFFERENT statute citations")
+            
+            logger.info(f"✅ Successfully injected {injected_count} additional statute citations")
         has_proper_citation = any(f'"{title}"' in fixed_response for title in statute_titles)
         
         if not has_proper_citation and statute_titles and len(fixed_response) > 500:  # Only for substantial responses
@@ -538,16 +604,52 @@ Score all {len(documents)} documents. Higher citation_value for statutes/regulat
                 logger.error(f"Raw response: {response_text[:300]}...")
                 
                 # Ultimate fallback: create balanced default scores
+                # STATUTE-PRIORITIZING fallback scores
+                # STATUTE-PRIORITIZING fallback scores
                 scores = []
                 for i in range(len(documents)):
-                    # Give slightly different scores to break ties
-                    base_score = 0.6 + (i * 0.05) % 0.3  # Varies between 0.6-0.9
-                    scores.append({
-                        "document_id": i + 1,
-                        "relevance": base_score,
-                        "citation_value": 0.7 if any(term in documents[i].title for term in ["نظام", "المادة", "لائحة"]) else 0.4,
-                        "style_match": 0.4 if "مذكرة" in documents[i].title else 0.6
-                    })
+                    doc_title = documents[i].title.lower()
+                    
+                    # Detect REAL legal statutes vs case documents
+                    is_real_statute = (
+                        any(term in doc_title for term in ["نظام", "المادة", "لائحة", "مرسوم", "التعريفات", "قانون", "قرار وزاري"]) 
+                        and not any(exclude in doc_title for exclude in ["دفع", "حجة", "رقم", "مذكرة"])
+                    )
+                    is_case_document = any(term in doc_title for term in ["دفع", "حجة", "رقم"]) and not any(term in doc_title for term in ["نظام", "المادة", "لائحة"])
+                    is_memo = 'مذكرة' in doc_title
+                    
+                    # PRIORITIZE REAL LAWS ONLY
+                    if is_real_statute:
+                        scores.append({
+                            "document_id": i + 1,
+                            "relevance": 0.9,      # HIGHEST for real laws
+                            "citation_value": 0.95, # MAXIMUM citation value
+                            "style_match": 0.2     # Low style (laws aren't stylistic)
+                        })
+                        logger.info(f"⚖️ REAL LAW PRIORITY: {documents[i].title[:50]}... (citation: 0.95)")
+                    elif is_case_document:
+                        scores.append({
+                            "document_id": i + 1,
+                            "relevance": 0.6,      # Medium relevance for case examples
+                            "citation_value": 0.1, # VERY LOW citation (don't cite cases as laws!)
+                            "style_match": 0.8     # High style for case examples
+                        })
+                        logger.info(f"📋 CASE EXAMPLE: {documents[i].title[:50]}... (style: 0.8)")
+                    elif is_memo:
+                        scores.append({
+                            "document_id": i + 1,
+                            "relevance": 0.7,      # Good relevance for memos
+                            "citation_value": 0.1, # VERY LOW citation value (no memo citations!)
+                            "style_match": 0.8     # High style for memos
+                        })
+                        logger.info(f"📋 MEMO BACKGROUND: {documents[i].title[:50]}... (style: 0.8)")
+                    else:
+                        scores.append({
+                            "document_id": i + 1,
+                            "relevance": 0.6,
+                            "citation_value": 0.5,
+                            "style_match": 0.5
+                        })
                 logger.warning(f"⚠️ Using intelligent fallback scores for {len(scores)} documents")
         
         # Combine documents with their scores

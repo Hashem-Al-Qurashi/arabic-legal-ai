@@ -1406,43 +1406,140 @@ const detectMultiAgentResponse = (content: string): boolean => {
   return indicators.some(indicator => content.includes(indicator));
 };
 
+
 const formatAIResponse = (content: string): string => {
-  return content.trim()
-    // Handle markdown headers first: #### → <h3>, ### → <h3>
-    .replace(/^####\s*(.*$)/gm, '<h3>$1</h3>')
-    .replace(/^###\s*(.*$)/gm, '<h3>$1</h3>')
-    .replace(/^##\s*(.*$)/gm, '<h2>$1</h2>')
-    .replace(/^#\s*(.*$)/gm, '<h1>$1</h1>')
+  console.log('---- RAW INPUT ----');
+  console.log(content);
+
+  // Step 1: Clean the input
+  let cleaned = content
+    // Remove any existing HTML tags first
+    .replace(/<\/?bold>/gi, '')
+    .replace(/<\/?b>/gi, '')
+    // Remove control characters
+    .replace(/[\u200e\u200f\u202a-\u202e\uFEFF]/g, '')
+    .trim();
+
+  console.log('---- AFTER CLEANING ----');
+  console.log(cleaned);
+
+  // Step 2: CRITICAL FIX - Separate stuck markdown headers (GENERIC - NO HARDCODING)
+  cleaned = cleaned
+    // FIRST: Fix stuck markdown headers: ANY character followed immediately by ###
+    .replace(/([^\s\n])(#{1,4}\s)/g, '$1\n$2')
     
-    // Multi-agent headers: 💡 Text: → <h3>
-    .replace(/(📋|🔍|⚖️|💡|📚|🎯)\s*([^:\n]+):?/gm, '<h3>$1 $2</h3>')
+    // SECOND: Fix Arabic ordinals stuck to previous text (but preserve the ordinal word intact)
+    .replace(/([^\s\n:])(\s*)(أولاً|ثانياً|ثالثاً|رابعاً|خامساً|سادساً|سابعاً|ثامناً|تاسعاً|عاشراً):/g, '$1\n$3:')
     
-    // Regular headers: Text: → <h3>
-    .replace(/^([^:\n<]+):/gm, '<h3>$1:</h3>')
+    // THIRD: Fix numbered points stuck to Arabic text
+    .replace(/([أ-ي])(\d+\.)/g, '$1\n$2')
     
-    // Numbered points: 1. Text: Content → <div class="legal-point">
-    .replace(/^(\d+)\.\s*([^:]+):\s*(.*?)(?=\n\d+\.|\n[^0-9]|\n*$)/gms, 
-      '<div class="legal-point"><strong>$1. $2:</strong><p>$3</p></div>')
+    // FOURTH: Fix common Arabic sentence starters stuck to previous text
+    .replace(/([أ-ي])(بناءً|وفقاً|يجب|يمكن|نطلب|ختاماً|في\s+حال|على\s+أن|من\s+المهم)/g, '$1\n$2')
     
-    // Bullet points: • Text → <li>
-    .replace(/^[•·-]\s*(.*?)(?=\n[•·-]|\n[^•·-]|\n*$)/gms, '<li>$1</li>')
+    // FIFTH: Add line breaks after Arabic ordinals if they're followed by more content on same line
+    .replace(/(أولاً|ثانياً|ثالثاً|رابعاً|خامساً|سادساً|سابعاً|ثامناً|تاسعاً|عاشراً):\s*([أ-ي][^:\n]{10,})/g, '$1: $2\n');
+
+  console.log('---- AFTER HEADER SEPARATION ----');
+  console.log(cleaned);
+
+  // Step 3: Ensure proper spacing around headers
+  cleaned = cleaned
+    // Ensure headers have space after #
+    .replace(/(#+)([^\s#])/g, '$1 $2')
+    // Add line breaks before and after headers
+    .replace(/\n(#+\s[^\n]+)\n/g, '\n\n$1\n\n')
+    // Clean up multiple newlines
+    .replace(/\n{3,}/g, '\n\n');
+
+  // Step 4: Process line by line to convert markdown
+  const lines = cleaned.split('\n');
+  const processedLines = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i].trim();
     
-    // Bold text: **text** → <strong>
+    if (!line) {
+      processedLines.push('');
+      continue;
+    }
+
+    // Convert headers (order matters - start with longest)
+    if (line.startsWith('####')) {
+      line = line.replace(/^####\s*(.*)$/, '<h3>$1</h3>');
+    } else if (line.startsWith('###')) {
+      line = line.replace(/^###\s*(.*)$/, '<h2>$1</h2>');
+    } else if (line.startsWith('##')) {
+      line = line.replace(/^##\s*(.*)$/, '<h2>$1</h2>');
+    } else if (line.startsWith('#')) {
+      line = line.replace(/^#\s*(.*)$/, '<h1>$1</h1>');
+    }
+    // Convert Arabic ordinal headers (MORE SPECIFIC PATTERN)
+    else if (/^(أولاً|ثانياً|ثالثاً|رابعاً|خامساً|سادساً|سابعاً|ثامناً|تاسعاً|عاشراً):\s*.{0,100}$/.test(line)) {
+      line = line.replace(/^(.*?)$/, '<h3>$1</h3>');
+    }
+    // Handle OTHER Arabic headers ending with colon (LESS AGGRESSIVE)
+    else if (/^[أ-ي\s]{4,25}:\s*$/.test(line) && !line.includes('أولاً') && !line.includes('ثانياً') && !line.includes('ثالثاً')) {
+      line = line.replace(/^(.*?):\s*$/, '<h3>$1</h3>');
+    }
+
+    processedLines.push(line);
+  }
+
+  // Step 5: Join and process other markdown
+  let html = processedLines.join('\n');
+
+  console.log('---- AFTER LINE PROCESSING ----');
+  console.log(html);
+
+  // Step 6: Process remaining markdown elements
+  html = html
+    // Convert bold text
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    
-    // Paragraphs: double line breaks
-    .replace(/\n\n+/g, '</p><p>')
-    .replace(/^/, '<p>')
-    .replace(/$/, '</p>')
-    
-    // Clean up structure
-    .replace(/<p>(<h[1-3]>)/g, '$1')
-    .replace(/(<\/h[1-3]>)<\/p>/g, '$1')
-    .replace(/<p>(<div class="legal-point">)/g, '$1')
-    .replace(/(<\/div>)<\/p>/g, '$1')
-    .replace(/<p>(<li)/g, '<ul>$1')
-    .replace(/(<\/li>)<\/p>/g, '$1</ul>')
-    .replace(/<p>\s*<\/p>/g, '');
+    // Handle numbered lists with bold
+    .replace(/^(\d+)\.\s*\*\*(.*?)\*\*:\s*(.*?)$/gm,
+      '<div class="legal-point"><strong>$1. $2:</strong><p>$3</p></div>')
+    // Handle numbered lists plain
+    .replace(/^(\d+)\.\s*(.*?)$/gm,
+      '<div class="legal-point"><strong>$1.</strong> <p>$2</p></div>')
+    // Handle bullet points
+    .replace(/^[•·-]\s*(.*?)$/gm, '<li>$1</li>');
+
+  // Step 7: Wrap paragraphs and clean up
+  const blocks = html.split(/\n\s*\n/);
+  const finalBlocks = [];
+
+  for (const block of blocks) {
+    const trimmed = block.trim();
+    if (!trimmed) continue;
+
+    // Check if it's already an HTML element
+    if (/^<(h[1-3]|div|ul|li)/.test(trimmed)) {
+      finalBlocks.push(trimmed);
+    } else {
+      // Wrap in paragraph
+      finalBlocks.push(`<p>${trimmed}</p>`);
+    }
+  }
+
+  // Step 8: Final cleanup
+  let result = finalBlocks.join('\n\n')
+    // Wrap consecutive <li> elements in <ul>
+    .replace(/(<li>.*?<\/li>)(\s*<li>.*?<\/li>)*/gs, (match) => {
+      return '<ul>' + match + '</ul>';
+    })
+    .replace(/<\/ul>\s*<ul>/g, '')
+    // Remove empty paragraphs
+    .replace(/<p>\s*<\/p>/g, '')
+    // Clean up strong tags inside headers
+    .replace(/<h([1-3])><strong>(.*?)<\/strong><\/h[1-3]>/g, '<h$1>$2</h$1>')
+    // Remove extra whitespace
+    .replace(/\n{3,}/g, '\n\n');
+
+  console.log('---- FINAL RESULT ----');
+  console.log(result);
+  
+  return result;
 };
 
 

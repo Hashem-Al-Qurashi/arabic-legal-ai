@@ -7,7 +7,7 @@ import type {
   Consultation 
 } from '../types/auth';
 
-const API_BASE_URL = 'http://localhost:8000/';
+const API_BASE_URL = 'https://d2c979d13bkvf4.cloudfront.net'; // ✅ CORRECT VERSION
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -291,7 +291,7 @@ async sendMessageStreaming(
 
   try {
     // ✅ FIXED: Removed conflicting headers, let browser set Content-Type for FormData
-    const response = await fetch(`${API_BASE_URL}api/chat/message`, {  // ← Removed double slash
+    const response = await fetch(`${API_BASE_URL}/api/chat/message`, {  // ← Removed double slash
       method: 'POST',
       headers: {
         'Accept': 'text/event-stream',
