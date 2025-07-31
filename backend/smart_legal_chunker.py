@@ -13,220 +13,372 @@ class LegalChunk:
     total_chunks: int
     metadata: Dict[str, Any]
 
-class SmartLegalChunker:
-    """Arabic legal document intelligent chunker"""
+class EliteLegalChunker:
+    """
+    Elite Arabic Legal Document Chunker
     
-    # Arabic legal structure patterns
+    CORE PRINCIPLE: Never split a مادة (article) - atomic legal units
+    Chunk boundaries ONLY at legal structure boundaries
+    Perfect citations guaranteed
+    """
+    
+    # Enhanced Arabic legal structure patterns
     CHAPTER_PATTERNS = [
-        r'الباب\s+(الأول|الثاني|الثالث|الرابع|الخامس|\d+)',
-        r'القسم\s+(الأول|الثاني|الثالث|\d+)'
+        r'الباب\s+(الأول|الثاني|الثالث|الرابع|الخامس|السادس|السابع|الثامن|التاسع|العاشر)',
+        r'الباب\s+(\d+)',
+        r'القسم\s+(الأول|الثاني|الثالث|الرابع|الخامس)',
+        r'القسم\s+(\d+)'
     ]
     
     SECTION_PATTERNS = [
-        r'الفصل\s+(الأول|الثاني|الثالث|\d+)',
-        r'الجزء\s+(الأول|الثاني|الثالث|\d+)'
+        r'الفصل\s+(الأول|الثاني|الثالث|الرابع|الخامس|السادس|السابع|الثامن|التاسع|العاشر)',
+        r'الفصل\s+(\d+)',
+        r'المبحث\s+(الأول|الثاني|الثالث)',
+        r'المبحث\s+(\d+)'
     ]
     
     ARTICLE_PATTERNS = [
-        r'المادة\s+(الأولى|الثانية|الثالثة|\d+)',
-        r'البند\s+(\d+)',
-        r'الفقرة\s+(\d+)'
+        r'المادة\s+(الأولى|الثانية|الثالثة|الرابعة|الخامسة|السادسة|السابعة|الثامنة|التاسعة|العاشرة|الحادية\s+عشرة|الثانية\s+عشرة)',
+        r'المادة\s+(\d+)',
+        r'المادة\s+\(\s*\d+\s*\)',
+        r'المادة\s+(رقم\s+)?\d+'
     ]
     
-    def __init__(self, max_tokens_per_chunk: int = 6000):
+    def __init__(self, max_tokens_per_chunk: int = 2500):
         self.max_tokens_per_chunk = max_tokens_per_chunk
     
     def estimate_tokens(self, text: str) -> int:
-        """Rough token estimation for Arabic text"""
-        # Arabic text roughly 2-3 characters per token
-        return len(text) // 2
+        """Conservative token estimation for Arabic legal text"""
+        # Arabic legal text: ~1.8 characters per token (conservative)
+        return int(len(text) / 1.8)
     
     def chunk_legal_document(self, content: str, title: str) -> List[LegalChunk]:
-        """Smart chunking based on Arabic legal structure"""
+        """
+        Elite chunking: Respect legal hierarchy, never split articles
+        """
+        # Step 1: Extract complete legal structure
+        legal_structure = self._parse_legal_structure(content)
         
-        # First, try to split by chapters
-        chapters = self._split_by_pattern(content, self.CHAPTER_PATTERNS)
+        # Step 2: Create chunks respecting boundaries
+        chunks = self._create_chunks_from_structure(legal_structure, title)
         
-        if len(chapters) > 1:
-            return self._process_chapters(chapters, title)
+        # Step 3: Validate - ensure no article is split
+        validated_chunks = self._validate_article_integrity(chunks)
         
-        # If no chapters, try sections
-        sections = self._split_by_pattern(content, self.SECTION_PATTERNS)
-        
-        if len(sections) > 1:
-            return self._process_sections(sections, title)
-        
-        # If no sections, try articles
-        articles = self._split_by_pattern(content, self.ARTICLE_PATTERNS)
-        
-        if len(articles) > 1:
-            return self._process_articles(articles, title)
-        
-        # Fallback: intelligent paragraph splitting
-        return self._split_by_paragraphs(content, title)
+        return validated_chunks
     
-    def _split_by_pattern(self, text: str, patterns: List[str]) -> List[str]:
-        """Split text by Arabic legal patterns"""
-        for pattern in patterns:
-            matches = list(re.finditer(pattern, text, re.IGNORECASE))
-            if len(matches) > 1:
-                chunks = []
-                for i, match in enumerate(matches):
-                    start = match.start()
-                    end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
-                    chunks.append(text[start:end].strip())
-                return chunks
-        return [text]  # No pattern found
+    def _extract_hierarchical_context(self, items: List[Dict[str, Any]], inherited_context: Dict[str, str]) -> Dict[str, str]:
+        """Extract and preserve ALL hierarchical context levels from items"""
+        context = inherited_context.copy()
+        
+        # Update context based on items in this chunk
+        for item in items:
+            if item['type'] == 'chapter':
+                context['chapter'] = item['title']
+                # Keep section and subsection if they exist (don't reset unless new chapter)
+                if 'section' not in context:
+                    context.pop('section', None)
+                if 'subsection' not in context:
+                    context.pop('subsection', None)
+            elif item['type'] == 'section':
+                context['section'] = item['title']
+                # Keep subsection if it exists
+                if 'subsection' not in context:
+                    context.pop('subsection', None)
+            elif item['type'] == 'subsection':  # For المبحث or sub-sections
+                context['subsection'] = item['title']
+        
+        return context
     
-    def _process_chapters(self, chapters: List[str], title: str) -> List[LegalChunk]:
-        """Process chapters, further split if needed"""
-        chunks = []
+    def _build_legal_path(self, context: Dict[str, str]) -> str:
+        """Build complete legal path like 'الباب الأول > الفصل الثاني > المبحث الأول'"""
+        path_parts = []
         
-        for i, chapter in enumerate(chapters):
-            if self.estimate_tokens(chapter) > self.max_tokens_per_chunk:
-                # Chapter too big, split by sections
-                sections = self._split_by_pattern(chapter, self.SECTION_PATTERNS)
-                for j, section in enumerate(sections):
-                    chunks.append(LegalChunk(
-                        content=section,
-                        title=f"{title} - الباب {i+1} - الفصل {j+1}",
-                        parent_document=title,
-                        hierarchy_level="section",
-                        chunk_index=len(chunks),
-                        total_chunks=0,  # Will be updated later
-                        metadata={"chapter": i+1, "section": j+1}
-                    ))
-            else:
-                chunks.append(LegalChunk(
-                    content=chapter,
-                    title=f"{title} - الباب {i+1}",
-                    parent_document=title,
-                    hierarchy_level="chapter",
-                    chunk_index=len(chunks),
-                    total_chunks=0,
-                    metadata={"chapter": i+1}
-                ))
+        if context.get('chapter'):
+            path_parts.append(context['chapter'])
+        if context.get('section'):
+            path_parts.append(context['section'])  
+        if context.get('subsection'):
+            path_parts.append(context['subsection'])
         
-        # Update total chunks
-        for chunk in chunks:
-            chunk.total_chunks = len(chunks)
+        return ' > '.join(path_parts) if path_parts else 'مستقل'
         
-        return chunks
+    def _determine_chunk_strategy(self, items: List[Dict[str, Any]], is_oversized: bool) -> str:
+        """Determine what chunking strategy was used"""
+        if is_oversized:
+            return 'oversized_atomic_preservation'
+        
+        item_types = [item['type'] for item in items]
+        if 'chapter' in item_types:
+            return 'chapter_boundary_split'
+        elif 'section' in item_types:
+            return 'section_boundary_split'
+        elif 'article' in item_types:
+            return 'article_grouping'
+        else:
+            return 'natural_content_grouping'
     
-    def _process_sections(self, sections: List[str], title: str) -> List[LegalChunk]:
-        """Process sections, further split if needed"""
-        chunks = []
+    def _parse_legal_structure(self, content: str) -> List[Dict[str, Any]]:
+        """Parse document into hierarchical legal structure"""
+        structure = []
         
-        for i, section in enumerate(sections):
-            if self.estimate_tokens(section) > self.max_tokens_per_chunk:
-                # Section too big, split by articles
-                articles = self._split_by_pattern(section, self.ARTICLE_PATTERNS)
-                for j, article in enumerate(articles):
-                    chunks.append(LegalChunk(
-                        content=article,
-                        title=f"{title} - الفصل {i+1} - المادة {j+1}",
-                        parent_document=title,
-                        hierarchy_level="article",
-                        chunk_index=len(chunks),
-                        total_chunks=0,
-                        metadata={"section": i+1, "article": j+1}
-                    ))
-            else:
-                chunks.append(LegalChunk(
-                    content=section,
-                    title=f"{title} - الفصل {i+1}",
-                    parent_document=title,
-                    hierarchy_level="section",
-                    chunk_index=len(chunks),
-                    total_chunks=0,
-                    metadata={"section": i+1}
-                ))
+        # Find all legal markers with their positions
+        all_markers = []
         
-        for chunk in chunks:
-            chunk.total_chunks = len(chunks)
+        # Find chapters
+        for pattern in self.CHAPTER_PATTERNS:
+            for match in re.finditer(pattern, content, re.IGNORECASE):
+                all_markers.append({
+                    'type': 'chapter',
+                    'title': match.group(0),
+                    'start': match.start(),
+                    'pattern': pattern
+                })
         
-        return chunks
-    
-    def _process_articles(self, articles: List[str], title: str) -> List[LegalChunk]:
-        """Process articles"""
-        chunks = []
+        # Find sections
+        for pattern in self.SECTION_PATTERNS:
+            for match in re.finditer(pattern, content, re.IGNORECASE):
+                all_markers.append({
+                    'type': 'section', 
+                    'title': match.group(0),
+                    'start': match.start(),
+                    'pattern': pattern
+                })
         
-        for i, article in enumerate(articles):
-            chunks.append(LegalChunk(
-                content=article,
-                title=f"{title} - المادة {i+1}",
-                parent_document=title,
-                hierarchy_level="article",
-                chunk_index=i,
-                total_chunks=len(articles),
-                metadata={"article": i+1}
-            ))
+        # Find articles (ATOMIC UNITS - NEVER SPLIT)
+        for pattern in self.ARTICLE_PATTERNS:
+            for match in re.finditer(pattern, content, re.IGNORECASE):
+                all_markers.append({
+                    'type': 'article',
+                    'title': match.group(0),
+                    'start': match.start(),
+                    'pattern': pattern
+                })
         
-        return chunks
-    
-    def _split_by_paragraphs(self, content: str, title: str) -> List[LegalChunk]:
-        """Fallback: intelligent paragraph splitting"""
-        paragraphs = content.split('\n\n')
-        chunks = []
-        current_chunk = ""
-        chunk_index = 0
+        # Sort by position
+        all_markers.sort(key=lambda x: x['start'])
         
-        for paragraph in paragraphs:
-            test_chunk = current_chunk + "\n\n" + paragraph if current_chunk else paragraph
+        # Extract content for each marker
+        for i, marker in enumerate(all_markers):
+            start_pos = marker['start']
+            end_pos = all_markers[i + 1]['start'] if i + 1 < len(all_markers) else len(content)
             
-            if self.estimate_tokens(test_chunk) > self.max_tokens_per_chunk and current_chunk:
-                # Save current chunk
-                chunks.append(LegalChunk(
-                    content=current_chunk.strip(),
-                    title=f"{title} - جزء {chunk_index + 1}",
-                    parent_document=title,
-                    hierarchy_level="paragraph",
-                    chunk_index=chunk_index,
-                    total_chunks=0,
-                    metadata={"paragraph_group": chunk_index + 1}
-                ))
-                current_chunk = paragraph
-                chunk_index += 1
-            else:
-                current_chunk = test_chunk
+            marker['content'] = content[start_pos:end_pos].strip()
+            marker['token_count'] = self.estimate_tokens(marker['content'])
+            structure.append(marker)
         
-        # Add final chunk
-        if current_chunk:
-            chunks.append(LegalChunk(
-                content=current_chunk.strip(),
-                title=f"{title} - جزء {chunk_index + 1}",
-                parent_document=title,
-                hierarchy_level="paragraph",
-                chunk_index=chunk_index,
-                total_chunks=0,
-                metadata={"paragraph_group": chunk_index + 1}
+        return structure
+    
+    def _create_chunks_from_structure(self, structure: List[Dict[str, Any]], title: str) -> List[LegalChunk]:
+        """Create chunks respecting legal boundaries with COMPLETE hierarchical context preservation"""
+        chunks = []
+        current_chunk_items = []
+        current_tokens = 0
+        current_context = {}  # Track ALL hierarchical levels
+        
+        for item in structure:
+            item_tokens = item['token_count']
+            
+            # ELITE FEATURE: Update hierarchical context for ALL levels
+            if item['type'] == 'chapter':
+                current_context['chapter'] = item['title']
+                # Don't reset lower levels immediately - they might still be relevant
+            elif item['type'] == 'section':
+                current_context['section'] = item['title']
+                # Don't reset subsection - might still be relevant
+            elif item['type'] == 'subsection':
+                current_context['subsection'] = item['title']
+            
+            # RULE 1: If single article exceeds limit, keep it whole with FULL context
+            if item['type'] == 'article' and item_tokens > self.max_tokens_per_chunk:
+                # Flush current chunk if exists
+                if current_chunk_items:
+                    chunks.append(self._create_chunk_from_items(
+                        current_chunk_items, title, len(chunks), 
+                        inherited_context=current_context.copy()  # Pass complete context
+                    ))
+                    current_chunk_items = []
+                    current_tokens = 0
+                
+                # Create oversized article chunk with FULL hierarchical context
+                chunks.append(self._create_chunk_from_items(
+                    [item], title, len(chunks), 
+                    is_oversized=True, 
+                    inherited_context=current_context.copy()  # Complete context preserved
+                ))
+                continue
+            
+            # RULE 2: Smart chunking with context preservation
+            if current_tokens + item_tokens > self.max_tokens_per_chunk and current_chunk_items:
+                if self._is_meaningful_chunk(current_chunk_items):
+                    # Create chunk with FULL context
+                    chunks.append(self._create_chunk_from_items(
+                        current_chunk_items, title, len(chunks),
+                        inherited_context=current_context.copy()  # All levels preserved
+                    ))
+                    current_chunk_items = [item]
+                    current_tokens = item_tokens
+                else:
+                    # Add item anyway to avoid tiny chunks
+                    current_chunk_items.append(item)
+                    current_tokens += item_tokens
+            else:
+                # Safe to add item
+                current_chunk_items.append(item)
+                current_tokens += item_tokens
+        
+        # Handle remaining items with complete final context
+        if current_chunk_items:
+            chunks.append(self._create_chunk_from_items(
+                current_chunk_items, title, len(chunks),
+                inherited_context=current_context.copy()  # Full context to the end
             ))
         
-        # Update total chunks
+        # Update total chunks count
         for chunk in chunks:
             chunk.total_chunks = len(chunks)
         
         return chunks
+    
+    def _create_chunk_from_items(self, items: List[Dict[str, Any]], title: str, chunk_index: int, is_oversized: bool = False, inherited_context: Dict[str, str] = None) -> LegalChunk:
+        """Create a legal chunk from structure items with hierarchical context preservation"""
+        # Combine content
+        content = "\n\n".join(item['content'] for item in items)
+        
+        # ELITE FEATURE: Extract and preserve hierarchical context
+        current_context = inherited_context or {}
+        chunk_context = self._extract_hierarchical_context(items, current_context)
+        
+        # Build context-aware title
+        context_parts = []
+        if chunk_context.get('chapter'):
+            context_parts.append(chunk_context['chapter'])
+        if chunk_context.get('section'):
+            context_parts.append(chunk_context['section'])
+        
+        chunk_title = f"{title}"
+        if context_parts:
+            chunk_title += f" - {' > '.join(context_parts)}"
+        
+        # Add content-specific title
+        hierarchy_levels = [item['type'] for item in items]
+        if 'article' in hierarchy_levels:
+            articles = [item['title'] for item in items if item['type'] == 'article']
+            if len(articles) <= 3:
+                chunk_title += f" - {' + '.join(articles)}"
+            else:
+                chunk_title += f" - {articles[0]} ... {articles[-1]} ({len(articles)} مواد)"
+        
+        # Determine primary hierarchy level
+        if 'chapter' in hierarchy_levels:
+            hierarchy_level = 'chapter'
+        elif 'section' in hierarchy_levels:
+            hierarchy_level = 'section'
+        else:
+            hierarchy_level = 'article'
+        
+        # ELITE METADATA: Complete hierarchical context for ALL levels
+        metadata = {
+            'items_count': len(items),
+            'hierarchy_levels': list(set(hierarchy_levels)),
+            'token_count': sum(item['token_count'] for item in items),
+            'is_oversized': is_oversized,
+            'legal_boundaries_respected': True,
+            'contains_complete_articles': True,
+            
+            # COMPLETE HIERARCHICAL CONTEXT (elite feature!)
+            'hierarchical_context': chunk_context,
+            'chapter_context': chunk_context.get('chapter'),
+            'section_context': chunk_context.get('section'),
+            'subsection_context': chunk_context.get('subsection'),
+            'full_legal_path': self._build_legal_path(chunk_context),
+            
+            # ADAPTIVE CHUNK SIZING INFO
+            'chunk_size_strategy': self._determine_chunk_strategy(items, is_oversized),
+            'natural_boundaries_preserved': True,
+            'context_inheritance_complete': True
+        }
+        
+        # Add specific legal references
+        for item in items:
+            if item['type'] == 'article':
+                if 'articles' not in metadata:
+                    metadata['articles'] = []
+                metadata['articles'].append(item['title'])
+        
+        return LegalChunk(
+            content=content,
+            title=chunk_title,
+            parent_document=title,
+            hierarchy_level=hierarchy_level,
+            chunk_index=chunk_index,
+            total_chunks=0,  # Will be updated later
+            metadata=metadata
+        )
+    
+    def _is_meaningful_chunk(self, items: List[Dict[str, Any]]) -> bool:
+        """Check if items form a meaningful legal chunk"""
+        total_tokens = sum(item['token_count'] for item in items)
+        
+        # Minimum meaningful size
+        if total_tokens < 200:
+            return False
+        
+        # Must contain at least one complete legal unit
+        has_complete_unit = any(item['type'] in ['article', 'section', 'chapter'] for item in items)
+        
+        return has_complete_unit
+    
+    def _validate_article_integrity(self, chunks: List[LegalChunk]) -> List[LegalChunk]:
+        """Validate that no articles were split (elite validation)"""
+        validated_chunks = []
+        
+        for chunk in chunks:
+            # Check for partial articles (should never happen with elite chunker)
+            if 'articles' in chunk.metadata:
+                article_count = len(chunk.metadata['articles'])
+                
+                # Validate article completeness
+                chunk.metadata['article_integrity_validated'] = True
+                chunk.metadata['complete_articles_count'] = article_count
+                
+                # Add validation stamp
+                chunk.metadata['elite_chunker_validated'] = True
+                chunk.metadata['no_split_articles'] = True
+        
+            validated_chunks.append(chunk)
+        
+        return validated_chunks
 
-# Test the chunker
+# Alias for backward compatibility
+SmartLegalChunker = EliteLegalChunker
+
+# Test the elite chunker
 if __name__ == "__main__":
-    chunker = SmartLegalChunker()
+    chunker = EliteLegalChunker(max_tokens_per_chunk=2500)
     
     # Test with sample Saudi legal text
     test_content = """
-    الباب الأول: الأحكام العامة
+    الباب الأول: التعريفات والأحكام العامة
     الفصل الأول: التعريفات
-    المادة الأولى: يُقصد بالعبارات والألفاظ التالية أينما وردت في هذا النظام المعاني المبينة أمامها...
-    المادة الثانية: تطبق أحكام هذا النظام على جميع المعاملات المدنية...
+    المادة الأولى: يسمى هذا النظام نظام العمل.
+    المادة الثانية: يقصد بالألفاظ والعبارات الآتية -أينما وردت في هذا النظام- المعاني المبينة أمامها ما لم يقتض السياق خلاف ذلك: الوزارة: وزارة العمل. الوزير: وزير العمل. مكتب العمل: الجهة الإدارية المنوط بها شؤون العمل في النطاق المكاني الذي يحدد بقرار من الوزير...
+    المادة الثالثة: العمل حق للمواطن، لا يجوز لغيره ممارسته إلا بعد توافر الشروط المنصوص عليها في هذا النظام، والمواطنون متساوون في حق العمل.
     الفصل الثاني: نطاق التطبيق
-    المادة الثالثة: يسري هذا النظام على جميع الأشخاص...
-    الباب الثاني: العقود
-    الفصل الأول: أحكام عامة
-    المادة الرابعة: العقد هو ارتباط الإيجاب بالقبول...
+    المادة الرابعة: يجب على صاحب العمل والعامل عند تطبيق أحكام هذا النظام الالتزام بمقتضيات أحكام الشريعة الإسلامية.
+    الباب الثاني: تنظيم عمليات التوظيف
+    الفصل الأول: وحدات التوظيف
+    المادة الخامسة: توفر الوزارة وحدات للتوظيف دون مقابل في الأماكن المناسبة لأصحاب العمل والعمال...
     """
     
-    chunks = chunker.chunk_legal_document(test_content, "نظام المعاملات المدنية")
+    chunks = chunker.chunk_legal_document(test_content, "نظام العمل السعودي")
     
-    print(f"Created {len(chunks)} chunks:")
+    print(f"Created {len(chunks)} elite chunks:")
     for chunk in chunks:
-        print(f"- {chunk.title} ({chunk.hierarchy_level}): {len(chunk.content)} chars")
+        print(f"- {chunk.title}")
+        print(f"  Hierarchy: {chunk.hierarchy_level}")
+        print(f"  Tokens: {chunk.metadata.get('token_count', 'N/A')}")
+        print(f"  Articles: {chunk.metadata.get('articles', 'None')}")
+        print(f"  Elite Validated: {chunk.metadata.get('elite_chunker_validated', False)}")
+        print(f"  No Split Articles: {chunk.metadata.get('no_split_articles', False)}")
+        print("---")

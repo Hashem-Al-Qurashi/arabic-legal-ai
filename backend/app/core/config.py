@@ -193,6 +193,8 @@ class Settings(BaseSettings):
         return self
         
     # ==================== HELPER PROPERTIES ====================
+    # Replace the allowed_origins property in your config.py with this fixed version:
+
     @property
     def allowed_origins(self) -> List[str]:
         """Get CORS origins from environment or use defaults"""
@@ -203,32 +205,51 @@ class Settings(BaseSettings):
         # Default origins based on environment
         if self.environment == Environment.DEVELOPMENT:
             return [
+                # Local development
                 "http://localhost:3000",
                 "http://127.0.0.1:3000",
                 "http://localhost:5173",  # Vite dev server
                 "https://*.ngrok.io",
-                # Local network access for mobile testing
+                
+                # Local network access (FIXED: Remove wildcard IPs)
                 "http://192.168.1.10:3000",      # Your specific local IP
-                "http://192.168.1.*:3000",       # Your network range (if supported)
                 "http://10.0.3.1:3000",          # Your virtual interface
                 "http://172.18.0.1:3000",        # Docker bridge
                 "http://172.17.0.1:3000",        # Docker bridge
+                
+                # Your domains for local testing
+                "http://hokm.ai",
+                "https://hokm.ai",
+                "http://app.hokm.ai",
+                "https://app.hokm.ai",
             ]
         elif self.environment == Environment.STAGING:
             return [
                 "https://staging.yourdomain.com",
                 "http://localhost:3000",  # Allow local testing
                 "https://*.ngrok.io",
-                # Add local network for staging testing if needed
                 "http://192.168.1.10:3000",
+                # Your domains for staging
+                "http://hokm.ai",
+                "https://hokm.ai",
+                "http://app.hokm.ai", 
+                "https://app.hokm.ai",
             ]
-        else:  # Production
-            # For production, require explicit configuration but provide CloudFront fallback
+        else:  # Production - FIXED: Add your actual domains
             return [
+                # Your production domains (ADDED)
+                "http://hokm.ai",
+                "https://hokm.ai",
+                "http://app.hokm.ai",
+                "https://app.hokm.ai",
+                
+                # CloudFront distributions
                 "https://d10drat4g0606g.cloudfront.net",
-                "https://d2c979d13bkvf4.cloudfront.net"
+                "https://d2c979d13bkvf4.cloudfront.net",
+                
+                # Keep localhost for production testing (remove if not needed)
+                "http://localhost:3000"
             ]
-    
     @property
     def is_postgresql(self) -> bool:
         """Check if using PostgreSQL database"""

@@ -225,7 +225,7 @@ class SqliteVectorStore(VectorStore):
                     
                     try:
                         # Unpickle the stored embedding
-                        chunk_embedding = pickle.loads(embedding_data) if embedding_data else None
+                        chunk_embedding = json.loads(embedding_data) if embedding_data else None
                         if not chunk_embedding:
                             continue
                         

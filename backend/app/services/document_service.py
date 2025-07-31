@@ -40,21 +40,21 @@ class DocumentService:
 
     def estimate_tokens(self, text: str) -> int:
         """Estimate token count for text (rough estimation)"""
-        return len(text) // 2
+        return int(len(text) / 1.8)
 
     def should_chunk_document(self, content: str) -> bool:
         """Determine if document needs chunking"""
-        return self.estimate_tokens(content) > 6000
+        return self.estimate_tokens(content) > 2000
     
     async def add_document(
-        self, 
-        title: str, 
-        content: str, 
-        metadata: Optional[Dict[str, Any]] = None,
-        document_id: Optional[str] = None
-    ) -> bool:
+    self, 
+    title: str, 
+    content: str, 
+    metadata: Optional[Dict[str, Any]] = None,
+    document_id: Optional[str] = None
+) -> bool:
         """
-        Add a single document to storage
+        Add a single document to storage with smart chunking
         
         Args:
             title: Document title
@@ -72,31 +72,99 @@ class DocumentService:
             
             logger.info(f"Adding document: {title[:50]}...")
             
-            # Generate embedding
-            response = await self.ai_client.embeddings.create(
-                model="text-embedding-ada-002",
-                input=content
-            )
+            chunks_to_store = []
             
-            # Create chunk object
-            chunk = Chunk(
-                id=document_id,
-                title=title,
-                content=content,
-                embedding=response.data[0].embedding,
-                metadata=metadata or {}
-            )
+            # SMART CHUNKING LOGIC - Same as batch method
+            if self.should_chunk_document(content):
+                logger.info(f"📏 Large document detected ({self.estimate_tokens(content)} tokens) - using smart chunker")
+                
+                # Initialize chunker
+                chunker = SmartLegalChunker(max_tokens_per_chunk=2500)
+                legal_chunks = chunker.chunk_legal_document(content, title)
+                
+                logger.info(f"✂️ Split into {len(legal_chunks)} chunks")
+                
+                # Process each chunk
+                for chunk_idx, legal_chunk in enumerate(legal_chunks):
+                    try:
+                        # Generate unique chunk ID
+                        chunk_id = f"{document_id}_chunk_{chunk_idx+1}" if len(legal_chunks) > 1 else document_id
+                        
+                        try:
+                            response = await self.ai_client.embeddings.create(
+                                model="text-embedding-ada-002",
+                                input=legal_chunk.content
+                            )
+                        except Exception as embedding_error:
+                            logger.error(f"Embedding generation failed for chunk {chunk_idx+1}: {str(embedding_error)}")
+                            logger.error(f"Chunk size: {len(legal_chunk.content)} chars, ~{self.estimate_tokens(legal_chunk.content)} tokens")
+                            return False
+                        
+                        # Enhanced metadata with chunk info
+                        chunk_metadata = {
+                            **(metadata or {}),
+                            'parent_document_id': document_id,
+                            'chunk_index': legal_chunk.chunk_index,
+                            'total_chunks': legal_chunk.total_chunks,
+                            'hierarchy_level': legal_chunk.hierarchy_level,
+                            'legal_structure': legal_chunk.metadata,
+                            'is_chunk': len(legal_chunks) > 1
+                        }
+                        
+                        # Create chunk object
+                        chunk = Chunk(
+                            id=chunk_id,
+                            title=legal_chunk.title,
+                            content=legal_chunk.content,
+                            embedding=response.data[0].embedding,
+                            metadata=chunk_metadata
+                        )
+                        
+                        chunks_to_store.append(chunk)
+                        
+                    except Exception as chunk_error:
+                        logger.error(f"Error processing chunk {chunk_idx+1}: {str(chunk_error)}")
+                        return False
             
-            # Store in database
-            success = await self.storage.store_chunks([chunk])
-            
-            if success:
-                logger.info(f"Successfully added document: {document_id}")
             else:
-                logger.error(f"Failed to store document: {document_id}")
+                # Small document - process normally
+                logger.info(f"📄 Small document ({self.estimate_tokens(content)} tokens) - processing normally")
+                
+                try:
+                    response = await self.ai_client.embeddings.create(
+                        model="text-embedding-ada-002",
+                        input=content  # or doc_data['content']
+                    )
+                except Exception as embedding_error:
+                    logger.error(f"Embedding generation failed: {str(embedding_error)}")
+                    logger.error(f"Content size: {len(content)} chars, ~{self.estimate_tokens(content)} tokens")  # adjust variable name as needed
+                    return False
+                
+                # Create chunk object
+                chunk = Chunk(
+                    id=document_id,
+                    title=title,
+                    content=content,
+                    embedding=response.data[0].embedding,
+                    metadata={**(metadata or {}), 'is_chunk': False}
+                )
+                
+                chunks_to_store.append(chunk)
             
-            return success
-            
+            # Store all chunks
+            if chunks_to_store:
+                success = await self.storage.store_chunks(chunks_to_store)
+                
+                if success:
+                    logger.info(f"Successfully added document: {document_id}")
+                    return True
+                else:
+                    logger.error(f"Failed to store document: {document_id}")
+                    return False
+            else:
+                logger.error("No chunks generated")
+                return False
+                
         except Exception as e:
             logger.error(f"Error adding document: {e}")
             return False
@@ -143,7 +211,7 @@ class DocumentService:
                         logger.info(f"📏 Large document detected ({self.estimate_tokens(doc_data['content'])} tokens) - using smart chunker")
                         
                         # Initialize chunker
-                        chunker = SmartLegalChunker(max_tokens_per_chunk=6000)
+                        chunker = SmartLegalChunker(max_tokens_per_chunk=2500)
                         legal_chunks = chunker.chunk_legal_document(doc_data['content'], doc_data['title'])
                         
                         logger.info(f"✂️ Split into {len(legal_chunks)} chunks")
@@ -154,11 +222,15 @@ class DocumentService:
                                 # Generate unique chunk ID
                                 chunk_id = f"{base_doc_id}_chunk_{chunk_idx+1}"
                                 
-                                # Generate embedding for chunk
-                                response = await self.ai_client.embeddings.create(
-                                    model="text-embedding-ada-002",
-                                    input=legal_chunk.content
-                                )
+                                try:
+                                    response = await self.ai_client.embeddings.create(
+                                        model="text-embedding-ada-002",
+                                        input=legal_chunk.content
+                                    )
+                                except Exception as embedding_error:
+                                    logger.error(f"Embedding generation failed for chunk {chunk_idx+1}: {str(embedding_error)}")
+                                    logger.error(f"Chunk size: {len(legal_chunk.content)} chars, ~{self.estimate_tokens(legal_chunk.content)} tokens")
+                                    return False
                                 
                                 # Enhanced metadata with chunk info
                                 chunk_metadata = {
@@ -194,11 +266,15 @@ class DocumentService:
                         # Small document - process normally (unchanged)
                         logger.info(f"📄 Small document ({self.estimate_tokens(doc_data['content'])} tokens) - processing normally")
                         
-                        # Generate embedding
-                        response = await self.ai_client.embeddings.create(
-                            model="text-embedding-ada-002",
-                            input=doc_data['content']
-                        )
+                        try:
+                            response = await self.ai_client.embeddings.create(
+                                model="text-embedding-ada-002",
+                                input=content  # or doc_data['content']
+                            )
+                        except Exception as embedding_error:
+                            logger.error(f"Embedding generation failed: {str(embedding_error)}")
+                            logger.error(f"Content size: {len(content)} chars, ~{self.estimate_tokens(content)} tokens")  # adjust variable name as needed
+                            return False
                         
                         # Create chunk object
                         chunk = Chunk(
