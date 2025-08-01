@@ -707,30 +707,91 @@ const ActionsBar: React.FC<ActionsBarProps> = ({ content, isLastMessage, message
   const [copied, setCopied] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
-  const handleCopy = async () => {
+  // FIXED: Copy function that produces clean professional text
+const handleCopy = async () => {
   try {
-    // Better HTML cleaning with more comprehensive approach
+    // Step 1: Convert HTML to clean, professional Arabic text
     let cleanContent = content
-      .replace(/<br\s*\/?>/gi, '\n')      // Convert <br> to newlines
-      .replace(/<\/p>/gi, '\n\n')         // Convert </p> to double newlines
-      .replace(/<\/h[1-6]>/gi, '\n\n')    // Convert heading ends to double newlines
-      .replace(/<[^>]*>/g, '')            // Remove all HTML tags
-      .replace(/&nbsp;/g, ' ')            // Replace non-breaking spaces
-      .replace(/&amp;/g, '&')             // Replace HTML entities
+      
+      // Convert headings to clean structured text
+      .replace(/<h1[^>]*>(.*?)<\/h1>/gi, '\n━━━ $1 ━━━\n\n')
+      .replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n▎$1\n\n') 
+      .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n▸ $1\n\n')
+      
+      // Convert legal-point divs to clean numbered format
+      .replace(/<div class="legal-point"><strong>(.*?)<\/strong><p>(.*?)<\/p><\/div>/gi, '$1 $2\n\n')
+      
+      // 🔑 KEY FIX: Convert bold/strong to clean text (NO ASTERISKS!)
+      .replace(/<strong[^>]*>(.*?)<\/strong>/gi, '$1')
+      .replace(/<b[^>]*>(.*?)<\/b>/gi, '$1')
+      
+      // Convert emphasis to clean text  
+      .replace(/<em[^>]*>(.*?)<\/em>/gi, '$1')
+      .replace(/<i[^>]*>(.*?)<\/i>/gi, '$1')
+      
+      // Convert lists to clean bullet points
+      .replace(/<ul[^>]*>/gi, '\n')
+      .replace(/<\/ul>/gi, '\n')
+      .replace(/<ol[^>]*>/gi, '\n') 
+      .replace(/<\/ol>/gi, '\n')
+      .replace(/<li[^>]*>(.*?)<\/li>/gi, '• $1\n')
+      
+      // Convert paragraphs with proper spacing
+      .replace(/<p[^>]*>(.*?)<\/p>/gi, '$1\n\n')
+      
+      // Convert line breaks
+      .replace(/<br\s*\/?>/gi, '\n')
+      
+      // Convert divs to clean text
+      .replace(/<div[^>]*>(.*?)<\/div>/gi, '$1\n')
+      
+      // Remove any remaining HTML tags
+      .replace(/<[^>]*>/g, '')
+      
+      // Convert HTML entities
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
       .replace(/&quot;/g, '"')
       .replace(/&#39;/g, "'")
-      .replace(/\s+/g, ' ')               // Replace multiple spaces with single space
-      .replace(/\n\s+/g, '\n')            // Clean up newlines with spaces
-      .replace(/\n{3,}/g, '\n\n')         // Max 2 consecutive newlines
+      .replace(/&hellip;/g, '...')
+      
+      // Clean up whitespace while preserving structure
+      .replace(/[ \t]+/g, ' ')                    // Normalize horizontal spaces
+      .replace(/\n[ \t]+/g, '\n')                 // Remove leading spaces
+      .replace(/[ \t]+\n/g, '\n')                 // Remove trailing spaces  
+      .replace(/\n{4,}/g, '\n\n\n')               // Max 3 newlines for section breaks
+      
+      // Ensure proper Arabic text flow
+      .replace(/([أ-ي])\n+(أولاً|ثانياً|ثالثاً|رابعاً|خامساً)/g, '$1\n\n$2')
+      .replace(/([أ-ي])\n+(\d+\.)/g, '$1\n\n$2')
+      .replace(/([أ-ي])\n+(▸|•)/g, '$1\n\n$2')
+      
       .trim();
 
-    // Check if clipboard API is available
+    // Step 2: Final cleanup for professional appearance
+    cleanContent = cleanContent
+      // Ensure sections have proper spacing
+      .replace(/(━━━.*━━━)\n{1,2}([^▸•])/g, '$1\n\n$2')
+      .replace(/(▸.*?)\n{1,2}([^▸•▎])/g, '$1\n\n$2')
+      
+      // Clean bullet formatting
+      .replace(/•\s*/g, '• ')
+      .replace(/▸\s*/g, '▸ ')
+      
+      // Remove excess whitespace at beginning/end
+      .replace(/\n{2,}$/, '\n')
+      .replace(/^\n{2,}/, '');
+
+    console.log('📋 CLEAN PROFESSIONAL COPY:');
+    console.log(cleanContent);
+
+    // Copy to clipboard
     if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(cleanContent);
     } else {
-      // Fallback for older browsers or non-secure contexts
+      // Fallback for older browsers
       const textArea = document.createElement('textarea');
       textArea.value = cleanContent;
       textArea.style.position = 'fixed';
@@ -744,8 +805,9 @@ const ActionsBar: React.FC<ActionsBarProps> = ({ content, isLastMessage, message
     }
     
     setCopied(true);
-    showToast('تم نسخ النص بنجاح', 'success');
+    showToast('تم نسخ النص بتنسيق نظيف ومهني', 'success');
     setTimeout(() => setCopied(false), 2000);
+    
   } catch (error) {
     console.error('Copy failed:', error);
     showToast('فشل في نسخ النص', 'error');
