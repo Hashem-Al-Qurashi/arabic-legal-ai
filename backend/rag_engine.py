@@ -263,6 +263,12 @@ PROMPT_TEMPLATES = {
 - عندما تجد المادة المناسبة، اذكرها بصيغة: "وفقاً للمادة (X) من [اسم النظام]"
 - لا تقل "لا توجد مادة محددة" إذا كانت هناك مراجع مرفقة - ابحث بعمق أكثر
 
+
+⚖️ التنسيق الإجباري للاستشهاد (لا تُخالفه):
+- "وفقاً لـ[اسم النظام الكامل] - [الباب] - [المادة رقم X]"
+- مثال: "وفقاً لـنظام العمل - الباب الثاني - المادة 52"
+
+
 🔥 قاعدة إلزامية:
 إذا كانت هناك مراجع قانونية مرفقة، فيجب عليك قراءتها والاستشهاد منها. لا تتجاهلها أبداً.
 
@@ -408,46 +414,6 @@ PROMPT_TEMPLATES = {
 تحدث كمستشار استراتيجي يساعد في اتخاذ القرارات الذكية."""
 }
 
-async def decompose_query_to_concepts(query: str, ai_client) -> List[str]:
-    """
-    NUCLEAR OPTION 1: AI-driven query decomposition for precision targeting
-    Zero hardcoding - pure AI intelligence determines what to search for
-    """
-    logger.info("🚀 NUCLEAR OPTION 1: Dynamic query decomposition activated")
-    
-    try:
-        decomposition_prompt = f"""
-أنت خبير قانوني متخصص في تحليل الاستفسارات. حلل هذا الاستفسار القانوني وحدد المفاهيم القانونية المحددة التي تجيب عليه مباشرة.
-
-الاستفسار: {query}
-
-ما هي الكلمات المفتاحية والمفاهيم القانونية المحددة التي يجب البحث عنها للإجابة على هذا السؤال؟
-
-أجب بالكلمات المفتاحية فقط، مفصولة بمسافات، بدون شرح.
-"""
-
-        response = await self.ai_client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": decomposition_prompt}],
-            max_tokens=150,
-            temperature=0.1
-        )
-        
-        ai_response = response.choices[0].message.content.strip()
-        concepts = [concept.strip() for concept in ai_response.split() if len(concept.strip()) > 2]
-        
-        logger.info(f"🎯 AI decomposed query into {len(concepts)} concepts: {concepts}")
-        
-        # Always include original query as backup
-        if query not in concepts:
-            concepts.insert(0, query)
-        
-        return concepts[:5]  # Limit to 5 concepts for efficiency
-        
-    except Exception as e:
-        logger.error(f"Query decomposition failed: {e}")
-        logger.info("🔄 Falling back to original query")
-        return [query]
 
 async def score_documents_multi_objective(documents: List[Chunk], original_query: str, user_intent: str, ai_client) -> List[Dict]:
     """
@@ -776,6 +742,139 @@ class DocumentRetriever:
             logger.error(f"Failed to initialize retriever: {e}")
             raise
     
+    async def decompose_query_to_concepts(self, query: str) -> List[str]:
+        """
+        NUCLEAR OPTION 1: AI-driven query decomposition for precision targeting
+        Zero hardcoding - pure AI intelligence determines what to search for
+        """
+        logger.info("🚀 NUCLEAR OPTION 1: Dynamic query decomposition activated")
+        
+        try:
+            decomposition_prompt = f"""
+أنت خبير قانوني متخصص في تحليل الاستفسارات. حلل هذا الاستفسار القانوني وحدد المفاهيم القانونية المحددة التي تجيب عليه مباشرة.
+
+الاستفسار: {query}
+
+ما هي الكلمات المفتاحية والمفاهيم القانونية المحددة التي يجب البحث عنها للإجابة على هذا السؤال؟
+
+أجب بالكلمات المفتاحية فقط، مفصولة بمسافات، بدون شرح.
+"""
+
+            response = await self.ai_client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": decomposition_prompt}],
+                max_tokens=150,
+                temperature=0.1
+            )
+            
+            ai_response = response.choices[0].message.content.strip()
+            concepts = [concept.strip() for concept in ai_response.split() if len(concept.strip()) > 2]
+            
+            logger.info(f"🎯 AI decomposed query into {len(concepts)} concepts: {concepts}")
+            
+            # Always include original query as backup
+            if query not in concepts:
+                concepts.insert(0, query)
+            
+            return concepts[:5]  # Limit to 5 concepts for efficiency
+            
+        except Exception as e:
+            logger.error(f"Query decomposition failed: {e}")
+            logger.info("🔄 Falling back to original query")
+            return [query]
+        
+
+    async def search_by_concepts(self, concepts: List[str], original_query: str, top_k: int = 15) -> List[Chunk]:
+        """
+        PRECISION SEARCH: Intent-aware retrieval instead of keyword matching
+        """
+        logger.info(f"🎯 PRECISION SEARCH: Intent-aware search for '{original_query}'")
+        
+        try:
+            # KEY FIX: Use FULL original query, not fragmented concepts
+            response = await self.ai_client.embeddings.create(
+                model="text-embedding-ada-002",
+                input=original_query  # ← Use complete query for better context
+            )
+            query_embedding = response.data[0].embedding
+            
+            # Search with full query context
+            search_results = await self.storage.search_similar(
+                query_embedding,
+                top_k=min(top_k * 2, 30),  # Get more candidates for filtering
+                query_text=original_query,
+                openai_client=self.ai_client
+            )
+            
+            # Return top results (AI filtering comes next if needed)
+            final_results = []
+            for result in search_results[:top_k]:
+                chunk = result.chunk if hasattr(result, 'chunk') else result
+                final_results.append(chunk)
+            
+            # AI-powered filtering to find the ANSWER document
+            filtered_results = await self._ai_filter_results(original_query, search_results, top_k)
+            
+            logger.info(f"✅ PRECISION SEARCH: AI filtered to {len(filtered_results)} answer documents")
+            return filtered_results
+            
+        except Exception as e:
+            logger.error(f"Precision search failed: {e}")
+            return []
+   
+    async def _ai_filter_results(self, query: str, search_results: List, top_k: int) -> List[Chunk]:
+        """
+        AI-powered result filtering: Find documents that ANSWER the query
+        """
+        if len(search_results) <= 3:
+            return [result.chunk if hasattr(result, 'chunk') else result for result in search_results]
+        
+        logger.info("🧠 AI FILTERING: Analyzing which documents actually answer the query")
+        
+        try:
+            # Prepare documents for AI analysis (first 10 results)
+            doc_analyses = []
+            for i, result in enumerate(search_results[:10]):
+                chunk = result.chunk if hasattr(result, 'chunk') else result
+                content_snippet = chunk.content[:200] if chunk.content else ""
+                doc_analyses.append(f"{i+1}. {content_snippet}")
+            
+            # AI prompt to identify the ANSWER document
+            filter_prompt = f"""السؤال: {query}
+
+    الوثائق:
+    {chr(10).join(doc_analyses)}
+
+    أي وثيقة تحتوي على الإجابة المباشرة؟ أجب برقم واحد فقط (1-10):"""
+
+            response = await self.ai_client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": filter_prompt}],
+                max_tokens=10,
+                temperature=0.1
+            )
+            
+            ai_choice = response.choices[0].message.content.strip()
+            logger.info(f"🎯 AI selected document: {ai_choice}")
+            
+            # Parse AI choice and return selected document
+            try:
+                selected_idx = int(ai_choice) - 1
+                if 0 <= selected_idx < len(search_results):
+                    selected_chunk = search_results[selected_idx]
+                    chunk = selected_chunk.chunk if hasattr(selected_chunk, 'chunk') else selected_chunk
+                    logger.info(f"✅ AI FILTERING: Selected most relevant document")
+                    return [chunk]  # Return the AI-selected document first
+            except:
+                pass
+                
+        except Exception as e:
+            logger.warning(f"AI filtering failed: {e}")
+        
+        # Fallback: return original results
+        return [result.chunk if hasattr(result, 'chunk') else result for result in search_results[:top_k]]
+
+
     async def get_relevant_documents(self, query: str, top_k: int = 3, user_intent: str = None) -> List[Chunk]:
         """
         Enhanced document retrieval with semantic diversification + dual-stage filtering:
@@ -787,27 +886,17 @@ class DocumentRetriever:
             await self.initialize()
         
         try:
-            stats = await self.storage.get_stats()
-            if stats.total_chunks == 0:
-                logger.info("No documents found in storage - using general knowledge")
-                return []
-            
-            logger.info(f"🔍 Enhanced search in {stats.total_chunks} documents for: '{query[:50]}...'")
-            logger.info(f"📋 User intent: {user_intent}")
-            
-            # STAGE 1: SEMANTIC DIVERSIFICATION (NEW!)
             # NUCLEAR OPTION 1: AI-driven concept decomposition for ALL queries
-            target_concepts = await decompose_query_to_concepts(query, self.ai_client)
+            target_concepts = await self.decompose_query_to_concepts(query)  # ← FIXED: Added self.
 
             # Use precision search for high-accuracy targeting
             if len(target_concepts) > 1:
                 logger.info("🚀 NUCLEAR OPTION 1: Using precision concept-based search")
-                relevant_chunks = await search_by_concepts(target_concepts, query, self.storage, self.ai_client, top_k)
+                relevant_chunks = await self.search_by_concepts(target_concepts, query, top_k)  # ← FIXED: Added self.
                 logger.info(f"✅ NUCLEAR OPTION 1: Retrieved {len(relevant_chunks)} precisely targeted documents")
                 return relevant_chunks
             else:
                 logger.info("🔄 Falling back to standard search")
-                # Continue with existing search logic as fallback
             
             # STAGE 2: MULTI-QUERY RETRIEVAL (ENHANCED)
             # In your enhanced get_relevant_documents method, replace the multi-query retrieval section:
@@ -815,6 +904,7 @@ class DocumentRetriever:
             # STAGE 2: MULTI-QUERY RETRIEVAL (ENHANCED WITH DOMAIN BYPASS)
             all_search_results = []
 
+            semantic_queries = target_concepts if target_concepts else [query]
             for i, semantic_query in enumerate(semantic_queries):
                 try:
                     # Get embedding for this semantic query
@@ -857,8 +947,8 @@ class DocumentRetriever:
                     logger.info(f"  Semantic query {i+1}: Found {len(search_results)} candidates")
                     
                 except Exception as e:
-                    logger.warning(f"Semantic query {i} failed: {e}")
-                    continue
+                    logger.error(f"Error retrieving documents: {e}")
+                    return []
             
             # STAGE 3: DEDUPLICATE AND MERGE RESULTS
             if len(semantic_queries) > 1:
@@ -942,53 +1032,8 @@ class DocumentRetriever:
             logger.error(f"Error retrieving documents: {e}")
             return []
 
-async def search_by_concepts(concepts: List[str], original_query: str, storage, ai_client, top_k: int = 15) -> List[Chunk]:
-    """
-    PRECISION SEARCH: Search database using AI-determined concepts
-    Much more accurate than broad document retrieval
-    """
-    logger.info(f"🔍 PRECISION SEARCH: Searching for {len(concepts)} AI-determined concepts")
-    
-    all_results = []
-    seen_ids = set()
-    
-    for i, concept in enumerate(concepts):
-        try:
-            logger.info(f"🎯 Concept {i+1}: Searching for '{concept}'")
-            
-            # Get embedding for this concept
-            response = await ai_client.embeddings.create(
-                model="text-embedding-ada-002",
-                input=concept
-            )
-            query_embedding = response.data[0].embedding
-            
-            # Search with this concept
-            search_results = await storage.search_similar(
-                query_embedding,
-                top_k=top_k // len(concepts) + 2,  # Distribute search budget
-                query_text=f"{original_query} {concept}",  # ← ONE-LINE FIX: Keep original context!
-                openai_client=ai_client
-            )
-            
-            # Add unique results
-            for result in search_results:
-                chunk_id = result.chunk.id if hasattr(result, 'chunk') else result.id
-                if chunk_id not in seen_ids:
-                    seen_ids.add(chunk_id)
-                    all_results.append(result.chunk if hasattr(result, 'chunk') else result)
-                    
-            logger.info(f"✅ Concept '{concept}' found {len(search_results)} documents")
-            
-        except Exception as e:
-            logger.warning(f"Search for concept '{concept}' failed: {e}")
-            continue
-    
-    logger.info(f"🎯 PRECISION SEARCH: Found {len(all_results)} total unique documents")
-    return all_results[:top_k]
-   
 
-    
+ 
 class IntentClassifier:
     """AI-powered intent classifier - no hard-coding"""
     
@@ -1201,98 +1246,50 @@ class IntelligentLegalRAG:
             return structured_docs    
 
 
-        def format_legal_context_naturally(self, retrieved_chunks: List[Chunk]) -> str:
-            """
-            CITATION-AWARE CONTEXT FORMATTER
-            - Uses ALL documents for intelligence (including memos)
-            - Only creates citation examples for STATUTES
-            - Memos work as background intelligence only
-            """
-            if not retrieved_chunks:
+    def format_legal_context_naturally(self, documents: List[Chunk]) -> str:
+            """Enhanced legal context formatting with specific article identification"""
+            if not documents:
                 return ""
             
-            statute_sources = []
             context_parts = []
+            current_law = ""
+            current_chapter = ""
+            articles_in_section = []
             
-            for i, chunk in enumerate(retrieved_chunks, 1):
-                # Classify document type
-                is_statute = any(term in chunk.title for term in ["نظام", "المادة", "لائحة", "مرسوم", "التعريفات"])
-                is_memo = 'مذكرة' in chunk.title.lower()
+            for doc in documents:
+                # Extract law name, chapter, and article from the document
+                title = doc.title or ""
+                content = doc.content or ""
                 
-                # Clean content
-                clean_content = chunk.content.replace('"', "'").replace('\n', ' ').replace('\r', ' ')
-                preview = clean_content[:300] + "..." if len(clean_content) > 300 else clean_content
+                # Try to identify specific articles in the content
+                import re
+                article_matches = re.findall(r'المادة\s+([\d\u0660-\u0669]+|الأولى|الثانية|الثالثة|الرابعة|الخامسة|السادسة|السابعة|الثامنة|التاسعة|العاشرة)', content)
                 
-                if is_statute:
-                    # STATUTES: Available for citation
-                    statute_sources.append(chunk.title)
-                    formatted_chunk = f"""
-        📜 **{chunk.title}** (مصدر للاستشهاد)
-        {preview}
-        """
-                    context_parts.append(formatted_chunk)
-                    
-                elif is_memo:
-                    # MEMOS: Background intelligence only
-                    formatted_chunk = f"""
-        📋 **خلفية قانونية من مذكرة دفاع** (للاستفادة من المحتوى فقط - لا تستشهد بها)
-        {preview}
-        """
-                    context_parts.append(formatted_chunk)
-                    
-                else:
-                    # OTHER DOCUMENTS: Include but check if citable
-                    formatted_chunk = f"""
-        📄 **{chunk.title}**
-        {preview}
-        """
-                    context_parts.append(formatted_chunk)
+                if title and content:
+                    # Add document with emphasis on specific articles
+                    if article_matches:
+                        article_list = ", ".join(set(article_matches))
+                        context_parts.append(f"""📄 **{title}**
+        📍 **المواد المتاحة**: {article_list}
+        📝 **المحتوى**: {content[:1000]}...""")
+                    else:
+                        context_parts.append(f"""📄 **{title}**
+        📝 **المحتوى**: {content[:1000]}...""")
             
-            # Create citation examples ONLY for statutes
-            citation_examples = []
-            if len(statute_sources) >= 1:
-                citation_examples.append(f'وفقاً لـ"{statute_sources[0]}"، فإن الأدلة يجب أن تكون صحيحة.')
-            if len(statute_sources) >= 2:
-                citation_examples.append(f'استناداً إلى "{statute_sources[1]}"، تسري أحكام النظام القائم.')
-            if len(statute_sources) >= 3:
-                citation_examples.append(f'بناءً على "{statute_sources[2]}"، نطلب رفض الدعوى.')
+            full_context = "\n\n".join(context_parts)
             
-            # Build final context
-            final_context = f"""المراجع القانونية والخلفية المتاحة:
-        {chr(10).join(context_parts)}
+            # Add instruction for AI to use specific articles
+            context_header = """📚 **النصوص القانونية المتاحة للاستشهاد:**
 
-        🎯 قواعد الاستشهاد الإجبارية:
+        ⚠️ **تعليمات مهمة للاستشهاد:**
+        - اقرأ المواد المتاحة بعناية
+        - اذكر رقم المادة المحدد في إجابتك
+        - استخدم الصيغة: "وفقاً لـ[اسم النظام] - [الباب] > [الفصل] - [المادة المحددة]"
+        - لا تستخدم استشهادات عامة
 
-        ✅ مصادر الاستشهاد المسموحة فقط:
         """
             
-            if statute_sources:
-                for source in statute_sources:
-                    final_context += f"- {source}\n"
-                
-                final_context += f"""
-        💥 أمثلة الاستشهاد الصحيحة (استخدم هذه الأنماط بالضبط):
-        {chr(10).join(citation_examples)}
-
-        ❌ ممنوع تماماً الاستشهاد بـ:
-        - أي مذكرة (مذكرة civil، مذكرة criminal، مذكرة family، إلخ)
-        - مرجع 1، مرجع 2، أو أي ترقيم
-        - أي مصدر غير مذكور في القائمة أعلاه
-
-        🔥 استخدم المذكرات للاستفادة من المحتوى والحجج القانونية
-        🔥 لكن استشهد فقط بالأنظمة والمواد المذكورة أعلاه
-
-        ✅ نمط الاستشهاد الوحيد المقبول:
-        وفقاً لـ"[الاسم الكامل للنظام أو المادة]"
-        """
-            else:
-                final_context += """
-        ⚠️ لا توجد أنظمة أو مواد متاحة للاستشهاد في هذا السياق
-        استخدم المحتوى المتاح للتحليل القانوني دون استشهادات مباشرة
-        """
-            
-            return final_context
-
+            return context_header + full_context
 
 
     async def ask_question_with_context_streaming(
@@ -1342,7 +1339,7 @@ class IntelligentLegalRAG:
             # Stage 5: Add current question with legal context if available
             if relevant_docs:
                 # PRIORITY 4 FIX: Structure multi-article chunks before formatting
-                structured_docs = await self.structure_multi_article_chunks(relevant_docs, query)
+                structured_docs = relevant_docs
                 legal_context = self.format_legal_context_naturally(structured_docs)
                 contextual_prompt = f"""{legal_context}
 
