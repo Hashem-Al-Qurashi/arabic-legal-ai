@@ -1180,71 +1180,64 @@ class IntelligentLegalRAG:
         logger.info("🔧 Citation fixer initialized")
     
 
-        async def structure_multi_article_chunks(documents: List[Chunk], query: str, ai_client) -> List[Chunk]:
-            """
-            PRIORITY 4 FIX: Structure multi-article chunks for better AI navigation
-            Makes large chunks searchable by breaking them into article summaries
-            """
-            logger.info("🔧 PRIORITY 4: Structuring multi-article chunks for AI navigation")
-            
-            structured_docs = []
-            
-            for doc in documents:
-                # Check if this is a large multi-article chunk
-                article_count = doc.content.count('المادة')
-                
-                if article_count > 5:  # Multi-article chunk detected
-                    logger.info(f"🔍 Structuring large chunk: {doc.title} ({article_count} articles)")
-                    
-                    try:
-                        # Ask AI to create article navigation for this chunk
-                        structure_prompt = f"""
-        قم بتحليل هذا النص القانوني وإنشاء فهرس للمواد القانونية الموجودة فيه.
-
-        النص القانوني: {doc.content[:3000]}...
-
-        للاستفسار: {query}
-
-        أنشئ قائمة بالمواد وملخص مختصر لكل مادة:
-
-        المادة الأولى: [ملخص مختصر]
-        المادة الثانية: [ملخص مختصر]
-        ...
-
-        ثم اذكر أي من هذه المواد تجيب على الاستفسار المطلوب.
+    async def structure_multi_article_chunks(self, documents: List[Chunk], query: str) -> List[Chunk]:
         """
+        Create article navigation for large chunks containing multiple articles
+        """
+        if not documents:
+            return documents
+        
+        logger.info("🧠 STRUCTURING: Creating article navigation for precise citations")
+        
+        structured_docs = []
+        
+        for doc in documents:
+            try:
+                # Check if this chunk contains multiple articles
+                import re
+                article_matches = re.findall(r'المادة\s+([\d\u0660-\u0669]+|الأولى|الثانية|الثالثة|الرابعة|الخامسة|السادسة|السابعة|الثامنة|التاسعة|العاشرة)', doc.content)
+                
+                if len(article_matches) > 3:  # Multiple articles detected
+                    # Use AI to identify relevant articles
+                    navigation_prompt = f"""السؤال: {query}
 
-                        response = await self.ai_client.chat.completions.create(
-                            model="gpt-4o-mini",
-                            messages=[{"role": "user", "content": structure_prompt}],
-                            max_tokens=800,
-                            temperature=0.1
-                        )
-                        
-                        structured_content = response.choices[0].message.content.strip()
-                        
-                        # Create new structured document
-                        structured_doc = Chunk(
-                            id=f"{doc.id}_structured",
-                            title=f"📋 {doc.title} - فهرس المواد",
-                            content=f"الوثيقة الأصلية: {doc.title}\n\n{structured_content}\n\n--- النص الكامل ---\n{doc.content}",
-                            embedding=doc.embedding,
-                            metadata=doc.metadata
-                        )
-                        
-                        structured_docs.append(structured_doc)
-                        logger.info(f"✅ Structured chunk: {doc.title}")
-                        
-                    except Exception as e:
-                        logger.warning(f"Failed to structure chunk {doc.title}: {e}")
-                        structured_docs.append(doc)  # Use original if structuring fails
+    المحتوى القانوني:
+    {doc.content[:1000]}...
+
+    حدد أرقام المواد التي تجيب على السؤال مباشرة. أجب برقم المادة فقط (مثل: التاسعة):"""
+
+                    response = await self.ai_client.chat.completions.create(
+                        model="gpt-4o-mini",
+                        messages=[{"role": "user", "content": navigation_prompt}],
+                        max_tokens=50,
+                        temperature=0.1
+                    )
+                    
+                    relevant_article = response.choices[0].message.content.strip()
+                    logger.info(f"🎯 AI identified relevant article: {relevant_article}")
+                    
+                    # Create enhanced content with article highlighting
+                    enhanced_content = f"🎯 المادة ذات الصلة: {relevant_article}\n\n{doc.content}"
+                    
+                    # Create new chunk with enhanced content
+                    enhanced_chunk = Chunk(
+                        id=doc.id,
+                        content=enhanced_content,
+                        title=f"{doc.title} - المادة {relevant_article}",
+                        metadata=doc.metadata
+                    )
+                    structured_docs.append(enhanced_chunk)
+                    
                 else:
-                    # Single article or small chunk - use as is
+                    # Single article or few articles - use as is
                     structured_docs.append(doc)
-            
-            logger.info(f"🔧 PRIORITY 4: Structured {len([d for d in documents if d.content.count('المادة') > 5])} multi-article chunks")
-            return structured_docs    
-
+                    
+            except Exception as e:
+                logger.warning(f"Article structuring failed for chunk {doc.id}: {e}")
+                structured_docs.append(doc)  # Fallback to original
+        
+        logger.info(f"✅ STRUCTURING: Enhanced {len(structured_docs)} documents with article navigation")
+        return structured_docs
 
     def format_legal_context_naturally(self, documents: List[Chunk]) -> str:
             """Enhanced legal context formatting with specific article identification"""
@@ -1339,7 +1332,7 @@ class IntelligentLegalRAG:
             # Stage 5: Add current question with legal context if available
             if relevant_docs:
                 # PRIORITY 4 FIX: Structure multi-article chunks before formatting
-                structured_docs = relevant_docs
+                structured_docs = await self.structure_multi_article_chunks(relevant_docs, query)
                 legal_context = self.format_legal_context_naturally(structured_docs)
                 contextual_prompt = f"""{legal_context}
 

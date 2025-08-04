@@ -79,7 +79,7 @@ class DocumentService:
                 logger.info(f"📏 Large document detected ({self.estimate_tokens(content)} tokens) - using smart chunker")
                 
                 # Initialize chunker
-                chunker = SmartLegalChunker(max_tokens_per_chunk=2500)
+                chunker = SmartLegalChunker(max_tokens_per_chunk=1500)
                 legal_chunks = chunker.chunk_legal_document(content, title)
                 
                 logger.info(f"✂️ Split into {len(legal_chunks)} chunks")
@@ -211,7 +211,7 @@ class DocumentService:
                         logger.info(f"📏 Large document detected ({self.estimate_tokens(doc_data['content'])} tokens) - using smart chunker")
                         
                         # Initialize chunker
-                        chunker = SmartLegalChunker(max_tokens_per_chunk=2500)
+                        chunker = SmartLegalChunker(max_tokens_per_chunk=1500)
                         legal_chunks = chunker.chunk_legal_document(doc_data['content'], doc_data['title'])
                         
                         logger.info(f"✂️ Split into {len(legal_chunks)} chunks")

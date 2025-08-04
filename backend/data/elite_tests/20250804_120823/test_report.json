@@ -1,0 +1,186 @@
+{
+  "success": true,
+  "test_id": "20250804_120823",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/b19a8aa6-7b50-43f0-ab8c-a9a700f1a446/1",
+  "title": "نظام الوكالات التجارية",
+  "extraction_summary": {
+    "total_characters": 7705,
+    "estimated_tokens": 4280,
+    "quality_score": 6.249179251477347,
+    "arabic_ratio": 0.9996717005909389
+  },
+  "chunking_results": {
+    "total_chunks": 3,
+    "chunk_sizes": {
+      "min_chars": 826,
+      "max_chars": 2722,
+      "avg_chars": 1951,
+      "min_tokens": 458,
+      "max_tokens": 1512,
+      "avg_tokens": 1083
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 3,
+      "total_chunks": 3
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 3,
+      "violations": [],
+      "saudi_legal_patterns_detected": [],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الوكالات التجارية - المادة (1) ... المادة (6) (6 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2722,
+      "tokens": 1512,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1500,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة (1)",
+          "المادة (2)",
+          "المادة (3)",
+          "المادة (4)",
+          "المادة (5)",
+          "المادة (6)"
+        ],
+        "unique_articles_count": 6,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 6,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (1):\n\nلا يجوز لغير السعوديين سواء بصفة أشخاص طبيعيين أو معنويين أن يكونواوكلاء تجاريينفي المملكة العربية السعودية، على أن الشركات السعودية التي تقوم بأعمالالوكالات التجاريةيجب أن يكون رأس مالها..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الوكالات التجارية - المادة (6) ... المادة (5) (9 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2307,
+      "tokens": 1281,
+      "metadata": {
+        "items_count": 10,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1269,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة (6)",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة (1)",
+          "المادة (2)",
+          "المادة (3)",
+          "المادة (4)",
+          "المادة (5)"
+        ],
+        "unique_articles_count": 9,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 9,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (6):يضاف النص التالي إلى نظام (الوكالات التجارية) الصادر بالمرسوم الملكي رقم (11) لعام 1382. ونظام (المعايرة والمقاييس) الصادر بالمرسوم الملكي رقم (29) لعام 1383هـ ، بموجب المرسوم الملكي رقم م ..."
+    },
+    {
+      "index": 2,
+      "title": "نظام الوكالات التجارية - المادة (6)",
+      "hierarchy_level": "article",
+      "chars": 826,
+      "tokens": 458,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 458,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة (6)"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (6):حقل المادة مطلوبالوصف*رمز التحقق*قيمة الرمز المدخل غير صحيحالإسم*البريد الإلكترونييرجى اختيار الحدث ليصلكم اشعار بذلك على البريد الإلكترونياضافةتعديلحذفأبلغني حين توافر النظام باللغة الإنجل..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.249179251477347,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 0,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 3 chunks missing context",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}
