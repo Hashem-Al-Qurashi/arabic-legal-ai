@@ -123,8 +123,55 @@ class EliteCrawlerTester:
             test_results = await self._generate_test_report(doc, elite_chunks)
             
             # Step 4: Save complete content for manual review
+            # Step 4: Save complete content for manual review
             await self._save_test_artifacts(doc, elite_chunks, test_results)
-            
+
+            # Step 5: SAVE TO DATABASE (NEW ADDITION)
+            if self.document_service and elite_chunks:
+                logger.info(f"💾 Saving {len(elite_chunks)} chunks to database...")
+                
+                # Convert chunks to documents format
+                documents = []
+                for chunk in elite_chunks:
+                    documents.append({
+                        'id': f"elite_test_{self.test_id}_{chunk.chunk_index}",
+                        'title': chunk.title,
+                        'content': chunk.content,
+                        'metadata': {
+                            **chunk.metadata,
+                            'source_url': doc.url,
+                            'test_id': self.test_id,
+                            'extraction_timestamp': datetime.now().isoformat(),
+                            'quality_score': doc.quality.overall_score,
+                            'arabic_ratio': doc.quality.arabic_ratio
+                        }
+                    })
+                
+                # Save using DocumentService (generates embeddings automatically)
+                try:
+                    result = await self.document_service.add_documents_batch(documents)
+                    
+                    if result['success']:
+                        saved_count = result.get('successful', 0)
+                        logger.info(f"✅ Successfully saved {saved_count} chunks to database with embeddings")
+                        test_results["database_save"] = {
+                            "success": True,
+                            "chunks_saved": saved_count,
+                            "errors": result.get('errors', 0)
+                        }
+                    else:
+                        logger.error(f"❌ Database save failed: {result.get('message', 'Unknown error')}")
+                        test_results["database_save"] = {
+                            "success": False,
+                            "error": result.get('message', 'Unknown error')
+                        }
+                except Exception as e:
+                    logger.error(f"❌ Database save exception: {e}")
+                    test_results["database_save"] = {
+                        "success": False, 
+                        "error": str(e)
+                    }
+
             return test_results
             
         except Exception as e:

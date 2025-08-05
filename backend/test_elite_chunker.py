@@ -405,30 +405,80 @@ class EliteChunkerTester:
         
         try:
             content = sys.stdin.read()
-            if content.strip():
-                title = input("Document title: ").strip() or "وثيقة تفاعلية"
+            if not content.strip():
+                print(f"{C.R}❌ No content provided. Exiting.{C.END}")
+                return
+
+            title = input("Document title: ").strip() or "وثيقة تفاعلية"
+            
+            print(f"\n{C.Y}Processing...{C.END}")
+            start_time = time.time()
+            
+            chunks = self.chunker.chunk_legal_document(content, title)
+            
+            end_time = time.time()
+            
+            print(f"\n{C.G}✅ SUCCESS!{C.END}")
+            print(f"Created {len(chunks)} chunks in {end_time - start_time:.3f}s")
+            
+            # 🚀 SAVE TO DATABASE?
+            save_to_db = input(f"\n{C.Y}Save to database? (y/n): {C.END}").lower().strip()
+            if save_to_db in ['y', 'yes', '']:
+                print(f"{C.Y}Saving to database...{C.END}")
                 
-                print(f"\n{C.Y}Processing...{C.END}")
-                start_time = time.time()
-                
-                chunks = self.chunker.chunk_legal_document(content, title)
-                
-                end_time = time.time()
-                
-                print(f"\n{C.G}✅ SUCCESS!{C.END}")
-                print(f"Created {len(chunks)} chunks in {end_time-start_time:.3f}s")
-                
-                for i, chunk in enumerate(chunks):
-                    print(f"\n{C.B}--- Chunk {i+1}/{len(chunks)} ---{C.END}")
-                    print(f"Title: {chunk.title}")
-                    print(f"Hierarchy: {chunk.hierarchy_level}")
-                    print(f"Tokens: {chunk.metadata.get('token_count', 'N/A')}")
-                    print(f"Articles: {chunk.metadata.get('articles', 'None')}")
-                    print(f"Content preview: {chunk.content[:200]}...")
-            else:
-                print("No content provided.")
+                try:
+                    from app.services.document_service import DocumentService
+                    service = DocumentService()
+                    
+                    documents = []
+                    timestamp_ms = int(time.time() * 1000)  # Avoid ID collisions
+                    for chunk in chunks:
+                        doc_id = f"interactive_test_{chunk.chunk_index}_{timestamp_ms}"
+                        documents.append({
+                            'id': doc_id,
+                            'title': chunk.title,
+                            'content': chunk.content,
+                            'metadata': chunk.metadata or {}
+                        })
+                    
+                    result = service.add_documents_batch(documents)
+                    success_count = result.get('success_count', 0)
+                    error_count = result.get('error_count', 0)
+                    
+                    if success_count > 0:
+                        print(f"{C.G}✅ SAVED: {success_count} chunks saved to database{C.END}")
+                        print(f"{C.C}Now you can search for this content in your RAG system!{C.END}")
+                    if error_count > 0:
+                        print(f"{C.R}❌ ERRORS: {error_count} chunks failed to save{C.END}")
+                        
+                except ImportError:
+                    print(f"{C.R}❌ ERROR: Cannot import DocumentService{C.END}")
+                    print("Make sure app.services.document_service is available")
+                except Exception as e:
+                    print(f"{C.R}❌ DATABASE ERROR: {str(e)}{C.END}")
+
+            # Display chunks
+            for i, chunk in enumerate(chunks):
+                metadata = chunk.metadata or {}
+                print(f"\n{C.B}--- Chunk {i+1}/{len(chunks)} ---{C.END}")
+                print(f"Title: {chunk.title}")
+                print(f"Hierarchy: {chunk.hierarchy_level}")
+                print(f"Tokens: {metadata.get('token_count', 'N/A')}")
+                print(f"Articles: {metadata.get('articles', 'None')}")
+                print(f"Content preview: {chunk.content[:200]}...")
+
         except KeyboardInterrupt:
-            print(f"\n{C.Y}Interactive mode cancelled.{C.END}")
+            print(f"\n{C.Y}👋 Interactive mode interrupted by user.{C.END}")
+        except EOFError:
+            print(f"\n{C.R}❌ Input ended unexpectedly (EOF).{C.END}")
+        except Exception as e:
+            print(f"{C.R}❌ Unexpected error during processing: {str(e)}{C.END}")
+            import traceback
+            traceback.print_exc()
+
+
+           
+
 
     def print_summary(self):
         """Print test summary"""

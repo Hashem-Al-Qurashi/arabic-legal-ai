@@ -836,7 +836,7 @@ class DocumentRetriever:
             doc_analyses = []
             for i, result in enumerate(search_results[:10]):
                 chunk = result.chunk if hasattr(result, 'chunk') else result
-                content_snippet = chunk.content[:200] if chunk.content else ""
+                content_snippet = chunk.content[:1000] if chunk.content else ""
                 doc_analyses.append(f"{i+1}. {content_snippet}")
             
             # AI prompt to identify the ANSWER document
@@ -1199,17 +1199,19 @@ class IntelligentLegalRAG:
                 
                 if len(article_matches) > 3:  # Multiple articles detected
                     # Use AI to identify relevant articles
+                    # Instead of truncated content
                     navigation_prompt = f"""السؤال: {query}
 
-    المحتوى القانوني:
-    {doc.content[:1000]}...
+                    ابحث في هذا المحتوى القانوني عن المادة التي تجيب على السؤال مباشرة:
 
-    حدد أرقام المواد التي تجيب على السؤال مباشرة. أجب برقم المادة فقط (مثل: التاسعة):"""
+                    {doc.content}
+
+                    حدد رقم المادة التي تحتوي على الإجابة المباشرة للسؤال. أجب برقم المادة فقط:"""
 
                     response = await self.ai_client.chat.completions.create(
                         model="gpt-4o-mini",
                         messages=[{"role": "user", "content": navigation_prompt}],
-                        max_tokens=50,
+                        max_tokens=400,
                         temperature=0.1
                     )
                     
@@ -1407,7 +1409,13 @@ class IntelligentLegalRAG:
         except Exception as e:
             logger.error(f"Title generation error: {e}")
             return first_message[:25] + "..." if len(first_message) > 25 else first_message
-
+    async def ask_question_streaming(self, query: str) -> AsyncIterator[str]:
+        """
+        STANDARDIZED: Single streaming interface for RAG
+        Replaces multiple compatibility methods with one clean interface
+        """
+        async for chunk in self.ask_question_with_context_streaming(query, []):
+            yield chunk
 
 # Global instance - maintains compatibility with existing code
 rag_engine = IntelligentLegalRAG()

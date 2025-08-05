@@ -171,14 +171,14 @@ class DocumentService:
     
     async def add_documents_batch(self, documents: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
-        Add multiple documents in batch
+        REFACTORED: Clean batch document processing with proper error handling
         
         Args:
             documents: List of document dictionaries with keys:
-                      - title: Document title
-                      - content: Document content  
-                      - metadata: Optional metadata
-                      - id: Optional custom ID
+                    - title: Document title
+                    - content: Document content  
+                    - metadata: Optional metadata
+                    - id: Optional custom ID
         
         Returns:
             Dictionary with success/failure statistics
@@ -191,51 +191,49 @@ class DocumentService:
             error_count = 0
             errors = []
             
-            # Process each document
-            for i, doc_data in enumerate(documents):
+            # Process each document with consistent variable scoping
+            for i, document in enumerate(documents):
                 try:
                     # Validate required fields
-                    if 'title' not in doc_data or 'content' not in doc_data:
+                    if 'title' not in document or 'content' not in document:
                         error_msg = f"Document {i+1}: Missing required fields (title, content)"
                         errors.append(error_msg)
                         error_count += 1
                         continue
                     
-                    # Generate base ID if not provided
-                    base_doc_id = doc_data.get('id', f"doc_{uuid.uuid4().hex[:8]}")
+                    # Extract document data with consistent naming
+                    doc_title = document['title']
+                    doc_content = document['content']
+                    doc_metadata = document.get('metadata', {})
+                    doc_id = document.get('id', f"doc_{uuid.uuid4().hex[:8]}")
                     
-                    logger.info(f"Processing document {i+1}/{len(documents)}: {doc_data['title'][:30]}...")
+                    logger.info(f"Processing document {i+1}/{len(documents)}: {doc_title[:30]}...")
                     
-                    # SMART CHUNKING LOGIC
-                    if self.should_chunk_document(doc_data['content']):
-                        logger.info(f"📏 Large document detected ({self.estimate_tokens(doc_data['content'])} tokens) - using smart chunker")
+                    # Smart chunking decision
+                    if self.should_chunk_document(doc_content):
+                        # Large document - use smart chunker
+                        logger.info(f"📏 Large document detected ({self.estimate_tokens(doc_content)} tokens) - using smart chunker")
                         
-                        # Initialize chunker
-                        chunker = SmartLegalChunker(max_tokens_per_chunk=1500)
-                        legal_chunks = chunker.chunk_legal_document(doc_data['content'], doc_data['title'])
+                        chunker = SmartLegalChunker(max_tokens_per_chunk=2500)
+                        legal_chunks = chunker.chunk_legal_document(doc_content, doc_title)
                         
                         logger.info(f"✂️ Split into {len(legal_chunks)} chunks")
                         
-                        # Process each chunk
+                        # Process each chunk with proper error handling
                         for chunk_idx, legal_chunk in enumerate(legal_chunks):
                             try:
-                                # Generate unique chunk ID
-                                chunk_id = f"{base_doc_id}_chunk_{chunk_idx+1}"
+                                chunk_id = f"{doc_id}_chunk_{chunk_idx+1}"
                                 
-                                try:
-                                    response = await self.ai_client.embeddings.create(
-                                        model="text-embedding-ada-002",
-                                        input=legal_chunk.content
-                                    )
-                                except Exception as embedding_error:
-                                    logger.error(f"Embedding generation failed for chunk {chunk_idx+1}: {str(embedding_error)}")
-                                    logger.error(f"Chunk size: {len(legal_chunk.content)} chars, ~{self.estimate_tokens(legal_chunk.content)} tokens")
-                                    return False
+                                # Generate embedding for chunk content
+                                response = await self.ai_client.embeddings.create(
+                                    model="text-embedding-ada-002",
+                                    input=legal_chunk.content  # ✅ FIXED: Use legal_chunk.content
+                                )
                                 
-                                # Enhanced metadata with chunk info
+                                # Create chunk with enhanced metadata
                                 chunk_metadata = {
-                                    **doc_data.get('metadata', {}),
-                                    'parent_document_id': base_doc_id,
+                                    **doc_metadata,
+                                    'parent_document_id': doc_id,
                                     'chunk_index': legal_chunk.chunk_index,
                                     'total_chunks': legal_chunk.total_chunks,
                                     'hierarchy_level': legal_chunk.hierarchy_level,
@@ -243,7 +241,6 @@ class DocumentService:
                                     'is_chunk': True
                                 }
                                 
-                                # Create chunk object
                                 chunk = Chunk(
                                     id=chunk_id,
                                     title=legal_chunk.title,
@@ -263,33 +260,29 @@ class DocumentService:
                         success_count += 1
                         
                     else:
-                        # Small document - process normally (unchanged)
-                        logger.info(f"📄 Small document ({self.estimate_tokens(doc_data['content'])} tokens) - processing normally")
+                        # Small document - process as single chunk
+                        logger.info(f"📄 Small document ({self.estimate_tokens(doc_content)} tokens) - processing as single chunk")
                         
-                        try:
-                            response = await self.ai_client.embeddings.create(
-                                model="text-embedding-ada-002",
-                                input=content  # or doc_data['content']
-                            )
-                        except Exception as embedding_error:
-                            logger.error(f"Embedding generation failed: {str(embedding_error)}")
-                            logger.error(f"Content size: {len(content)} chars, ~{self.estimate_tokens(content)} tokens")  # adjust variable name as needed
-                            return False
+                        # Generate embedding for document content
+                        response = await self.ai_client.embeddings.create(
+                            model="text-embedding-ada-002",
+                            input=doc_content  # ✅ FIXED: Use doc_content consistently
+                        )
                         
-                        # Create chunk object
+                        # Create single chunk
                         chunk = Chunk(
-                            id=base_doc_id,
-                            title=doc_data['title'],
-                            content=doc_data['content'],
+                            id=doc_id,
+                            title=doc_title,
+                            content=doc_content,
                             embedding=response.data[0].embedding,
-                            metadata={**doc_data.get('metadata', {}), 'is_chunk': False}
+                            metadata={**doc_metadata, 'is_chunk': False}
                         )
                         
                         chunks_to_store.append(chunk)
                         success_count += 1
                     
                 except Exception as e:
-                    error_msg = f"Document {i+1} ({doc_data.get('title', 'Unknown')}): {str(e)}"
+                    error_msg = f"Document {i+1} ({document.get('title', 'Unknown')}): {str(e)}"
                     errors.append(error_msg)
                     error_count += 1
                     logger.error(error_msg)
@@ -303,7 +296,7 @@ class DocumentService:
                     return {
                         "success": False,
                         "message": "Failed to store chunks in database",
-                        "processed": success_count,
+                        "successful": success_count,
                         "errors": error_count,
                         "error_details": errors
                     }
@@ -313,20 +306,19 @@ class DocumentService:
             return {
                 "success": True,
                 "message": f"Successfully processed {success_count} documents",
-                "total_documents": len(documents),
                 "successful": success_count,
                 "errors": error_count,
-                "error_details": errors if errors else None
+                "error_details": errors if errors else []
             }
             
         except Exception as e:
-            logger.error(f"Error in batch document processing: {e}")
+            logger.error(f"Batch processing failed: {e}")
             return {
                 "success": False,
                 "message": f"Batch processing failed: {str(e)}",
-                "total_documents": len(documents),
                 "successful": 0,
-                "errors": len(documents)
+                "errors": len(documents),
+                "error_details": [str(e)]
             }
     
     async def remove_document(self, document_id: str) -> bool:
