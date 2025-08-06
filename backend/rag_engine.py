@@ -824,56 +824,18 @@ class DocumentRetriever:
    
     async def _ai_filter_results(self, query: str, search_results: List, top_k: int) -> List[Chunk]:
         """
-        AI-powered result filtering: Find documents that ANSWER the query
+        Trust vector similarity ranking - no AI filtering needed
         """
-        if len(search_results) <= 3:
-            return [result.chunk if hasattr(result, 'chunk') else result for result in search_results]
+        logger.info("🎯 SKIPPING AI FILTERING: Using vector similarity ranking")
         
-        logger.info("🧠 AI FILTERING: Analyzing which documents actually answer the query")
-        
-        try:
-            # Prepare documents for AI analysis (first 10 results)
-            doc_analyses = []
-            for i, result in enumerate(search_results[:10]):
-                chunk = result.chunk if hasattr(result, 'chunk') else result
-                content_snippet = chunk.content[:1000] if chunk.content else ""
-                doc_analyses.append(f"{i+1}. {content_snippet}")
-            
-            # AI prompt to identify the ANSWER document
-            filter_prompt = f"""السؤال: {query}
+        # Return top result based on vector similarity
+        # Return top 10 results for broader context
+        chunks = []
+        for i in range(min(10, len(search_results))):
+            chunk = search_results[i].chunk if hasattr(search_results[i], 'chunk') else search_results[i]
+            chunks.append(chunk)
 
-    الوثائق:
-    {chr(10).join(doc_analyses)}
-
-    أي وثيقة تحتوي على الإجابة المباشرة؟ أجب برقم واحد فقط (1-10):"""
-
-            response = await self.ai_client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[{"role": "user", "content": filter_prompt}],
-                max_tokens=10,
-                temperature=0.1
-            )
-            
-            ai_choice = response.choices[0].message.content.strip()
-            logger.info(f"🎯 AI selected document: {ai_choice}")
-            
-            # Parse AI choice and return selected document
-            try:
-                selected_idx = int(ai_choice) - 1
-                if 0 <= selected_idx < len(search_results):
-                    selected_chunk = search_results[selected_idx]
-                    chunk = selected_chunk.chunk if hasattr(selected_chunk, 'chunk') else selected_chunk
-                    logger.info(f"✅ AI FILTERING: Selected most relevant document")
-                    return [chunk]  # Return the AI-selected document first
-            except:
-                pass
-                
-        except Exception as e:
-            logger.warning(f"AI filtering failed: {e}")
-        
-        # Fallback: return original results
-        return [result.chunk if hasattr(result, 'chunk') else result for result in search_results[:top_k]]
-
+        return chunks
 
     async def get_relevant_documents(self, query: str, top_k: int = 3, user_intent: str = None) -> List[Chunk]:
         """
@@ -919,8 +881,9 @@ class DocumentRetriever:
                     
                     # BYPASS DOMAIN FILTERING FOR STATUTE QUERY (Query 3)
                     # AGGRESSIVE BYPASS: Skip domain filtering entirely for legal disputes
-                    if user_intent == "ACTIVE_DISPUTE":
-                        logger.info(f"🔓 Legal dispute detected: Bypassing ALL domain filtering for query {i+1}")
+                    # AGGRESSIVE BYPASS: Skip domain filtering for general questions and legal disputes
+                    if user_intent in ["ACTIVE_DISPUTE", "GENERAL_QUESTION"]:
+                        logger.info(f"🔓 {user_intent} detected: Bypassing ALL domain filtering for query {i+1}")
                         # Search ALL documents without domain filtering for comprehensive legal analysis
                         search_results = await self.storage.search_similar(
                             query_embedding, 
@@ -929,7 +892,7 @@ class DocumentRetriever:
                         )
                     else:
                         # Use normal domain filtering for other queries
-                        expanded_top_k = min(top_k * 4, 15) if user_intent == "ACTIVE_DISPUTE" else top_k * 4
+                        expanded_top_k = min(top_k * 4, 15) if user_intent in ["ACTIVE_DISPUTE", "GENERAL_QUESTION"] else top_k * 4
                         search_results = await self.storage.search_similar(
                             query_embedding, 
                             top_k=expanded_top_k, 
@@ -1206,7 +1169,7 @@ class IntelligentLegalRAG:
 
                     {doc.content}
 
-                    حدد رقم المادة التي تحتوي على الإجابة المباشرة للسؤال. أجب برقم المادة فقط:"""
+                    حدد رقم المادة التي تحتوي على معلومات تتعلق بالسؤال. أجب برقم المادة فقط:"""
 
                     response = await self.ai_client.chat.completions.create(
                         model="gpt-4o-mini",

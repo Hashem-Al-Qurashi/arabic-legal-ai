@@ -141,47 +141,11 @@ class SqliteVectorStore(VectorStore):
             
         try:
             async with aiosqlite.connect(self.db_path) as db:
-                # Step 1: AI Domain Classification (if query text provided)
-                domain_filter_sql = "1=1"  # Default: no filter
-                # Debug the actual parameter values
-                print(f"🚨 PARAMETER DEBUG:")
-                print(f"  query_text: {repr(query_text)}")
-                print(f"  query_text type: {type(query_text)}")
-                print(f"  openai_client: {repr(openai_client)}")
-                print(f"  openai_client type: {type(openai_client)}")
-                print(f"  Condition result: {bool(query_text and openai_client)}")
-                if query_text and openai_client:
-                    print(f"🔥 DEBUG A: query_text exists: {bool(query_text)}")
-                    print(f"🔥 DEBUG B: openai_client exists: {bool(openai_client)}")
-                    try:
-                        from app.legal_reasoning.ai_domain_classifier import AIDomainClassifier
-                        classifier = AIDomainClassifier(openai_client)
-                        print(f"🔥 DEBUG C: AIDomainClassifier created successfully")
-                        # Get AI domain classification
-                        classification = await classifier.classify_query(query_text)
-                        print(f"🔥 DEBUG D: Classification result: {classification}")
-                        domain = classification["domain"]
-                        confidence = classification["confidence"]
-                        print(f"🔥 DEBUG E: Domain: {domain}, Confidence: {confidence}")
-                        
-                        # Use domain filter if confidence is high enough
-                        if confidence >= 0.8:
-                            print(f"🔥 DEBUG F: Confidence >= 0.8, generating filter...")
-                            domain_filter_sql = classifier.get_domain_filter_sql(domain)
-                            print(f"🔥 DEBUG G: Generated filter: {domain_filter_sql}")
-                            logger.info(f"🎯 AI classified as {domain.value} (confidence: {confidence:.2f})")
-                            logger.info(f"📋 Domain filter: {domain_filter_sql[:100]}...")
-                        else:
-                            print(f"🔥 DEBUG H: Confidence too low ({confidence}), using default filter")
-                            logger.info(f"⚠️ Low confidence ({confidence:.2f}), searching all documents")
-                            
-                    except Exception as e:
-                        print(f"🚨 DOMAIN CLASSIFICATION EXCEPTION: {e}")
-                        print(f"🚨 Exception type: {type(e)}")
-                        import traceback
-                        print(f"🚨 Full traceback: {traceback.format_exc()}")
-                        logger.warning(f"AI domain classification failed: {e}, using all documents")
                 
+                            
+                # Step 1: AI Domain Classification (DISABLED - search all documents)
+                domain_filter_sql = "1=1"  # Always search all documents
+                logger.info("🔍 Domain filtering disabled - searching all documents")
                 # Step 2: Get domain-filtered chunks with embeddings
                 base_query = """
                     SELECT id, content, title, embedding, metadata 
