@@ -1,0 +1,100 @@
+{
+  "success": true,
+  "test_id": "20250806_214007",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/25fed59a-2790-4a77-ab11-a9a700f2c5fd/1",
+  "title": "نظام جباية الزكاة",
+  "extraction_summary": {
+    "total_characters": 2551,
+    "estimated_tokens": 1417,
+    "quality_score": 4.652267676767677,
+    "arabic_ratio": 0.9707070707070707
+  },
+  "chunking_results": {
+    "total_chunks": 1,
+    "chunk_sizes": {
+      "min_chars": 1465,
+      "max_chars": 1465,
+      "avg_chars": 1465,
+      "min_tokens": 813,
+      "max_tokens": 813,
+      "avg_tokens": 813
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 1,
+      "total_chunks": 1
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 1,
+      "violations": [],
+      "saudi_legal_patterns_detected": [],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام جباية الزكاة - المادة الأولى ... المادة الرابعة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 1465,
+      "tokens": 813,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 803,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:تعتبر أحكام  المرسوم    رقم (17 / 2 / 28 /3321) وتاريخ 21 المحرم 1370، خاصة بالأفراد والشركات الذين لا يحملون الرعوية السعودية.\n\nالمادة الثانية:تستوفى من الأفراد والشركات الذين يحملون ال..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "ACCEPTABLE",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "ACCEPTABLE",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - ACCEPTABLE",
+    "quality_score": 4.652267676767677,
+    "recommendation": "⚡ PROCEED: Start crawling, plan improvements for next iteration",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 0,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 1 chunks missing context",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

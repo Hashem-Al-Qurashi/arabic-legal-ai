@@ -1,0 +1,153 @@
+{
+  "success": true,
+  "test_id": "20250806_215103",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/90f66860-d28b-40ed-b49d-ac3700baf50e/1",
+  "title": "لائحة حقوق وواجبات من يستعان بهم في أعمال الدفاع المدني وعلاقتهم بجهاتهم",
+  "extraction_summary": {
+    "total_characters": 6816,
+    "estimated_tokens": 3786,
+    "quality_score": 5.880009233610341,
+    "arabic_ratio": 1.0120036934441368
+  },
+  "chunking_results": {
+    "total_chunks": 2,
+    "chunk_sizes": {
+      "min_chars": 2257,
+      "max_chars": 2699,
+      "avg_chars": 2478,
+      "min_tokens": 1253,
+      "max_tokens": 1499,
+      "avg_tokens": 1376
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 2,
+      "total_chunks": 2
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 2,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['3→5']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "لائحة حقوق وواجبات من يستعان بهم في أعمال الدفاع المدني وعلاقتهم بجهاتهم - المادة الأولى ... المادة السادسة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2257,
+      "tokens": 1253,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1247,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىلغرض تطبيق أحكام هذه اللائحة، يكون للكلمات والمصطلحات الآتية المعاني الموضحة أمام كل منها:\n\nاللائحة:\n\nلائحة حقوق وواجبات من يستعان بهم في أعمال الدفاع المدني وعلاقتهم بجهاتهم.النظام:نظام ..."
+    },
+    {
+      "index": 1,
+      "title": "لائحة حقوق وواجبات من يستعان بهم في أعمال الدفاع المدني وعلاقتهم بجهاتهم - المادة السابعة ... المادة السادسة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2699,
+      "tokens": 1499,
+      "metadata": {
+        "items_count": 18,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1471,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الأولى",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعةيلتزم المستدعى بما يأتي:تلبية قرار الاستدعاء، ومباشرة المهمة في أقرب وقت، إلا إذا تعذر ذلك لعذر مشروع تقبله جهة الاستدعاء، على أن تبلغ الأمانة بهذا العذر.أداء المهمات المكلف بها، والتقيد..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "ACCEPTABLE",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 5.880009233610341,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 2 chunks missing context",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

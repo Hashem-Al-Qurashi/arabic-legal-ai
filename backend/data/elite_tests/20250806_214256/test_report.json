@@ -1,0 +1,278 @@
+{
+  "success": true,
+  "test_id": "20250806_214256",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/90b81287-baab-4f66-a9c1-a9a700f2ce78/1",
+  "title": "نظام البنك السعودي للتسليف والادخار ( بنك التنمية الاجتماعية )",
+  "extraction_summary": {
+    "total_characters": 14345,
+    "estimated_tokens": 7969,
+    "quality_score": 5.965733871725044,
+    "arabic_ratio": 1.0262935486900178
+  },
+  "chunking_results": {
+    "total_chunks": 5,
+    "chunk_sizes": {
+      "min_chars": 1356,
+      "max_chars": 2616,
+      "avg_chars": 2280,
+      "min_tokens": 753,
+      "max_tokens": 1453,
+      "avg_tokens": 1266
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 5,
+      "total_chunks": 5
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 5,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['1→3']",
+        "Article sequence pattern: ['7→10']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام البنك السعودي للتسليف والادخار ( بنك التنمية الاجتماعية ) - المادة الأولى + المادة الثالثة + المادة الرابعة",
+      "hierarchy_level": "article",
+      "chars": 2301,
+      "tokens": 1278,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1269,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:يقصد بالكلمات والعبارات الآتية أينما وردت في هذا النظام المعاني المبينة أمامها، ما لم يقتض السياق خلاف ذلك :1  - البنك  :\n\nالبنك السعودي للتسليف والادخار   .2  - الوزير :وزير المالية .\n\n..."
+    },
+    {
+      "index": 1,
+      "title": "نظام البنك السعودي للتسليف والادخار ( بنك التنمية الاجتماعية ) - المادة الرابعة ... المادة الثامنة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2545,
+      "tokens": 1413,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1402,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة:• المادة الرابعة- إضافة الفقرات (و ، ز ، ح) إلى هذه المادة بموجب قرار مجلس الوزراء رقم (182) وتاريخ 1 / 3 / 1441هـ لتكون بالنص الآتي:\"و- تقديم قروض دون فائدة للمنشآت الصغيرة والناشئة بم..."
+    },
+    {
+      "index": 2,
+      "title": "نظام البنك السعودي للتسليف والادخار ( بنك التنمية الاجتماعية ) - المادة الثامنة + المادة التاسعة",
+      "hierarchy_level": "article",
+      "chars": 2616,
+      "tokens": 1453,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1442,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة:تم تعديل الفقرة ( ب ) من هذه المادة بموجب قرار مجلس الوزراء رقم: (440) وتاريخ: 20/ 10/ 1437هـ ،وذلك :بإحلال عبارة\" ويستثنى من شرط المدة الرئيس، ومدير عام البنك \"محل عبارة\" ويستثنى من شر..."
+    },
+    {
+      "index": 3,
+      "title": "نظام البنك السعودي للتسليف والادخار ( بنك التنمية الاجتماعية ) - المادة العاشرة ... المادة السابعة (8 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2582,
+      "tokens": 1434,
+      "metadata": {
+        "items_count": 11,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1418,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العاشرة:يجتمع المجلس بدعوة من رئيسه أربع مرات على الأقل في السنة، ولا تكون اجتماعات المجلس صحيحة إلا إذا حضرها ثلثا الأعضاء بمن فيهم الرئيس، ويصدر المجلس قراراته بأغلبية الحاضرين، وعند تساوي ال..."
+    },
+    {
+      "index": 4,
+      "title": "نظام البنك السعودي للتسليف والادخار ( بنك التنمية الاجتماعية ) - المادة الثامنة ... المادة الحادية عشرة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 1356,
+      "tokens": 753,
+      "metadata": {
+        "items_count": 19,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 727,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة عشرة:ينشر هذا النظام في الجريدة الرسمية، ويعمل به بعد تسعين يوما من تاريخ نشره.الإسم*البريد الإلكترونيرقم الجوال*النوع*- اختر -تعليقخطأ لغويخطأ في مادةخطأ في تاريخأخرىالمادة- اختر -\n\nال..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 5.965733871725044,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 3,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 5 chunks missing context",
+    "📊 INFO: 3 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

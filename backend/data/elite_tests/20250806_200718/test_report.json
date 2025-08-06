@@ -1,0 +1,265 @@
+{
+  "success": true,
+  "test_id": "20250806_200718",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/6b615a05-f637-41cf-8419-a9a700f1afd7/1",
+  "title": "نظام المنافسة",
+  "extraction_summary": {
+    "total_characters": 14587,
+    "estimated_tokens": 8103,
+    "quality_score": 6.1859396914446005,
+    "arabic_ratio": 1.0143758765778401
+  },
+  "chunking_results": {
+    "total_chunks": 7,
+    "chunk_sizes": {
+      "min_chars": 839,
+      "max_chars": 2281,
+      "avg_chars": 1766,
+      "min_tokens": 466,
+      "max_tokens": 1267,
+      "avg_tokens": 981
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 7,
+      "total_chunks": 7
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 7,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['2→9']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context",
+        "Chunk 5: Missing hierarchical context",
+        "Chunk 6: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام المنافسة - المادة الأولى + المادة الثانية + المادة الثالثة",
+      "hierarchy_level": "article",
+      "chars": 1244,
+      "tokens": 691,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 688,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:يهدف هذا النظام إلى حماية المنافسة العادلة وتشجيعها، ومكافحةالممارسات الاحتكاريةالتي تؤثر على المنافسة المشروعة .\n\nالمادة الثانية:يقصد بالمصطلحات الآتية أينما وردت في هذا النظام المعاني ..."
+    },
+    {
+      "index": 1,
+      "title": "نظام المنافسة - المادة الرابعة + المادة الخامسة",
+      "hierarchy_level": "article",
+      "chars": 2147,
+      "tokens": 1192,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1191,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة:تحظر الممارسات أو الاتفاقيات أو العقود بين المنشآت المتنافسة أو تلك التي من المحتمل أن تكون متنافسة ، سواء أكانت العقود مكتوبة أو شفهية ، وصريحة كانت أم ضمنية ، إذا كان الهدف من هذه الم..."
+    },
+    {
+      "index": 2,
+      "title": "نظام المنافسة - المادة السادسة + المادة السابعة + المادة الثامنة",
+      "hierarchy_level": "article",
+      "chars": 2094,
+      "tokens": 1163,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1159,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة:1- على المنشآت المشاركة في عملية الاندماج، أو المنشآت التي ترغب تملك أصول أو حقوق ملكية أو حقوق انتفاع أو أسهم، تجعلها في وضع مهيمن، إبلاغ المجلس كتابة قبل ستين يومًا على الأقل من إتمام..."
+    },
+    {
+      "index": 3,
+      "title": "نظام المنافسة - المادة التاسعة ... المادة الثانية (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2125,
+      "tokens": 1180,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1176,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعة:\n\nمع مراعاة ما تقضي به الأنظمة الأخرى، يختص المجلس بالمهام الآتية :1 - الموافقة على حالات الاندماج أو التملك أو الجمع بين إدارتين أو أكثر بإدارة مشتركة وينتج عنها وضع مهيمن في السوق.2 -..."
+    },
+    {
+      "index": 4,
+      "title": "نظام المنافسة - المادة الثانية + المادة الثالثة + المادة الرابعة",
+      "hierarchy_level": "article",
+      "chars": 1636,
+      "tokens": 908,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 905,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية عشرة:تم تعديل هذه المادة بموجب المرسوم الملكي رقم (م/24) بتاريخ 11 / 4 / 1435هـ،لتصبح بالنص الآتي:\"مع عدم الإخلال بأي عقوبة أشد ينص عليها نظام آخر، ودون إخلال بما نصت عليه المادة (الثال..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 6.1859396914446005,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 7 chunks missing context",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "success": true,
+  "test_id": "20250806_214101",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/d6bd59f3-b94c-4b6e-8ced-a9a700f2c955/1",
+  "title": "نظام رسوم وأجور خدمات الموانئ",
+  "extraction_summary": {
+    "total_characters": 3416,
+    "estimated_tokens": 1897,
+    "quality_score": 5.032484339190222,
+    "arabic_ratio": 1.0297937356760887
+  },
+  "chunking_results": {
+    "total_chunks": 1,
+    "chunk_sizes": {
+      "min_chars": 2338,
+      "max_chars": 2338,
+      "avg_chars": 2338,
+      "min_tokens": 1298,
+      "max_tokens": 1298,
+      "avg_tokens": 1298
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 1,
+      "total_chunks": 1
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 1,
+      "violations": [],
+      "saudi_legal_patterns_detected": [],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام رسوم وأجور خدمات الموانئ - المادة العشرين و + المادة التاسعة",
+      "hierarchy_level": "article",
+      "chars": 2338,
+      "tokens": 1298,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1296,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العشرين و",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العشرين و\n\nالمادة التاسعة والعشرين و\n\nالمادة الثلاثين من نظام مجلس الوزراء الصادر بالمرسوم الملكي رقم (٣٨) وتاريخ ٢٢ / ١٠ / ١٣٧٧ هـ.وبعد الاطلاع على نظام الموانئ والمرافئ والمنائر البحرية الصاد..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "ACCEPTABLE",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 5.032484339190222,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 0,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 1 chunks missing context",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

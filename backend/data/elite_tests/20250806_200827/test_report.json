@@ -1,0 +1,269 @@
+{
+  "success": true,
+  "test_id": "20250806_200827",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/7017dc70-15bb-4137-b87d-a9a700f1b950/1",
+  "title": "نظام الصندوق السعودي للتنمية",
+  "extraction_summary": {
+    "total_characters": 13965,
+    "estimated_tokens": 7758,
+    "quality_score": 6.264941154836337,
+    "arabic_ratio": 1.0059764619345348
+  },
+  "chunking_results": {
+    "total_chunks": 5,
+    "chunk_sizes": {
+      "min_chars": 2033,
+      "max_chars": 2590,
+      "avg_chars": 2350,
+      "min_tokens": 1129,
+      "max_tokens": 1438,
+      "avg_tokens": 1305
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 5,
+      "total_chunks": 5
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 5,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['5→7']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الصندوق السعودي للتنمية - المادة الأولى + المادة الثانية",
+      "hierarchy_level": "article",
+      "chars": 2265,
+      "tokens": 1258,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1247,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:تنشأ بموجب هذا النظام مؤسسة عامة تسمىالصندوق السعودي للتنمية، يكون مقره مدينة الرياض ويتمتع بالشخصية المعنوية والذمة المالية المستقلة، ويتولى المساهمة في تمويل المشاريع الإنسانية في الدو..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الصندوق السعودي للتنمية - المادة الثانية + المادة الثالثة",
+      "hierarchy_level": "article",
+      "chars": 2372,
+      "tokens": 1317,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1312,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية:•    المادة الثالثة- عٌدلت هذه المادة بموجب قرار مجلس الوزراء رقم (182) وتاريخ 1 / 3 / 1441هـ، لتكون بالنص الآتي:1-     يدير الصندوق مجلس إدارة يعين رئيسه بأمر من رئيس مجلس الوزراء، وعض..."
+    },
+    {
+      "index": 2,
+      "title": "نظام الصندوق السعودي للتنمية - المادة الثالثة + المادة الرابعة + المادة الخامسة",
+      "hierarchy_level": "article",
+      "chars": 2590,
+      "tokens": 1438,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1429,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثة- إحلال عبارة \"مجلس إدارة الصندوق\" محل عبارة \"مجلس الوزراء\"، بناءً على اقتراح من رئيس مجلس الشؤون الاقتصادية والتنمية. وذلك بموجب قرار مجلس الوزراء رقم (164) وتاريخ 1438/3/6هـ.\n\nالمادة ا..."
+    },
+    {
+      "index": 3,
+      "title": "نظام الصندوق السعودي للتنمية - المادة الخامسة + المادة السابعة + المادة الثامنة",
+      "hierarchy_level": "article",
+      "chars": 2491,
+      "tokens": 1383,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1379,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السابعة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة- عٌدلت هذه المادة بموجب قرار مجلس الوزراء رقم (182) وتاريخ 1 / 3 / 1441هـ.\n\nالمادة السادسة:يجب أن يتحرى الصندوق قبل منح القرض مدى إنتاجيته وضمان الوفاء به مراعياً الاعتبارات التالية:أ )..."
+    },
+    {
+      "index": 4,
+      "title": "نظام الصندوق السعودي للتنمية - المادة التاسعة ... المادة العاشرة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2033,
+      "tokens": 1129,
+      "metadata": {
+        "items_count": 15,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1107,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الأولى",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعة:يجوز للصندوق وفقاً لما يراه أن يطلب من المقترض ضمانات ملائمة للقرض.\n\nالمادة العاشرة:بدون إخلال بحقوق الصندوق الناشئة عن عقد القرض أو قواعد القانون العام أو العرف الدولي يجوز للصندوق إذا..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.264941154836337,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 5 chunks missing context",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

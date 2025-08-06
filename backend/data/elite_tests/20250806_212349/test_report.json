@@ -1,0 +1,195 @@
+{
+  "success": true,
+  "test_id": "20250806_212349",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/66eccea3-fc1c-471f-bcfa-ad9d009a7ec0/1",
+  "title": "نظام تصنيف المقاولين",
+  "extraction_summary": {
+    "total_characters": 10163,
+    "estimated_tokens": 5646,
+    "quality_score": 6.56017682228724,
+    "arabic_ratio": 1.0040707289148962
+  },
+  "chunking_results": {
+    "total_chunks": 3,
+    "chunk_sizes": {
+      "min_chars": 874,
+      "max_chars": 2739,
+      "avg_chars": 2097,
+      "min_tokens": 485,
+      "max_tokens": 1521,
+      "avg_tokens": 1164
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 3,
+      "total_chunks": 3
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 3,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام تصنيف المقاولين - المادة الأولى ... المادة العاشرة (10 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2678,
+      "tokens": 1487,
+      "metadata": {
+        "items_count": 10,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1473,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 10,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 10,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيقصد بالألفاظ الآتية أينما وردت في هذا النظام المعاني المبينة أمامها ما لم يقتض السياق غير ذلك:\n\nالوزارة:وزارة الشؤون البلدية والقروية والإسكان.الوزير:وزير الشؤون البلدية والقروية والإسكا..."
+    },
+    {
+      "index": 1,
+      "title": "نظام تصنيف المقاولين - المادة الحادية عشرة ... المادة العاشرة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2739,
+      "tokens": 1521,
+      "metadata": {
+        "items_count": 24,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1481,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية عشرة",
+          "المادة الثالثة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الرابعة",
+          "المادة السابعة",
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الحادية عشرةيصنف المقاول المرخص له بالعمل وفقًا لنظام الاستثمار الأجنبي حسب الإجراءات المعمول بها في تصنيف المقاول السعودي. ولمجلس الوزراء استثناؤه وفق ضوابط يضعها لذلك.\n\nالمادة الثانية عشرةتتق..."
+    },
+    {
+      "index": 2,
+      "title": "نظام تصنيف المقاولين - المادة التاسعة",
+      "hierarchy_level": "article",
+      "chars": 874,
+      "tokens": 485,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 485,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعة عشرةحقل المادة مطلوبالوصف*رمز التحقق*قيمة الرمز المدخل غير صحيحالإسم*البريد الإلكترونييرجى اختيار الحدث ليصلكم اشعار بذلك على البريد الإلكترونياضافةتعديلحذفأبلغني حين توافر النظام باللغ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.56017682228724,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 1,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 3 chunks missing context",
+    "📊 INFO: 1 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

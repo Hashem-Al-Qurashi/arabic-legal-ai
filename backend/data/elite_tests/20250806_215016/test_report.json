@@ -1,0 +1,195 @@
+{
+  "success": true,
+  "test_id": "20250806_215016",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/d4a64a81-307e-4899-a555-af34014304ad/1",
+  "title": "اللائحة التنظيمية للجان إصلاح ذات البين في إمارات المناطق",
+  "extraction_summary": {
+    "total_characters": 9142,
+    "estimated_tokens": 5078,
+    "quality_score": 5.940824799335733,
+    "arabic_ratio": 1.0163299197342928
+  },
+  "chunking_results": {
+    "total_chunks": 3,
+    "chunk_sizes": {
+      "min_chars": 2002,
+      "max_chars": 2627,
+      "avg_chars": 2333,
+      "min_tokens": 1112,
+      "max_tokens": 1459,
+      "avg_tokens": 1296
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 3,
+      "total_chunks": 3
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 3,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "اللائحة التنظيمية للجان إصلاح ذات البين في إمارات المناطق - المادة الأولى ... المادة الخامسة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2372,
+      "tokens": 1317,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1310,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىتُشكَّل في كل منطقة بقرار من أمير المنطقة لجنة لإصلاح ذات البين في القضايا المحكوم فيها بالقتل قصاصًا، ترتبط بأمير المنطقة، ويشار إليها فيما بعد بـ(اللجنة).\n\nالمادة الثانيةتتولى اللجنة ال..."
+    },
+    {
+      "index": 1,
+      "title": "اللائحة التنظيمية للجان إصلاح ذات البين في إمارات المناطق - المادة السادسة ... المادة الحادية عشرة (6 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2627,
+      "tokens": 1459,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1452,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 6,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 6,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسةيكون للجنة أمين من منسوبي إمارة المنطقة، يعين بقرار من أمير المنطقة، ويشترط فيه الآتي:أ-أن يكون حاصلًا على درجة البكالوريوس على الأقل.ب-أن يكون من ذوي الخبرة والكفاية.ج-أن يكون مشهودًا ل..."
+    },
+    {
+      "index": 2,
+      "title": "اللائحة التنظيمية للجان إصلاح ذات البين في إمارات المناطق - المادة الثانية ... المادة الحادية عشرة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2002,
+      "tokens": 1112,
+      "metadata": {
+        "items_count": 21,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1078,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة الأولى",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية عشرةيكون للجنة مخصص مالي، وفقاً لما يعتمده أمير المنطقة ضمن بنود ميزانية الإمارة، على أن يشمل ذلك المكافآت التي تخصص لرئيس وأعضاء اللجنة وأمينها وفق ما يحدده أمير المنطقة.يكون الصرف من ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 5.940824799335733,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 1,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 3 chunks missing context",
+    "📊 INFO: 1 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "success": true,
+  "test_id": "20250806_214732",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/a292ec7e-85fb-4ceb-9ad0-ac9200ced829/1",
+  "title": "نظام البنك المركزي السعودي",
+  "extraction_summary": {
+    "total_characters": 19262,
+    "estimated_tokens": 10701,
+    "quality_score": 7.034262072532162,
+    "arabic_ratio": 1.0137048290128645
+  },
+  "chunking_results": {
+    "total_chunks": 7,
+    "chunk_sizes": {
+      "min_chars": 712,
+      "max_chars": 2657,
+      "avg_chars": 2225,
+      "min_tokens": 395,
+      "max_tokens": 1476,
+      "avg_tokens": 1235
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 4,
+      "articles_detected": 3,
+      "total_chunks": 7
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 0,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['5→7']",
+        "Article sequence pattern: ['2→10']",
+        "Article sequence pattern: ['5→7']",
+        "Article sequence pattern: ['2→8']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام البنك المركزي السعودي - الفصل الأول - المادة الأولى + المادة الثانية + المادة الثالثة",
+      "hierarchy_level": "section",
+      "chars": 712,
+      "tokens": 395,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 390,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الأول:\n\nالتعريفات وأحكام عامة\n\nالمادة الأولىيقصد بالألفاظ والعبارة الآتية - أينما وردت في هذا النظام - المعاني المبينة أمام كل منها:\n\nالبنك:\n\nالبنك المركزي السعودي.النظام: نظام البنك.المجلس:\n\nمج..."
+    },
+    {
+      "index": 1,
+      "title": "نظام البنك المركزي السعودي - الفصل الأول - المادة الرابعة",
+      "hierarchy_level": "article",
+      "chars": 2310,
+      "tokens": 1283,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1283,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعةيؤدي البنك مهماته وفقاً لأحكام النظام، وما يصدره المجلس من لوائح وسياسات، ووفق أفضل المعايير والممارسات الدولية، وله جميع الصلاحيات اللازمة لتحقيق أهدافه، وله - في سبيل ذلك - ممارسة المه..."
+    },
+    {
+      "index": 2,
+      "title": "نظام البنك المركزي السعودي - الفصل الثاني - المادة الخامسة ... المادة التاسعة (4 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2298,
+      "tokens": 1276,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1269,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثاني",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسةللبنك أن يتقاضى مقابلاً مالياً عن إصدار التراخيص والموافقات والخدمات والعمليات التي يؤديها وتكاليف الإشراف على المؤسسات المالية، وذلك وفقاً لضوابط يعتمدها المجلس.\n\nالمادة السادسةلا يجوز ..."
+    },
+    {
+      "index": 3,
+      "title": "نظام البنك المركزي السعودي - الفصل الثاني - المادة العاشرة + المادة الحادية عشرة + المادة الثانية",
+      "hierarchy_level": "article",
+      "chars": 2657,
+      "tokens": 1476,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1471,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثاني",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العاشرةيتولى المجلس الإشراف على أعمال البنك، ويكون المسؤول بشكل عام عن حسن سير الإدارة، وله الاختصاصات كافة اللازمة لتحقيق ذلك وفقاً لأهداف البنك، وللمجلس أن يضع ما يلزم من النظم والتعليمات وال..."
+    },
+    {
+      "index": 4,
+      "title": "نظام البنك المركزي السعودي - الفصل الرابع - المادة الثالثة ... المادة السابعة (4 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2543,
+      "tokens": 1412,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1402,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الرابع"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الرابع",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الرابع",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثة عشرة )\n\n\n\nتعديلات المادةالمحافظ ونائب المحافظ وموظفو البنك  (\n\nالمادة الثالثة عشرة )- عُدل العنوان الفرعي وذلك بموجب قرار مجلس الوزراء رقم (412) وتاريخ 1443/7/28هـ، ليكون بالنص الآتي:\"ا..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.034262072532162,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 5,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "📊 INFO: 5 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "success": true,
+  "test_id": "20250806_212804",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/c1878d16-7ce0-4710-993b-a9a700f17ac5/1",
+  "title": "النظام الجزائي لجرائم التزوير",
+  "extraction_summary": {
+    "total_characters": 11177,
+    "estimated_tokens": 6209,
+    "quality_score": 6.994749065367622,
+    "arabic_ratio": 1.0178996261470488
+  },
+  "chunking_results": {
+    "total_chunks": 4,
+    "chunk_sizes": {
+      "min_chars": 1482,
+      "max_chars": 2711,
+      "avg_chars": 2387,
+      "min_tokens": 823,
+      "max_tokens": 1506,
+      "avg_tokens": 1325
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 4,
+      "total_chunks": 4
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 4,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['4→6', '7→9']"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "النظام الجزائي لجرائم التزوير - المادة الأولى ... المادة الخامسة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2707,
+      "tokens": 1503,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1497,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:يقصد بالمصطلحات والعبارات الآتية أينما وردت في هذا النظام المعاني الموضحة أمام كل منها، ما لم يدل السياق على خلاف ذلك:1- التزوير:كل تغيير للحقيقة بإحدى الطرق المنصوص عليها في هذا النظام ..."
+    },
+    {
+      "index": 1,
+      "title": "النظام الجزائي لجرائم التزوير - المادة السادسة ... المادة الخامسة (10 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2649,
+      "tokens": 1471,
+      "metadata": {
+        "items_count": 13,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1453,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 10,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 10,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة:\n\nمن زوّر طابعاً يعاقب بالسجن مدة لا تتجاوز خمس سنوات، وبغرامةٍ لا تزيد على خمسمائة ألف ريال، مع إلزامه بدفع ما فوته على الخزينة العامة من مبالغ.\n\nالمادة السابعة:\n\nمن أعاد استعمال طابعٍ..."
+    },
+    {
+      "index": 2,
+      "title": "النظام الجزائي لجرائم التزوير - المادة التاسعة ... المادة الثلاثون (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2711,
+      "tokens": 1506,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1495,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثلاثون"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعة عشرة:يعاقب بالعقوبة نفسها المقررة لجريمة التزوير المنصوص عليها في هذا النظام، كل من استعمل أيًّا مما نص على تجريمه في هذا النظام مع علمه بتزويره، وكل من جلب إلى المملكة أو حاز فيها أيًّ..."
+    },
+    {
+      "index": 3,
+      "title": "النظام الجزائي لجرائم التزوير - المادة الأولى ... المادة الثلاثون (14 مواد)",
+      "hierarchy_level": "article",
+      "chars": 1482,
+      "tokens": 823,
+      "metadata": {
+        "items_count": 30,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 783,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثلاثون"
+        ],
+        "unique_articles_count": 14,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 14,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:\n\nالمادة الثانية:\n\nالمادة الثالثة:\n\nالمادة الرابعة:\n\nالمادة الخامسة:\n\nالمادة السادسة:\n\nالمادة السابعة:\n\nالمادة الثامنة:\n\nالمادة التاسعة:\n\nالمادة العاشرة:\n\nالمادة الحادية عشرة:\n\nالمادة ال..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.994749065367622,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 1,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 4 chunks missing context",
+    "📊 INFO: 1 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

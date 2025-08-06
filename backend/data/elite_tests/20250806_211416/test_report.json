@@ -1,0 +1,362 @@
+{
+  "success": true,
+  "test_id": "20250806_211416",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/c58ba10c-4e89-4c06-98d7-a9a700f1c706/1",
+  "title": "النظام التجاري ( نظام المحكمة التجارية)",
+  "extraction_summary": {
+    "total_characters": 219017,
+    "estimated_tokens": 121676,
+    "quality_score": 8.002361567844893,
+    "arabic_ratio": 1.000944627137957
+  },
+  "chunking_results": {
+    "total_chunks": 86,
+    "chunk_sizes": {
+      "min_chars": 843,
+      "max_chars": 3208,
+      "avg_chars": 2498,
+      "min_tokens": 468,
+      "max_tokens": 1782,
+      "avg_tokens": 1387
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 9,
+      "sections_detected": 27,
+      "articles_detected": 50,
+      "total_chunks": 86
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 0,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['5→7', '8→10', '11→16']",
+        "Article sequence pattern: ['5→19', '19→26']",
+        "Article sequence pattern: ['62→64']",
+        "Article sequence pattern: ['73→76']",
+        "Article sequence pattern: ['90→92', '96→98']",
+        "Article sequence pattern: ['113→115']",
+        "Article sequence pattern: ['125→128']",
+        "Article sequence pattern: ['133→135', '135→137', '137→139']",
+        "Article sequence pattern: ['147→149']",
+        "Article sequence pattern: ['159→161']",
+        "Article sequence pattern: ['163→165']",
+        "Article sequence pattern: ['176→178']",
+        "Article sequence pattern: ['204→207']",
+        "Article sequence pattern: ['209→211']",
+        "Article sequence pattern: ['216→218']",
+        "Article sequence pattern: ['221→223']",
+        "Article sequence pattern: ['228→230']",
+        "Article sequence pattern: ['243→246', '246→248']",
+        "Article sequence pattern: ['263→265']",
+        "Article sequence pattern: ['275→277']",
+        "Article sequence pattern: ['292→294']",
+        "Article sequence pattern: ['297→299']",
+        "Article sequence pattern: ['322→324']",
+        "Article sequence pattern: ['326→329', '330→332', '332→334']",
+        "Article sequence pattern: ['335→337']",
+        "Article sequence pattern: ['347→349']",
+        "Article sequence pattern: ['352→355', '355→357']",
+        "Article sequence pattern: ['360→362', '362→366']",
+        "Article sequence pattern: ['368→370']",
+        "Article sequence pattern: ['387→389']",
+        "Article sequence pattern: ['398→400']",
+        "Article sequence pattern: ['404→406']",
+        "Article sequence pattern: ['409→411', '412→414', '415→417']",
+        "Article sequence pattern: ['422→424', '424→426']",
+        "Article sequence pattern: ['445→448']",
+        "Article sequence pattern: ['452→454']",
+        "Article sequence pattern: ['467→469']",
+        "Article sequence pattern: ['473→475']",
+        "Article sequence pattern: ['483→485']",
+        "Article sequence pattern: ['506→509']",
+        "Article sequence pattern: ['531→534']",
+        "Article sequence pattern: ['544→546']",
+        "Article sequence pattern: ['562→564']",
+        "Article sequence pattern: ['573→575']",
+        "Article sequence pattern: ['586→588']",
+        "Article sequence pattern: ['610→612', '612→614']",
+        "Article sequence pattern: ['624→626']",
+        "Article sequence pattern: ['11→16', '19→26', '109→628', '630→633']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "النظام التجاري ( نظام المحكمة التجارية) - الباب الأول > الفصل الأول - المادة (1) ... المادة (7) (7 مواد)",
+      "hierarchy_level": "chapter",
+      "chars": 2705,
+      "tokens": 1502,
+      "metadata": {
+        "items_count": 12,
+        "hierarchy_levels": [
+          "section",
+          "article",
+          "chapter"
+        ],
+        "token_count": 1486,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الأول"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الأول",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الأول:\n\nالتجارة البرية.\n\nالفصل الأول:\n\nالتاجر ، شروطه ، صفاته ، أنواعه\n\nالمادة (1):\n\nالتاجر هو من اشتغل بالمعاملات التجارية واتخذها مهنة له.\n\nالمادة (2):\n\n\n\nتعديلات\n\nالمادة (2):تم إلغاء العبارة ..."
+    },
+    {
+      "index": 1,
+      "title": "النظام التجاري ( نظام المحكمة التجارية) - الباب الأول > الفصل الثالث - المادة (7) ... المادة (18) (11 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2634,
+      "tokens": 1463,
+      "metadata": {
+        "items_count": 15,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1441,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الثالث"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الثالث",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الثالث",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية عشرة",
+          "المادة الثالثة عشرة",
+          "المادة الرابعة عشرة",
+          "المادة الخامسة عشرة",
+          "المادة (16)",
+          "المادة (17)",
+          "المادة (18)"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (7):(ألغيت هذه المادة بموجب المادة الرابعة عشرة من نظام الدفاتر التجارية الصادر بالمرسوم الملكي رقم (م/61) بتاريخ 17 / 12 / 1409 هـ، .)يجب أن يكون كل من دفاتر اليومية والجرد والتوثق محررات بصور..."
+    },
+    {
+      "index": 2,
+      "title": "النظام التجاري ( نظام المحكمة التجارية) - الباب الأول > الفصل الرابع - المادة (19) ... المادة (30) (11 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2720,
+      "tokens": 1511,
+      "metadata": {
+        "items_count": 12,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1493,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الرابع"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الرابع",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الرابع",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة (19)",
+          "المادة الحادية والعشرون",
+          "المادة الثانية والعشرون",
+          "المادة الثالثة والعشرون",
+          "المادة الرابعة والعشرون",
+          "المادة الخامسة والعشرون",
+          "المادة (26)",
+          "المادة (27)",
+          "المادة (28)",
+          "المادة (29)",
+          "المادة (30)"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (19):كل  وكيل بعمولة    له الحق أن يتقدم في استيفاء جميع ما صرفه على أمتعة مرسلة له من محل آخر برسم البيع لحساب موكله من نفس قيمتها إذا كانت موجودة لديه أو مودعة في مخزن الجمرك أو حملت إليه بمو..."
+    },
+    {
+      "index": 3,
+      "title": "النظام التجاري ( نظام المحكمة التجارية) - الباب الأول > الفصل السادس - المادة (31) ... المادة (41) (11 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2469,
+      "tokens": 1371,
+      "metadata": {
+        "items_count": 13,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1354,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل السادس"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل السادس",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل السادس",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة (31)",
+          "المادة (32)",
+          "المادة (33)",
+          "المادة (34)",
+          "المادة (35)",
+          "المادة (36)",
+          "المادة (37)",
+          "المادة (38)",
+          "المادة (39)",
+          "المادة (40)",
+          "المادة (41)"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (31):يتبع فيماللدلالمن الحقوق وفيما عليه من الواجبات وفيما يستحقه من الأجرة العرف المطرد والعادة.\n\nالمادة (32):يجب على كلدلاليتعاطى الدلالة في البضائع التجارية بين التجار أن يتخذ لهدفتر يوميةيق..."
+    },
+    {
+      "index": 4,
+      "title": "النظام التجاري ( نظام المحكمة التجارية) - الباب الأول > الفصل السادس - المادة (42) ... المادة (54) (13 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2611,
+      "tokens": 1450,
+      "metadata": {
+        "items_count": 13,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1432,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل السادس"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل السادس",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل السادس",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة (42)",
+          "المادة (43)",
+          "المادة (44)",
+          "المادة (45)",
+          "المادة (46)",
+          "المادة (47)",
+          "المادة (48)",
+          "المادة (49)",
+          "المادة (50)",
+          "المادة (51)",
+          "المادة (52)",
+          "المادة (53)",
+          "المادة (54)"
+        ],
+        "unique_articles_count": 13,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 13,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (42):سندات الحوالة أي السفاتج التي تسحب من محل على آخر يجب أن تؤرخ ويوضح فيها المبالغ المحولة واسم الشخص المحال عليه وتاريخ ومكان الدفع ويبين فيها أنها قيمة بضاعة أو مقابل نقود أو محسوبة لحساب ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 8.002361567844893,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 49,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "📊 INFO: 49 Saudi legal document patterns detected (normal)",
+    "⚡ INFO: High chunk count - monitor performance",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

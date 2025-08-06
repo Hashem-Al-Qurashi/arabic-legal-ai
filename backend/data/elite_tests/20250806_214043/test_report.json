@@ -1,0 +1,288 @@
+{
+  "success": true,
+  "test_id": "20250806_214043",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/5dc538d4-5bbd-4995-8f0c-a9a700f2c88c/1",
+  "title": "نظام ديوان المراقبة العامة",
+  "extraction_summary": {
+    "total_characters": 14539,
+    "estimated_tokens": 8077,
+    "quality_score": 6.177448588358313,
+    "arabic_ratio": 1.0109794353433252
+  },
+  "chunking_results": {
+    "total_chunks": 6,
+    "chunk_sizes": {
+      "min_chars": 840,
+      "max_chars": 2741,
+      "avg_chars": 2140,
+      "min_tokens": 466,
+      "max_tokens": 1522,
+      "avg_tokens": 1188
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 6,
+      "total_chunks": 6
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 6,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['1→3', '5→7']",
+        "Article sequence pattern: ['9→11']",
+        "Article sequence pattern: ['3→5']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context",
+        "Chunk 5: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام ديوان المراقبة العامة - المادة الأولى ... المادة السابعة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2001,
+      "tokens": 1111,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1102,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:ديوان المراقبة العامة جهاز مستقل مرجعه رئيس مجلس الوزراء.\n\n\n\nتعديلات\n\nالمادة الأولى:- عُدلت هذه المادة لتصبح بالنص الآتي: \"الديوان العام للمحاسبة جهاز رقابي مستقل، يرتبط مباشرةً بالملك، ..."
+    },
+    {
+      "index": 1,
+      "title": "نظام ديوان المراقبة العامة - المادة الثامنة + المادة التاسعة + المادة الحادية عشرة",
+      "hierarchy_level": "article",
+      "chars": 2643,
+      "tokens": 1468,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1462,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة:تنفيذا لأحكام المادة السابقة يعمل الديوان على إعداد اللوائح التنفيذية، والتصديق عليها من رئيس مجلس الوزراء، وإيجاد الأجهزة اللازمة التي تكفل ما يأتي:1 - التحقق من أن جميع إيرادات الدولة..."
+    },
+    {
+      "index": 2,
+      "title": "نظام ديوان المراقبة العامة - المادة الثانية ... المادة التاسعة (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2070,
+      "tokens": 1150,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1139,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية عشرة:تفترض مسئولية مدير الشئون المالية الشخصية أو من يقوم مقامه في الأحوال التالية ما لم يثبت أن شخصا آخر بعينه هو المسئول:1 - أية مخالفة لأحكام المادة الحادية عشرة.2 - تأخر إرسال البيا..."
+    },
+    {
+      "index": 3,
+      "title": "نظام ديوان المراقبة العامة - المادة العشرون ... المادة السادسة (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2550,
+      "tokens": 1416,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1406,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العشرون:يجب على رئيس الديوان رفع تقرير سنوي عن كل سنة مالية في فترة لا تتجاوز بأية حال من الأحوال اليوم الأخير من الشهر التاسع للسنة المالية التالية، فإذا صادف ذلك اليوم يوم عطلة رسمية وجب تقدي..."
+    },
+    {
+      "index": 4,
+      "title": "نظام ديوان المراقبة العامة - المادة السادسة ... المادة الحادية والعشرون (15 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2741,
+      "tokens": 1522,
+      "metadata": {
+        "items_count": 39,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1467,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة التاسعة",
+          "المادة الثلاثون",
+          "المادة الحادية والثلاثون",
+          "المادة الثانية",
+          "المادة الأولى",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة الثامنة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون"
+        ],
+        "unique_articles_count": 15,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 15,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة والعشرون:- إحلال كلمة \"الملك\" محل عبارة \"رئيس مجلس الوزراء\" ، وذلك بموجب المرسوم الملكي رقم (م / 178) وتاريخ 2 / 12 / 1441هـ.\n\nالمادة السابعة والعشرون:يضع رئيس الديوان مشروع ميزانية الد..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 6.177448588358313,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 4,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 6 chunks missing context",
+    "📊 INFO: 4 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "success": true,
+  "test_id": "20250806_214410",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/1603064a-ab7e-48eb-9564-a9a700f2d2e0/1",
+  "title": "نظام النقد العربى السعودى",
+  "extraction_summary": {
+    "total_characters": 9460,
+    "estimated_tokens": 5255,
+    "quality_score": 5.933014418541976,
+    "arabic_ratio": 1.0132057674167902
+  },
+  "chunking_results": {
+    "total_chunks": 4,
+    "chunk_sizes": {
+      "min_chars": 923,
+      "max_chars": 2778,
+      "avg_chars": 2027,
+      "min_tokens": 512,
+      "max_tokens": 1543,
+      "avg_tokens": 1126
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 4,
+      "total_chunks": 4
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 4,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article 1 mid-sequence (likely amendment structure)",
+        "Article sequence pattern: ['5→11']"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام النقد العربى السعودى - المادة الأولى ... المادة الخامسة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2134,
+      "tokens": 1185,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1179,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:وحدة النقد السعودي هي الريال السعودي، ويقسم الريال إلى عشرين قرشا سعوديا، ويقسم القرش السعودي إلى: خمس هلل سعودية.\n\nالمادة الثانية:تعادل قيمة الريال السعودي: (197482 /0) غرام من الذهب ال..."
+    },
+    {
+      "index": 1,
+      "title": "نظام النقد العربى السعودى - المادة الخامسة + المادة السادسة",
+      "hierarchy_level": "article",
+      "chars": 2276,
+      "tokens": 1264,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1263,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة:تم تصحيح  الفقرة  ( ب ) من المادة الخامسة بموجب المرسوم الملكي     رقم (م/17) وتاريخ 16 / 9 / 1379 هـ ،لتصبح بالنص التالى :(( ب - الشروط التي يجب توافرها في النقد المستهلك لاستبداله بآخ..."
+    },
+    {
+      "index": 2,
+      "title": "نظام النقد العربى السعودى - المادة السابعة ... المادة السادسة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2778,
+      "tokens": 1543,
+      "metadata": {
+        "items_count": 33,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1497,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعة:يكون لورق النقد من فئة الريال ومضاعفاته وأجزائه الذي تصدره  مؤسسة النقد العربي السعودي   ،   صفة التداول القانوني       وقوة إبرائية     غير محددة، لتسديد كافة الديون والالتزامات الخاصة..."
+    },
+    {
+      "index": 3,
+      "title": "نظام النقد العربى السعودى - المادة الحادية عشرة ... المادة الخامسة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 923,
+      "tokens": 512,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 507,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الحادية عشرة:\n\nالمادة الثانية عشرة:\n\nالمادة الثالثة عشرة:\n\nالمادة الرابعة عشرة:\n\nالمادة الخامسة عشرة:حقل المادة مطلوبالوصف*رمز التحقق*قيمة الرمز المدخل غير صحيحالإسم*البريد الإلكترونييرجى اختيا..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 5.933014418541976,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 4 chunks missing context",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

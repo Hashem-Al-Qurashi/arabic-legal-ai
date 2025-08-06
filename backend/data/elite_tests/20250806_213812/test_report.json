@@ -1,0 +1,151 @@
+{
+  "success": true,
+  "test_id": "20250806_213812",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/61fa8a49-aa1b-49ed-b9ad-adaa00dc6272/1",
+  "title": "نظام مكافحة التسول",
+  "extraction_summary": {
+    "total_characters": 7364,
+    "estimated_tokens": 4091,
+    "quality_score": 6.391801510248111,
+    "arabic_ratio": 1.016720604099245
+  },
+  "chunking_results": {
+    "total_chunks": 2,
+    "chunk_sizes": {
+      "min_chars": 1763,
+      "max_chars": 2516,
+      "avg_chars": 2139,
+      "min_tokens": 979,
+      "max_tokens": 1397,
+      "avg_tokens": 1188
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 2,
+      "total_chunks": 2
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 2,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام مكافحة التسول - المادة الأولى ... المادة الخامسة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2516,
+      "tokens": 1397,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1391,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيقصد بالألفاظ والعبارات الآتية -أينما وردت في هذا النظام- المعاني المبينة أمام كل منها، ما لم يدل السياق على غير ذلك:\n\nالنظام: نظام مكافحة التسول.الوزير: وزير الموارد البشرية والتنمية الا..."
+    },
+    {
+      "index": 1,
+      "title": "نظام مكافحة التسول - المادة السادسة ... المادة الثامنة (10 مواد)",
+      "hierarchy_level": "article",
+      "chars": 1763,
+      "tokens": 979,
+      "metadata": {
+        "items_count": 14,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 956,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 10,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 10,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسةتُصادر -بحكم قضائي- جميع الأموال النقدية والعينية التي حصل عليها المتسول من تسوله، أو التي من شأنها أن تستعمل فيه. فإن تعذر ضبط أي من تلك الأموال؛ حكمت المحكمة المختصة بغرامة تعادل قيمته..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "ACCEPTABLE",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.391801510248111,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 1,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 2 chunks missing context",
+    "📊 INFO: 1 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

@@ -1,0 +1,284 @@
+{
+  "success": true,
+  "test_id": "20250806_212118",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/85eb2897-bec6-4c0c-b1d7-ac7c008ec09c/1",
+  "title": "نظام مكافحة الغش التجاري",
+  "extraction_summary": {
+    "total_characters": 13672,
+    "estimated_tokens": 7595,
+    "quality_score": 7.2737140731094785,
+    "arabic_ratio": 1.0294856292437913
+  },
+  "chunking_results": {
+    "total_chunks": 5,
+    "chunk_sizes": {
+      "min_chars": 955,
+      "max_chars": 2793,
+      "avg_chars": 2277,
+      "min_tokens": 530,
+      "max_tokens": 1551,
+      "avg_tokens": 1264
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 5,
+      "total_chunks": 5
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 5,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['6→8']",
+        "Article sequence pattern: ['3→5']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام مكافحة الغش التجاري - المادة الأولى ... المادة الخامسة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2292,
+      "tokens": 1273,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1267,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيقصد بالكلمات والعبارات الآتية - أينما وردت في هذا النظام - المعاني المبينة أمامها ما لم يقتضِ السياق خلاف ذلك:\n\nالنظام: نظام مكافحة الغش التجاري.اللائحة:\n\nاللائحة التنفيذية لنظام مكافحة ..."
+    },
+    {
+      "index": 1,
+      "title": "نظام مكافحة الغش التجاري - المادة الخامسة ... المادة الرابعة (8 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2644,
+      "tokens": 1468,
+      "metadata": {
+        "items_count": 9,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1456,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة- عُدلت هذه المادة وذلك بإضافة عبارة \"ووزارة الطاقة والصناعة والثروة المعدنية\" بعد عبارة \"ووزارة الشؤون البلدية والقروية\". وذلك بموجب المرسوم الملكي رقم (م/101) وتاريخ 1440/9/3هـ.\n\nالماد..."
+    },
+    {
+      "index": 2,
+      "title": "نظام مكافحة الغش التجاري - المادة الخامسة ... المادة الثالثة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2704,
+      "tokens": 1502,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1495,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة عشرةيكون البائع، ومن يصرف المنتج لحسابه، ومديرو الشركات والجمعيات والمؤسسات والمحلات، مسئولين عن كل ما يقع من مخالفات لأحكام هذا النظام، وتوقع على كل منهم العقوبات المقررة لمرتكب المخال..."
+    },
+    {
+      "index": 3,
+      "title": "نظام مكافحة الغش التجاري - المادة الرابعة ... المادة الحادية عشرة (14 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2793,
+      "tokens": 1551,
+      "metadata": {
+        "items_count": 32,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1497,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الثلاثون",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 14,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 14,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة والعشرونإذا عاد المخالف إلى ارتكاب أي من المخالفات المنصوص عليها في هذا النظام خلال خمس سنوات من تاريخ صدور الحكم نهائيًّا، يعاقب بعقوبة لا تزيد على ضعف الحد الأعلى للعقوبة المقررة للمخ..."
+    },
+    {
+      "index": 4,
+      "title": "نظام مكافحة الغش التجاري - المادة الرابعة ... المادة السابعة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 955,
+      "tokens": 530,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 521,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة والعشرون\n\nالمادة الخامسة والعشرون\n\nالمادة الرابعة عشرة\n\nالمادة الخامسة عشرة\n\nالمادة السادسة والعشرون\n\nالمادة السابعة والعشرونحقل المادة مطلوبالوصف*رمز التحقق*قيمة الرمز المدخل غير صحيحا..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.2737140731094785,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 3,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 5 chunks missing context",
+    "📊 INFO: 3 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

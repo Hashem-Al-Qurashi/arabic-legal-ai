@@ -1,0 +1,262 @@
+{
+  "success": true,
+  "test_id": "20250806_200742",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/3ab82e3c-de46-4463-a939-a9a700f1b2af/1",
+  "title": "نظام  المشاركة بالوقت فى الوحدات العقارية السياحية",
+  "extraction_summary": {
+    "total_characters": 15480,
+    "estimated_tokens": 8600,
+    "quality_score": 6.552951967978652,
+    "arabic_ratio": 1.0211807871914609
+  },
+  "chunking_results": {
+    "total_chunks": 7,
+    "chunk_sizes": {
+      "min_chars": 848,
+      "max_chars": 2320,
+      "avg_chars": 1845,
+      "min_tokens": 471,
+      "max_tokens": 1288,
+      "avg_tokens": 1024
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 7,
+      "total_chunks": 7
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 7,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['1→3']",
+        "Article sequence pattern: ['2→4']",
+        "Article sequence pattern: ['5→8']",
+        "Article sequence pattern: ['3→11']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context",
+        "Chunk 5: Missing hierarchical context",
+        "Chunk 6: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام  المشاركة بالوقت فى الوحدات العقارية السياحية - المادة الأولى + المادة الثالثة",
+      "hierarchy_level": "article",
+      "chars": 2129,
+      "tokens": 1182,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1178,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:\n\nالتعريفات:يقصد بالألفاظ والعبارات الآتية– أينما وردت في هذا النظام– المعاني المبينة أمامها ما لم يقتض السياق خلاف ذلك :\n\nالوحدات العقارية السياحية:\n\nالفنادق والشقق المفروشة والمنتجعات ..."
+    },
+    {
+      "index": 1,
+      "title": "نظام  المشاركة بالوقت فى الوحدات العقارية السياحية - المادة الثانية + المادة الرابعة",
+      "hierarchy_level": "article",
+      "chars": 2204,
+      "tokens": 1224,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1222,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية:\n\nالترخيص بمزاولة النشاط :\n\nالفقرة ( 1 ) من المادة الثانية عُدلت الفقرة ليكون نصها:\"1- لا تجوز مزاولة نشاط المشاركة بالوقت أو التسويق له قبل الحصول على ترخيص من الهيئة، وذلك وفقاً للشرو..."
+    },
+    {
+      "index": 2,
+      "title": "نظام  المشاركة بالوقت فى الوحدات العقارية السياحية - المادة الخامسة",
+      "hierarchy_level": "article",
+      "chars": 2075,
+      "tokens": 1152,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1150,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة:  حقوق المشتري  والتزاماته:1- دون إخلال بأي حق يكتسبه المشتري بموجب الأنظمة فيما يتعلق ببطلان العقود،فإن للمشتري الخيار في الآتي:أ - الانسحاب منعقد المشاركة بالوقتدون إبداء أي سبب، وذلك..."
+    },
+    {
+      "index": 3,
+      "title": "نظام  المشاركة بالوقت فى الوحدات العقارية السياحية - المادة الخامسة + المادة الثامنة",
+      "hierarchy_level": "article",
+      "chars": 2320,
+      "tokens": 1288,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1287,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة:  حقوق المشتري  والتزاماته:إضافة عبارة \"على أنه يجوز الاتفاق على أن يتحمل المشتري نسبة تسويق - إذا كان المسوق غير البائع ومرخصاً من الهيئة - لا تتجاوز (1%) أو مبلغاً مقطوعاً لا يتجاوز خ..."
+    },
+    {
+      "index": 4,
+      "title": "نظام  المشاركة بالوقت فى الوحدات العقارية السياحية - المادة الحادية عشرة + المادة الثالثة",
+      "hierarchy_level": "article",
+      "chars": 1415,
+      "tokens": 786,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 783,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية عشرة",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الحادية عشرة:\n\nالعقوبات :\n\nمع عدم الإخلال بأي عقوبة أشد منصوص عليها في نظام آخر، ودون المساس بحقوق الغير:1- يعاقب كل من خالف الحكم الوارد في الفقرة (1) من المادة (الثانية) من هذا النظام بغرامة ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 6.552951967978652,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 5,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 7 chunks missing context",
+    "📊 INFO: 5 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "success": true,
+  "test_id": "20250806_212425",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/a8376aea-1bc3-49d4-9027-aed900b555af/1",
+  "title": "نظام الشركات",
+  "extraction_summary": {
+    "total_characters": 184143,
+    "estimated_tokens": 102301,
+    "quality_score": 7.7315188544918545,
+    "arabic_ratio": 1.0126075417967417
+  },
+  "chunking_results": {
+    "total_chunks": 76,
+    "chunk_sizes": {
+      "min_chars": 1223,
+      "max_chars": 3617,
+      "avg_chars": 2378,
+      "min_tokens": 679,
+      "max_tokens": 2009,
+      "avg_tokens": 1320
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 14,
+      "sections_detected": 14,
+      "articles_detected": 48,
+      "total_chunks": 76
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 1,
+      "missing_context": 0,
+      "violations": [
+        "Chunk 4: 2009 tokens (significantly oversized)"
+      ],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['3→9']",
+        "Article sequence pattern: ['3→9']",
+        "Article sequence pattern: ['3→9']",
+        "Article 1 mid-sequence (likely amendment structure)",
+        "Article sequence pattern: ['2→4']",
+        "Article sequence pattern: ['4→9']",
+        "Article sequence pattern: ['3→8']",
+        "Article sequence pattern: ['3→5', '5→9']",
+        "Article sequence pattern: ['2→9']",
+        "Article sequence pattern: ['2→8']",
+        "Article sequence pattern: ['2→4']",
+        "Article sequence pattern: ['2→7']",
+        "Article 1 mid-sequence (likely amendment structure)",
+        "Article sequence pattern: ['2→11']",
+        "Article sequence pattern: ['4→6']",
+        "Article sequence pattern: ['5→7', '7→9']",
+        "Article sequence pattern: ['5→7']",
+        "Article 1 mid-sequence (likely amendment structure)",
+        "Article 1 mid-sequence (likely amendment structure)",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "GOOD"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الشركات - الباب الأول > الفصل الأول - المادة الأولى ... المادة الخامسة (5 مواد)",
+      "hierarchy_level": "chapter",
+      "chars": 2222,
+      "tokens": 1234,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "chapter",
+          "article",
+          "section"
+        ],
+        "token_count": 1224,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الأول"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الأول",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الأول: أحكام عامة فصل تمهيدي\n\nالمادة الأولى:\n\nالتعريفات1- يقصد بالكلمات والعبارات الآتية -أينما وردت في هذا النظام- المعاني الموضحة أمام كل منها، ما لم يقتضِ السياق غير ذلك:\n\nالمملكة:\n\nالمملكة ا..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الشركات - الباب الأول > الفصل الأول - المادة السادسة + المادة السابعة + المادة الثامنة",
+      "hierarchy_level": "article",
+      "chars": 2140,
+      "tokens": 1188,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1186,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الأول"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الأول",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة: طلب تأسيس الشركةيعد مؤسسًا كل من اشترك فعليًّا في تأسيس الشركة وساهم في رأس مالها بحصة نقدية أو عينية.يقدم المؤسسون طلب تأسيس الشركة وقيدها إلى السجل التجاري، مرافقًا له عقد التأسيس أو..."
+    },
+    {
+      "index": 2,
+      "title": "نظام الشركات - الباب الأول > الفصل الأول - المادة التاسعة ... المادة الثالثة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2306,
+      "tokens": 1281,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1274,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الأول"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الأول",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعة:\n\nاكتساب الشخصية الاعتباريةتكتسب الشركة الشخصية الاعتبارية بعد قيدها لدى السجل التجاري، ومع ذلك تكون للشركة خلال مدة التأسيس شخصية اعتبارية بالقدر اللازم لتأسيسها، بشرط إتمام عملية التأ..."
+    },
+    {
+      "index": 3,
+      "title": "نظام الشركات - الباب الأول > الفصل الثاني - المادة الرابعة + المادة الخامسة + المادة السادسة",
+      "hierarchy_level": "section",
+      "chars": 1314,
+      "tokens": 730,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 726,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الثاني",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة عشرة: تقديم الحصةإذا كانت حصة الشريك أو المساهم حق ملكية أو حق منفعة أو أي حق عيني آخر، كان مسؤولًا -وفقًا لأحكام عقد البيع- عن ضمان الحصة في حالة الهلاك وضمان التعرض أو الاستحقاق أو ظه..."
+    },
+    {
+      "index": 4,
+      "title": "نظام الشركات - الباب الأول > الفصل الثاني - المادة السابعة",
+      "hierarchy_level": "article",
+      "chars": 3617,
+      "tokens": 2009,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 2009,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الثاني",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعة عشرة:\n\nالسجلات المحاسبية والقوائم الماليةعلى الشركة الاحتفاظ بالسجلات المحاسبية والمستندات المؤيدة لها لتوضيح أعمالها وعقودها وقوائمها المالية في مركز الشركة الرئيس أو في أي مكان آخر يح..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "GOOD",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.7315188544918545,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 20,
+    "technical_violations": 1
+  },
+  "recommendations": [
+    "🔧 MINOR: 1 oversized chunks detected",
+    "📊 INFO: 20 Saudi legal document patterns detected (normal)",
+    "⚡ INFO: High chunk count - monitor performance",
+    "✅ GOOD: Strong performance - proceed with confidence!"
+  ]
+}

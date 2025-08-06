@@ -1,0 +1,275 @@
+{
+  "success": true,
+  "test_id": "20250806_214218",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/456ab486-9c16-4c7b-993c-a9a700f2cc4a/1",
+  "title": "نظام تعريفة الطيران المدني",
+  "extraction_summary": {
+    "total_characters": 14890,
+    "estimated_tokens": 8272,
+    "quality_score": 5.997481770391725,
+    "arabic_ratio": 1.0189927081566899
+  },
+  "chunking_results": {
+    "total_chunks": 5,
+    "chunk_sizes": {
+      "min_chars": 838,
+      "max_chars": 2600,
+      "avg_chars": 2172,
+      "min_tokens": 465,
+      "max_tokens": 1444,
+      "avg_tokens": 1206
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 5,
+      "total_chunks": 5
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 5,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['7→9']",
+        "Article sequence pattern: ['5→11']"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام تعريفة الطيران المدني - المادة الثانية ... المادة السادسة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2419,
+      "tokens": 1343,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1334,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانيةيجب على مؤسسات وشركات النقل الجوي الوطنية والأجنبية دفع أجور خدمات الطيران المدني التي تستحق عن عملياتها ورحلاتها داخل المملكة ومنها وإليها وعبر أجوائها وفق أحكام هذا النظام، ولائحته.\n\nا..."
+    },
+    {
+      "index": 1,
+      "title": "نظام تعريفة الطيران المدني - المادة السابعة + المادة التاسعة + المادة العاشرة",
+      "hierarchy_level": "article",
+      "chars": 2600,
+      "tokens": 1444,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1441,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة التاسعة",
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعةتحسب جميع الأجور الواردة في هذا النظام على الطائرات على أساس أقصى وزن تستطيع الطائرة الإقلاع به، المبين في شهادة صلاحية الطيران التي تحملها الطائرة.وتجبر الكسور التي تبدأ من (500) خمسمائ..."
+    },
+    {
+      "index": 2,
+      "title": "نظام تعريفة الطيران المدني - المادة الحادية عشرة ... المادة الخامسة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2412,
+      "tokens": 1340,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1333,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الحادية عشرةتستوفي الهيئة أجورا تحددها اللائحة عن كل متر ممتد من أنابيب الوقود المعدة لتزويد الطائرات داخل منطقة المطار .\n\nالمادة الثانية عشرةتصنف المطارات إلى ثلاث فئات على النحو الآتي :1  -\t ..."
+    },
+    {
+      "index": 3,
+      "title": "نظام تعريفة الطيران المدني - المادة الخامسة ... المادة الحادية عشرة (13 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2592,
+      "tokens": 1440,
+      "metadata": {
+        "items_count": 27,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1395,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الاولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 13,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 13,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة عشرةتم تعديل هذه المادة بموجب المرسوم الملكي رقم (م / 53) وتاريخ 9 / 7 / 1436هـ،لتصبح بالنص الآتي:\"يقوم مجلس الإدارة باتخاذ الآتي:1   -\tمراجعة الأجور والإيجارات وفئاتها الواردة في هذا ا..."
+    },
+    {
+      "index": 4,
+      "title": "نظام تعريفة الطيران المدني - المادة الحادية والعشرون",
+      "hierarchy_level": "article",
+      "chars": 838,
+      "tokens": 465,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 465,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية والعشرون"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الحادية والعشرونحقل المادة مطلوبالوصف*رمز التحقق*قيمة الرمز المدخل غير صحيحالإسم*البريد الإلكترونييرجى اختيار الحدث ليصلكم اشعار بذلك على البريد الإلكترونياضافةتعديلحذفأبلغني حين توافر النظام ب..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 5.997481770391725,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 5 chunks missing context",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

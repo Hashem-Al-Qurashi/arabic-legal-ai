@@ -1,0 +1,277 @@
+{
+  "success": true,
+  "test_id": "20250806_212913",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/75e963c8-9ff3-4d10-88a4-a9a700f17f21/1",
+  "title": "نظام مكافحة الرشوة",
+  "extraction_summary": {
+    "total_characters": 12832,
+    "estimated_tokens": 7128,
+    "quality_score": 5.876360290460559,
+    "arabic_ratio": 1.0105441161842237
+  },
+  "chunking_results": {
+    "total_chunks": 5,
+    "chunk_sizes": {
+      "min_chars": 838,
+      "max_chars": 2555,
+      "avg_chars": 2069,
+      "min_tokens": 465,
+      "max_tokens": 1419,
+      "avg_tokens": 1149
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 5,
+      "total_chunks": 5
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 5,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['3→5', '5→7']",
+        "Article sequence pattern: ['5→7', '7→10']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام مكافحة الرشوة - المادة الأولى ... المادة السابعة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2181,
+      "tokens": 1211,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1204,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الخامسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىكل   موظف عام    طلب لنفسه أو لغيره أو قبل أو أخذ وعدا أو عطية لأداء عمل من أعمال وظيفته أو يزعم أنه من أعمال وظيفته ولو كان هذا العمل مشروعا، يعد مرتشيا ويعاقب بالسجن مدة لا تتجاوز عشر س..."
+    },
+    {
+      "index": 1,
+      "title": "نظام مكافحة الرشوة - المادة الثامنة + المادة التاسعة",
+      "hierarchy_level": "article",
+      "chars": 2555,
+      "tokens": 1419,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1414,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنةيعد في حكم  الموظف العام  في تطبيق أحكام هذا النظام:1 - كل من يعمل لدى الدولة أو لدى أحد الأجهزة ذات الشخصية المعنوية العامة سواء كان يعمل بصفة دائمة أو مؤقتة.2 -   المحكم    أو   الخبير..."
+    },
+    {
+      "index": 2,
+      "title": "نظام مكافحة الرشوة - المادة العاشرة ... المادة السابعة (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2407,
+      "tokens": 1337,
+      "metadata": {
+        "items_count": 9,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1325,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العاشرةيعاقب الراشي والوسيط وكل من اشترك في إحدى الجرائم الواردة في هذا النظام بالعقوبة المنصوص عليها في المادة التي تجرمها، ويعتبر شريكا في الجريمة كل من اتفق أو حرض أو ساعد في ارتكابها مع علم..."
+    },
+    {
+      "index": 3,
+      "title": "نظام مكافحة الرشوة - المادة السابعة ... المادة الحادية عشرة (13 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2368,
+      "tokens": 1315,
+      "metadata": {
+        "items_count": 28,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1269,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثالثة",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة الثامنة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 13,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 13,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعة عشرة- إحلال عبارة \"لرئاسة أمن الدولة\" محل عبارة \"لوزارة الداخلية\" الواردة في المادة (السابعة عشرة) من هذا النظام وذلك بموجب المرسوم الملكي رقم (م/127) وتاريخ 1440/11/7هـ.\n\nالمادة الثامن..."
+    },
+    {
+      "index": 4,
+      "title": "نظام مكافحة الرشوة - المادة الثالثة",
+      "hierarchy_level": "article",
+      "chars": 838,
+      "tokens": 465,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 465,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثة والعشرونحقل المادة مطلوبالوصف*رمز التحقق*قيمة الرمز المدخل غير صحيحالإسم*البريد الإلكترونييرجى اختيار الحدث ليصلكم اشعار بذلك على البريد الإلكترونياضافةتعديلحذفأبلغني حين توافر النظام ب..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 5.876360290460559,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 3,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 5 chunks missing context",
+    "📊 INFO: 3 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

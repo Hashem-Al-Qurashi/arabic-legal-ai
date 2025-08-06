@@ -1,0 +1,100 @@
+{
+  "success": true,
+  "test_id": "20250806_213212",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/f62643d0-eff3-43c2-8629-a9a700f18812/1",
+  "title": "نظام استبدال الغرامة بالحبس",
+  "extraction_summary": {
+    "total_characters": 4708,
+    "estimated_tokens": 2615,
+    "quality_score": 5.848800434428456,
+    "arabic_ratio": 1.017920173771382
+  },
+  "chunking_results": {
+    "total_chunks": 1,
+    "chunk_sizes": {
+      "min_chars": 2601,
+      "max_chars": 2601,
+      "avg_chars": 2601,
+      "min_tokens": 1445,
+      "max_tokens": 1445,
+      "avg_tokens": 1445
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 1,
+      "total_chunks": 1
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 1,
+      "violations": [],
+      "saudi_legal_patterns_detected": [],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام استبدال الغرامة بالحبس - المادة الأولى ... المادة الرابعة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2601,
+      "tokens": 1445,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1433,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىلا يجوز في تنفيذ الأحكام أن يستبدل الحبس بالغرامة، ويجوز أن تستبدل الغرامة بالحبس بالشروط والقيود التي يبينها هذا النظام.ويسمى الحبس الذي يعوض عن الغرامة بـ \" الحبس التعويضي \" في أحكام هذ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "ACCEPTABLE",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 5.848800434428456,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 0,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 1 chunks missing context",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

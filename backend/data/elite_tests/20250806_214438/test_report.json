@@ -1,0 +1,179 @@
+{
+  "success": true,
+  "test_id": "20250806_214438",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/59d8016f-daa9-463b-8a5d-a9a700f2d3eb/1",
+  "title": "نظام رسوم تسجيل السفن والوحدات العائمة",
+  "extraction_summary": {
+    "total_characters": 8252,
+    "estimated_tokens": 4584,
+    "quality_score": 5.956499608457321,
+    "arabic_ratio": 1.0425998433829287
+  },
+  "chunking_results": {
+    "total_chunks": 3,
+    "chunk_sizes": {
+      "min_chars": 830,
+      "max_chars": 2511,
+      "avg_chars": 1875,
+      "min_tokens": 461,
+      "max_tokens": 1395,
+      "avg_tokens": 1041
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 3,
+      "total_chunks": 3
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 3,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام رسوم تسجيل السفن والوحدات العائمة - المادة الأولى",
+      "hierarchy_level": "article",
+      "chars": 2285,
+      "tokens": 1269,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1269,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى: تعاريفيقصد بالألفاظ التالية المعاني الموضحة قرين كل منها، ما لم يقتض النص خلاف ذلك:1 - الوزارة :وزارة المواصلات.2 - السفينة :كل عائمة تستخدم في عمليات النقل، طبقا للأنظمة المعمول بها دو..."
+    },
+    {
+      "index": 1,
+      "title": "نظام رسوم تسجيل السفن والوحدات العائمة - المادة الثانية ... المادة الأولى (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2511,
+      "tokens": 1395,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1387,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الأولى"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية:تستوفي الوزارة رسوماً مُقابِل الخدمات التي تُقدِمُها، والوثائق التي تُصدِرُها على النحو الآتي:\n\nالرقمنوع الخِـدمةاسم الوثيقـةمِقـدار الرسم1تسجيل سفينة لأول مرةشهادة تسجيل سفينةثلاثة ريا..."
+    },
+    {
+      "index": 2,
+      "title": "نظام رسوم تسجيل السفن والوحدات العائمة - المادة الرابعة",
+      "hierarchy_level": "article",
+      "chars": 830,
+      "tokens": 461,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 461,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة:حقل المادة مطلوبالوصف*رمز التحقق*قيمة الرمز المدخل غير صحيحالإسم*البريد الإلكترونييرجى اختيار الحدث ليصلكم اشعار بذلك على البريد الإلكترونياضافةتعديلحذفأبلغني حين توافر النظام باللغة ال..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 5.956499608457321,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 1,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 3 chunks missing context",
+    "📊 INFO: 1 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

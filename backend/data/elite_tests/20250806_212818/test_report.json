@@ -1,0 +1,148 @@
+{
+  "success": true,
+  "test_id": "20250806_212818",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/f5b4288e-5625-4cf3-8ce8-a9a700f17bf9/1",
+  "title": "نظام جوازات السفر السياسية والخاصة",
+  "extraction_summary": {
+    "total_characters": 6837,
+    "estimated_tokens": 3798,
+    "quality_score": 5.894535164223418,
+    "arabic_ratio": 1.0178140656893673
+  },
+  "chunking_results": {
+    "total_chunks": 2,
+    "chunk_sizes": {
+      "min_chars": 2086,
+      "max_chars": 2622,
+      "avg_chars": 2354,
+      "min_tokens": 1158,
+      "max_tokens": 1456,
+      "avg_tokens": 1307
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 2,
+      "total_chunks": 2
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 2,
+      "violations": [],
+      "saudi_legal_patterns_detected": [],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام جوازات السفر السياسية والخاصة - المادة 1 ... المادة 9 (9 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2622,
+      "tokens": 1456,
+      "metadata": {
+        "items_count": 10,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1444,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة 1",
+          "المادة 2",
+          "المادة 3",
+          "المادة 4",
+          "المادة 5",
+          "المادة 6",
+          "المادة 7",
+          "المادة 8",
+          "المادة 9"
+        ],
+        "unique_articles_count": 9,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 9,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة 1تمنحالحكومةالجوازات السياسية والخاصةبقصد حصول أصحابها على تسهيلات خاصة لأداء مهماتهم أو بحكم مراكزهم الشخصية.\n\nالمادة 2تمنح جوازات السفر السياسية للأشخاص الآتي بيانهم:أ - أفراد العائلة المالكة..."
+    },
+    {
+      "index": 1,
+      "title": "نظام جوازات السفر السياسية والخاصة - المادة 11 ... المادة 16 (6 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2086,
+      "tokens": 1158,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1149,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة 11",
+          "المادة 12",
+          "المادة 13",
+          "المادة 14",
+          "المادة 15",
+          "المادة 16"
+        ],
+        "unique_articles_count": 6,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 6,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة 11ينتهي حتماً وفي كل الحالات مفعول جوازات السفر السياسية والخاصة بانتهاء المهمة التي يمنح الجواز من أجلها والعودة إلى المملكة ويعاد الجواز لوزارة الخارجية ولا يجوز استعماله للسفر مرة أخرى إلا ب..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "ACCEPTABLE",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 5.894535164223418,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 0,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 2 chunks missing context",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

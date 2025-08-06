@@ -1,0 +1,230 @@
+{
+  "success": true,
+  "test_id": "20250806_211615",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/ebb751a1-6f0b-4595-9736-a9a700f1f47b/1",
+  "title": "نظام مزاولة المهن الهندسية",
+  "extraction_summary": {
+    "total_characters": 11025,
+    "estimated_tokens": 6125,
+    "quality_score": 6.318420431756518,
+    "arabic_ratio": 1.0273681727026072
+  },
+  "chunking_results": {
+    "total_chunks": 4,
+    "chunk_sizes": {
+      "min_chars": 451,
+      "max_chars": 2626,
+      "avg_chars": 1929,
+      "min_tokens": 250,
+      "max_tokens": 1458,
+      "avg_tokens": 1071
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 4,
+      "total_chunks": 4
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 4,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['4→6']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام مزاولة المهن الهندسية - المادة الأولى ... المادة السادسة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2626,
+      "tokens": 1458,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1452,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:يقصد بالألفاظ والعبارات الآتية -أينما وردت في هذا النظام- المعاني الموضحة أمام كل منها، ما لم يقتضِ السياق خلاف ذلك:\n\nالنظام :نظام مزاولة المهن الهندسية.اللائحة :\n\nاللائحة التنفيذية للنظ..."
+    },
+    {
+      "index": 1,
+      "title": "نظام مزاولة المهن الهندسية - المادة السابعة + المادة الثامنة",
+      "hierarchy_level": "article",
+      "chars": 451,
+      "tokens": 250,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 248,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعة:تقدم طلبات الاعتماد المهني إلى اللجنة وفقاً للإجراءات التي يعتمدها مجلس الإدارة، ويتم الاعتماد المهني بعد التحقق من توافر الشروط اللازمة للاعتماد. وعلى اللجنة أن تبت في الطلب خلال ثلاثي..."
+    },
+    {
+      "index": 2,
+      "title": "نظام مزاولة المهن الهندسية - المادة التاسعة",
+      "hierarchy_level": "article",
+      "chars": 2521,
+      "tokens": 1400,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1400,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعة:يحدد مجلس الإدارة الدرجات المهنية ومتطلباتها، ومدة الاعتماد المهني وإجراءات تجديده، والمقابل المالي له، على أن يراجع ذلك كل خمس سنوات، وطبقاً لما تحدده اللائحة.\n\nالمادة العاشرة:\n\nمع مرا..."
+    },
+    {
+      "index": 3,
+      "title": "نظام مزاولة المهن الهندسية - المادة الثالثة ... المادة الحادية عشرة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2120,
+      "tokens": 1177,
+      "metadata": {
+        "items_count": 22,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1146,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثة عشرة :يجوز تضمين الحكم أو القرار المكتسب القطعية الصادر بالعقوبة النص على نشره على نفقة المخالف في ثلاث صحف محلية، تصدر إحداها على الأقل في مقر إقامته، فإن لم تكن هناك صحيفة في المنطقة ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.318420431756518,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 4 chunks missing context",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

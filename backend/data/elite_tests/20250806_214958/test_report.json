@@ -1,0 +1,267 @@
+{
+  "success": true,
+  "test_id": "20250806_214958",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/e2997001-1d2c-4113-b322-a9fa01631039/1",
+  "title": "اللائحة التنفيذية لنظام مكافحة جرائم الإرهاب وتمويله",
+  "extraction_summary": {
+    "total_characters": 23937,
+    "estimated_tokens": 13298,
+    "quality_score": 6.062667815911822,
+    "arabic_ratio": 1.0050671263647286
+  },
+  "chunking_results": {
+    "total_chunks": 10,
+    "chunk_sizes": {
+      "min_chars": 766,
+      "max_chars": 4585,
+      "avg_chars": 2208,
+      "min_tokens": 425,
+      "max_tokens": 2547,
+      "avg_tokens": 1226
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 10,
+      "total_chunks": 10
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 1,
+      "missing_context": 10,
+      "violations": [
+        "Chunk 5: 2547 tokens (significantly oversized)"
+      ],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['2→5']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context",
+        "Chunk 5: Missing hierarchical context",
+        "Chunk 6: Missing hierarchical context",
+        "Chunk 7: Missing hierarchical context",
+        "Chunk 8: Missing hierarchical context",
+        "Chunk 9: Missing hierarchical context"
+      ],
+      "overall_quality": "GOOD"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "اللائحة التنفيذية لنظام مكافحة جرائم الإرهاب وتمويله - المادة الأولى + المادة الثانية + المادة الثالثة",
+      "hierarchy_level": "article",
+      "chars": 2623,
+      "tokens": 1457,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1454,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:\n\nالأنشطة أو العمليات المالية المشار إليها في الفقرة (14) من المادة (الأولى) من النظام هي:1- قبول الودائع وغيرها من الأموال القابلة للدفع، بما في ذلك الخدمات الخاصة في المصارف.2- الإقراض..."
+    },
+    {
+      "index": 1,
+      "title": "اللائحة التنفيذية لنظام مكافحة جرائم الإرهاب وتمويله - المادة الخامسة ... المادة الثامنة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2665,
+      "tokens": 1480,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1476,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة:1- لأغراض تطبيق المادة (الخامسة) من النظام، عند القبض على المشتبه بارتكابه إحدى الجرائم المنصوص عليها في النظام، فيتم إشعار النيابة العامة فور القبض عليه وبشكل مباشر، ويعرض عليها فور ال..."
+    },
+    {
+      "index": 2,
+      "title": "اللائحة التنفيذية لنظام مكافحة جرائم الإرهاب وتمويله - المادة التاسعة",
+      "hierarchy_level": "article",
+      "chars": 1222,
+      "tokens": 678,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 678,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعة:\n\nالمحاذير الأمنية المشار إليها في المادة (الثانية عشرة) من النظام هي:1- خشية الهرب أو الاختفاء.2- الإضرار بمصلحة التحقيقات.\n\nالمادة العاشرة:ضوابط الإفراج المؤقت وشروطه، المشار إليها في..."
+    },
+    {
+      "index": 3,
+      "title": "اللائحة التنفيذية لنظام مكافحة جرائم الإرهاب وتمويله - المادة الثانية + المادة الخامسة",
+      "hierarchy_level": "article",
+      "chars": 2534,
+      "tokens": 1407,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1405,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية عشرة:1- إذا استوجبت مصلحة التحقيق توقيف المتهم بارتكابه جريمة من الجرائم المنصوص عليها في النظام؛ فعلى المحقق إصدار أمر بتوقيفه مدة لا تزيد على ثلاثين يوماً من تاريخ إحالته إلى النيابة ..."
+    },
+    {
+      "index": 4,
+      "title": "اللائحة التنفيذية لنظام مكافحة جرائم الإرهاب وتمويله - المادة السادسة",
+      "hierarchy_level": "article",
+      "chars": 766,
+      "tokens": 425,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 425,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة عشرة:على المؤسسات المالية والأعمال والمهن غير المالية المحددة والمنظمات غير الهادفة للربح -عند تقييم مخاطر تمويل الإرهاب وفقاً لما ورد في المادة (الثالثة والستون) منالنظام- مراعاة العنا..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "GOOD",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.062667815911822,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 1
+  },
+  "recommendations": [
+    "🔧 MINOR: 1 oversized chunks detected",
+    "🏗️ ENHANCE: 10 chunks missing context",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ GOOD: Strong performance - proceed with confidence!"
+  ]
+}

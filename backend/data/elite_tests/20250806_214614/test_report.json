@@ -1,0 +1,278 @@
+{
+  "success": true,
+  "test_id": "20250806_214614",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/f53c97f5-d253-4828-89d4-a9a700f2d829/1",
+  "title": "نظام مراقبة شركات التمويل",
+  "extraction_summary": {
+    "total_characters": 27753,
+    "estimated_tokens": 15418,
+    "quality_score": 6.551385367620427,
+    "arabic_ratio": 1.020554147048171
+  },
+  "chunking_results": {
+    "total_chunks": 7,
+    "chunk_sizes": {
+      "min_chars": 1465,
+      "max_chars": 2659,
+      "avg_chars": 2361,
+      "min_tokens": 813,
+      "max_tokens": 1477,
+      "avg_tokens": 1311
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 7,
+      "total_chunks": 7
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 7,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['1→4']",
+        "Article sequence pattern: ['3→10']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context",
+        "Chunk 5: Missing hierarchical context",
+        "Chunk 6: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام مراقبة شركات التمويل - المادة الأولى + المادة الرابعة",
+      "hierarchy_level": "article",
+      "chars": 1465,
+      "tokens": 813,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 812,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:يقصد بالألفاظ والعبارات الآتية - أينما وردت في هذا النظام - المعاني المبينة أمام كل منها، ما لم يقتضِ السياق خلاف ذلك:\n\nالنظام :نظام مراقبة شركات التمويل.اللائحة :\n\nاللائحة التنفيذية لهذ..."
+    },
+    {
+      "index": 1,
+      "title": "نظام مراقبة شركات التمويل - المادة الخامسة ... المادة الثامنة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2659,
+      "tokens": 1477,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1472,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة:أولاً :يقدم المؤسسون لشركة التمويل - أو من يمثلهم - طلب الترخيص إلى المؤسسة،ويشترط لإصدار الترخيص ما يأتي:تقديم الهيكلة الإدارية للشركة ، ونظم تشغيلها، وخطة استثمار تبين القدرة الفنية ل..."
+    },
+    {
+      "index": 2,
+      "title": "نظام مراقبة شركات التمويل - المادة العاشرة ... المادة الثالثة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2650,
+      "tokens": 1472,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1467,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العاشرة:ترخص المؤسسة لشركة التمويل بممارسة نوع واحد أو أكثر من أنواع نشاط التمويل الآتية:أ -التمويل العقاري.ب -تمويل الأصول الإنتاجية.ج -تمويل نشاط المنشآت الصغيرة والمتوسطة.د -الإيجار التمويلي..."
+    },
+    {
+      "index": 3,
+      "title": "نظام مراقبة شركات التمويل - المادة الرابعة ... المادة الحادية والعشرون (8 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2652,
+      "tokens": 1473,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1463,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة عشرة:\n\nمع عدم الإخلال بما ورد في المادة (الثالثة) من هـذا النظام؛ يجـوز لشـركـة التمويـل - وفق ما تحدده اللائحة وبما يتناسب مع أصولها ومركزها المالي - إصدار الأوراق المالية والصكوك وفقً..."
+    },
+    {
+      "index": 4,
+      "title": "نظام مراقبة شركات التمويل - المادة الثالثة ... المادة الحادية والثلاثون (9 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2653,
+      "tokens": 1473,
+      "metadata": {
+        "items_count": 9,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1461,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الثلاثون",
+          "المادة الحادية والثلاثون"
+        ],
+        "unique_articles_count": 9,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 9,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثة والعشرون:يجب على شركة التمويل أن تتقيد بقواعد معدل كفاية رأس المال وفقًا لما تحدده اللائحة.\n\nالمادة الرابعة والعشرون:يجب على شركة التمويل تنويع مخاطر نشاطها، ولا يجوز أن تمنح تمويلاً لم..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 6.551385367620427,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 3,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 7 chunks missing context",
+    "📊 INFO: 3 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

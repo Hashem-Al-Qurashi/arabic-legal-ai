@@ -1,0 +1,303 @@
+{
+  "success": true,
+  "test_id": "20250806_214121",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/b93d0275-775f-482a-9d52-a9a700f2ca15/1",
+  "title": "نظام (قانون) الجمارك الموحد لدول مجلس التعاون لدول الخليج العربية",
+  "extraction_summary": {
+    "total_characters": 66976,
+    "estimated_tokens": 37208,
+    "quality_score": 7.771783918648168,
+    "arabic_ratio": 1.0087135674592673
+  },
+  "chunking_results": {
+    "total_chunks": 25,
+    "chunk_sizes": {
+      "min_chars": 138,
+      "max_chars": 5597,
+      "avg_chars": 2516,
+      "min_tokens": 76,
+      "max_tokens": 3109,
+      "avg_tokens": 1397
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 17,
+      "sections_detected": 5,
+      "articles_detected": 3,
+      "total_chunks": 25
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 1,
+      "missing_context": 0,
+      "violations": [
+        "Chunk 1: 3109 tokens (significantly oversized)"
+      ],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['17→19']",
+        "Article sequence pattern: ['30→32']",
+        "Article sequence pattern: ['38→40']",
+        "Article sequence pattern: ['107→109']",
+        "Article sequence pattern: ['120→122']",
+        "Article sequence pattern: ['139→141']",
+        "Article sequence pattern: ['147→149']",
+        "Article sequence pattern: ['158→160']",
+        "Article sequence pattern: ['169→171']",
+        "Article sequence pattern: ['2→100']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "GOOD"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام (قانون) الجمارك الموحد لدول مجلس التعاون لدول الخليج العربية - الباب الأول - المادة (1)",
+      "hierarchy_level": "chapter",
+      "chars": 138,
+      "tokens": 76,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article",
+          "chapter"
+        ],
+        "token_count": 74,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الأول: تعريفات وأحكام عامة\n\nالمادة (1)يسمى هذا النظام \"القانون\" (نظام \"قانون\" الجمارك الموحد لدول مجلس التعاون لدول الخليج العربية)."
+    },
+    {
+      "index": 1,
+      "title": "نظام (قانون) الجمارك الموحد لدول مجلس التعاون لدول الخليج العربية - الباب الأول - المادة (2)",
+      "hierarchy_level": "article",
+      "chars": 5597,
+      "tokens": 3109,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 3109,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (2)يكون للكلمات والعبارات التالية حيثما وردت في هذا النظام \"القانون\" ومذكرته الإيضاحية ولائحته التنفيذية ، المعاني الموضحة أمام كل منها ما لم يقتض السياق معنى آخر :1 - المجلس :\n\nمجلس التعاون لد..."
+    },
+    {
+      "index": 2,
+      "title": "نظام (قانون) الجمارك الموحد لدول مجلس التعاون لدول الخليج العربية - الباب الثالث - المادة 3 ... المادة 19 (17 مواد)",
+      "hierarchy_level": "chapter",
+      "chars": 2687,
+      "tokens": 1492,
+      "metadata": {
+        "items_count": 19,
+        "hierarchy_levels": [
+          "article",
+          "chapter"
+        ],
+        "token_count": 1467,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثالث"
+        },
+        "chapter_context": "الباب الثالث",
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "الباب الثالث",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة 3",
+          "المادة 4",
+          "المادة 5",
+          "المادة 6",
+          "المادة 7",
+          "المادة 8",
+          "المادة السابعة",
+          "المادة 9",
+          "المادة 10",
+          "المادة 11",
+          "المادة 12",
+          "المادة 13",
+          "المادة 14",
+          "المادة 15",
+          "المادة 16",
+          "المادة 17",
+          "المادة 19"
+        ],
+        "unique_articles_count": 17,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 17,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة 3تسري أحكام هذا النظام \"القانون\" على الأراضي الخاضعة لسيادة الدولة ومياهها الإقليمية، ويجوز أن تنشأ في هذه الأراضي مناطق حرة لا تسري عليها الأحكام الجمركية كليا أو جزئيا.\n\nالمادة 4تخضع كل بضاعة..."
+    },
+    {
+      "index": 3,
+      "title": "نظام (قانون) الجمارك الموحد لدول مجلس التعاون لدول الخليج العربية - الباب الرابع - المادة 20 ... المادة 28 (9 مواد)",
+      "hierarchy_level": "chapter",
+      "chars": 2547,
+      "tokens": 1415,
+      "metadata": {
+        "items_count": 10,
+        "hierarchy_levels": [
+          "article",
+          "chapter"
+        ],
+        "token_count": 1400,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الرابع"
+        },
+        "chapter_context": "الباب الرابع",
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "الباب الرابع",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة 20",
+          "المادة 21",
+          "المادة 22",
+          "المادة 23",
+          "المادة 24",
+          "المادة 25",
+          "المادة 26",
+          "المادة 27",
+          "المادة 28"
+        ],
+        "unique_articles_count": 9,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 9,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة 20يحظر على وسائل النقل البحرية التي تدخل الدولة مهما كانت حمولتها الاستيعابية أن ترسو في غير الموانئ المعدة لاستقبالها، إلا في ظرف بحري طارئ أو بسبب قوة قاهرة، وعلى الربان في هذه الحالة أن يقوم..."
+    },
+    {
+      "index": 4,
+      "title": "نظام (قانون) الجمارك الموحد لدول مجلس التعاون لدول الخليج العربية - الباب الخامس > الفصل الأول - المادة 29 ... المادة 35 (6 مواد)",
+      "hierarchy_level": "chapter",
+      "chars": 2573,
+      "tokens": 1429,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article",
+          "section",
+          "chapter"
+        ],
+        "token_count": 1416,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الخامس",
+          "section": "الفصل الأول"
+        },
+        "chapter_context": "الباب الخامس",
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الباب الخامس > الفصل الأول",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة 29",
+          "المادة 30",
+          "المادة 32",
+          "المادة 33",
+          "المادة 34",
+          "المادة 35"
+        ],
+        "unique_articles_count": 6,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 6,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة 29تصنف البضائع التي لا يوجد لها ذكر في جدول التعرفة الجمركية وشروحاتها وفق ما يصدر عن منظمة الجمارك العالمية بهذا الشأن، أما البضائع التي تخضع لفقرات فرعية محلية في جدول التعرفة فيتم تصنيفها في..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "GOOD",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.771783918648168,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 11,
+    "technical_violations": 1
+  },
+  "recommendations": [
+    "🔧 MINOR: 1 oversized chunks detected",
+    "📊 INFO: 11 Saudi legal document patterns detected (normal)",
+    "✅ GOOD: Strong performance - proceed with confidence!"
+  ]
+}

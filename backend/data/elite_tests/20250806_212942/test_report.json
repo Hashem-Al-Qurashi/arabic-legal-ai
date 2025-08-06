@@ -1,0 +1,233 @@
+{
+  "success": true,
+  "test_id": "20250806_212942",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/e29f08fa-d53e-4944-b22b-a9a700f17fd9/1",
+  "title": "نظام وثائق السفر",
+  "extraction_summary": {
+    "total_characters": 10717,
+    "estimated_tokens": 5953,
+    "quality_score": 6.033304815448545,
+    "arabic_ratio": 1.0133219261794182
+  },
+  "chunking_results": {
+    "total_chunks": 4,
+    "chunk_sizes": {
+      "min_chars": 834,
+      "max_chars": 2744,
+      "avg_chars": 2118,
+      "min_tokens": 463,
+      "max_tokens": 1524,
+      "avg_tokens": 1176
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 4,
+      "total_chunks": 4
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 4,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['4→6']",
+        "Article sequence pattern: ['6→8']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام وثائق السفر - المادة الأولى ... المادة السادسة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2472,
+      "tokens": 1373,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1364,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىوثائق السفر التي تصدر باسم حكومة المملكة العربية السعودية وتخول حاملها السفر هي :1  -   جواز السفر .2  -   تذكرة المرور .3  -    جواز السفر الدبلوماسي .4  -   جواز السفر الخاص .وتقوم الجه..."
+    },
+    {
+      "index": 1,
+      "title": "نظام وثائق السفر - المادة السادسة ... المادة العاشرة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2425,
+      "tokens": 1347,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1341,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسةالفقرة (2) من المادة (السادسة) \nإضافة عبارة \"أو رئيس أمن الدولة - بحسب الأحوال - ولأسباب محددة\" بعد عبارة \"وزير الداخلية\".\n\nالمادة السابعةيحددوزير الداخليةالبلدان التي لا يسمح بالسفر إلي..."
+    },
+    {
+      "index": 2,
+      "title": "نظام وثائق السفر - المادة الحادية عشرة ... المادة العاشرة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2744,
+      "tokens": 1524,
+      "metadata": {
+        "items_count": 21,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1490,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة الأولى",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الحادية عشرة1- تشكل بقرار منوزير الداخليةلجنة أو أكثر، وتتكون كل لجنة من ثلاث أعضاء يكون أحدهممستشارا نظاميا، تختص بالنظر في المخالفات المنصوص عليها في المادة العاشرة من هذا النظام واقتراح العق..."
+    },
+    {
+      "index": 3,
+      "title": "نظام وثائق السفر - المادة الخامسة",
+      "hierarchy_level": "article",
+      "chars": 834,
+      "tokens": 463,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 463,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة عشرةحقل المادة مطلوبالوصف*رمز التحقق*قيمة الرمز المدخل غير صحيحالإسم*البريد الإلكترونييرجى اختيار الحدث ليصلكم اشعار بذلك على البريد الإلكترونياضافةتعديلحذفأبلغني حين توافر النظام باللغ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.033304815448545,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 3,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 4 chunks missing context",
+    "📊 INFO: 3 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

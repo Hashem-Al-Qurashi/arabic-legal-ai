@@ -1,0 +1,272 @@
+{
+  "success": true,
+  "test_id": "20250806_212406",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/c4af9503-d0f4-4d07-a7c3-add500a67d0c/1",
+  "title": "نظام المدفوعات وخدماتها",
+  "extraction_summary": {
+    "total_characters": 14416,
+    "estimated_tokens": 8008,
+    "quality_score": 6.488411458333334,
+    "arabic_ratio": 1.0153645833333333
+  },
+  "chunking_results": {
+    "total_chunks": 5,
+    "chunk_sizes": {
+      "min_chars": 912,
+      "max_chars": 2706,
+      "avg_chars": 2189,
+      "min_tokens": 506,
+      "max_tokens": 1503,
+      "avg_tokens": 1216
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 5,
+      "total_chunks": 5
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 5,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['4→11']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام المدفوعات وخدماتها - المادة الأولى",
+      "hierarchy_level": "article",
+      "chars": 2655,
+      "tokens": 1475,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1475,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيقصد بالكلمات والمصطلحات الآتية -أينما وردت في هذا النظام- المعاني الموضحة أمام كل منها، ما لم يقتضِ السياق غير ذلك:\n\nالنظام:نظام المدفوعات وخدماتها.البنك المركزي:\n\nالبنك المركزي السعودي...."
+    },
+    {
+      "index": 1,
+      "title": "نظام المدفوعات وخدماتها - المادة الثانية ... المادة الثامنة (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2706,
+      "tokens": 1503,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1494,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانيةيهدف النظام إلى ما يلي:تعزيز سلامة وكفاية البُنى التحتية لنظم المدفوعات وخدماتها في المملكة.تعزيز حماية حقوق الأطراف المتعاملة مع نظم المدفوعات وخدماتها.تحفيز الابتكار والمنافسة في مجال ..."
+    },
+    {
+      "index": 2,
+      "title": "نظام المدفوعات وخدماتها - المادة التاسعة",
+      "hierarchy_level": "article",
+      "chars": 912,
+      "tokens": 506,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 506,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعةيلتزم مشغل نظام المدفوعات الذي يصنف بأنه نظام مدفوعات مهم، من تاريخ إشعاره بذلك؛ بالعمل وفق قواعد خاصة بـ (نظام المدفوعات المهم) يضعها لهذا الغرض، بحسب ما تحدده اللوائح.\n\nالمادة العاشرةي..."
+    },
+    {
+      "index": 3,
+      "title": "نظام المدفوعات وخدماتها - المادة الحادية عشرة + المادة الثالثة + المادة الرابعة",
+      "hierarchy_level": "article",
+      "chars": 2341,
+      "tokens": 1300,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1296,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية عشرة",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الحادية عشرةيلتزم أي عضو في نظام مدفوعات مهم بالآتي:\n\nالإفصاح للبنك ولمشغل نظام المدفوعات عن أي نظم مدفوعات مهمة يكون عضواً فيها، وذلك عند قيد أو افتتاح أي من إجراءات الإفلاس أو الإيداع القضائي..."
+    },
+    {
+      "index": 4,
+      "title": "نظام المدفوعات وخدماتها - المادة الخامسة ... المادة الحادية عشرة (12 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2333,
+      "tokens": 1296,
+      "metadata": {
+        "items_count": 25,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1254,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة السادسة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 12,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 12,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة عشرةيتولى مفتشون -يصدر بتعيينهم قرار من محافظ البنك المركزي- أعمال الرقابة والتفتيش، وضبط مخالفات النظام واللوائح، ولهم الاطلاع على السجلات وتلقي الشكاوى واستجواب العاملين لدى الأشخاص ا..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.488411458333334,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 5 chunks missing context",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

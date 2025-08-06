@@ -1,0 +1,275 @@
+{
+  "success": true,
+  "test_id": "20250806_211927",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/e7bd6fcc-c29c-4696-8032-aae9009b113a/1",
+  "title": "نظام  الرهن التجاري",
+  "extraction_summary": {
+    "total_characters": 35839,
+    "estimated_tokens": 19910,
+    "quality_score": 7.141067943941813,
+    "arabic_ratio": 1.0164271775767253
+  },
+  "chunking_results": {
+    "total_chunks": 14,
+    "chunk_sizes": {
+      "min_chars": 50,
+      "max_chars": 3359,
+      "avg_chars": 2238,
+      "min_tokens": 27,
+      "max_tokens": 1866,
+      "avg_tokens": 1243
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 8,
+      "articles_detected": 6,
+      "total_chunks": 14
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 0,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['4→6']",
+        "Article sequence pattern: ['7→9']",
+        "Article sequence pattern: ['5→7']",
+        "Article sequence pattern: ['5→7']",
+        "Article sequence pattern: ['4→6', '6→8']",
+        "Article sequence pattern: ['6→8']",
+        "Article sequence pattern: ['3→5']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام  الرهن التجاري - الفصل الأول  - المادة الأولى",
+      "hierarchy_level": "section",
+      "chars": 50,
+      "tokens": 27,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 26,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول "
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول ",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول ",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الأول : أحكام عامة\n\nالمادة الأولى\n\n\n\nتعديلات"
+    },
+    {
+      "index": 1,
+      "title": "نظام  الرهن التجاري - الفصل الأول  - المادة الأولى",
+      "hierarchy_level": "article",
+      "chars": 3359,
+      "tokens": 1866,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1866,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول "
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول ",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول ",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىعُدل تعريف \"الدين أو الدين المضمون\" ليكون بالنص الآتي:\"الدين أو الدين المضمون:\n\nالدين، أو جزء الدين، الذي قُدم المال المرهون ضماناً له، ويشمل جميع أنواع الالتزامات، الحالية والمستقبلية، ب..."
+    },
+    {
+      "index": 2,
+      "title": "نظام  الرهن التجاري - الفصل الرابع  - المادة الثانية ... المادة السادسة (4 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2700,
+      "tokens": 1500,
+      "metadata": {
+        "items_count": 9,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1487,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الرابع "
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الرابع ",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الرابع ",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية\n\n\n\nتعديلات المادة\n\nالمادة الثانية- عُدلت هذه المادة بموجب المرسوم الملكي رقم (م/94) وتاريخ 1441/8/15هـ،  وذلك بحذف عبارة \"اقتصادي بالنسبة إلى المدين\".تسري أحكام النظام على عقد الرهن الم..."
+    },
+    {
+      "index": 3,
+      "title": "نظام  الرهن التجاري - الفصل الرابع  - المادة السابعة ... المادة الحادية عشرة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2677,
+      "tokens": 1487,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1477,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الرابع "
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الرابع ",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الرابع ",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعةيضمن المال المرهون -إضافة إلى سداد أصل الدين المضمون- المصروفات المتعلقة به، وهي:\n\nمصروفات حفظه.مصروفات استثماره.مصروفات تحصيل ريعه.مصروفات التنفيذ عليه.\n\nالمادة التاسعة\n\n\n\nتعديلات\n\nالما..."
+    },
+    {
+      "index": 4,
+      "title": "نظام  الرهن التجاري - الفصل الخامس  - المادة الثانية ... المادة الثالثة (5 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2043,
+      "tokens": 1135,
+      "metadata": {
+        "items_count": 10,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1119,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الخامس "
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الخامس ",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الخامس ",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السابعة",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية عشرةيجوز رهن أكثر من مال منقول لضمان الدين نفسه، ويحق للمرتهن في هذه الحال تحديد ترتيب التنفيذ على هذه الأموال، ما لم يُتفق على غير ذلك.\n\\ن\n\nالفصل الخامس :\n\nالمحافظة على المال المرهون و..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.141067943941813,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 8,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "📊 INFO: 8 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

@@ -1,0 +1,252 @@
+{
+  "success": true,
+  "test_id": "20250806_211554",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/b2d0decd-a691-45b9-9af0-a9a700f1e86f/1",
+  "title": "قانون (نظام) العلامات التجارية لدول مجلس التعاون لدول الخليج العربية",
+  "extraction_summary": {
+    "total_characters": 35719,
+    "estimated_tokens": 19843,
+    "quality_score": 7.826186461957886,
+    "arabic_ratio": 1.0104745847831547
+  },
+  "chunking_results": {
+    "total_chunks": 9,
+    "chunk_sizes": {
+      "min_chars": 1372,
+      "max_chars": 9525,
+      "avg_chars": 3492,
+      "min_tokens": 762,
+      "max_tokens": 5291,
+      "avg_tokens": 1939
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 6,
+      "sections_detected": 2,
+      "articles_detected": 1,
+      "total_chunks": 9
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 2,
+      "missing_context": 0,
+      "violations": [
+        "Chunk 1: 5291 tokens (significantly oversized)",
+        "Chunk 6: 2684 tokens (significantly oversized)"
+      ],
+      "saudi_legal_patterns_detected": [],
+      "quality_warnings": [],
+      "overall_quality": "GOOD"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "قانون (نظام) العلامات التجارية لدول مجلس التعاون لدول الخليج العربية - الباب الثاني > الفصل الأول",
+      "hierarchy_level": "chapter",
+      "chars": 1372,
+      "tokens": 762,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "chapter"
+        ],
+        "token_count": 760,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثاني",
+          "section": "الفصل الأول"
+        },
+        "chapter_context": "الباب الثاني",
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الباب الثاني > الفصل الأول",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [],
+        "unique_articles_count": 0,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 0,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الأول: تعاريفمادة (1) تعريفات:\n\n\n\nتعديلات المادةمادة (1) تعريفات:* صدر المرسوم الملكي رقم (م/49) وتاريخ 1442/6/1هـ. ونص على- تعديل تعريف (الجهة المختصة) ليصبح بالنص الآتي: \"الجهة المختصة:\n\nالوزا..."
+    },
+    {
+      "index": 1,
+      "title": "قانون (نظام) العلامات التجارية لدول مجلس التعاون لدول الخليج العربية - الباب الثاني > الفصل الأول",
+      "hierarchy_level": "section",
+      "chars": 9525,
+      "tokens": 5291,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "section"
+        ],
+        "token_count": 5291,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثاني",
+          "section": "الفصل الأول"
+        },
+        "chapter_context": "الباب الثاني",
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الباب الثاني > الفصل الأول",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [],
+        "unique_articles_count": 0,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 0,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الأول: إجراءات تسجيل العلامات التجاريةمادة (3):\n\nلا تعد علامة تجارية أو جزءًا منها، ولا يجوز أن يسجل بهذا الوصف ما يأتي:1 - العلامة الخالية من أية صفة مميزة، أو العلامات المكونة من بيانات ليست إ..."
+    },
+    {
+      "index": 2,
+      "title": "قانون (نظام) العلامات التجارية لدول مجلس التعاون لدول الخليج العربية - الباب الثاني > الفصل الثالث",
+      "hierarchy_level": "section",
+      "chars": 2249,
+      "tokens": 1249,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "section"
+        ],
+        "token_count": 1247,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثاني",
+          "section": "الفصل الثالث"
+        },
+        "chapter_context": "الباب الثاني",
+        "section_context": "الفصل الثالث",
+        "subsection_context": null,
+        "full_legal_path": "الباب الثاني > الفصل الثالث",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [],
+        "unique_articles_count": 0,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 0,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الثاني:\n\nمدة حماية العلامة التجاريةمادة (20):1- مدة الحماية المترتبة على تسجيل العلامة عشرة سنوات، ولصاحب الحق إذا رغب في استمرار الحماية لمدد مماثلة، أن يقدم طلبًا بالتجديد خلال السنة الأخيرة، ..."
+    },
+    {
+      "index": 3,
+      "title": "قانون (نظام) العلامات التجارية لدول مجلس التعاون لدول الخليج العربية - الباب الثالث > الفصل الرابع",
+      "hierarchy_level": "chapter",
+      "chars": 2347,
+      "tokens": 1303,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "section",
+          "chapter"
+        ],
+        "token_count": 1302,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثالث",
+          "section": "الفصل الرابع"
+        },
+        "chapter_context": "الباب الثالث",
+        "section_context": "الفصل الرابع",
+        "subsection_context": null,
+        "full_legal_path": "الباب الثالث > الفصل الرابع",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [],
+        "unique_articles_count": 0,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 0,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الرابع: نقل ملكية العلامة ورهنها والحجز عليهامادة (27):1 - يجوز نقل ملكية العلامة التجارية كليًا أو جزئيًا بعوض أو بغير عوض أو رهنها أو الحجز عليها مع المحل التجاري أو مشروع الاستغلال الذي تستخد..."
+    },
+    {
+      "index": 4,
+      "title": "قانون (نظام) العلامات التجارية لدول مجلس التعاون لدول الخليج العربية - الباب الرابع > الفصل الرابع",
+      "hierarchy_level": "chapter",
+      "chars": 2418,
+      "tokens": 1343,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "chapter"
+        ],
+        "token_count": 1343,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الرابع",
+          "section": "الفصل الرابع"
+        },
+        "chapter_context": "الباب الرابع",
+        "section_context": "الفصل الرابع",
+        "subsection_context": null,
+        "full_legal_path": "الباب الرابع > الفصل الرابع",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [],
+        "unique_articles_count": 0,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 0,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الرابع:\n\nالعلامات الجماعية وعلامات المراقبة وعلامات الهيئات ذات النفع العام والمؤسسات المهنيةمادة (34):1 - يجوز تسجيل العلامات الجماعية التي تستخدم لتمييز سلع أو خدمات منشآت تعود لأعضاء ينتمون إ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "GOOD",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.826186461957886,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 0,
+    "technical_violations": 2
+  },
+  "recommendations": [
+    "🔧 MINOR: 2 oversized chunks detected",
+    "✅ GOOD: Strong performance - proceed with confidence!"
+  ]
+}

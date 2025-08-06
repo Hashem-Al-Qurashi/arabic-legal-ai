@@ -1,0 +1,145 @@
+{
+  "success": true,
+  "test_id": "20250806_213751",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/905e11b3-4d66-496c-9c1b-ad240106367f/1",
+  "title": "نظام مكافحة الاحتيال المالي وخيانة الأمانة",
+  "extraction_summary": {
+    "total_characters": 7705,
+    "estimated_tokens": 4280,
+    "quality_score": 5.939944425147621,
+    "arabic_ratio": 1.0159777700590482
+  },
+  "chunking_results": {
+    "total_chunks": 2,
+    "chunk_sizes": {
+      "min_chars": 834,
+      "max_chars": 2648,
+      "avg_chars": 1741,
+      "min_tokens": 463,
+      "max_tokens": 1471,
+      "avg_tokens": 967
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 2,
+      "total_chunks": 2
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 2,
+      "violations": [],
+      "saudi_legal_patterns_detected": [],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام مكافحة الاحتيال المالي وخيانة الأمانة - المادة الأولى ... المادة العاشرة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2648,
+      "tokens": 1471,
+      "metadata": {
+        "items_count": 17,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1443,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة السادسة",
+          "المادة التاسعة",
+          "المادة الحادية عشرة",
+          "المادة الخامسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيعاقب بالسجن مدة لا تتجاوز (سبع) سنوات، وبغرامة مالية لا تزيد على (خمسة) ملايين ريال، أو بإحدى هاتين العقوبتين؛ كل من استولى على مال للغير دون وجه حق بارتكابه فعلاً (أو أكثر) ينطوي على اس..."
+    },
+    {
+      "index": 1,
+      "title": "نظام مكافحة الاحتيال المالي وخيانة الأمانة - المادة الحادية عشرة",
+      "hierarchy_level": "article",
+      "chars": 834,
+      "tokens": 463,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 463,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الحادية عشرةحقل المادة مطلوبالوصف*رمز التحقق*قيمة الرمز المدخل غير صحيحالإسم*البريد الإلكترونييرجى اختيار الحدث ليصلكم اشعار بذلك على البريد الإلكترونياضافةتعديلحذفأبلغني حين توافر النظام باللغ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "ACCEPTABLE",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 5.939944425147621,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 0,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 2 chunks missing context",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

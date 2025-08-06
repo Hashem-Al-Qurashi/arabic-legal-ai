@@ -1,0 +1,300 @@
+{
+  "success": true,
+  "test_id": "20250806_214908",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/9a0249b7-f835-48fa-8d1e-a9a700f1981a/1",
+  "title": "اللائحة التنفيذية لنظام الإجراءات الجزائية",
+  "extraction_summary": {
+    "total_characters": 79193,
+    "estimated_tokens": 43996,
+    "quality_score": 7.801084552095103,
+    "arabic_ratio": 1.0204338208380412
+  },
+  "chunking_results": {
+    "total_chunks": 34,
+    "chunk_sizes": {
+      "min_chars": 1197,
+      "max_chars": 2944,
+      "avg_chars": 2288,
+      "min_tokens": 665,
+      "max_tokens": 1635,
+      "avg_tokens": 1271
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 8,
+      "sections_detected": 13,
+      "articles_detected": 13,
+      "total_chunks": 34
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 0,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['6→8']",
+        "Article sequence pattern: ['2→4']",
+        "Article sequence pattern: ['2→8']",
+        "Article sequence pattern: ['3→5']",
+        "Article sequence pattern: ['2→4']",
+        "Article sequence pattern: ['5→7']",
+        "Article sequence pattern: ['3→5', '6→8']",
+        "Article sequence pattern: ['2→6', '6→8']",
+        "Article sequence pattern: ['3→5', '5→7']",
+        "Article sequence pattern: ['5→9']",
+        "Article sequence pattern: ['3→5', '5→7']",
+        "Article sequence pattern: ['4→8']",
+        "Article sequence pattern: ['3→6', '6→9']",
+        "Article sequence pattern: ['3→5', '5→7']",
+        "Article sequence pattern: ['7→9']",
+        "Article sequence pattern: ['2→5', '5→8']",
+        "Article sequence pattern: ['3→6']",
+        "Article 1 mid-sequence (likely amendment structure)",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "اللائحة التنفيذية لنظام الإجراءات الجزائية - الباب الثاني > الفصل الأول - المادة الأولى ... المادة الخامسة (5 مواد)",
+      "hierarchy_level": "chapter",
+      "chars": 1980,
+      "tokens": 1100,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "section",
+          "article",
+          "chapter"
+        ],
+        "token_count": 1088,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثاني",
+          "section": "الفصل الأول"
+        },
+        "chapter_context": "الباب الثاني",
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الباب الثاني > الفصل الأول",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الأول:\n\nالتعريفات\n\nالمادة الأولى:يقصد بالمصطلحات والعبارات الآتية - أينما وردت في هذه اللائحة - المعاني المبينة أمامها، ما لم يقتض السياق خلاف ذلك :\n\nالنظام :نظام الإجراءات الجزائية.اللائحة :\n\nا..."
+    },
+    {
+      "index": 1,
+      "title": "اللائحة التنفيذية لنظام الإجراءات الجزائية - الباب الثالث > الفصل الأول - المادة السادسة ... المادة العاشرة (4 مواد)",
+      "hierarchy_level": "chapter",
+      "chars": 2639,
+      "tokens": 1466,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "section",
+          "article",
+          "chapter"
+        ],
+        "token_count": 1456,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثالث",
+          "section": "الفصل الأول"
+        },
+        "chapter_context": "الباب الثالث",
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الباب الثالث > الفصل الأول",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة:1- الدعوى المشار إليها في المادة (التاسعة عشرة) من النظام هي الدعوى الجزائية العامة.2 - يكون إبلاغ المحكمة لمن رفع الدعوى - في الحالتين المنصوص عليهما في المادة (التاسعة عشرة) من النظام..."
+    },
+    {
+      "index": 2,
+      "title": "اللائحة التنفيذية لنظام الإجراءات الجزائية - الباب الثالث > الفصل الأول - المادة الثانية ... المادة السابعة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2564,
+      "tokens": 1424,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1418,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثالث",
+          "section": "الفصل الأول"
+        },
+        "chapter_context": "الباب الثالث",
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الباب الثالث > الفصل الأول",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية عشرة:\n\nالجهة المختصة المشار إليها في المادة (الخامسة والعشرين) من النظام هي الجهة التي يتبع لها رجل الضبط الجنائي.\n\nالمادة الثالثة عشرة:يقوم بأعمال الضبط الجنائي - وفقاً لما ورد في الفق..."
+    },
+    {
+      "index": 3,
+      "title": "اللائحة التنفيذية لنظام الإجراءات الجزائية - الباب الثالث > الفصل الثاني - المادة الثامنة ... المادة الثانية (5 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2068,
+      "tokens": 1148,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1140,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثالث",
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": "الباب الثالث",
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الباب الثالث > الفصل الثاني",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة عشرة:\n\nلا يجوز لرجل الضبط الجنائي - من أجل تحرير المحضر وفقاً للمادة (الثانية والثلاثين) من النظام - أن يحول دون إسعاف المصابين في مكان وقوع الجريمة.\n\\ن\n\nالفصل الثاني:\n\nالقبض على المتهم..."
+    },
+    {
+      "index": 4,
+      "title": "اللائحة التنفيذية لنظام الإجراءات الجزائية - الباب الثالث > الفصل الثاني - المادة الثالثة + المادة الخامسة + المادة السادسة",
+      "hierarchy_level": "article",
+      "chars": 2625,
+      "tokens": 1458,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1454,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثالث",
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": "الباب الثالث",
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الباب الثالث > الفصل الثاني",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة",
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثة والعشرون:1- يُمكّن الموقوف من الاتصال بمن يرى إبلاغه بالطريقة التي يقدرها رجل الضبط الجنائي أو المحقق بحسب حالة كل قضية وملابساتها.2 - يكون إبلاغ مرجع الموظف الموقوف - الوارد في الفقرة ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.801084552095103,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 19,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "📊 INFO: 19 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

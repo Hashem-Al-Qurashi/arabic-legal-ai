@@ -1,0 +1,303 @@
+{
+  "success": true,
+  "test_id": "20250806_214636",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/bf568515-eef9-4356-9d52-a9a700f2d8c3/1",
+  "title": "نظام الرهن العقاري المسجل",
+  "extraction_summary": {
+    "total_characters": 15604,
+    "estimated_tokens": 8668,
+    "quality_score": 6.168908941755537,
+    "arabic_ratio": 1.0275635767022149
+  },
+  "chunking_results": {
+    "total_chunks": 5,
+    "chunk_sizes": {
+      "min_chars": 2450,
+      "max_chars": 2726,
+      "avg_chars": 2589,
+      "min_tokens": 1361,
+      "max_tokens": 1514,
+      "avg_tokens": 1438
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 5,
+      "total_chunks": 5
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 5,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الرهن العقاري المسجل - المادة الأولى ... المادة الثامنة (8 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2506,
+      "tokens": 1392,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1381,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:1- الرهن العقاري المسجل: عقد يسجل وفق أحكام هذا النظام يكسب به المرتهن (الدائن) حقـًا عينيًّا على عقار معين له سجل، ويكون له بمقتضاه أن يتقدم على جميع الدائنين في استيفاء دينه من ثمن ذلك..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الرهن العقاري المسجل - المادة التاسعة ... المادة الثامنة (10 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2694,
+      "tokens": 1496,
+      "metadata": {
+        "items_count": 10,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1484,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 10,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 10,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعة:يشترط في مقابل الرهن أن يكون دينًا، ثابتًا في الذمة، أو موعودًا به محددًا، أو عينًا من الأعيان المضمونة على المدين، أو دينًا مآله إلى الوجوب، كدين معلق على شرط أو دين مستقبلي أو دين احت..."
+    },
+    {
+      "index": 2,
+      "title": "نظام الرهن العقاري المسجل - المادة التاسعة ... المادة الحادية والثلاثون (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2726,
+      "tokens": 1514,
+      "metadata": {
+        "items_count": 12,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1496,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة الثلاثون",
+          "المادة الحادية والثلاثون"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعة عشرة:\n\nلا يصح أن يشترط في عقد الرهن ما يأتي:1  - \tأن تكون منافع العقار المرهون للمرتهن، وللمرتهن بموافقة الراهن تحصيل غلة العقار المرهون على ألا ينتفع بها.2 -\t أن يمتلك المرتهن العقار ا..."
+    },
+    {
+      "index": 3,
+      "title": "نظام الرهن العقاري المسجل - المادة الثانية ... المادة الحادية والأربعون (10 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2450,
+      "tokens": 1361,
+      "metadata": {
+        "items_count": 10,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1345,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الأربعون",
+          "المادة الحادية والأربعون"
+        ],
+        "unique_articles_count": 10,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 10,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية والثلاثون:يجوز لحائز العقار المرهون أن يدخل في إجراءات بيعه في المزاد، فإذا رسا المزاد عليه وأدى الثمن، عُدَّ مالكًا للعقار بمقتضى وثيقة ملكيته الأصلية، ويتطهر العقار المرهون من كل حقّ ..."
+    },
+    {
+      "index": 4,
+      "title": "نظام الرهن العقاري المسجل - المادة الثانية ... المادة الحادية والأربعون (17 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2569,
+      "tokens": 1427,
+      "metadata": {
+        "items_count": 49,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1349,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة الأولى",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثلاثون",
+          "المادة الحادية والثلاثون",
+          "المادة الأربعون",
+          "المادة الحادية والأربعون"
+        ],
+        "unique_articles_count": 17,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 17,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية والأربعون:ينقضي الرهن المسجل بهلاك محلّه، وتراعى أحكام هلاك الرهن المنصوص عليها في هذا النظام.\n\nالمادة الثالثة والأربعون:\n\nللراهن والحائز طلب فك الرهن بعد انقضاء مدة سماع دعوى الدين الم..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.168908941755537,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 1,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 5 chunks missing context",
+    "📊 INFO: 1 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

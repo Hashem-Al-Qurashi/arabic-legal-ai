@@ -1,0 +1,287 @@
+{
+  "success": true,
+  "test_id": "20250806_213058",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/85364e57-c01e-41ba-8def-a9a700f183e9/1",
+  "title": "نظام المرور",
+  "extraction_summary": {
+    "total_characters": 58088,
+    "estimated_tokens": 32271,
+    "quality_score": 7.281637772700801,
+    "arabic_ratio": 1.0126551090803206
+  },
+  "chunking_results": {
+    "total_chunks": 19,
+    "chunk_sizes": {
+      "min_chars": 356,
+      "max_chars": 9022,
+      "avg_chars": 2557,
+      "min_tokens": 197,
+      "max_tokens": 5012,
+      "avg_tokens": 1420
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 8,
+      "sections_detected": 0,
+      "articles_detected": 11,
+      "total_chunks": 19
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 2,
+      "missing_context": 0,
+      "violations": [
+        "Chunk 1: 3275 tokens (significantly oversized)",
+        "Chunk 16: 5012 tokens (significantly oversized)"
+      ],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['4→6']",
+        "Article sequence pattern: ['2→9']"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "GOOD"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام المرور - الباب الأول  - المادة الأولى + المادة الثانية",
+      "hierarchy_level": "chapter",
+      "chars": 356,
+      "tokens": 197,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article",
+          "chapter"
+        ],
+        "token_count": 192,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول "
+        },
+        "chapter_context": "الباب الأول ",
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول ",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الأول : نطاق سريان النظام وتعريف المصطلحات\n\nالمادة الأولى\n\n\n\nتعديلات المادة\n\nالمادة الأولىعُدلت هذه المادة بموجب المرسوم الملكي رقم (م/115) وتاريخ 1439/12/5 هــ.تسري أحكام هذا النظام، والجداول ا..."
+    },
+    {
+      "index": 1,
+      "title": "نظام المرور - الباب الأول  - المادة الثانية",
+      "hierarchy_level": "article",
+      "chars": 5895,
+      "tokens": 3275,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 3275,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول "
+        },
+        "chapter_context": "الباب الأول ",
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول ",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانيةعُدلت هذه المادة بموجب المرسوم الملكي رقم (م/115) وتاريخ 1439/12/5 هــ.\n\nالمادة الثانيةالفقرة ( 20 ) من المادة (الثانية)عُدلت هذه الفقرة لتكون بالنص الآتي: \"السيارة الخاصة:\n\nالسيارة المع..."
+    },
+    {
+      "index": 2,
+      "title": "نظام المرور - الباب الثاني  - المادة الثالثة ... المادة الثامنة (6 مواد)",
+      "hierarchy_level": "chapter",
+      "chars": 2359,
+      "tokens": 1310,
+      "metadata": {
+        "items_count": 9,
+        "hierarchy_levels": [
+          "article",
+          "chapter"
+        ],
+        "token_count": 1297,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثاني "
+        },
+        "chapter_context": "الباب الثاني ",
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "الباب الثاني ",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 6,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 6,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الثاني : تسجيل المركبات ورخص السير\n\nالمادة الثالثةأ - يكون لكل مركبة رقم خاص تحمله مسجل لدى الإدارة المختصة، وفق ما تحدده   اللائحة .ب - يكون رقم   رخصة السير    هو رقم لوحة   المركبة    نفسه، و..."
+    },
+    {
+      "index": 3,
+      "title": "نظام المرور - الباب الثاني  - المادة الثامنة ... المادة السابعة (10 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2741,
+      "tokens": 1522,
+      "metadata": {
+        "items_count": 14,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1500,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثاني "
+        },
+        "chapter_context": "الباب الثاني ",
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "الباب الثاني ",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 10,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 10,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنةعُدلت هذه المادة بموجب المرسوم الملكي رقم (م/115) وتاريخ 1439/12/5 هــ.أ - لا يجوز تسيير المركبات قبل تسجيلها ودفع الرسوم المقررة - وفقا لجداول الرسوم الملحقة بهذا النظام - وصدور   رخصة ..."
+    },
+    {
+      "index": 4,
+      "title": "نظام المرور - الباب الثالث  - المادة العشرون ... المادة التاسعة (10 مواد)",
+      "hierarchy_level": "chapter",
+      "chars": 2643,
+      "tokens": 1468,
+      "metadata": {
+        "items_count": 15,
+        "hierarchy_levels": [
+          "chapter",
+          "article"
+        ],
+        "token_count": 1445,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثالث "
+        },
+        "chapter_context": "الباب الثالث ",
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "الباب الثالث ",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 10,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 10,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العشرون\n\n\n\nتعديلات المادة\n\nالمادة العشرونعُدلت هذه المادة بموجب المرسوم الملكي رقم (م/115) وتاريخ 1439/12/5 هــ.لوزير الداخلية إسناد سحب المركبات وحجزها للقطاع الخاص، وفقا للضوابط والأحكام الخا..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "GOOD",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.281637772700801,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 2
+  },
+  "recommendations": [
+    "🔧 MINOR: 2 oversized chunks detected",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ GOOD: Strong performance - proceed with confidence!"
+  ]
+}

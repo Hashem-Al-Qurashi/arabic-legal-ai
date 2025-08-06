@@ -1,0 +1,308 @@
+{
+  "success": true,
+  "test_id": "20250806_200759",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/4763eb94-047b-46f1-9697-a9a700f1b7ed/1",
+  "title": "نظام الأوراق التجارية",
+  "extraction_summary": {
+    "total_characters": 50628,
+    "estimated_tokens": 28126,
+    "quality_score": 7.462086926182526,
+    "arabic_ratio": 1.00483477047301
+  },
+  "chunking_results": {
+    "total_chunks": 21,
+    "chunk_sizes": {
+      "min_chars": 828,
+      "max_chars": 2720,
+      "avg_chars": 2330,
+      "min_tokens": 460,
+      "max_tokens": 1511,
+      "avg_tokens": 1294
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 3,
+      "sections_detected": 9,
+      "articles_detected": 9,
+      "total_chunks": 21
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 0,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['5→16']",
+        "Article sequence pattern: ['5→26']",
+        "Article sequence pattern: ['39→41']",
+        "Article sequence pattern: ['49→51']",
+        "Article sequence pattern: ['63→65']",
+        "Article sequence pattern: ['78→81']",
+        "Article sequence pattern: ['11→16', '19→26']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الأوراق التجارية - الباب الأول > الفصل الثاني - المادة (1) ... المادة (12) (12 مواد)",
+      "hierarchy_level": "chapter",
+      "chars": 2690,
+      "tokens": 1494,
+      "metadata": {
+        "items_count": 15,
+        "hierarchy_levels": [
+          "chapter",
+          "section",
+          "article"
+        ],
+        "token_count": 1471,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الثاني",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية عشرة"
+        ],
+        "unique_articles_count": 12,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 12,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الأول:\n\nالكمبيالة.\n\nالفصل الأول: إنشاء الكمبيالة\n\nالمادة (1):تشتملالكمبيالةعلى البيانات الآتية:أ - كلمة (كمبيالة) مكتوبة في متن الصك وباللغة التي كتب بها.ب - أمر غير معلق على شرط بوفاء مبلغ معين..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الأوراق التجارية - الباب الأول > الفصل الثالث - المادة (13) ... المادة (20) (8 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2514,
+      "tokens": 1396,
+      "metadata": {
+        "items_count": 9,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1384,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الثالث"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الثالث",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الثالث",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة عشرة",
+          "المادة الرابعة عشرة",
+          "المادة الخامسة عشرة",
+          "المادة (16)",
+          "المادة (17)",
+          "المادة (18)",
+          "المادة (19)",
+          "المادة العشرون"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (13):يجب أن يكونالتظهيرخاليا من كل شرط، وكل شرط علق عليهالتظهيريعتبر كأن لم يكن.والتظهير الجزئيباطل. ويعتبرالتظهير للحاملتظهيرا على بياض.\n\nالمادة (14):يكتبالتظهيرعلىالكمبيالةذاتها أو على ورقة أ..."
+    },
+    {
+      "index": 2,
+      "title": "نظام الأوراق التجارية - الباب الأول > الفصل الرابع - المادة (21) ... المادة (28) (8 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2571,
+      "tokens": 1428,
+      "metadata": {
+        "items_count": 9,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1416,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الرابع"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الرابع",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الرابع",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية والعشرون",
+          "المادة الثانية والعشرون",
+          "المادة الثالثة والعشرون",
+          "المادة الرابعة والعشرون",
+          "المادة الخامسة والعشرون",
+          "المادة (26)",
+          "المادة (27)",
+          "المادة (28)"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (21):يجوز لحامل الكمبيالة أو لأي حائز لها حتى ميعاد استحقاقها أن يقدمها إلى المسحوب عليه في موطنه لقبولها.ويجوز لساحب الكمبيالة أن يضمنها شرط تقديمها للقبول في ميعاد معين أو بغير ميعاد وله أن ي..."
+    },
+    {
+      "index": 3,
+      "title": "نظام الأوراق التجارية - الباب الأول > الفصل الخامس - المادة (29) ... المادة (35) (7 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2279,
+      "tokens": 1266,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1255,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الخامس"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الخامس",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الخامس",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة (29)",
+          "المادة (30)",
+          "المادة (31)",
+          "المادة (32)",
+          "المادة (33)",
+          "المادة (34)",
+          "المادة (35)"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (29):على ساحب الكمبيالة أو من سحب الكمبيالة لحسابه أن يوجد لدى المسحوب عليه مقابل وفائها ولكن ذلك لا يعفي الساحب لحساب غيره من مسئوليته شخصيا قبل مظهريها وحامليها.\n\nالمادة (30):يعتبر مقابل الوف..."
+    },
+    {
+      "index": 4,
+      "title": "نظام الأوراق التجارية - الباب الأول > الفصل السادس - المادة (36) ... المادة (41) (5 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2441,
+      "tokens": 1356,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1348,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل السادس"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل السادس",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل السادس",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة (36)",
+          "المادة (37)",
+          "المادة (38)",
+          "المادة (39)",
+          "المادة (41)"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (36):يكتبالضمان الاحتياطيعلىالكمبيالةذاتها أو على الورقة المتصلة بها، ويؤدى بصيغة (مقبولكضمان احتياطي) أو أية عبارة أخرى تفيد نفس المعنى، ويوقعه الضامن ويذكر في الضمان اسم المضمون وإلا اعتبر ال..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.462086926182526,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 8,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "📊 INFO: 8 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

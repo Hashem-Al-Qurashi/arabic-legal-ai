@@ -1,0 +1,285 @@
+{
+  "success": true,
+  "test_id": "20250806_211637",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/f98f4238-0289-4891-8a22-a9a700f1f538/1",
+  "title": "نظام ضريبة القيمة المضافة",
+  "extraction_summary": {
+    "total_characters": 30891,
+    "estimated_tokens": 17161,
+    "quality_score": 6.860539856256126,
+    "arabic_ratio": 1.0242159425024502
+  },
+  "chunking_results": {
+    "total_chunks": 8,
+    "chunk_sizes": {
+      "min_chars": 1704,
+      "max_chars": 2754,
+      "avg_chars": 2324,
+      "min_tokens": 946,
+      "max_tokens": 1530,
+      "avg_tokens": 1291
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 4,
+      "articles_detected": 4,
+      "total_chunks": 8
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 0,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['3→5', '5→7']",
+        "Article sequence pattern: ['2→8']",
+        "Article sequence pattern: ['4→6', '7→9']",
+        "Article sequence pattern: ['5→9']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام ضريبة القيمة المضافة - الفصل الثاني - المادة الأولى ... المادة الرابعة (4 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2706,
+      "tokens": 1503,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1495,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثاني",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الأول: أحكام تمهيدية\n\nالمادة الأولى:1- يُقصد بالألفاظ والعبارات الآتية - أينما وردت في النظام - المعاني المبينة أمام كل منها، ما لم يقتضِ السياق خلاف ذلك:\n\nالهيئة:\n\nالهيئة العامة للزكاة والدخل.ا..."
+    },
+    {
+      "index": 1,
+      "title": "نظام ضريبة القيمة المضافة - الفصل الخامس - المادة الخامسة ... المادة الثالثة (8 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2303,
+      "tokens": 1279,
+      "metadata": {
+        "items_count": 12,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1264,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الخامس"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الخامس",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الخامس",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة:1 - على الشخص الخاضع للضريبة التقدم بطلب إلغاء تسجيله في أي من الحالات الآتية:أ - الحالات المنصوص عليها في الاتفاقية.ب - إذا كان الشخص مقيماً ولم يتجاوز مجموع رقم أعماله السنوي حد التسج..."
+    },
+    {
+      "index": 2,
+      "title": "نظام ضريبة القيمة المضافة - الفصل العاشر - المادة الثامنة + المادة التاسعة + المادة الثانية",
+      "hierarchy_level": "section",
+      "chars": 2563,
+      "tokens": 1423,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1413,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل العاشر"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل العاشر",
+        "subsection_context": null,
+        "full_legal_path": "الفصل العاشر",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل السادس:\n\nالاستيراد\n\nالمادة السادسة عشرة:1 - تستحق الضريبة عند الاستيراد إلى المملكة، وفقاً للأحكام المنصوص عليها في الاتفاقية.2 - في حالة تعليق الضريبة على استيراد السلع وفقاً لنظام (قانون) الجم..."
+    },
+    {
+      "index": 3,
+      "title": "نظام ضريبة القيمة المضافة - الفصل الثاني عشر - المادة الرابعة ... المادة الثلاثون (5 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2178,
+      "tokens": 1210,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1199,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثاني عشر"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثاني عشر",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثاني عشر",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة التاسعة",
+          "المادة الثلاثون"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة والعشرون:1 - تحدد اللائحة الفترة الضريبية التي يلتزم الخاضع للضريبة بتقديم إقرار عنها.2 - على الشخص الخاضع للضريبة أن يقدم إلى الهيئة إقراراً ضريبياً عن الفترة الضريبية خلال المدة ووفقا..."
+    },
+    {
+      "index": 4,
+      "title": "نظام ضريبة القيمة المضافة - الفصل الثاني عشر - المادة الحادية والثلاثون ... المادة الثامنة (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2352,
+      "tokens": 1306,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1297,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثاني عشر"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثاني عشر",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثاني عشر",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية والثلاثون",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الحادية والثلاثون:\n\nللهيئة استثناء الفئات المنصوص عليها في الاتفاقية من دفع الضريبة عند تلقي السلع والخدمات في المملكة، والسماح لها باسترداد الضريبة التي تكبدتها على السلع والخدمات، وذلك وفقاً ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 6.860539856256126,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 5,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "📊 INFO: 5 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

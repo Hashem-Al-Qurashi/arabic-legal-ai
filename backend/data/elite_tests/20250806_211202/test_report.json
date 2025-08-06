@@ -1,0 +1,280 @@
+{
+  "success": true,
+  "test_id": "20250806_211202",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/6cfde53b-e803-49be-b2c6-a9a700f1c434/1",
+  "title": "نظام براءات الاختراع والتصميمات التخطيطية للدارات المتكاملة والأصناف النباتية والنماذج الصناعية",
+  "extraction_summary": {
+    "total_characters": 35902,
+    "estimated_tokens": 19945,
+    "quality_score": 6.495051289159967,
+    "arabic_ratio": 1.0180205156639868
+  },
+  "chunking_results": {
+    "total_chunks": 14,
+    "chunk_sizes": {
+      "min_chars": 215,
+      "max_chars": 2672,
+      "avg_chars": 2305,
+      "min_tokens": 119,
+      "max_tokens": 1484,
+      "avg_tokens": 1280
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 5,
+      "articles_detected": 9,
+      "total_chunks": 14
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 0,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['7→10']",
+        "Article sequence pattern: ['3→8']",
+        "Article sequence pattern: ['3→6']",
+        "Article sequence pattern: ['3→8']",
+        "Article sequence pattern: ['4→8']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام براءات الاختراع والتصميمات التخطيطية للدارات المتكاملة والأصناف النباتية والنماذج الصناعية - الفصل الأول - المادة الأولى + المادة الثانية",
+      "hierarchy_level": "section",
+      "chars": 215,
+      "tokens": 119,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 116,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الأول: أحكام عامة\n\nالمادة الأولى:يهدف هذا النظام إلى توفير الحماية الكاملة – داخل المملكة – للاختراعات، والتصميمات التخطيطية للدارات المتكاملة، والأصناف النباتية، والنماذج الصناعية.\n\nالمادة الثا..."
+    },
+    {
+      "index": 1,
+      "title": "نظام براءات الاختراع والتصميمات التخطيطية للدارات المتكاملة والأصناف النباتية والنماذج الصناعية - الفصل الأول - المادة الثانية + المادة الثالثة",
+      "hierarchy_level": "article",
+      "chars": 2590,
+      "tokens": 1438,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1437,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية:إحلال عبارة \"الهيئة:\n\nالهيئة السعودية للملكية الفكرية\" محل عبارة \"المدينة:\n\nمدية الملك عبدالعزيز للعلوم والتقنية\" و إحلال كلمة \"الهيئة\" محل كلمة \"الإدارة\" أينما وردتا في النظام المشار إ..."
+    },
+    {
+      "index": 2,
+      "title": "نظام براءات الاختراع والتصميمات التخطيطية للدارات المتكاملة والأصناف النباتية والنماذج الصناعية - الفصل الأول - المادة الرابعة ... المادة التاسعة (6 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2420,
+      "tokens": 1344,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1338,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة السادسة",
+          "المادة الخامسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 6,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 6,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة:أ - لا تمنحوثيقة الحمايةإذا كان استغلالها تجاريًّا مخالفًا للشريعة الإسلامية.ب - لا تمنحوثيقة الحمايةإذا كان استغلالها تجاريًّا مضرًّا بالحياة، أو بالصحة البشرية أو الحيوانية أو النباتي..."
+    },
+    {
+      "index": 3,
+      "title": "نظام براءات الاختراع والتصميمات التخطيطية للدارات المتكاملة والأصناف النباتية والنماذج الصناعية - الفصل الأول - المادة العاشرة ... المادة السابعة (8 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2383,
+      "tokens": 1323,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1313,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العاشرة:أ - يحق لمقدم الطلب الاستفادة من الأسبقية المقررة لطلب سابق، أودع خلال فترة الأسبقية المحددة لكل موضوع منموضوعات الحماية، اعتبارًا من تاريخ إيداع الطلب السابق، بشرط أن يرافقه إقرار مكتو..."
+    },
+    {
+      "index": 4,
+      "title": "نظام براءات الاختراع والتصميمات التخطيطية للدارات المتكاملة والأصناف النباتية والنماذج الصناعية - الفصل الأول - المادة الثامنة ... المادة الثالثة (6 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2648,
+      "tokens": 1471,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1462,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 6,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 6,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة عشرة:أ - يستحق علىطلب الحماية، أووثيقة الحمايةمقابل مالي سنوي – طبقًا للجدول المرفق بهذا النظام – يجب سداده في بداية كل سنة، اعتبارًا من السنة التالية لتاريخ إيداع الطلب.وإذا لم يقم مقد..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 6.495051289159967,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 6,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "📊 INFO: 6 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

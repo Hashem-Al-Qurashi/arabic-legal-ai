@@ -1,0 +1,268 @@
+{
+  "success": true,
+  "test_id": "20250806_214025",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/8f70dc63-dd9a-4734-9216-a9a700f2c78c/1",
+  "title": "نظام مراقبة البنوك",
+  "extraction_summary": {
+    "total_characters": 18451,
+    "estimated_tokens": 10250,
+    "quality_score": 6.120272572402044,
+    "arabic_ratio": 1.0081090289608177
+  },
+  "chunking_results": {
+    "total_chunks": 7,
+    "chunk_sizes": {
+      "min_chars": 1674,
+      "max_chars": 2714,
+      "avg_chars": 2357,
+      "min_tokens": 930,
+      "max_tokens": 1507,
+      "avg_tokens": 1309
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 7,
+      "total_chunks": 7
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 7,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['3→11']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context",
+        "Chunk 5: Missing hierarchical context",
+        "Chunk 6: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام مراقبة البنوك - المادة الأولى ... المادة الخامسة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2581,
+      "tokens": 1433,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1427,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:يقصد بالمصطلحات الآتية في خصوص هذا النظام المعاني المحددة لها في هذه المادة:أ - يقصد باصطلاح (بنك):أي شخص طبيعي أو اعتباري يزاول في المملكة أي عمل من الأعمال المصرفية بصفة أساسية.ب - يقص..."
+    },
+    {
+      "index": 1,
+      "title": "نظام مراقبة البنوك - المادة السادسة ... المادة التاسعة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2444,
+      "tokens": 1357,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1353,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة:\n\nلا يجوز أن تزيد التزامات البنك من الودائع على خمسة عشر مثلا من مجموع احتياطاته ورأس ماله المدفوع أو المستثمر، فإذا زادت التزامات الودائع على هذا القدر وجب على البنك- في خلال شهر من تا..."
+    },
+    {
+      "index": 2,
+      "title": "نظام مراقبة البنوك - المادة العاشرة",
+      "hierarchy_level": "article",
+      "chars": 1674,
+      "tokens": 930,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 930,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العاشرة:يحظر على أي بنك أن يزاول الأعمال الآتية:1 - الاشتغال لحسابه أو بالعمولة بتجارة الجملة أو التجزئة بما في ذلك تجارة الاستيراد أو التصدير.2 - أن تكون له مصلحة مباشرة كمساهم أو كشريك أو كما..."
+    },
+    {
+      "index": 3,
+      "title": "نظام مراقبة البنوك - المادة الحادية عشرة + المادة الثالثة",
+      "hierarchy_level": "article",
+      "chars": 2426,
+      "tokens": 1347,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1345,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية عشرة",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الحادية عشرة:يحظر على أي بنك أن يقوم بأي عمل من الأعمال الآتية إلا بعد الحصول على ترخيص كتابي سابق من المؤسسة وبالشروط التي تحددها:أ - تعديل تكوين رأس ماله المدفوع أو المستثمر.ب - الاتفاق على ا..."
+    },
+    {
+      "index": 4,
+      "title": "نظام مراقبة البنوك - المادة الرابعة ... المادة التاسعة (6 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2714,
+      "tokens": 1507,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1500,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 6,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 6,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة عشرة:يجب على كل بنك أن يعين سنويا مراقبين اثنين للحسابات من القائمة المسجلة بوزارة التجارة والصناعة، وعلى مراقبي الحسابات تقديم تقرير عن الميزانية السنوية وحساب الأرباح والخسائر، ويجب أ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 6.120272572402044,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 7 chunks missing context",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

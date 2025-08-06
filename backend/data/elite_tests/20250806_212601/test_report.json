@@ -1,0 +1,258 @@
+{
+  "success": true,
+  "test_id": "20250806_212601",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/8799f302-3ad8-41ae-a8d8-b11d008a40f6/1",
+  "title": "نظام صندوق البنية التحتية الوطني",
+  "extraction_summary": {
+    "total_characters": 15379,
+    "estimated_tokens": 8543,
+    "quality_score": 6.289951573849879,
+    "arabic_ratio": 1.0159806295399516
+  },
+  "chunking_results": {
+    "total_chunks": 6,
+    "chunk_sizes": {
+      "min_chars": 563,
+      "max_chars": 2888,
+      "avg_chars": 2059,
+      "min_tokens": 312,
+      "max_tokens": 1604,
+      "avg_tokens": 1143
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 6,
+      "total_chunks": 6
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 6,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['2→9']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context",
+        "Chunk 5: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام صندوق البنية التحتية الوطني - المادة الأولى + المادة الثانية",
+      "hierarchy_level": "article",
+      "chars": 2660,
+      "tokens": 1477,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1476,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيُقصد بالألفاظ والعبارات الآتية -أينما وردت في هذا النظام- المعاني المبينة أمام كلٍّ منها، ما لم يقتضِ السياق غير ذلك:\n\nالصندوق:صندوق البنية التحتية الوطني.النظام: نظام الصندوق.المجلس:\n\nم..."
+    },
+    {
+      "index": 1,
+      "title": "نظام صندوق البنية التحتية الوطني - المادة الخامسة",
+      "hierarchy_level": "article",
+      "chars": 563,
+      "tokens": 312,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 312,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسةللصندوق أن يبرم العقود والاتفاقيات ومذكرات التفاهم ذات الصلة بنشاطه بغير اللغة العربية، على أن يكون ذلك في مصلحته، ووفقاً للضوابط والسياسات التي يضعها مجلس إدارة صندوق التنمية الوطني.\n\nا..."
+    },
+    {
+      "index": 2,
+      "title": "نظام صندوق البنية التحتية الوطني - المادة السابعة",
+      "hierarchy_level": "article",
+      "chars": 2888,
+      "tokens": 1604,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1604,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعةدون إخلال باختصاصات صندوق التنمية الوطني، يُعد المجلس هو السلطة المسؤولة عن رسم السياسات العامة للصندوق في حدود النظام والأنظمة ذات العلاقة، ويتولى جميع المهمات والصلاحيات التي تكفل تحقي..."
+    },
+    {
+      "index": 3,
+      "title": "نظام صندوق البنية التحتية الوطني - المادة الثامنة",
+      "hierarchy_level": "article",
+      "chars": 1327,
+      "tokens": 737,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 737,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنةتعقد اجتماعات المجلس في مقر الصندوق برئاسة الرئيس أو من ينيبه من الأعضاء حال غيابه. ويجوز عند الحاجة عقدها في مكان آخر داخل المملكة أو من خلال وسائل التقنية.يعقد المجلس اجتماعاته بصفة دو..."
+    },
+    {
+      "index": 4,
+      "title": "نظام صندوق البنية التحتية الوطني - المادة التاسعة ... المادة الثانية (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2400,
+      "tokens": 1333,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1328,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعةيكون للصندوق رئيس تنفيذي، يعين ويعفى من منصبه بقرار من المجلس، ولا يكون القرار نافذاً إلا بعد موافقة مجلس إدارة صندوق التنمية الوطني، ويحدد القرار أجره ومزاياه المالية الأخرى، ويُعد المس..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 6.289951573849879,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 6 chunks missing context",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

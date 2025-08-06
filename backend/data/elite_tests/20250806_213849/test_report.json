@@ -1,0 +1,303 @@
+{
+  "success": true,
+  "test_id": "20250806_213849",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/2716057c-c097-4bad-8e1e-ae1400c678d5/1",
+  "title": "نظام الإثبات",
+  "extraction_summary": {
+    "total_characters": 45682,
+    "estimated_tokens": 25378,
+    "quality_score": 7.297983727851038,
+    "arabic_ratio": 1.0191934911404155
+  },
+  "chunking_results": {
+    "total_chunks": 17,
+    "chunk_sizes": {
+      "min_chars": 849,
+      "max_chars": 2816,
+      "avg_chars": 2441,
+      "min_tokens": 471,
+      "max_tokens": 1564,
+      "avg_tokens": 1356
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 17,
+      "total_chunks": 17
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 17,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['3→7']",
+        "Article sequence pattern: ['3→9']",
+        "Article sequence pattern: ['4→6']",
+        "Article sequence pattern: ['2→5']",
+        "Article sequence pattern: ['9→11']",
+        "Article 1 mid-sequence (likely amendment structure)",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context",
+        "Chunk 5: Missing hierarchical context",
+        "Chunk 6: Missing hierarchical context",
+        "Chunk 7: Missing hierarchical context",
+        "Chunk 8: Missing hierarchical context",
+        "Chunk 9: Missing hierarchical context",
+        "Chunk 10: Missing hierarchical context",
+        "Chunk 11: Missing hierarchical context",
+        "Chunk 12: Missing hierarchical context",
+        "Chunk 13: Missing hierarchical context",
+        "Chunk 14: Missing hierarchical context",
+        "Chunk 15: Missing hierarchical context",
+        "Chunk 16: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الإثبات - المادة الأولى ... المادة الحادية عشرة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2593,
+      "tokens": 1440,
+      "metadata": {
+        "items_count": 14,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1421,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىتسري أحكام هذا النظام على المعاملات المدنية والتجارية.\n\nالمادة الثانيةعلى المدعي أن يثبت ما يدعيه من حق، وللمدعى عليه نفيه.يجب أن تكون الوقائع المراد إثباتها متعلقة بالدعوى، ومنتجة فيها، ..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الإثبات - المادة الخامسة ... المادة الرابعة (10 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2612,
+      "tokens": 1451,
+      "metadata": {
+        "items_count": 12,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1434,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 10,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 10,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة عشرةيشترط أن يكون المقر أهلاً للتصرف فيما أقر به.يصح إقرار الصغير المميز المأذون له في البيع والشراء بقدر ما أذن له فيه.يصح الإقرار من الوصي أو الولي أو ناظر الوقف أو من في حكمهم فيما ب..."
+    },
+    {
+      "index": 2,
+      "title": "نظام الإثبات - المادة السابعة ... المادة الثالثة (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2632,
+      "tokens": 1462,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1452,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الثلاثون",
+          "المادة الحادية والثلاثون",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعة والعشرونإذا كان أصل المحرَّر الرسمي موجوداً، فإن صورته الرسمية تعد حجة بالقدر الذي تكون فيه مطابقة للأصل.تكون الصورة رسمية إذا أخذت من الأصل؛ وفقاً للإجراءات المنظمة لذلك.تعد الصورة الر..."
+    },
+    {
+      "index": 3,
+      "title": "نظام الإثبات - المادة الرابعة ... المادة الثامنة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2707,
+      "tokens": 1503,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1498,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة والثلاثونيجوز للخصم أن يطلب من المحكمة إلزام خصمه بتقديم أي محرَّر منتج في الدعوى يكون تحت يده في الحالات الآتية:أ-إذا كان النظام يجيز مطالبته بتقديمه أو تسليمه.ب-إذا كان المحرَّر مشترك..."
+    },
+    {
+      "index": 4,
+      "title": "نظام الإثبات - المادة التاسعة ... المادة الثالثة (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2289,
+      "tokens": 1271,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1264,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة",
+          "المادة الأربعون",
+          "المادة الحادية والأربعون",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعة والثلاثونيرد الادعاء بالتزوير على المحرَّر الرسمي والعادي، أما إنكار الخط أو الختم أو الإمضاء أو البصمة فلا يرد إلا على المحرَّر العادي.على الخصم الذي يدعي التزوير عبء إثبات ادعائه، أما..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.297983727851038,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 7,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 17 chunks missing context",
+    "📊 INFO: 7 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

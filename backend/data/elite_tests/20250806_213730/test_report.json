@@ -1,0 +1,283 @@
+{
+  "success": true,
+  "test_id": "20250806_213730",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/9b461caf-dc11-46bd-a8fd-ac74009a8724/1",
+  "title": "نظام خدمة الأفراد",
+  "extraction_summary": {
+    "total_characters": 36390,
+    "estimated_tokens": 20216,
+    "quality_score": 7.020905110536893,
+    "arabic_ratio": 1.0083620442147574
+  },
+  "chunking_results": {
+    "total_chunks": 15,
+    "chunk_sizes": {
+      "min_chars": 824,
+      "max_chars": 2700,
+      "avg_chars": 2211,
+      "min_tokens": 457,
+      "max_tokens": 1500,
+      "avg_tokens": 1228
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 1,
+      "articles_detected": 14,
+      "total_chunks": 15
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 0,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['18→20']",
+        "Article sequence pattern: ['23→25']",
+        "Article sequence pattern: ['53→55']",
+        "Article sequence pattern: ['57→59']",
+        "Article sequence pattern: ['64→66']",
+        "Article sequence pattern: ['4→53', '54→69']"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام خدمة الأفراد - الفصل الأول - المادة 1 ... المادة 5 (5 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2173,
+      "tokens": 1207,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1195,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة 1",
+          "المادة 2",
+          "المادة 3",
+          "المادة 4",
+          "المادة 5"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة 1تطبق احكام هذا النظام على جميع الافراد العسكريين السعوديين العامليين في:- وزارة الدفاع والطيران.- وزارة الداخلية.- الحرس الوطني.- الاستخبارات العامة.\n\\ن\n\nالفصل الأول:\n\nالمادة 2التعريفات والرتب..."
+    },
+    {
+      "index": 1,
+      "title": "نظام خدمة الأفراد - الفصل الأول - المادة 5 ... المادة 13 (9 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2700,
+      "tokens": 1500,
+      "metadata": {
+        "items_count": 10,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1485,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة 5",
+          "المادة 6",
+          "المادة 7",
+          "المادة 8",
+          "المادة 9",
+          "المادة 10",
+          "المادة 11",
+          "المادة 12",
+          "المادة 13"
+        ],
+        "unique_articles_count": 9,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 9,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة 5- عُّدلت هذه المادة وذلك بموجب المرسوم الملكي رقم (م/4) وتاريخ 1420/2/7هـ، لتصبح بالنص الآتي:(يقدم المرشح للتعيين اقرارا بعدم إخفائه لخدمة عسكرية سابقة له، واقرارا آخر بتوافر شروط التعيين المن..."
+    },
+    {
+      "index": 2,
+      "title": "نظام خدمة الأفراد - الفصل الأول - المادة 13 ... المادة 17 (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2180,
+      "tokens": 1211,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1204,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة 13",
+          "المادة 14",
+          "المادة 15",
+          "المادة 16",
+          "المادة 17"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة 13- عُّدلت هذه المادة وذلك بموجب المرسوم الملكي رقم (م/44) وتاريخ 1422/9/22هـ، لتصبح بالنص الآتي: \"يصرف للفرد أثناء مدة توقيفه أو سجنه لغرض التحقيق أو المحاكمة نصف صافي راتبه، فان لم تثبت ادانت..."
+    },
+    {
+      "index": 3,
+      "title": "نظام خدمة الأفراد - الفصل الأول - المادة 17 ... المادة 22 (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2220,
+      "tokens": 1233,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1226,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة 17",
+          "المادة 18",
+          "المادة 20",
+          "المادة 21",
+          "المادة 22"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة 17- عُّدلت الفقرة (ب) من هذه المادة وذلك بموجب المرسوم الملكي رقم (م/1) وتاريخ 1399/1/5هـ.\n\nالمادة 17- عُّدلت هذه المادة وذلك بموجب المرسوم الملكي رقم (م/9) وتاريخ 1403/5/24هـ.\n\nالمادة 17- عُّد..."
+    },
+    {
+      "index": 4,
+      "title": "نظام خدمة الأفراد - الفصل الأول - المادة 23 + المادة 25 + المادة 26",
+      "hierarchy_level": "article",
+      "chars": 1556,
+      "tokens": 864,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 861,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة 23",
+          "المادة 25",
+          "المادة 26"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة 23- عُّدلت الفقرة ( ب ) من هذه المادة، وذلك بموجب المرسوم الملكي رقم (م/33) وتاريخ 1427/5/28هـ، لتصبح بالنص الآتي:\"ب- تصرف لأفراد قوى الأمن الداخلي الذين يقومون بأعمال ميدانية، يومية الميدان ال..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.020905110536893,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 6,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "📊 INFO: 6 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

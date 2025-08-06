@@ -1,0 +1,263 @@
+{
+  "success": true,
+  "test_id": "20250806_212235",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/82b804f6-0075-47c2-a772-acc4002f8b3e/1",
+  "title": "نظام معالجة المنشآت المالية المهمة",
+  "extraction_summary": {
+    "total_characters": 37634,
+    "estimated_tokens": 20907,
+    "quality_score": 6.937296304796879,
+    "arabic_ratio": 1.0149185219187515
+  },
+  "chunking_results": {
+    "total_chunks": 17,
+    "chunk_sizes": {
+      "min_chars": 23,
+      "max_chars": 3281,
+      "avg_chars": 2055,
+      "min_tokens": 12,
+      "max_tokens": 1822,
+      "avg_tokens": 1141
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 12,
+      "articles_detected": 5,
+      "total_chunks": 17
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 0,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['2→4']",
+        "Article sequence pattern: ['4→6']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام معالجة المنشآت المالية المهمة - الفصل الأول",
+      "hierarchy_level": "section",
+      "chars": 23,
+      "tokens": 12,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "section"
+        ],
+        "token_count": 12,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [],
+        "unique_articles_count": 0,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 0,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الأول:\n\nالتعريفات"
+    },
+    {
+      "index": 1,
+      "title": "نظام معالجة المنشآت المالية المهمة - الفصل الأول - المادة الأولى",
+      "hierarchy_level": "article",
+      "chars": 3281,
+      "tokens": 1822,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1822,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىلغرض تطبيق أحكام هذا النظام، يقصد بالكلمات والعبارات الآتية المعاني المبينة أمام كل منها:\n\nالنظام:نظام معالجة المنشآت المالية المهمة.اللوائح التنفيذية:\n\nاللوائح التنفيذية للنظام.الجهة الم..."
+    },
+    {
+      "index": 2,
+      "title": "نظام معالجة المنشآت المالية المهمة - الفصل الثالث - المادة الثانية ... المادة الخامسة (4 مواد)",
+      "hierarchy_level": "section",
+      "chars": 1250,
+      "tokens": 694,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 685,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثالث"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثالث",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثالث",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الثاني: أحكام عامة\n\nالمادة الثانيةتصنف المنشأة المالية بأنها مهمة بقرار يصدر من الجهة المختصة، وفق معايير تضعها كل جهة مختصة للمنشآت الخاضعة لإشرافها؛ على أن يراعى في هذه المعايير حجم المنشأة ال..."
+    },
+    {
+      "index": 3,
+      "title": "نظام معالجة المنشآت المالية المهمة - الفصل الثالث - المادة السادسة + المادة السابعة",
+      "hierarchy_level": "section",
+      "chars": 2649,
+      "tokens": 1471,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1468,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثالث"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثالث",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثالث",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسةعلى المنشأة المالية، خلال (مائة وثمانين) يومًا من تاريخ طلب الجهة المختصة، أن تعد خطة استعادة تتضمن الخطوات والإجراءات التي ستتخذها؛ لاستعادة وضعها المالي عندما تتعرض لتغيرات جوهرية تؤثر..."
+    },
+    {
+      "index": 4,
+      "title": "نظام معالجة المنشآت المالية المهمة - الفصل الرابع - المادة الثامنة + المادة التاسعة",
+      "hierarchy_level": "section",
+      "chars": 2395,
+      "tokens": 1330,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1327,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الرابع"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الرابع",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الرابع",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنةعلى الجهة المختصة إعداد خطة معالجة لكل منشأة مالية مهمة تتضمن إجراءات المعالجة التي قد تتخذها الجهة المختصة في حال تحقق شروط اتخاذ إجراءات المعالجة الواردة في المادة (العاشرة) من النظام...."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 6.937296304796879,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 3,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "📊 INFO: 3 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

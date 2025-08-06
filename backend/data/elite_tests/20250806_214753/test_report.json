@@ -1,0 +1,277 @@
+{
+  "success": true,
+  "test_id": "20250806_214753",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/a8ebff8e-412c-4f67-ac5f-b1ca008d18d9/1",
+  "title": "نظام هيئة الرقابة ومكافحة الفساد",
+  "extraction_summary": {
+    "total_characters": 22020,
+    "estimated_tokens": 12233,
+    "quality_score": 7.241182863352972,
+    "arabic_ratio": 1.0164731453411886
+  },
+  "chunking_results": {
+    "total_chunks": 6,
+    "chunk_sizes": {
+      "min_chars": 621,
+      "max_chars": 4112,
+      "avg_chars": 2079,
+      "min_tokens": 345,
+      "max_tokens": 2284,
+      "avg_tokens": 1154
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 6,
+      "total_chunks": 6
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 1,
+      "missing_context": 6,
+      "violations": [
+        "Chunk 1: 2284 tokens (significantly oversized)"
+      ],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['3→7']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context",
+        "Chunk 5: Missing hierarchical context"
+      ],
+      "overall_quality": "GOOD"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام هيئة الرقابة ومكافحة الفساد - المادة الأولى + المادة الثانية",
+      "hierarchy_level": "article",
+      "chars": 621,
+      "tokens": 345,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 343,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيقصد بالكلمات والعبارات الآتية -أينما وردت في هذا النظام- المعاني الموضحة أمام كل منها:\n\nالنظام: نظام هيئة الرقابة ومكافحة الفساد.الهيئة: هيئة الرقابة ومكافحة الفساد.الرئيس: رئيس الهيئة.ا..."
+    },
+    {
+      "index": 1,
+      "title": "نظام هيئة الرقابة ومكافحة الفساد - المادة الثالثة",
+      "hierarchy_level": "article",
+      "chars": 4112,
+      "tokens": 2284,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 2284,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثةترتبط الهيئة بالملك، وتتمتع بالشخصية الاعتبارية والاستقلال المالي والإداري.يكون مقر الهيئة الرئيس في مدينة الرياض، ولها أن تنشئ فروعاً أو مكاتب داخل المملكة بحسب الحاجة.تباشر الهيئة عمله..."
+    },
+    {
+      "index": 2,
+      "title": "نظام هيئة الرقابة ومكافحة الفساد - المادة السابعة ... المادة الثالثة (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2337,
+      "tokens": 1298,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1289,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعةيصدر الرئيس قرارًا بتحديد منسوبي الهيئة الذين تكون لهم صفة رجال الضبط الجنائي.\n\nالمادة الثامنةيكون للهيئة رئيس بمرتبة وزير، ونائب ومساعد -أو أكثر- يصدر بتعيينهم أمر ملكي.\n\nالمادة التاسعة..."
+    },
+    {
+      "index": 3,
+      "title": "نظام هيئة الرقابة ومكافحة الفساد - المادة الرابعة + المادة الخامسة",
+      "hierarchy_level": "article",
+      "chars": 2149,
+      "tokens": 1193,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1192,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة عشرةينشأ مجلس للوحدة يسمى (مجلس وحدة التحقيق والادعاء الجنائي)، برئاسة الرئيس، وعضوية كل من:أ-رئيس الوحدة (عضواً ونائباً للرئيس).ب-خمسة من أعضاء الوحدة لا تقل مرتبة أي منهم عن رئيس دائر..."
+    },
+    {
+      "index": 4,
+      "title": "نظام هيئة الرقابة ومكافحة الفساد - المادة التاسعة ... المادة الحادية عشرة (13 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2424,
+      "tokens": 1346,
+      "metadata": {
+        "items_count": 29,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1299,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الثامنة",
+          "المادة الأولى",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 13,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 13,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعة عشرةإذا طرأت على ثروة الموظف العام ومن في حكمه بعد توليه الوظيفة زيادة لا تتناسب مع دخله أو موارده بناءً على قرائن مبنية على تحريات مالية بارتكابه جريمة فساد؛ فيكون عبء الإثبات عليه للت..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "GOOD",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.241182863352972,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 1
+  },
+  "recommendations": [
+    "🔧 MINOR: 1 oversized chunks detected",
+    "🏗️ ENHANCE: 6 chunks missing context",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ GOOD: Strong performance - proceed with confidence!"
+  ]
+}

@@ -1,0 +1,294 @@
+{
+  "success": true,
+  "test_id": "20250806_212016",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/e2c00ba7-2af3-41fa-a1ab-ab9f00af1dec/1",
+  "title": "نظام ضمان الحقوق بالأموال المنقولة",
+  "extraction_summary": {
+    "total_characters": 22006,
+    "estimated_tokens": 12225,
+    "quality_score": 7.070956679758486,
+    "arabic_ratio": 1.0083826719033941
+  },
+  "chunking_results": {
+    "total_chunks": 6,
+    "chunk_sizes": {
+      "min_chars": 835,
+      "max_chars": 2531,
+      "avg_chars": 2082,
+      "min_tokens": 463,
+      "max_tokens": 1406,
+      "avg_tokens": 1156
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 5,
+      "articles_detected": 1,
+      "total_chunks": 6
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 0,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['6→8', '8→10']",
+        "Article sequence pattern: ['5→9']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام ضمان الحقوق بالأموال المنقولة - الفصل الثاني - المادة الأولى + المادة الثانية",
+      "hierarchy_level": "section",
+      "chars": 2212,
+      "tokens": 1228,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1221,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثاني",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الأول:\n\nالتعريفات\n\nالمادة الأولى:\n\n\n\nتعديلات\n\nالمادة الأولى:-تعديل تعريف (العقار بالتخصيص ) وذلك بموجبالمرسوم الملكي رقم (م/191) وتاريخ 1444/11/29هـ. ليكون بالنص الآتي:\"العقار بالتخصيص:\n\nالمنقول..."
+    },
+    {
+      "index": 1,
+      "title": "نظام ضمان الحقوق بالأموال المنقولة - الفصل الرابع - المادة الثالثة ... المادة التاسعة (7 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2498,
+      "tokens": 1387,
+      "metadata": {
+        "items_count": 9,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1374,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الرابع"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الرابع",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الرابع",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثة:يجوز أن تكون ضمانة أي أموال منقولة -سواء كانت مادية أو معنوية، حالية أو مستقبلية، أو حقوقًا حالية أو مستقبلية-، وسواء كانت مملوكة من الضامن أو المضمون له أو الغير، ويشمل ذلك بوجه خاص ال..."
+    },
+    {
+      "index": 2,
+      "title": "نظام ضمان الحقوق بالأموال المنقولة - الفصل السادس - المادة العاشرة ... المادة الثامنة (8 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2531,
+      "tokens": 1406,
+      "metadata": {
+        "items_count": 10,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1392,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل السادس"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل السادس",
+        "subsection_context": null,
+        "full_legal_path": "الفصل السادس",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العاشرة:1- يستمر حق الضمان النافذ في مواجهة الغير تلقائيًّا على عوائد الضمانة لمدة (خمسة عشر) يومًا من قبض الضامن لها، ما لم يتفق عند إنشاء حق الضمان على استثنائها.2- ينقضي نفاذ حق الضمان على ا..."
+    },
+    {
+      "index": 3,
+      "title": "نظام ضمان الحقوق بالأموال المنقولة - الفصل الثامن - المادة التاسعة ... المادة الخامسة (7 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2201,
+      "tokens": 1222,
+      "metadata": {
+        "items_count": 9,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1208,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثامن"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثامن",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثامن",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعة عشرة:1- للضامن إيقاع أكثر من حق ضمان على الضمانة نفسها.2- ترتب الأولوية حقاً للمضمون له بالتقدم على غيره من الدائنين في استيفاء الالتزام المضمون من الضمانة، وتكون الأولوية بين المضمون ل..."
+    },
+    {
+      "index": 4,
+      "title": "نظام ضمان الحقوق بالأموال المنقولة - الفصل العاشر - المادة السادسة ... المادة الحادية عشرة (13 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2219,
+      "tokens": 1232,
+      "metadata": {
+        "items_count": 34,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1185,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل العاشر"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل العاشر",
+        "subsection_context": null,
+        "full_legal_path": "الفصل العاشر",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة العشرون",
+          "المادة الرابعة",
+          "المادة العاشرة",
+          "المادة الخامسة",
+          "المادة الحادية والعشرون",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 13,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 13,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة والعشرون:1- إذا كانت حصيلة التنفيذ على الضمانة لا تكفي للوفاء بالحقوق المترتبة عليها فتوزع وفق الترتيب الآتي:‌أ-    نفقات اتخاذ الإجراءات اللازمة لإصلاح الضمانة وتحسينها وإعدادها للبيع...."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.070956679758486,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 3,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "📊 INFO: 3 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

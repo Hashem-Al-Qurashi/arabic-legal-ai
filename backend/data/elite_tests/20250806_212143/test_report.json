@@ -1,0 +1,279 @@
+{
+  "success": true,
+  "test_id": "20250806_212143",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/fb3e69e4-84a6-45b4-85d6-ac8c00cb3d67/1",
+  "title": "نظام الغرف التجارية",
+  "extraction_summary": {
+    "total_characters": 39704,
+    "estimated_tokens": 22057,
+    "quality_score": 7.1379058013705,
+    "arabic_ratio": 1.0151623205482
+  },
+  "chunking_results": {
+    "total_chunks": 16,
+    "chunk_sizes": {
+      "min_chars": 838,
+      "max_chars": 3263,
+      "avg_chars": 2299,
+      "min_tokens": 465,
+      "max_tokens": 1812,
+      "avg_tokens": 1276
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 3,
+      "sections_detected": 5,
+      "articles_detected": 8,
+      "total_chunks": 16
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 0,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['3→5']",
+        "Article sequence pattern: ['3→5', '5→9']",
+        "Article sequence pattern: ['3→6']",
+        "Article sequence pattern: ['4→6', '6→8']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الغرف التجارية - الباب الأول > الفصل الأول - المادة الأولى ... المادة الرابعة (4 مواد)",
+      "hierarchy_level": "chapter",
+      "chars": 1502,
+      "tokens": 834,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article",
+          "section",
+          "chapter"
+        ],
+        "token_count": 826,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الأول"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الأول",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيقصد بالكلمات والعبارات الآتية -أينما وردت في هذا النظام- المعاني المبينة أمام كل منها، ما لم يقتضِ السياق غير ذلك:\n\nالنظام: نظام الغرف التجارية.اللائحة:\n\nاللائحة التنفيذية للنظام.الوزارة..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الغرف التجارية - الباب الأول > الفصل الأول - المادة الخامسة",
+      "hierarchy_level": "article",
+      "chars": 3183,
+      "tokens": 1768,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1768,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الأول"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الأول",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسةتعمل الغرفة على تنمية الأنشطة التجارية التي تقع ضمن نطاق اختصاصها المكاني وحمايتها وتطويرها بجميع الوسائل والسبل الممكنة ووفقاً للإجراءات النظامية، وبالتنسيق مع الجهات المختصة، وتتولى عل..."
+    },
+    {
+      "index": 2,
+      "title": "نظام الغرف التجارية - الباب الأول > الفصل الثاني - المادة السادسة ... المادة العاشرة (5 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2590,
+      "tokens": 1438,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1431,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الثاني",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسةيجوز للغرفة التواصل مع الغرف الأخرى، والوزارات والهيئات والمؤسسات العامة؛ في كل ما تحتاج إليه من بيانات ومعلومات تتعلق بأداء مهماتها.\n\\ن\n\nالفصل الثاني:\n\nالأجهزة الإدارية للغرفة\n\nالمادة ا..."
+    },
+    {
+      "index": 3,
+      "title": "نظام الغرف التجارية - الباب الأول > الفصل الثاني - المادة الثالثة ... المادة السابعة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2556,
+      "tokens": 1420,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1414,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الثاني",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثة عشرةإذا لم يترشح لانتخابات عضوية مجلس إدارة الغرفة أكثر من العدد المحدد شغله عن طريق الانتخابات، توقف إجراءات الانتخابات ويُعد جميع المترشحين فائزين بالتزكية.إذا كان عدد الفائزين بالتزك..."
+    },
+    {
+      "index": 4,
+      "title": "نظام الغرف التجارية - الباب الأول > الفصل الثاني - المادة الثامنة + المادة التاسعة + المادة العشرون",
+      "hierarchy_level": "article",
+      "chars": 1607,
+      "tokens": 892,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 889,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الثاني",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العشرون"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة عشرةإذا خلا محل عضو منتخب في مجلس إدارة الغرفة لأي من الأسباب المنصوص عليها في المادة (السابعة عشرة) من النظام، يعين بقرار من الوزير المترشح الحائز على أكثر الأصوات من غير الفائزين، فإن..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.1379058013705,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 5,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "📊 INFO: 5 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

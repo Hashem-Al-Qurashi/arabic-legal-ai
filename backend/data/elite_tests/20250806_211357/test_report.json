@@ -1,0 +1,234 @@
+{
+  "success": true,
+  "test_id": "20250806_211357",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/64aee787-4618-4979-b4d8-a9a700f1c647/1",
+  "title": "نظام استيراد المواد الكيميائية وإدارتها ( نظام إدارة المواد الكيميائية )",
+  "extraction_summary": {
+    "total_characters": 12713,
+    "estimated_tokens": 7062,
+    "quality_score": 6.024946194482489,
+    "arabic_ratio": 1.0099784777929954
+  },
+  "chunking_results": {
+    "total_chunks": 4,
+    "chunk_sizes": {
+      "min_chars": 2348,
+      "max_chars": 2603,
+      "avg_chars": 2460,
+      "min_tokens": 1304,
+      "max_tokens": 1446,
+      "avg_tokens": 1366
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 4,
+      "total_chunks": 4
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 4,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['3→5']",
+        "Article sequence pattern: ['6→8']",
+        "Article sequence pattern: ['3→11']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام استيراد المواد الكيميائية وإدارتها ( نظام إدارة المواد الكيميائية ) - المادة الأولى ... المادة الخامسة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2486,
+      "tokens": 1381,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1376,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:يقصد بالكلمات والعبارات الآتية– أينما وردت في هذا النظام– المعاني المبينة أمامها ما لم يقتض السياق خلاف ذلك :\n\nالمواد الكيميائية:أي مادة كيميائية بحالتها الغازية أو السائلة أو الصلبة، وت..."
+    },
+    {
+      "index": 1,
+      "title": "نظام استيراد المواد الكيميائية وإدارتها ( نظام إدارة المواد الكيميائية ) - المادة السادسة ... المادة العاشرة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2348,
+      "tokens": 1304,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1299,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة :تصدروزارة النقلوالهيئة العامة للطيران المدني– كل جهة بحسب اختصاصها– تراخيص نقل المواد الكيميائية وفق الشروط والمواصفات التي تحددها اللائحة.\n\nالمادة السابعة :\n\nلا تجوز إدارةالمواد الكيم..."
+    },
+    {
+      "index": 2,
+      "title": "نظام استيراد المواد الكيميائية وإدارتها ( نظام إدارة المواد الكيميائية ) - المادة الحادية عشرة + المادة الثالثة",
+      "hierarchy_level": "article",
+      "chars": 2403,
+      "tokens": 1335,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1331,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية عشرة",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الحادية عشرة :يلتزم مستوردو المواد الكيميائية والقائمون على إداراتها بما يأتي:1 -  إنهاء إجراءاتإذن الفسحقبل وصولالمواد الكيميائيةإلى المملكة أو حال وصولها.2 -  تسلمالمواد الكيميائيةالمستوردة و..."
+    },
+    {
+      "index": 3,
+      "title": "نظام استيراد المواد الكيميائية وإدارتها ( نظام إدارة المواد الكيميائية ) - المادة الثالثة ... المادة الحادية عشرة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2603,
+      "tokens": 1446,
+      "metadata": {
+        "items_count": 24,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1406,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثة عشرة-إضافة فقرة الى هذه المادة، يكون نصها الآتي:\"4= يجوز تضمين الحكم الصادر بتحديد العقوبة النص على نشر ملخصه على نفقة المخالف في إحدى الصحف المحلية، أو في أي وسيلة أخرى مناسبة، وذلك بح..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.024946194482489,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 4,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 4 chunks missing context",
+    "📊 INFO: 4 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

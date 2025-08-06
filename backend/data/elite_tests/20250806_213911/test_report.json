@@ -1,0 +1,231 @@
+{
+  "success": true,
+  "test_id": "20250806_213911",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/f3a44a6f-9217-478b-b7ca-af3401391514/1",
+  "title": "نظام استخدام كاميرات المراقبة الأمنية",
+  "extraction_summary": {
+    "total_characters": 13482,
+    "estimated_tokens": 7490,
+    "quality_score": 6.531545004206,
+    "arabic_ratio": 1.0126180016824002
+  },
+  "chunking_results": {
+    "total_chunks": 4,
+    "chunk_sizes": {
+      "min_chars": 2223,
+      "max_chars": 2664,
+      "avg_chars": 2439,
+      "min_tokens": 1235,
+      "max_tokens": 1480,
+      "avg_tokens": 1354
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 4,
+      "total_chunks": 4
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 4,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['4→8']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام استخدام كاميرات المراقبة الأمنية - المادة الأولى + المادة الثانية + المادة الثالثة",
+      "hierarchy_level": "article",
+      "chars": 2593,
+      "tokens": 1440,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1437,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيقصد بالكلمات والعبارات الآتية -أينما وردت في هذا النظام- المعاني الموضحة أمام كل منها، ما لم يقتض السياق غير ذلك:\n\nالنظام: نظام استخدام كاميرات المراقبة الأمنية.اللائحة:\n\nاللائحة التنفيذ..."
+    },
+    {
+      "index": 1,
+      "title": "نظام استخدام كاميرات المراقبة الأمنية - المادة الرابعة + المادة الخامسة + المادة السادسة",
+      "hierarchy_level": "article",
+      "chars": 2276,
+      "tokens": 1264,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1260,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعةيجب على الخاضعين لأحكام النظام تركيب أجهزة أنظمة كاميرات المراقبة الأمنية وصيانتها، وتشغيلها على مدار الساعة.يجب على الخاضعين لأحكام النظام الاحتفاظ بالتسجيلات بحسب المدة المنصوص عليها ف..."
+    },
+    {
+      "index": 2,
+      "title": "نظام استخدام كاميرات المراقبة الأمنية - المادة الثامنة + المادة الثالثة + المادة الرابعة",
+      "hierarchy_level": "article",
+      "chars": 2664,
+      "tokens": 1480,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1477,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنةتتولى الهيئة السعودية للبيانات والذكاء الاصطناعي -باستخدام تقنيات البيانات والذكاء الاصطناعي- تطوير أنظمة معالجة وتحليل بث وتسجيلات كاميرات المراقبة الأمنية، وتمكين الوزارة ورئاسة أمن ال..."
+    },
+    {
+      "index": 3,
+      "title": "نظام استخدام كاميرات المراقبة الأمنية - المادة الخامسة ... المادة الحادية عشرة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2223,
+      "tokens": 1235,
+      "metadata": {
+        "items_count": 22,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1198,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة عشرةللوزير -أو من يفوضه- أن يمنح -وفقاً لضوابط وشروط يضعها الوزير- من يساعد في الكشف عن أي مخالفة لأحكام النظام مكافأةً ماليةً تشجيعية لا تزيد على (%10) من مبلغ الغرامة المحصلة من المخا..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.531545004206,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 4 chunks missing context",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

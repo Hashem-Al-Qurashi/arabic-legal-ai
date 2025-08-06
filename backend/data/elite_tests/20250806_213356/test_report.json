@@ -1,0 +1,292 @@
+{
+  "success": true,
+  "test_id": "20250806_213356",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/a445af93-671f-496b-818a-a9a700f19150/1",
+  "title": "نظام الأسلحة والذخائر",
+  "extraction_summary": {
+    "total_characters": 23803,
+    "estimated_tokens": 13223,
+    "quality_score": 6.61925308576854,
+    "arabic_ratio": 1.0077012343074163
+  },
+  "chunking_results": {
+    "total_chunks": 9,
+    "chunk_sizes": {
+      "min_chars": 1643,
+      "max_chars": 2799,
+      "avg_chars": 2392,
+      "min_tokens": 912,
+      "max_tokens": 1555,
+      "avg_tokens": 1328
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 9,
+      "total_chunks": 9
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 9,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['7→9']",
+        "Article sequence pattern: ['2→5', '6→8']",
+        "Article sequence pattern: ['3→7']",
+        "Article sequence pattern: ['7→9']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context",
+        "Chunk 5: Missing hierarchical context",
+        "Chunk 6: Missing hierarchical context",
+        "Chunk 7: Missing hierarchical context",
+        "Chunk 8: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الأسلحة والذخائر - المادة الأولى ... المادة الرابعة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2506,
+      "tokens": 1392,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1387,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيقصد بالألفاظ والعبارات الآتية أينما وردت في هذا النظام المعاني المبينة أمامها ما لم يقتض السياق خلاف ذلك :\n\nالأسلحة الحربية  :\n\nالأسلحة النارية والذخائر والتجهيزات التي صممت بشكل خاص للا..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الأسلحة والذخائر - المادة الخامسة ... المادة الرابعة (10 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2571,
+      "tokens": 1428,
+      "metadata": {
+        "items_count": 13,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1411,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 10,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 10,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسةأ - لا يجوز استيراد   الأسلحة الأثرية    وتداولها بقصد الاتجار إلا بترخيص من   الوزير  .ب - يجوز جلب   الأسلحة الأثرية    أو اصطحابها بقصد الاقتناء.ج - تحدد   اللائحة    شروط وإجراءات ما..."
+    },
+    {
+      "index": 2,
+      "title": "نظام الأسلحة والذخائر - المادة السابعة ... المادة السادسة (9 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2717,
+      "tokens": 1509,
+      "metadata": {
+        "items_count": 11,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1491,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 9,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 9,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعة عشرةجميع الرخص الصادرة بموجب أحكام هذا النظام لا يستفيد منها إلا المرخص له نفسه.\n\nالمادة الثامنة عشرةتلغى رخصة حمل السلاح أو اقتنائه في الأحوال الآتية:أ - إذا تقررت مصادرة السلاح وذخيرت..."
+    },
+    {
+      "index": 3,
+      "title": "نظام الأسلحة والذخائر - المادة الثامنة ... المادة السادسة (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2498,
+      "tokens": 1387,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1378,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الثلاثون",
+          "المادة الحادية والثلاثون",
+          "المادة الثانية",
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة والعشرونتحظر ممارسة مهنة إصلاح الأسلحة النارية بجميع أنواعها إلا بترخيص من   الوزير  . وتحدد   اللائحة    شروط منح الترخيص وواجبات المرخص له.\n\nالمادة التاسعة والعشرونيحظر إصلاح أي سلاح ..."
+    },
+    {
+      "index": 4,
+      "title": "نظام الأسلحة والذخائر - المادة السابعة ... المادة الثالثة (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2194,
+      "tokens": 1218,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1210,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الأربعون",
+          "المادة الحادية والأربعون",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعة والثلاثونيعاقب بالسجن مدة لا تتجاوز عشر سنوات وبغرامة لا تتجاوز مائة ألف ريال، أو بإحدى هاتين العقوبتين، كل من ثبت قيامه بصنع أسلحة فردية أو قطع منها أو ذخائرها، أو ثبت قيامه بتهريبها إ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 6.61925308576854,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 5,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 9 chunks missing context",
+    "📊 INFO: 5 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

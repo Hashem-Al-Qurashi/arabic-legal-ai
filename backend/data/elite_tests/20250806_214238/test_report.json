@@ -1,0 +1,285 @@
+{
+  "success": true,
+  "test_id": "20250806_214238",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/86f03d34-3650-4553-b6a0-a9a700f2cdae/1",
+  "title": "نظام الإيداع في المخازن العامة",
+  "extraction_summary": {
+    "total_characters": 13270,
+    "estimated_tokens": 7372,
+    "quality_score": 6.14135893648449,
+    "arabic_ratio": 1.016543574593796
+  },
+  "chunking_results": {
+    "total_chunks": 5,
+    "chunk_sizes": {
+      "min_chars": 839,
+      "max_chars": 2547,
+      "avg_chars": 2113,
+      "min_tokens": 466,
+      "max_tokens": 1415,
+      "avg_tokens": 1173
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 5,
+      "total_chunks": 5
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 5,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['5→8']",
+        "Article sequence pattern: ['2→6']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الإيداع في المخازن العامة - المادة الأولى ... المادة السابعة (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2486,
+      "tokens": 1381,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1373,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى :يهدف النظام إلى وضع ضوابط تنظم العمل في   المخزن العام   ، وتوضح طبيعة البضاعة التي يتم تخزينها وحفظها، وتحدد حقوق والتزامات المخزن وأجرة التخزين.\n\nالمادة الثانية:يقصد بالألفاظ والعبارا..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الإيداع في المخازن العامة - المادة الثامنة ... المادة الخامسة (8 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2547,
+      "tokens": 1415,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1403,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة:\n\nللخازن أن يطلب من   ديوان المظالم     الإذن له ببيع البضاعة إذا كانت مهددة بتلف سريع لا دخل له فيه ورفض المودع تسلمها أو التصرف فيها بعد إبلاغه بذلك بخطاب مسجل، ويحدد   ديوان المظالم ..."
+    },
+    {
+      "index": 2,
+      "title": "نظام الإيداع في المخازن العامة - المادة السادسة ... المادة الثانية (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2528,
+      "tokens": 1404,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1395,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة عشرة:إذا لم يدفع الدين في ميعاد الاستحقاق جاز لحامل   مستند الرهن     ـ منفصلا عن   إيصال التخزين     ـ أن يطلب من   ديوان المظالم    الإذن له في بيع البضاعة المرهونة، ويحدد الديوان طري..."
+    },
+    {
+      "index": 3,
+      "title": "نظام الإيداع في المخازن العامة - المادة الثالثة ... المادة الحادية والعشرون (13 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2167,
+      "tokens": 1203,
+      "metadata": {
+        "items_count": 33,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1156,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون"
+        ],
+        "unique_articles_count": 13,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 13,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثة والعشرون:أ- يعاقب بالسجن لمدة لا تزيد على ثلاث سنوات وبغرامة لا تقل عن خمسة آلاف ريال ولا تزيد على مليون ريال أو بإحدى هاتين العقوبتين ـ كل من زاول هذا النشاط دون الحصول على   الترخيص  ..."
+    },
+    {
+      "index": 4,
+      "title": "نظام الإيداع في المخازن العامة - المادة الثامنة",
+      "hierarchy_level": "article",
+      "chars": 839,
+      "tokens": 466,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 466,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة والعشرون:حقل المادة مطلوبالوصف*رمز التحقق*قيمة الرمز المدخل غير صحيحالإسم*البريد الإلكترونييرجى اختيار الحدث ليصلكم اشعار بذلك على البريد الإلكترونياضافةتعديلحذفأبلغني حين توافر النظام ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.14135893648449,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 3,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 5 chunks missing context",
+    "📊 INFO: 3 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

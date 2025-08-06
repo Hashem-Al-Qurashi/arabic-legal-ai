@@ -1,0 +1,273 @@
+{
+  "success": true,
+  "test_id": "20250806_213526",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/57694209-3eed-46c7-a5d8-a9ed012761d4/1",
+  "title": "نظام مكافحة جرائم الإرهاب وتمويله",
+  "extraction_summary": {
+    "total_characters": 47946,
+    "estimated_tokens": 26636,
+    "quality_score": 7.233596374716775,
+    "arabic_ratio": 1.01343854988671
+  },
+  "chunking_results": {
+    "total_chunks": 19,
+    "chunk_sizes": {
+      "min_chars": 23,
+      "max_chars": 4809,
+      "avg_chars": 2339,
+      "min_tokens": 12,
+      "max_tokens": 2671,
+      "avg_tokens": 1299
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 9,
+      "articles_detected": 10,
+      "total_chunks": 19
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 1,
+      "missing_context": 0,
+      "violations": [
+        "Chunk 1: 2671 tokens (significantly oversized)"
+      ],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['4→6']",
+        "Article sequence pattern: ['2→7', '8→11']",
+        "Article sequence pattern: ['2→7']",
+        "Article sequence pattern: ['4→6']",
+        "Article sequence pattern: ['2→7', '7→9']",
+        "Article sequence pattern: ['3→5', '5→7']",
+        "Article sequence pattern: ['3→5']",
+        "Article sequence pattern: ['2→4', '4→6']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "GOOD"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام مكافحة جرائم الإرهاب وتمويله - الفصل الأول",
+      "hierarchy_level": "section",
+      "chars": 23,
+      "tokens": 12,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "section"
+        ],
+        "token_count": 12,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [],
+        "unique_articles_count": 0,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 0,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الأول:\n\nالتعريفات"
+    },
+    {
+      "index": 1,
+      "title": "نظام مكافحة جرائم الإرهاب وتمويله - الفصل الأول - المادة الأولى",
+      "hierarchy_level": "article",
+      "chars": 4809,
+      "tokens": 2671,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 2671,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيقصد بالألفاظ والعبارات الآتية -أينما وردت في هذا النظام- المعاني الموضحة أمام كل منها، ما لم يقتضِ السياق خلاف ذلك:1-النظام: نظام مكافحة جرائم الإرهاب وتمويله.2-اللائحة:\n\nاللائحة التنفيذ..."
+    },
+    {
+      "index": 2,
+      "title": "نظام مكافحة جرائم الإرهاب وتمويله - الفصل الثالث - المادة الرابعة + المادة السادسة",
+      "hierarchy_level": "section",
+      "chars": 2548,
+      "tokens": 1415,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1410,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثالث"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثالث",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثالث",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الثاني: أحكام عامة\n\nالمادة الثانيةتعد الجرائم المنصوص عليها في النظام من الجرائم الكبيرة الموجبة للتوقيف.\n\nالمادة الثالثةاستثناءً من مبدأ الإقليمية، يسري النظام على كل شخص سعوديًّا كان أم أجنبيّ..."
+    },
+    {
+      "index": 3,
+      "title": "نظام مكافحة جرائم الإرهاب وتمويله - الفصل الثالث - المادة السابعة ... المادة الثانية (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2532,
+      "tokens": 1406,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1402,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثالث"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثالث",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثالث",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة الحادية عشرة",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعة1- تختص النيابة العامة بإصدار إذن بدخول المساكن أو المكاتب أو المباني وتفتيشها في أي وقت خلال المدة المحددة في إذن التفتيش والقبض على الأشخاص وضبط وتحريز الأموال أو الممتلكات أو المستندا..."
+    },
+    {
+      "index": 4,
+      "title": "نظام مكافحة جرائم الإرهاب وتمويله - الفصل الثالث - المادة الثانية ... المادة الحادية والعشرون (5 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2606,
+      "tokens": 1447,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1441,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثالث"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثالث",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثالث",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية عشرةتعديل المادة لتكون بالنص الآتي:\"للنيابة العامة الإفراج المؤقت عن أي موقوف في إحدى الجرائم المنصوص عليها في النظام، ما لم يترتب على ذلك إضرار بمصلحة التحقيقات أو كان يخشى هربه أو اخت..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "GOOD",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.233596374716775,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 9,
+    "technical_violations": 1
+  },
+  "recommendations": [
+    "🔧 MINOR: 1 oversized chunks detected",
+    "📊 INFO: 9 Saudi legal document patterns detected (normal)",
+    "✅ GOOD: Strong performance - proceed with confidence!"
+  ]
+}

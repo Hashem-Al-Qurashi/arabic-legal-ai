@@ -1,0 +1,272 @@
+{
+  "success": true,
+  "test_id": "20250806_214842",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/be479758-9a84-4e94-b1d3-a9a700f19454/1",
+  "title": "اللائحة التنفيذية لنظام مكافحة المخدرات والمؤثرات العقلية",
+  "extraction_summary": {
+    "total_characters": 41954,
+    "estimated_tokens": 23307,
+    "quality_score": 6.431574923547401,
+    "arabic_ratio": 0.9926299694189602
+  },
+  "chunking_results": {
+    "total_chunks": 18,
+    "chunk_sizes": {
+      "min_chars": 389,
+      "max_chars": 4812,
+      "avg_chars": 2153,
+      "min_tokens": 216,
+      "max_tokens": 2673,
+      "avg_tokens": 1196
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 18,
+      "total_chunks": 18
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 1,
+      "missing_context": 18,
+      "violations": [
+        "Chunk 15: 2673 tokens (significantly oversized)"
+      ],
+      "saudi_legal_patterns_detected": [
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context",
+        "Chunk 5: Missing hierarchical context",
+        "Chunk 6: Missing hierarchical context",
+        "Chunk 7: Missing hierarchical context",
+        "Chunk 8: Missing hierarchical context",
+        "Chunk 9: Missing hierarchical context",
+        "Chunk 10: Missing hierarchical context",
+        "Chunk 11: Missing hierarchical context",
+        "Chunk 12: Missing hierarchical context",
+        "Chunk 13: Missing hierarchical context",
+        "Chunk 14: Missing hierarchical context",
+        "Chunk 15: Missing hierarchical context",
+        "Chunk 16: Missing hierarchical context",
+        "Chunk 17: Missing hierarchical context"
+      ],
+      "overall_quality": "GOOD"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "اللائحة التنفيذية لنظام مكافحة المخدرات والمؤثرات العقلية - المادة الأولى",
+      "hierarchy_level": "article",
+      "chars": 538,
+      "tokens": 298,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 298,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:1- يحدد  وزير الصحة    المختبرات المعتمدة لإجراء التحاليل المخبرية للمواد المخدرة والمؤثرات العقلية والعينات المأخوذة من المتهمين.2 -يعتمد التحليل المخبري خبيران مختصان فيما يلي:أ - نتيج..."
+    },
+    {
+      "index": 1,
+      "title": "اللائحة التنفيذية لنظام مكافحة المخدرات والمؤثرات العقلية - المادة الثانية",
+      "hierarchy_level": "article",
+      "chars": 3208,
+      "tokens": 1782,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1782,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية:1- وسائط النقل هي:أ - السفن .ب - الطائرات.جـ - القطارات.2 - ضوابط حمل الأدوية الطبية التي تحتوي على مواد مخدرة أو مؤثرات عقلية في وسائط النقل هي:أولا: وسائط النقل غير السعودية داخل إقلي..."
+    },
+    {
+      "index": 2,
+      "title": "اللائحة التنفيذية لنظام مكافحة المخدرات والمؤثرات العقلية - المادة الثالثة ... المادة السادسة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2106,
+      "tokens": 1170,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1165,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثة:1- السلطات المختصة بمراقبة مرتكبي الجرائم المنصوص عليها في  نظام مكافحة المخدرات والمؤثرات العقلية    هي:\n\nالمديرية العامة لمكافحة المخدرات    وكل جهة ذات اختصاص بمكان وقوع الجريمة ومحل..."
+    },
+    {
+      "index": 3,
+      "title": "اللائحة التنفيذية لنظام مكافحة المخدرات والمؤثرات العقلية - المادة الثامنة",
+      "hierarchy_level": "article",
+      "chars": 3105,
+      "tokens": 1725,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1725,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة:1- السلطات المختصة بالسماح بإدخال أو مرور المواد المخدرة أو المؤثرات العقلية أو مواد حلت محلها عبر إقليم المملكة أو الخروج منه هي:\n\nالمديرية العامة لمكافحة المخدرات، ومصلحة الجمارك .2 -..."
+    },
+    {
+      "index": 4,
+      "title": "اللائحة التنفيذية لنظام مكافحة المخدرات والمؤثرات العقلية - المادة التاسعة + المادة العاشرة",
+      "hierarchy_level": "article",
+      "chars": 2625,
+      "tokens": 1458,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1456,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة التاسعة",
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة التاسعة:1- يجب أن تكون المنشأة الخاصة - الراغبة في استيراد  المواد المخدرة    أو  المؤثرات العقلية    أو تصديرها لأغراض مشروعة - مرخصة من  وزارة الصحة    أو الهيئة العامة للغذاء والدواء كل بحسب..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "GOOD",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.431574923547401,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 1,
+    "technical_violations": 1
+  },
+  "recommendations": [
+    "🔧 MINOR: 1 oversized chunks detected",
+    "🏗️ ENHANCE: 18 chunks missing context",
+    "📊 INFO: 1 Saudi legal document patterns detected (normal)",
+    "✅ GOOD: Strong performance - proceed with confidence!"
+  ]
+}

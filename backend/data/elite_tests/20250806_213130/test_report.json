@@ -1,0 +1,244 @@
+{
+  "success": true,
+  "test_id": "20250806_213130",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/d9f183b6-3afc-4405-834f-a9a700f18571/1",
+  "title": "نظام الجنسية العربية السعودية",
+  "extraction_summary": {
+    "total_characters": 18343,
+    "estimated_tokens": 10190,
+    "quality_score": 6.009561891515995,
+    "arabic_ratio": 1.0038247566063978
+  },
+  "chunking_results": {
+    "total_chunks": 4,
+    "chunk_sizes": {
+      "min_chars": 1839,
+      "max_chars": 11261,
+      "avg_chars": 4327,
+      "min_tokens": 1021,
+      "max_tokens": 6256,
+      "avg_tokens": 2403
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 4,
+      "total_chunks": 4
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 1,
+      "missing_context": 4,
+      "violations": [
+        "Chunk 2: 6256 tokens (significantly oversized)"
+      ],
+      "saudi_legal_patterns_detected": [],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context"
+      ],
+      "overall_quality": "GOOD"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الجنسية العربية السعودية - المادة رقم (1)يسمى هذا النظام \"   نظام الجنسية العربية السعودية   \". + المادة رقم (4)السعوديون هم",
+      "hierarchy_level": "article",
+      "chars": 1839,
+      "tokens": 1021,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1019,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة رقم",
+          "المادة رقم"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة رقم (1)يسمى هذا النظام \"   نظام الجنسية العربية السعودية   \".\n\nالمادة رقم (2)ليس لهذا النظام أثر رجعي وتعتبر جميع القرارات والإجراءات الصحيحة التي تمت بموجب الأنظمة السابقة نافذة كما تعتبر الجن..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الجنسية العربية السعودية - المادة\n\nالمادة رقم (7)عدلت هذه المادة بالمرسوم الملكي رقم (20) وتاريخ 12 / 11 / 1379 هـ لتصبح كالآتي",
+      "hierarchy_level": "article",
+      "chars": 1865,
+      "tokens": 1036,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1036,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة المادة رقم"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة\n\nالمادة رقم (7)عدلت هذه المادة بالمرسوم الملكي رقم (20) وتاريخ 12 / 11 / 1379 هـ لتصبح كالآتي :\"يكون سعوديا من ولد داخل المملكة العربية السعودية أو خارجها لأب سعودي، أو لأم سعودية، وأب مجهول ال..."
+    },
+    {
+      "index": 2,
+      "title": "نظام الجنسية العربية السعودية - المادة رقم (9)يجوز منح الجنسية العربية السعودية للأجنبي الذي تتوفر فيه الشروط الآتية",
+      "hierarchy_level": "article",
+      "chars": 11261,
+      "tokens": 6256,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 6256,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة رقم"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة رقم (9)يجوز منح الجنسية العربية السعودية للأجنبي الذي تتوفر فيه الشروط الآتية:أن يكون عند تقديم الطلب قد بلغ سن الرشد .أن يكون غير معتوه أو مجنون.أن يكون حين تقديم الطلب:أ - قد اكتسب صفة الإقام..."
+    },
+    {
+      "index": 3,
+      "title": "نظام الجنسية العربية السعودية - المادة رقم (27)يصدر   وزير الداخلية      القرارات    اللازمة لتنفيذ هذا النظام. ... المادة رقم (29) (30 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2344,
+      "tokens": 1302,
+      "metadata": {
+        "items_count": 30,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1256,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم",
+          "المادة رقم"
+        ],
+        "unique_articles_count": 30,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 30,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة رقم (27)يصدر   وزير الداخلية      القرارات    اللازمة لتنفيذ هذا النظام.\n\n\n\nتعديلات المادة\n\nالمادة رقم (27)عدلت هذه المادة بالمرسوم الملكي رقم (م/ 54) وتاريخ 29 / 10 / 1425 هـ لتصبح بالنص الآتى..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "GOOD",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.009561891515995,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 0,
+    "technical_violations": 1
+  },
+  "recommendations": [
+    "🔧 MINOR: 1 oversized chunks detected",
+    "🏗️ ENHANCE: 4 chunks missing context",
+    "✅ GOOD: Strong performance - proceed with confidence!"
+  ]
+}

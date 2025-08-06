@@ -1,0 +1,296 @@
+{
+  "success": true,
+  "test_id": "20250806_213041",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/a05632b0-ac19-4659-af2a-a9a700f18337/1",
+  "title": "نظام المتفجرات والمفرقعات",
+  "extraction_summary": {
+    "total_characters": 12139,
+    "estimated_tokens": 6743,
+    "quality_score": 6.427420723300456,
+    "arabic_ratio": 1.0309682893201824
+  },
+  "chunking_results": {
+    "total_chunks": 5,
+    "chunk_sizes": {
+      "min_chars": 839,
+      "max_chars": 2582,
+      "avg_chars": 1988,
+      "min_tokens": 466,
+      "max_tokens": 1434,
+      "avg_tokens": 1104
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 3,
+      "articles_detected": 2,
+      "total_chunks": 5
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 0,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['7→10']",
+        "Article sequence pattern: ['5→8']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام المتفجرات والمفرقعات - الفصل الثاني  - المادة الأولى ... المادة التاسعة (9 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2224,
+      "tokens": 1235,
+      "metadata": {
+        "items_count": 11,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1221,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثاني "
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثاني ",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثاني ",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 9,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 9,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الأول : أحكام عامة\n\nالمادة الأولىيقصد بالألفاظ والعبارات الآتية - أينما وردت في هذا النظام - المعاني المبينة أمامها، ما لم يقتض السياق خلاف ذلك:أ - المتفجرات :\n\nمركب أو خليط كيميائي يتحول بسرعة ..."
+    },
+    {
+      "index": 1,
+      "title": "نظام المتفجرات والمفرقعات - الفصل الثالث  - المادة العاشرة ... المادة السابعة (8 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2246,
+      "tokens": 1247,
+      "metadata": {
+        "items_count": 9,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1236,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثالث "
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثالث ",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثالث ",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العاشرةتحدد اللائحة الشروط والإجراءات، والمواصفات الفنية والأمنية، ومتطلبات السلامة، الواجب توافرها في الآتي:أ - نقل المتفجرات ، والوسائط التي تنقلها.ب - استعمال المتفجرات ، أو إتلافها.ج - التن..."
+    },
+    {
+      "index": 2,
+      "title": "نظام المتفجرات والمفرقعات - الفصل الرابع  - المادة الثامنة ... المادة الخامسة (8 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2582,
+      "tokens": 1434,
+      "metadata": {
+        "items_count": 9,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1422,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الرابع "
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الرابع ",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الرابع ",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة عشرةيعاقب المصرح له بصناعة المتفجرات ، أو استيرادها، أو تصديرها، أو استعمالها، أو تداولها؛ بغرامة مالية لا تتجاوز مائة ألف ريال،إذا قام بأي من الأفعال الآتية:أ - الإخلال بأي من شروط الت..."
+    },
+    {
+      "index": 3,
+      "title": "نظام المتفجرات والمفرقعات - الفصل الرابع  - المادة السادسة ... المادة الحادية والعشرون (15 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2051,
+      "tokens": 1139,
+      "metadata": {
+        "items_count": 35,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1078,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الرابع "
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الرابع ",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الرابع ",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة الثلاثون",
+          "المادة الحادية والثلاثون",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون"
+        ],
+        "unique_articles_count": 15,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 15,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة والعشرونيعفى من العقوبات المنصوص عليها في المواد (الخامسة عشرة، والسادسة عشرة، والسابعة عشرة، والحادية والعشرين) من هذا النظام كل من:أ - بادر بإبلاغ السلطات قبل البدء في تنفيذ المخالفة...."
+    },
+    {
+      "index": 4,
+      "title": "نظام المتفجرات والمفرقعات - الفصل الرابع  - المادة الحادية والثلاثون",
+      "hierarchy_level": "article",
+      "chars": 839,
+      "tokens": 466,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 466,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الرابع "
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الرابع ",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الرابع ",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية والثلاثون"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الحادية والثلاثونحقل المادة مطلوبالوصف*رمز التحقق*قيمة الرمز المدخل غير صحيحالإسم*البريد الإلكترونييرجى اختيار الحدث ليصلكم اشعار بذلك على البريد الإلكترونياضافةتعديلحذفأبلغني حين توافر النظام ..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.427420723300456,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 3,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "📊 INFO: 3 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

@@ -1,0 +1,292 @@
+{
+  "success": true,
+  "test_id": "20250806_212741",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/98ee4b51-d398-4323-ae69-b2b8009f3156/1",
+  "title": "نظام السجل التجاري",
+  "extraction_summary": {
+    "total_characters": 17152,
+    "estimated_tokens": 9528,
+    "quality_score": 7.0888696485152165,
+    "arabic_ratio": 1.0155478594060865
+  },
+  "chunking_results": {
+    "total_chunks": 6,
+    "chunk_sizes": {
+      "min_chars": 862,
+      "max_chars": 2484,
+      "avg_chars": 2080,
+      "min_tokens": 478,
+      "max_tokens": 1380,
+      "avg_tokens": 1155
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 5,
+      "articles_detected": 1,
+      "total_chunks": 6
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 0,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['4→7']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام السجل التجاري - الفصل الثاني - المادة الأولى ... المادة السادسة (6 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2375,
+      "tokens": 1319,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1307,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثاني",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 6,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 6,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الأول: أحكام عامة:\n\nالمادة الأولى:\n\nالتعريفاتيُقصد بالكلمات والعبارات الآتية- أينما وردت في هذا النظام- المعاني المبينة أمام كل منها:\n\nالنظام:نظام السجل التجاري.اللائحة:\n\nاللائحة التنفيذية للنظا..."
+    },
+    {
+      "index": 1,
+      "title": "نظام السجل التجاري - الفصل الثالث - المادة السابعة ... المادة الرابعة (8 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2125,
+      "tokens": 1180,
+      "metadata": {
+        "items_count": 9,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1167,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثالث"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثالث",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثالث",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعة: إجراءات تقديم الطلبيقدم طلب القيد في السجل التجاري إلى المسجل.يبتّ المسجل في الطلب المستوفي البيانات المطلوبة خلال (عشرة) أيام من تاريخ تقديمه. وللمسجل في حالات تحددها اللائحة تمديد تل..."
+    },
+    {
+      "index": 2,
+      "title": "نظام السجل التجاري - الفصل الرابع - المادة الخامسة ... المادة التاسعة (5 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2269,
+      "tokens": 1260,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1252,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الرابع"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الرابع",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الرابع",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 5,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 5,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة عشرة: تعليق القيد في السجل التجارييُعلق المسجل قيد التاجر إذا لم يقدم التأكيد السنوي خلال (تسعين) يومًا من تاريخ استحقاقه.يتعين على المسجل، قبل إجراء التعليق وفقًا للفقرة (1) من هذه الم..."
+    },
+    {
+      "index": 3,
+      "title": "نظام السجل التجاري - الفصل الخامس - المادة العشرون ... المادة الثالثة (4 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2368,
+      "tokens": 1315,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1309,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الخامس"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الخامس",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الخامس",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العشرون: قيد الأحكام النهائيةتشعر المحكمة المختصة المسجل بصدور أي من الأحكام والقرارات النهائية الآتية، وذلك خلال (ثلاثين) يومًا من تاريخ صدور أي منها:أحكام أو قرارات قبول الإيداع القضائي بشأن ..."
+    },
+    {
+      "index": 4,
+      "title": "نظام السجل التجاري - الفصل السادس - المادة الرابعة ... المادة الحادية عشرة (13 مواد)",
+      "hierarchy_level": "section",
+      "chars": 2484,
+      "tokens": 1380,
+      "metadata": {
+        "items_count": 35,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1327,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل السادس"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل السادس",
+        "subsection_context": null,
+        "full_legal_path": "الفصل السادس",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الأولى",
+          "المادة الحادية والعشرون",
+          "المادة الثالثة",
+          "المادة الثانية",
+          "المادة العشرون",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 13,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 13,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة والعشرون:\n\nالإجراءات البديلةإذا ثبت أن التاجر قد ارتكب أيًّا من المخالفات الواردة في المادة (الحادية والعشرين) من النظام، فيحق للجنة أن تتخذ -بالإضافة إلى العقوبة المقررة أو بدلًا عنها-..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.0888696485152165,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

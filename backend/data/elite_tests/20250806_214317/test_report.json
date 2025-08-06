@@ -1,0 +1,297 @@
+{
+  "success": true,
+  "test_id": "20250806_214317",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/c2c05ee1-201a-48de-91e7-a9a700f2d14f/1",
+  "title": "نظام المنافسات والمشتريات الحكومية",
+  "extraction_summary": {
+    "total_characters": 32063,
+    "estimated_tokens": 17812,
+    "quality_score": 6.082382108884841,
+    "arabic_ratio": 1.0129528435539366
+  },
+  "chunking_results": {
+    "total_chunks": 12,
+    "chunk_sizes": {
+      "min_chars": 2019,
+      "max_chars": 2730,
+      "avg_chars": 2467,
+      "min_tokens": 1121,
+      "max_tokens": 1516,
+      "avg_tokens": 1370
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 12,
+      "total_chunks": 12
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 12,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['6→8', '8→10']",
+        "Article sequence pattern: ['9→11']",
+        "Article sequence pattern: ['3→6', '6→8']",
+        "Article sequence pattern: ['2→4']",
+        "Article sequence pattern: ['2→7']",
+        "Article sequence pattern: ['4→6']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context",
+        "Chunk 5: Missing hierarchical context",
+        "Chunk 6: Missing hierarchical context",
+        "Chunk 7: Missing hierarchical context",
+        "Chunk 8: Missing hierarchical context",
+        "Chunk 9: Missing hierarchical context",
+        "Chunk 10: Missing hierarchical context",
+        "Chunk 11: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام المنافسات والمشتريات الحكومية - المادة الأولى ... المادة العاشرة (8 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2482,
+      "tokens": 1378,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1368,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة الثامنة",
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:يهدف هذا النظام إلى:أ - تنظيم إجراءات   المنافسات     والمشتريات التي تقوم بها الجهات الحكومية ومنع تأثير   المصالح الشخصية     فيها، وذلك حماية   للمال العام     .ب - تحقيق أقصى درجات  ..."
+    },
+    {
+      "index": 1,
+      "title": "نظام المنافسات والمشتريات الحكومية - المادة الحادية عشرة ... المادة التاسعة (9 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2640,
+      "tokens": 1466,
+      "metadata": {
+        "items_count": 9,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1454,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 9,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 9,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الحادية عشرة :يقدم مع   العرض  ضمان ابتدائي يتراوح من (1%) إلى (2%) (من واحد إلى اثنين في المائة) من قيمته وفقًا لشروط   المنافسة ،ولا يلزم تقديم هذا   الضمان     في الحالات التالية :أ - الشراء..."
+    },
+    {
+      "index": 2,
+      "title": "نظام المنافسات والمشتريات الحكومية - المادة العشرون ... المادة الخامسة (6 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2413,
+      "tokens": 1340,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1333,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة"
+        ],
+        "unique_articles_count": 6,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 6,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العشرون :يجب على الجهة الحكومية البت في  العروض     واعتماد الترسية خلال المدة المحددة لسريان  العروض     المشار إليها في المادة الثانية عشرة ، وبعد انتهاء هذه المدة تتخذ الإجراءات اللازمة لإعا..."
+    },
+    {
+      "index": 3,
+      "title": "نظام المنافسات والمشتريات الحكومية - المادة السادسة ... المادة الثالثة (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2648,
+      "tokens": 1471,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1461,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الثلاثون",
+          "المادة الحادية والثلاثون",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة والعشرون :تكون صلاحية البت في   المنافسة     وتنفيذ الأعمال للوزير أو رئيس الدائرة المستقلة ، ويجوز له   التفويض     للمسئولين بما لا يزيد على ثلاثة ملايين ريال ، على أن يكون   التفويض ..."
+    },
+    {
+      "index": 4,
+      "title": "نظام المنافسات والمشتريات الحكومية - المادة الرابعة ... المادة الحادية والأربعون (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2019,
+      "tokens": 1121,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1112,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الحادية والأربعون"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة والثلاثون :تقبل   الضمانات  إذا كانت وفق أحد الأشكال التالية :أ -   خطاب ضمان بنكي     من أحد البنوك المحلية .ب -   خطاب ضمان بنكي     من بنك في الخارج يقدم بوساطة أحد البنوك المحلية ال..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 6.082382108884841,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 7,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 12 chunks missing context",
+    "📊 INFO: 7 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

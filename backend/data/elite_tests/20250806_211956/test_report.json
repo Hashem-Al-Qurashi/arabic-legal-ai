@@ -1,0 +1,269 @@
+{
+  "success": true,
+  "test_id": "20250806_211956",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/af2a6b93-51dd-4f16-b781-aafd00d9fbbc/1",
+  "title": "نظام الامتياز التجاري",
+  "extraction_summary": {
+    "total_characters": 22809,
+    "estimated_tokens": 12671,
+    "quality_score": 6.466363933889707,
+    "arabic_ratio": 1.0065455735558828
+  },
+  "chunking_results": {
+    "total_chunks": 11,
+    "chunk_sizes": {
+      "min_chars": 838,
+      "max_chars": 2703,
+      "avg_chars": 1969,
+      "min_tokens": 465,
+      "max_tokens": 1501,
+      "avg_tokens": 1093
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 7,
+      "articles_detected": 4,
+      "total_chunks": 11
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 1,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['5→7']",
+        "Article sequence pattern: ['4→6']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الامتياز التجاري - المادة (الخامسة) و + المادة (السادسة) و + المادة (السابعة) والفقرة (2) من المادة (الثامنة) والفقرة (2) من المادة (التاسعة) و",
+      "hierarchy_level": "article",
+      "chars": 1706,
+      "tokens": 947,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 943,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة (الخامسة) و",
+          "المادة (السادسة) و",
+          "المادة (السابعة) والفقرة (2) من المادة (الثامنة) والفقرة (2) من المادة (التاسعة) و"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (الخامسة) و\n\nالمادة (السادسة) و\n\nالمادة (السابعة) والفقرة (2) من المادة (الثامنة) والفقرة (2) من المادة (التاسعة) و\n\nالمادة (الحادية عشرة)و\n\nالمادة (السابعة عشرة) و\n\nالمادة (التاسعة عشرة) من ال..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الامتياز التجاري - الفصل الأول - المادة (السابعة) والفقرة (2) من المادة (الثامنة) والفقرة (2) من المادة (التاسعة) و",
+      "hierarchy_level": "section",
+      "chars": 1575,
+      "tokens": 875,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 873,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الأول"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الأول",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الأول",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة (السابعة) والفقرة (2) من المادة (الثامنة) والفقرة (2) من المادة (التاسعة) و"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (السابعة) والفقرة (2) من المادة (الثامنة) والفقرة (2) من المادة (التاسعة) و\n\nالمادة (الحادية عشرة)و\n\nالمادة (السابعة عشرة) و\n\nالمادة (التاسعة عشرة) من النظام على عقود الامتياز المبرمة قبل نفاذه..."
+    },
+    {
+      "index": 2,
+      "title": "نظام الامتياز التجاري - الفصل الثاني - المادة الأولى + المادة الثانية + المادة الثالثة",
+      "hierarchy_level": "section",
+      "chars": 2506,
+      "tokens": 1392,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1387,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثاني",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيقصد بالعبارات والمصطلحات الآتية -أينما وردت في هذا النظام- المعاني المبينة أمام كل منها, ما لم يقتض السياق غير ذلك:\n\nالنظام: نظام الامتياز التجاري.اللائحة:\n\nاللائحة التنفيذية للنظام.الوز..."
+    },
+    {
+      "index": 3,
+      "title": "نظام الامتياز التجاري - الفصل الخامس - المادة الرابعة + المادة الخامسة + المادة السابعة",
+      "hierarchy_level": "section",
+      "chars": 2008,
+      "tokens": 1115,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "section",
+          "article"
+        ],
+        "token_count": 1107,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الخامس"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الخامس",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الخامس",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة:\n\nلأغراض تطبيق النظام، لا تعد اتفاقية امتياز أي من الاتفاقيات أو الترتيبات الآتية:\n\nالامتيازات التي تُمنح أو تَصدُر بموجب مراسيم ملكية.الاتفاقيات أو العقود الخاضعة لنظام الوكالات التجار..."
+    },
+    {
+      "index": 4,
+      "title": "نظام الامتياز التجاري - الفصل السادس - المادة الثامنة + المادة التاسعة + المادة العاشرة",
+      "hierarchy_level": "article",
+      "chars": 1703,
+      "tokens": 946,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 942,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل السادس"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل السادس",
+        "subsection_context": null,
+        "full_legal_path": "الفصل السادس",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنةيلتزم مانح الامتياز -ما لم يتفق كتابة مع صاحب الامتياز على غير ذلك- بما يأتي:تحديد الحقوق الممنوحة لصاحب الامتياز في شأن الامتياز.تحديد نموذج عمل الامتياز بشكل تفصيلي, بما في ذلك بيان ال..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 6.466363933889707,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 3,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 1 chunks missing context",
+    "📊 INFO: 3 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

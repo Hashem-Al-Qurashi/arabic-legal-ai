@@ -1,0 +1,283 @@
+{
+  "success": true,
+  "test_id": "20250806_212637",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/7f147afb-5a81-4744-a4bf-b1cd00b831ea/1",
+  "title": "نظام سلامة المنتجات",
+  "extraction_summary": {
+    "total_characters": 22947,
+    "estimated_tokens": 12748,
+    "quality_score": 7.381968274522499,
+    "arabic_ratio": 1.0127873098089997
+  },
+  "chunking_results": {
+    "total_chunks": 7,
+    "chunk_sizes": {
+      "min_chars": 1823,
+      "max_chars": 4064,
+      "avg_chars": 2619,
+      "min_tokens": 1012,
+      "max_tokens": 2257,
+      "avg_tokens": 1455
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 7,
+      "total_chunks": 7
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 1,
+      "missing_context": 7,
+      "violations": [
+        "Chunk 0: 2257 tokens (significantly oversized)"
+      ],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['6→10']",
+        "Article sequence pattern: ['4→8']",
+        "Article sequence pattern: ['2→6', '7→9']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context",
+        "Chunk 5: Missing hierarchical context",
+        "Chunk 6: Missing hierarchical context"
+      ],
+      "overall_quality": "GOOD"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام سلامة المنتجات - المادة الأولى",
+      "hierarchy_level": "article",
+      "chars": 4064,
+      "tokens": 2257,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 2257,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيقصد بالعبارات والمصطلحات الآتية -أينما وردت في هذا النظام- المعاني المبينة أمامها، ما لم يقتضِ السياق غير ذلك:\n\nالنظام:نظام سلامة المنتجات.اللوائح:\n\nاللائحة التنفيذية للنظام، وغيرها من ا..."
+    },
+    {
+      "index": 1,
+      "title": "نظام سلامة المنتجات - المادة الثانية ... المادة التاسعة (8 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2647,
+      "tokens": 1470,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1459,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 8,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 8,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانيةيهدف النظام إلى حماية المستهلك من خلال منع الخطر المرتبط بالمنتجات التي توضع أو تعرض في أسواق المملكة، وبيان أسلوب التعامل مع الخطر والمخاطر المرتبطة بتلك المنتجات.\n\nالمادة الثالثةتطبق أ..."
+    },
+    {
+      "index": 2,
+      "title": "نظام سلامة المنتجات - المادة العاشرة ... المادة السادسة (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2364,
+      "tokens": 1313,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1302,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العاشرةيجب على الصانع والممثل المعتمد والمستورد تزويد المستهلك بجميع المعلومات حول الخطر المرتبط بالمنتج، والتي لا تكون واضحة له، وذلك بما يمكن من اتخاذ الاحتياطات اللازمة لدرء ذلك الخطر.\n\nالما..."
+    },
+    {
+      "index": 3,
+      "title": "نظام سلامة المنتجات - المادة الثامنة ... المادة الرابعة (6 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2225,
+      "tokens": 1236,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1228,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة العشرون",
+          "المادة الحادية والعشرون",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 6,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 6,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة عشرةيلتزم الصانع والممثل المعتمد والمستورد، الذي يضع في الأسواق منتجًا يخضع للائحة فنية، بما يأتي:تقييم مدى مطابقة المنتج للمتطلبات من خلال تطبيق إجراء تقويم المطابقة؛ وفقًا للوائح أو ا..."
+    },
+    {
+      "index": 4,
+      "title": "نظام سلامة المنتجات - المادة السادسة ... المادة الثانية (6 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2704,
+      "tokens": 1502,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1494,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة التاسعة",
+          "المادة الثلاثون",
+          "المادة الحادية والثلاثون",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 6,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 6,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة والعشرونيتولى مفتشون -يعينهم المجلس- مجتمعين أو منفردين ضبط مخالفات أحكام النظام واللوائح وإثباتها، ولهم في سبيل ذلك الآتي:\n\nالدخول -في أي وقت- لمنشآت المشغل الاقتصادي وما يلحق بها من م..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "GOOD",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.381968274522499,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 4,
+    "technical_violations": 1
+  },
+  "recommendations": [
+    "🔧 MINOR: 1 oversized chunks detected",
+    "🏗️ ENHANCE: 7 chunks missing context",
+    "📊 INFO: 4 Saudi legal document patterns detected (normal)",
+    "✅ GOOD: Strong performance - proceed with confidence!"
+  ]
+}

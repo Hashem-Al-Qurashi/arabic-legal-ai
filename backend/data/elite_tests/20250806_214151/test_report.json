@@ -1,0 +1,271 @@
+{
+  "success": true,
+  "test_id": "20250806_214151",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/23576008-1ce4-4685-ac3e-a9a700f2cb02/1",
+  "title": "نظام ضريبة الدخل",
+  "extraction_summary": {
+    "total_characters": 68609,
+    "estimated_tokens": 38116,
+    "quality_score": 7.3725033392051715,
+    "arabic_ratio": 1.0090013356820688
+  },
+  "chunking_results": {
+    "total_chunks": 30,
+    "chunk_sizes": {
+      "min_chars": 861,
+      "max_chars": 3514,
+      "avg_chars": 2217,
+      "min_tokens": 478,
+      "max_tokens": 1952,
+      "avg_tokens": 1231
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 11,
+      "articles_detected": 19,
+      "total_chunks": 30
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 1,
+      "missing_context": 0,
+      "violations": [
+        "Chunk 22: 1952 tokens (significantly oversized)"
+      ],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['2→4']",
+        "Article sequence pattern: ['2→6']",
+        "Article sequence pattern: ['2→9']",
+        "Article sequence pattern: ['7→9']",
+        "Article sequence pattern: ['5→8']",
+        "Article sequence pattern: ['6→8']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "GOOD"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام ضريبة الدخل - الفصل الثاني - المادة الأولى + المادة الثانية",
+      "hierarchy_level": "section",
+      "chars": 2485,
+      "tokens": 1380,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1373,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثاني",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الفصل الأول: تعريفات\n\nالمادة الأولى : تعريفات\n\n\n\nتعديلات\n\nالمادة الأولى : تعريفاتإضافة تعريف (استثمار الغاز الطبيعي)، وتعريف (نقل الغاز الطبيعي) إلى هذه المادةيقصد بالكلمات والعبارات الآتية أينما وردت..."
+    },
+    {
+      "index": 1,
+      "title": "نظام ضريبة الدخل - الفصل الثاني - المادة الثانية + المادة الثالثة",
+      "hierarchy_level": "article",
+      "chars": 1718,
+      "tokens": 954,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 953,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثاني",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية :\n\nالأشخاص الخاضعون للضريبة :- عُدلت الفقرة (أ) من هذه المادة بموجب المرسوم الملكي رقم (م/153) وتاريخ 1441/11/5 هـ ، والمعدلة بالمرسوم الملكي رقم (م/131) وتاريخ 29/12/1438هـ، لتكون بالن..."
+    },
+    {
+      "index": 2,
+      "title": "نظام ضريبة الدخل - الفصل الثاني - المادة الرابعة",
+      "hierarchy_level": "article",
+      "chars": 1350,
+      "tokens": 750,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 750,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثاني"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثاني",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثاني",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة :\n\nالمنشأة الدائمةأ - تتألف   المنشأة الدائمة     لغير المقيم في المملكة - ما لم يرد خلاف ذلك في هذه المادة - من مكان دائم لنشاط غير المقيم الذي يمارس من خلاله النشاط كليا، أو جزئيا ، و..."
+    },
+    {
+      "index": 3,
+      "title": "نظام ضريبة الدخل - الفصل الثالث - المادة الخامسة + المادة السادسة",
+      "hierarchy_level": "section",
+      "chars": 1741,
+      "tokens": 967,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 962,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الثالث"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الثالث",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الثالث",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الخامسة :\n\nمصدر الدخلأ - يعد الدخل متحققا من مصدر في المملكة في أي من الحالات الآتية :1 -  إذا نشأ عن نشاط تم في المملكة.2 - إذا نشأ عن  ممتلكات غير منقولة    موجودة في المملكة ، بما في ذلك الأ..."
+    },
+    {
+      "index": 4,
+      "title": "نظام ضريبة الدخل - الفصل الرابع - المادة السادسة + المادة السابعة",
+      "hierarchy_level": "section",
+      "chars": 2475,
+      "tokens": 1375,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "article",
+          "section"
+        ],
+        "token_count": 1367,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "section": "الفصل الرابع"
+        },
+        "chapter_context": null,
+        "section_context": "الفصل الرابع",
+        "subsection_context": null,
+        "full_legal_path": "الفصل الرابع",
+        "chunk_size_strategy": "section_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السادسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السادسة :\n\nالوعاء الضريبيإضافة فقرة جديدة تحمل الترتيب (ز) بالنص الآتي:\"ز- الوعاء الضريبي للشخص الذي عمل في مجال استثمار الغاز الطبيعي هو دخله الخاضع للضريبة في مجال استثمار الغاز الطبيعي محسوم..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "GOOD",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.3725033392051715,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 7,
+    "technical_violations": 1
+  },
+  "recommendations": [
+    "🔧 MINOR: 1 oversized chunks detected",
+    "📊 INFO: 7 Saudi legal document patterns detected (normal)",
+    "✅ GOOD: Strong performance - proceed with confidence!"
+  ]
+}

@@ -1,0 +1,271 @@
+{
+  "success": true,
+  "test_id": "20250806_212654",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/eda86cc3-3a00-4b90-900d-b1d000c8a863/1",
+  "title": "نظام الاستثمار",
+  "extraction_summary": {
+    "total_characters": 14149,
+    "estimated_tokens": 7860,
+    "quality_score": 6.5906247178839035,
+    "arabic_ratio": 1.0162498871535615
+  },
+  "chunking_results": {
+    "total_chunks": 5,
+    "chunk_sizes": {
+      "min_chars": 2083,
+      "max_chars": 2761,
+      "avg_chars": 2408,
+      "min_tokens": 1157,
+      "max_tokens": 1533,
+      "avg_tokens": 1337
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 5,
+      "total_chunks": 5
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 5,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['1→3']",
+        "Article sequence pattern: ['5→7']",
+        "Article sequence pattern: ['2→8', '9→11']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context",
+        "Chunk 4: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الاستثمار - المادة (السادسة) والفقرتين (3) و(4) من المادة (السابعة) من النظام.خامساً",
+      "hierarchy_level": "article",
+      "chars": 2761,
+      "tokens": 1533,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1533,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة (السادسة) والفقرتين (3) و(4) من المادة (السابعة) من النظام.خامساً"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة (السادسة) والفقرتين (3) و(4) من المادة (السابعة) من النظام.خامساً:على سمو رئيس مجلس الوزراء والوزراء ورؤساء الأجهزة المعنية المستقلة -كل فيما يخُصُّه- تنفيذ مرسومنا هذا.سلمان بن عبدالعزيز آل سع..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الاستثمار - المادة الأولى + المادة الثالثة",
+      "hierarchy_level": "article",
+      "chars": 2083,
+      "tokens": 1157,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1155,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:\n\nالتعريفات:يقصد بالألفاظ والعبارات الآتية -أينما وردت في النظام- المعاني الموضحة أمام كل منها، ما لم يقتضِ السياق غير ذلك:\n\nالنظام:نظام الاستثمار.اللائحة:\n\nاللائحة التنفيذية للنظام.الجه..."
+    },
+    {
+      "index": 2,
+      "title": "نظام الاستثمار - المادة الرابعة + المادة الخامسة + المادة السابعة",
+      "hierarchy_level": "article",
+      "chars": 2548,
+      "tokens": 1415,
+      "metadata": {
+        "items_count": 3,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1413,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 3,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 3,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة: حقوق المستثمر:دون إخلال بما تقضي به الأنظمة ذات العلاقة، يتمتع المستثمر بالحقوق الآتية:أ-مساواته في التعامل مع المستثمرين الآخرين، والمساواة في التعامل بين المستثمر المحلي والأجنبي؛ وذ..."
+    },
+    {
+      "index": 3,
+      "title": "نظام الاستثمار - المادة الثامنة ... المادة الثانية (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2319,
+      "tokens": 1288,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1283,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة الحادية عشرة",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة: قائمة الأنشطة المستثناة:تتولى الجهة المختصة إصدار قائمة الأنشطة المستثناة وتحديثها، وتقوم الوزارة بنشرها.على المستثمر الأجنبي، قبل الاستثمار في أي من الأنشطة المحددة في قائمة الأنشطة ا..."
+    },
+    {
+      "index": 4,
+      "title": "نظام الاستثمار - المادة الثالثة ... المادة الحادية عشرة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2330,
+      "tokens": 1294,
+      "metadata": {
+        "items_count": 17,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1269,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة",
+          "المادة السادسة",
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثة عشرة:\n\nالالتزامات بموجب الاتفاقيات الدولية:\n\nلا تخل أحكام النظام بأي من التزامات المملكة بموجب أي اتفاقية دولية نافذة تكون المملكة طرفًا فيها.\n\nالمادة الرابعة عشرة:\n\nالأنشطة والمناطق ال..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 6.5906247178839035,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 4,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 5 chunks missing context",
+    "📊 INFO: 4 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

@@ -1,0 +1,250 @@
+{
+  "success": true,
+  "test_id": "20250806_200703",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/7b6436fd-e7c0-4a51-afcc-a9a700f1ae15/1",
+  "title": "نظام الرهن التجاري",
+  "extraction_summary": {
+    "total_characters": 11242,
+    "estimated_tokens": 6245,
+    "quality_score": 5.883044540708653,
+    "arabic_ratio": 1.013217816283461
+  },
+  "chunking_results": {
+    "total_chunks": 4,
+    "chunk_sizes": {
+      "min_chars": 1142,
+      "max_chars": 2758,
+      "avg_chars": 2259,
+      "min_tokens": 634,
+      "max_tokens": 1532,
+      "avg_tokens": 1254
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 4,
+      "total_chunks": 4
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 4,
+      "violations": [],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['6→10']",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context",
+        "Chunk 2: Missing hierarchical context",
+        "Chunk 3: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الرهن التجاري - المادة الأولى ... المادة التاسعة (9 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2461,
+      "tokens": 1367,
+      "metadata": {
+        "items_count": 10,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1353,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة"
+        ],
+        "unique_articles_count": 9,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 9,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولى:\n\nالرهن التجاريهو الذي يتقرر على مال منقول توثيقا لدين يعتبر تجاريًّا بالنسبة للمدين.ويكون الرهن تجاريًّا بالنسبة إلى جميع ذوي الشأن الذين تتعلق حقوقهم والتزاماتهم به.\n\nالمادة الثانية:يج..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الرهن التجاري - المادة العاشرة ... المادة السادسة (7 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2675,
+      "tokens": 1486,
+      "metadata": {
+        "items_count": 8,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1476,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة"
+        ],
+        "unique_articles_count": 7,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 7,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة العاشرة:إذا ترتبالرهنعلى مال مثلي، بقيالرهنقائمًا ولو استبدل بالشيءالمرهونشيء آخر بذات القيمة والنوع. وإذا كان الشيءالمرهونمنالأموال غير المثليةجازللمدين الراهنأن يسترده ويستبدل به غيره، بشرط أ..."
+    },
+    {
+      "index": 2,
+      "title": "نظام الرهن التجاري - المادة السابعة ... المادة الحادية عشرة (13 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2758,
+      "tokens": 1532,
+      "metadata": {
+        "items_count": 23,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1499,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الحادية العشرون",
+          "المادة الثانية",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة الأولى",
+          "المادة الثالثة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 13,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 13,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعة عشرة:يجري البيع في الزمان والمكان اللذين يعينهماديوان المظالمبالمزاد العلني، إلا إذا عين الديوان طريقة أخرى للبيع.وإذا كان الشيءالمرهونورقة تجاريةيتم تظهيرها تظهيرًا ناقلًا للملكية بإذن..."
+    },
+    {
+      "index": 3,
+      "title": "نظام الرهن التجاري - المادة الرابعة ... المادة الثالثة (10 مواد)",
+      "hierarchy_level": "article",
+      "chars": 1142,
+      "tokens": 634,
+      "metadata": {
+        "items_count": 14,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 616,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العشرون",
+          "المادة الحادية العشرون",
+          "المادة الثانية",
+          "المادة الثالثة"
+        ],
+        "unique_articles_count": 10,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 10,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الرابعة عشرة:\n\nالمادة الخامسة عشرة:\n\nالمادة السادسة عشرة:\n\nالمادة السابعة عشرة:\n\nالمادة الثامنة عشرة:\n\nالمادة التاسعة عشرة:\n\nالمادة العشرون\n\nالمادة الحادية العشرون:\n\nالمادة الثانية والعشرون:\n\nا..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "GOOD",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 5.883044540708653,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 2,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 4 chunks missing context",
+    "📊 INFO: 2 Saudi legal document patterns detected (normal)",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}
