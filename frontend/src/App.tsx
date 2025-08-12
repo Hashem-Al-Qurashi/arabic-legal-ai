@@ -1196,6 +1196,7 @@ interface FormattedMessageProps {
 
 // Replace your FormattedMessage component with this GREEN-THEMED version
 
+// Gemini-Style FormattedMessage Component
 const FormattedMessage: React.FC<FormattedMessageProps> = ({ 
   content, 
   role, 
@@ -1208,142 +1209,76 @@ const FormattedMessage: React.FC<FormattedMessageProps> = ({
   if (role === 'user') {
     return (
       <div style={{
-        lineHeight: '1.6',
+        fontFamily: "'Noto Sans Arabic', sans-serif",
+        fontSize: '16px',
+        fontWeight: '400',
+        lineHeight: '1.5',
         textAlign: 'right',
         direction: 'rtl',
-        fontSize: '25px'
+        letterSpacing: '0.01em'
       }}>
         {content}
       </div>
     );
   }
 
-  // AI messages: Premium Legal Document Container - GREEN THEME
+  // AI messages: Gemini-style clean typography
   return (
     <div
       className="ai-response-container"
       style={{
-        // Premium Legal Document Background
-        background: 'linear-gradient(145deg, #ffffff 0%, #fefffe 50%, #f6fdf9 100%)',
+        // Gemini-style background - Pure white with subtle contrast
+        background: '#ffffff',
         
-        // Professional Border & Shadow - GREEN THEME
-        border: '1px solid #d1f5d3',
-        borderRadius: '24px',
-        boxShadow: `
-          0 8px 32px rgba(0, 108, 53, 0.08),
-          0 4px 16px rgba(0, 108, 53, 0.04),
-          0 1px 4px rgba(0, 108, 53, 0.04),
-          inset 0 1px 0 rgba(255, 255, 255, 0.9)
-        `,
+        // Clean border and shadow - Very subtle like Gemini
+        border: '1px solid #e8eaed',
+        borderRadius: '12px',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)',
         
-        // Spacing & Layout
-        padding: '3.5rem 4rem 3rem 4rem',
-        margin: '2rem 0 2.5rem 0',
+        // Gemini-style spacing - Generous but not excessive
+        padding: '24px 28px',
+        margin: '16px 0',
+        
+        // Layout
         position: 'relative' as const,
         overflow: 'hidden' as const,
         maxWidth: sidebarOpen ? '85%' : '85%',
         width: 'fit-content',
-        minWidth: '400px',
+        minWidth: '320px',
         
-        // Typography Base
-        fontFamily: "'Noto Sans Arabic', 'SF Pro Display', -apple-system, sans-serif",
+        // Gemini typography - Perfect hierarchy
+        fontFamily: "'Noto Sans Arabic', sans-serif",
+        fontSize: '16px',
+        fontWeight: '400',
+        lineHeight: '1.6',
+        letterSpacing: '0.01em',
         direction: 'rtl' as const,
         textAlign: 'right' as const,
+        color: '#3c4043',
         
-        // Smooth Transitions
-        transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        // Smooth interaction
+        transition: 'all 0.2s ease',
         
-        // Auto margins for centering
+        // Positioning
         marginLeft: sidebarOpen ? '0' : 'auto',
-        marginRight: sidebarOpen ? '0' : 'auto',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-3px)';
-        e.currentTarget.style.boxShadow = `
-          0 12px 48px rgba(0, 108, 53, 0.12),
-          0 8px 24px rgba(0, 108, 53, 0.08),
-          0 2px 8px rgba(0, 108, 53, 0.06),
-          inset 0 1px 0 rgba(255, 255, 255, 0.95)
-        `;
-        e.currentTarget.style.borderColor = '#b8f2bb';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = `
-          0 8px 32px rgba(0, 108, 53, 0.08),
-          0 4px 16px rgba(0, 108, 53, 0.04),
-          0 1px 4px rgba(0, 108, 53, 0.04),
-          inset 0 1px 0 rgba(255, 255, 255, 0.9)
-        `;
-        e.currentTarget.style.borderColor = '#d1f5d3';
+        marginRight: sidebarOpen ? '2rem' : 'auto'
       }}
     >
-      {/* Premium Legal Header Badge - GREEN THEME */}
       <div
+        className="ai-response"
         style={{
-          content: '⚖️ الاستشارة القانونية',
-          position: 'absolute',
-          top: '0',
-          right: '0',
-          background: 'linear-gradient(135deg, #006C35 0%, #004A24 50%, #006C35 100%)',
-          color: 'white',
-          padding: '12px 32px 12px 28px',
-          borderRadius: '0 24px 0 20px',
+          fontFamily: "'Noto Sans Arabic', sans-serif",
           fontSize: '16px',
-          fontWeight: '600',
-          letterSpacing: '0.02em',
-          boxShadow: `
-            0 4px 16px rgba(0, 108, 53, 0.25),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2)
-          `,
-          zIndex: 10,
-          fontFamily: "'Noto Sans Arabic', sans-serif"
+          fontWeight: '400',
+          lineHeight: '1.6',
+          letterSpacing: '0.01em',
+          color: '#3c4043'
         }}
-      >
-        ⚖️ الاستشارة القانونية
-      </div>
-
-      {/* Elegant Legal Accent Border - GREEN THEME */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '0',
-          right: '0',
-          width: '5px',
-          height: '100%',
-          background: 'linear-gradient(180deg, #006C35 0%, #059669 25%, #004A24 50%, #059669 75%, #006C35 100%)',
-          borderRadius: '0 24px 24px 0',
-          boxShadow: 'inset 1px 0 2px rgba(255, 255, 255, 0.3)'
-        }}
-      />
-      
-      <div
-  className="ai-response"
-   dangerouslySetInnerHTML={{ __html: formatAIResponse(content) }}
-  style={{
-    // Enhanced Typography
-    fontFamily: "'Noto Sans Arabic', 'SF Pro Text', -apple-system, sans-serif",
-    direction: 'rtl',
-    textAlign: 'right',
-    lineHeight: '1.75',
-    color: '#1a202c',
-    position: 'relative',
-    zIndex: 5
-  }}
-/>
-      
-      {/* Add ActionsBar for AI messages */}
-      <ActionsBar
-        content={content}
-        isLastMessage={isLastMessage}
-        messages={messages}
-        conversations={conversations}
-        selectedConversation={selectedConversation}
+        dangerouslySetInnerHTML={{ __html: content }}
       />
     </div>
   );
 };
-
 // Enhanced CSS for green theme typography (add this to your App.css)
 
 interface MessageElement {
@@ -1469,142 +1404,117 @@ const detectMultiAgentResponse = (content: string): boolean => {
 };
 
 
+// SMART FIXED FORMATTER - Replace your formatAIResponse function
 const formatAIResponse = (content: string): string => {
-  console.log('---- RAW INPUT ----');
-  console.log(content);
-
-  // Step 1: Clean the input
-  let cleaned = content
-    // Remove any existing HTML tags first
-    .replace(/<\/?bold>/gi, '')
-    .replace(/<\/?b>/gi, '')
-    // Remove control characters
-    .replace(/[\u200e\u200f\u202a-\u202e\uFEFF]/g, '')
-    .trim();
-
-  console.log('---- AFTER CLEANING ----');
-  console.log(cleaned);
-
-  // Step 2: CRITICAL FIX - Separate stuck markdown headers (GENERIC - NO HARDCODING)
-  cleaned = cleaned
-    // FIRST: Fix stuck markdown headers: ANY character followed immediately by ###
-    .replace(/([^\s\n])(#{1,4}\s)/g, '$1\n$2')
-    
-    // SECOND: Fix Arabic ordinals stuck to previous text (but preserve the ordinal word intact)
-    .replace(/([^\s\n:])(\s*)(أولاً|ثانياً|ثالثاً|رابعاً|خامساً|سادساً|سابعاً|ثامناً|تاسعاً|عاشراً):/g, '$1\n$3:')
-    
-    // THIRD: Fix numbered points stuck to Arabic text
-    .replace(/([أ-ي])(\d+\.)/g, '$1\n$2')
-    
-    // FOURTH: Fix common Arabic sentence starters stuck to previous text
-    .replace(/([أ-ي])(بناءً|وفقاً|يجب|يمكن|نطلب|ختاماً|في\s+حال|على\s+أن|من\s+المهم)/g, '$1\n$2')
-    
-    // FIFTH: Add line breaks after Arabic ordinals if they're followed by more content on same line
-    .replace(/(أولاً|ثانياً|ثالثاً|رابعاً|خامساً|سادساً|سابعاً|ثامناً|تاسعاً|عاشراً):\s*([أ-ي][^:\n]{10,})/g, '$1: $2\n');
-
-  console.log('---- AFTER HEADER SEPARATION ----');
-  console.log(cleaned);
-
-  // Step 3: Ensure proper spacing around headers
-  cleaned = cleaned
-    // Ensure headers have space after #
-    .replace(/(#+)([^\s#])/g, '$1 $2')
-    // Add line breaks before and after headers
-    .replace(/\n(#+\s[^\n]+)\n/g, '\n\n$1\n\n')
+  console.log('🎯 SMART FORMATTER RUNNING');
+  
+  // Step 1: Fix all spacing issues BEFORE processing
+  let text = content
+    // Fix stuck markdown headers
+    .replace(/([^\n])(#{3,4})/g, '$1\n\n$2')
+    // Fix Arabic ordinals stuck to other content
+    .replace(/([^\n])(أولاً|ثانياً|ثالثاً|رابعاً|خامساً|سادساً|سابعاً|ثامناً|تاسعاً|عاشراً):/g, '$1\n\n$2:')
+    // Fix numbered points stuck to headers
+    .replace(/(أولاً|ثانياً|ثالثاً|رابعاً|خامساً):\s*([^:]+)(\d+\.\s*\*\*)/g, '$1: $2\n\n$3')
+    // Fix bullet points stuck to content
+    .replace(/([^-])-\s*\*\*/g, '$1\n- **')
+    // Fix numbered lists stuck to headers
+    .replace(/([^:])(\d+\.\s*\*\*)/g, '$1\n\n$2')
     // Clean up multiple newlines
     .replace(/\n{3,}/g, '\n\n');
 
-  // Step 4: Process line by line to convert markdown
-  const lines = cleaned.split('\n');
-  const processedLines = [];
-
+  console.log('After smart spacing fix:', text.substring(0, 150) + '...');
+  
+  // Step 2: Process line by line
+  const lines = text.split('\n');
+  const htmlLines = [];
+  
   for (let i = 0; i < lines.length; i++) {
-    let line = lines[i].trim();
+    const line = lines[i].trim();
     
     if (!line) {
-      processedLines.push('');
+      htmlLines.push('');
       continue;
     }
-
-    // Convert headers (order matters - start with longest)
-    if (line.startsWith('####')) {
-      line = line.replace(/^####\s*(.*)$/, '<h3>$1</h3>');
-    } else if (line.startsWith('###')) {
-      line = line.replace(/^###\s*(.*)$/, '<h2>$1</h2>');
-    } else if (line.startsWith('##')) {
-      line = line.replace(/^##\s*(.*)$/, '<h2>$1</h2>');
-    } else if (line.startsWith('#')) {
-      line = line.replace(/^#\s*(.*)$/, '<h1>$1</h1>');
+    
+    // Skip standalone #### lines
+    if (line === '####' || line === '###' || line === '#') {
+      continue;
     }
-    // Convert Arabic ordinal headers (MORE SPECIFIC PATTERN)
-    else if (/^(أولاً|ثانياً|ثالثاً|رابعاً|خامساً|سادساً|سابعاً|ثامناً|تاسعاً|عاشراً):\s*.{0,100}$/.test(line)) {
-      line = line.replace(/^(.*?)$/, '<h3>$1</h3>');
+    
+    // Convert ### headers
+    if (line.startsWith('### ')) {
+      const headerText = line.replace('### ', '');
+      htmlLines.push(`<h3>${headerText}</h3>`);
     }
-    // Handle OTHER Arabic headers ending with colon (LESS AGGRESSIVE)
-    else if (/^[أ-ي\s]{4,25}:\s*$/.test(line) && !line.includes('أولاً') && !line.includes('ثانياً') && !line.includes('ثالثاً')) {
-      line = line.replace(/^(.*?):\s*$/, '<h3>$1</h3>');
+    // Convert #### headers
+    else if (line.startsWith('#### ')) {
+      const headerText = line.replace('#### ', '');
+      htmlLines.push(`<h3>${headerText}</h3>`);
     }
-
-    processedLines.push(line);
+    // Convert Arabic ordinal headers
+    else if (/^(أولاً|ثانياً|ثالثاً|رابعاً|خامساً|سادساً|سابعاً|ثامناً|تاسعاً|عاشراً):\s*/.test(line)) {
+      htmlLines.push(`<h3>${line}</h3>`);
+    }
+    // Convert numbered lists with bold titles
+    else if (/^\d+\.\s*\*\*/.test(line)) {
+      const match = line.match(/^(\d+)\.\s*\*\*(.*?)\*\*:\s*(.*)$/);
+      if (match) {
+        htmlLines.push(`<div class="legal-point"><strong>${match[1]}. ${match[2]}:</strong> <p>${match[3]}</p></div>`);
+      } else {
+        // Handle case where there's no colon
+        const simpleMatch = line.match(/^(\d+)\.\s*\*\*(.*?)\*\*(.*)$/);
+        if (simpleMatch) {
+          htmlLines.push(`<div class="legal-point"><strong>${simpleMatch[1]}. ${simpleMatch[2]}:</strong> <p>${simpleMatch[3]}</p></div>`);
+        } else {
+          htmlLines.push(`<p>${line}</p>`);
+        }
+      }
+    }
+    // Convert bullet points with bold
+    else if (/^-\s*\*\*/.test(line)) {
+      const processed = line.replace(/^-\s*\*\*(.*?)\*\*:\s*/, '<strong>$1:</strong> ');
+      htmlLines.push(`<li>${processed}</li>`);
+    }
+    // Convert regular bullet points
+    else if (line.startsWith('- ')) {
+      const bulletText = line.replace('- ', '');
+      const processed = bulletText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      htmlLines.push(`<li>${processed}</li>`);
+    }
+    // Handle lines that start with # (section markers)
+    else if (line === '#') {
+      // Skip standalone # markers
+      continue;
+    }
+    // Regular paragraphs
+    else {
+      const processed = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      htmlLines.push(`<p>${processed}</p>`);
+    }
   }
-
-  // Step 5: Join and process other markdown
-  let html = processedLines.join('\n');
-
-  console.log('---- AFTER LINE PROCESSING ----');
-  console.log(html);
-
-  // Step 6: Process remaining markdown elements
-  html = html
-    // Convert bold text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    // Handle numbered lists with bold
-    .replace(/^(\d+)\.\s*\*\*(.*?)\*\*:\s*(.*?)$/gm,
-      '<div class="legal-point"><strong>$1. $2:</strong><p>$3</p></div>')
-    // Handle numbered lists plain
-    .replace(/^(\d+)\.\s*(.*?)$/gm,
-      '<div class="legal-point"><strong>$1.</strong> <p>$2</p></div>')
-    // Handle bullet points
-    .replace(/^[•·-]\s*(.*?)$/gm, '<li>$1</li>');
-
-  // Step 7: Wrap paragraphs and clean up
-  const blocks = html.split(/\n\s*\n/);
-  const finalBlocks = [];
-
-  for (const block of blocks) {
-    const trimmed = block.trim();
-    if (!trimmed) continue;
-
-    // Check if it's already an HTML element
-    if (/^<(h[1-3]|div|ul|li)/.test(trimmed)) {
-      finalBlocks.push(trimmed);
-    } else {
-      // Wrap in paragraph
-      finalBlocks.push(`<p>${trimmed}</p>`);
-    }
-  }
-
-  // Step 8: Final cleanup
-  let result = finalBlocks.join('\n\n')
-    // Wrap consecutive <li> elements in <ul>
-    .replace(/(<li>.*?<\/li>)(\s*<li>.*?<\/li>)*/gs, (match) => {
-      return '<ul>' + match + '</ul>';
-    })
-    .replace(/<\/ul>\s*<ul>/g, '')
-    // Remove empty paragraphs
-    .replace(/<p>\s*<\/p>/g, '')
-    // Clean up strong tags inside headers
-    .replace(/<h([1-3])><strong>(.*?)<\/strong><\/h[1-3]>/g, '<h$1>$2</h$1>')
-    // Remove extra whitespace
-    .replace(/\n{3,}/g, '\n\n');
-
-  console.log('---- FINAL RESULT ----');
-  console.log(result);
   
-  return result;
+  // Step 3: Clean up and wrap lists
+  let html = htmlLines.join('\n');
+  
+  // Wrap consecutive <li> elements in <ul>
+  html = html.replace(/(<li>.*?<\/li>\s*)+/gs, (match) => {
+    return `<ul>${match}</ul>`;
+  });
+  
+  // Remove empty paragraphs
+  html = html.replace(/<p>\s*<\/p>/g, '');
+  
+  // Clean up extra spacing
+  html = html.replace(/\n{3,}/g, '\n\n');
+  
+  console.log('✅ SMART CONVERSION COMPLETE');
+  console.log('Final preview:', html.substring(0, 200) + '...');
+  console.log('Contains h3:', html.includes('<h3>'));
+  console.log('Contains legal-point:', html.includes('legal-point'));
+  
+  return html;
 };
-
-
 
 // Parse Arabic comparison text into table structure
 const parseArabicComparison = (lines: string[]): TableData => {

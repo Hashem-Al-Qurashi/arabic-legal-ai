@@ -12,17 +12,24 @@ terraform {
     }
   }
 
-  backend "s3" {
-    bucket         = "mmoaen-ai-terraform-state-eu"
-    key            = "pproduction/terraform.tfstate"
-    region         = "eu-central-1"
-    encrypt        = true
-    dynamodb_table = "tterraform-state-lock"
-  }
 }
 
 provider "aws" {
   region = var.aws_region
+  profile = "newaccount"  # Add this line
+  default_tags {
+    tags = {
+      Project     = var.project_name
+      Environment = var.environment
+      ManagedBy   = "Terraform"
+    }
+  }
+}
+
+provider "aws" {
+  alias   = "us_east_1"
+  region  = "us-east-1"
+  profile = "newaccount"  # (both providers)
   
   default_tags {
     tags = {
@@ -32,6 +39,7 @@ provider "aws" {
     }
   }
 }
+
 
 data "aws_availability_zones" "available" {
   state = "available"
@@ -160,7 +168,7 @@ resource "aws_db_instance" "main" {
   
   engine         = "postgres"
   engine_version = "15.8"
-  instance_class = "db.t3.micro"
+  instance_class = "db.t4g.micro"
   
   db_name  = "arabic_legal_db"
   username = "postgres"
@@ -267,6 +275,7 @@ resource "aws_cloudfront_distribution" "frontend" {
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
+  aliases = ["hokm.ai", "www.hokm.ai"]
 
   default_cache_behavior {
     target_origin_id       = "S3-${aws_s3_bucket.frontend.bucket}"
@@ -287,6 +296,12 @@ resource "aws_cloudfront_distribution" "frontend" {
     max_ttl     = 31536000
   }
 
+  viewer_certificate {
+  acm_certificate_arn      = aws_acm_certificate_validation.frontend_cert.certificate_arn
+  ssl_support_method       = "sni-only"
+  minimum_protocol_version = "TLSv1.2_2021"
+}
+
   # Handle React Router (SPA) - redirect 404s to index.html
   custom_error_response {
     error_code         = 404
@@ -294,10 +309,7 @@ resource "aws_cloudfront_distribution" "frontend" {
     response_page_path = "/index.html"
   }
 
-  # Use CloudFront's free SSL certificate
-  viewer_certificate {
-    cloudfront_default_certificate = true
-  }
+  
 
   # No geographic restrictions
   restrictions {
@@ -310,6 +322,9 @@ resource "aws_cloudfront_distribution" "frontend" {
     Name        = "${var.project_name}-frontend-cdn"
     Environment = var.environment
   }
+
+ depends_on = [aws_acm_certificate_validation.frontend_cert]
+
 }
 
 # S3 bucket policy - only allow CloudFront access
@@ -396,8 +411,8 @@ resource "aws_cloudfront_distribution" "backend" {
 
   # Use CloudFront's free SSL certificate
   viewer_certificate {
-    cloudfront_default_certificate = true
-  }
+  cloudfront_default_certificate = true
+}
 
   # No geographic restrictions
   restrictions {
@@ -410,6 +425,7 @@ resource "aws_cloudfront_distribution" "backend" {
     Name        = "${var.project_name}-backend-cdn"
     Environment = var.environment
   }
+  
 }
 
 # Output the backend CloudFront domain
@@ -419,50 +435,9 @@ output "backend_cloudfront_url" {
 }
 
 
-# NAT Gateways for Private Subnets
-resource "aws_eip" "nat" {
-  count  = 2
-  domain = "vpc"
-  
-  tags = {
-    Name = "${var.project_name}-nat-eip-${count.index + 1}"
-  }
-}
 
-resource "aws_nat_gateway" "main" {
-  count = 2
-  
-  allocation_id = aws_eip.nat[count.index].id
-  subnet_id     = aws_subnet.public[count.index].id
-  
-  tags = {
-    Name = "${var.project_name}-nat-gateway-${count.index + 1}"
-  }
-  
-  depends_on = [aws_internet_gateway.main]
-}
 
-# Private Route Tables
-resource "aws_route_table" "private" {
-  count  = 2
-  vpc_id = aws_vpc.main.id
 
-  route {
-    cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.main[count.index].id
-  }
-
-  tags = {
-    Name = "${var.project_name}-private-rt-${count.index + 1}"
-  }
-}
-
-resource "aws_route_table_association" "private" {
-  count = 2
-
-  subnet_id      = aws_subnet.private[count.index].id
-  route_table_id = aws_route_table.private[count.index].id
-}
 
 # Security Groups for Load Balancer
 resource "aws_security_group" "alb" {
@@ -676,13 +651,17 @@ output "cloudfront_url" {
   value       = "https://${aws_cloudfront_distribution.frontend.domain_name}"
 }
 
+
+
+
+
 # ECS Task Definition
 resource "aws_ecs_task_definition" "backend" {
   family                   = "${var.project_name}-backend"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  cpu                      = "1024"
-  memory                   = "2048"
+  cpu                      = "256"
+  memory                   = "512"
   execution_role_arn       = aws_iam_role.ecs_task_execution.arn
   task_role_arn           = aws_iam_role.ecs_task.arn
 
@@ -711,7 +690,7 @@ resource "aws_ecs_task_definition" "backend" {
         },
         {
           name  = "CORS_ORIGINS"
-          value = "https://${aws_cloudfront_distribution.frontend.domain_name},https://${aws_cloudfront_distribution.backend.domain_name},http://localhost:3000"
+          value = "https://hokm.ai,https://www.hokm.ai,https://${aws_cloudfront_distribution.frontend.domain_name},https://${aws_cloudfront_distribution.backend.domain_name},http://localhost:3000"
         }
       ]
       
@@ -750,11 +729,11 @@ resource "aws_ecs_service" "backend" {
   desired_count   = 1
   launch_type     = "FARGATE"
 
-  network_configuration {
-    subnets          = aws_subnet.private[*].id
-    security_groups  = [aws_security_group.ecs.id]
-    assign_public_ip = false
-  }
+ network_configuration {
+  subnets          = aws_subnet.public[*].id
+  security_groups  = [aws_security_group.ecs.id]
+  assign_public_ip = true
+}
 
   load_balancer {
     target_group_arn = aws_lb_target_group.backend.arn
@@ -764,3 +743,91 @@ resource "aws_ecs_service" "backend" {
 
   depends_on = [aws_lb_listener.backend]
 }
+
+
+
+
+resource "aws_route53_zone" "main" {
+  name = "hokm.ai"
+  
+  tags = {
+    Name = "${var.project_name}-hosted-zone"
+  }
+}
+
+
+output "name_servers" {
+  description = "Configure these at Spaceship NOW"
+  value       = aws_route53_zone.main.name_servers
+}
+
+# SSL Certificate for hokm.ai
+resource "aws_acm_certificate" "frontend_cert" {
+  provider          = aws.us_east_1
+  domain_name       = "hokm.ai"
+  subject_alternative_names = ["www.hokm.ai"]
+  validation_method = "DNS"
+  
+  lifecycle {
+    create_before_destroy = true
+  }
+  
+  tags = {
+    Name = "${var.project_name}-frontend-cert"
+  }
+}
+
+# Certificate validation records
+resource "aws_route53_record" "cert_validation" {
+  for_each = {
+    for dvo in aws_acm_certificate.frontend_cert.domain_validation_options : dvo.domain_name => {
+      name   = dvo.resource_record_name
+      record = dvo.resource_record_value
+      type   = dvo.resource_record_type
+    }
+  }
+  
+  allow_overwrite = true
+  name            = each.value.name
+  records         = [each.value.record]
+  ttl             = 60
+  type            = each.value.type
+  zone_id         = aws_route53_zone.main.zone_id
+}
+
+# Certificate validation
+resource "aws_acm_certificate_validation" "frontend_cert" {
+  provider                = aws.us_east_1
+  certificate_arn         = aws_acm_certificate.frontend_cert.arn
+  validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
+}
+
+# DNS Records for hokm.ai
+resource "aws_route53_record" "frontend_a" {
+  zone_id = aws_route53_zone.main.zone_id
+  name    = "hokm.ai"
+  type    = "A"
+  
+  alias {
+    name                   = aws_cloudfront_distribution.frontend.domain_name
+    zone_id                = aws_cloudfront_distribution.frontend.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
+
+resource "aws_route53_record" "frontend_www" {
+  zone_id = aws_route53_zone.main.zone_id
+  name    = "www.hokm.ai"
+  type    = "A"
+  
+  alias {
+    name                   = aws_cloudfront_distribution.frontend.domain_name
+    zone_id                = aws_cloudfront_distribution.frontend.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
+
+
+
+
+
