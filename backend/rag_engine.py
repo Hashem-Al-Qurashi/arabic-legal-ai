@@ -209,7 +209,7 @@ load_dotenv(".env")
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
+from app.core.prompt_controller import get_master_controller
 # Simple API key configuration
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -1251,74 +1251,105 @@ class IntelligentLegalRAG:
 
 
     async def ask_question_with_context_streaming(
-        self, 
-        query: str, 
-        conversation_history: List[Dict[str, str]]
-    ) -> AsyncIterator[str]:
+    self, 
+    query: str, 
+    conversation_history: List[Dict[str, str]]
+) -> AsyncIterator[str]:
         """
-        Intelligent context-aware legal consultation with AI classification
+        🚀 ENHANCED: Now uses existing LegalContextBuilder and ConversationSynthesizer
         """
         try:
-            logger.info(f"Processing intelligent contextual legal question: {query[:50]}...")
+            logger.info(f"Processing with legal context synthesis: {query[:50]}...")
             logger.info(f"Conversation context: {len(conversation_history)} messages")
             
-            # Stage 1: AI-powered intent classification with context
+            # Stage 1: AI-powered intent classification (keep existing)
             classification = await self.classifier.classify_intent(query, conversation_history)
             category = classification["category"]
             confidence = classification["confidence"]
             
-            # Stage 2: Get relevant documents
-            print(f"🔥 DEBUG CATEGORY: category='{category}', type={type(category)}")
+            # Stage 2: Get relevant documents (keep existing)
             if category == "ACTIVE_DISPUTE":
-                top_k = 25  # Get more statutes for comprehensive legal citations
+                top_k = 25
             elif category == "PLANNING_ACTION":
-                top_k = 20  # Need good coverage for planning
+                top_k = 20
             else:
-                top_k = 15  # General questions need fewer documents
+                top_k = 15
 
             relevant_docs = await self.retriever.get_relevant_documents(query, top_k=top_k, user_intent=category)
             
-            # Stage 3: Select appropriate prompt
-            system_prompt = PROMPT_TEMPLATES[category]
+            # 🚀 NEW: Stage 3: Use Your Existing Legal Context System
+            try:
+                master_controller = get_master_controller(ai_client=self.ai_client)
+                
+                # Build legal context using your existing LegalContextBuilder
+                legal_context = await master_controller.context_builder.build_context(
+                    query=query,
+                    retrieved_documents=relevant_docs,
+                    conversation_history=conversation_history
+                )
+                
+                # Generate enhanced prompt using your existing system
+                enhanced_prompt = await master_controller.generate_prompt_for_query(
+                    query=query,
+                    retrieved_documents=relevant_docs,
+                    conversation_history=conversation_history
+                )
+                
+                # Stage 4: Use enhanced legal context instead of raw messages
+                messages = [
+                    {"role": "system", "content": PROMPT_TEMPLATES[category]},
+                    {"role": "system", "content": f"السياق القانوني المحسن:\n{enhanced_prompt}"},
+                ]
+                
+                logger.info(f"✅ Using enhanced legal context from existing components")
+                
+            except Exception as context_error:
+                logger.warning(f"Legal context generation failed: {context_error}, using fallback")
+                
+                # Fallback to original raw message processing
+                messages = [{"role": "system", "content": PROMPT_TEMPLATES[category]}]
+                
+                recent_history = conversation_history[-5:] if len(conversation_history) > 5 else conversation_history
+                for msg in recent_history:
+                    messages.append({
+                        "role": msg["role"],
+                        "content": msg["content"]
+                    })
             
-            messages = [
-                {"role": "system", "content": system_prompt}
-            ]
-            
-            # Stage 4: Add conversation history (last 8 messages)
-            recent_history = conversation_history[-8:] if len(conversation_history) > 8 else conversation_history
-            for msg in recent_history:
+            # Stage 5: Add legal documents context (keep existing)
+            context_text = self.format_legal_context_naturally(relevant_docs)
+            if context_text:
                 messages.append({
-                    "role": msg["role"],
-                    "content": msg["content"]
+                    "role": "system", 
+                    "content": f"📚 المراجع القانونية:\n{context_text}"
                 })
             
-            # Stage 5: Add current question with legal context if available
-            # Stage 5: Add current question with legal context if available
-            if relevant_docs:
-                # PRIORITY 4 FIX: Structure multi-article chunks before formatting
-                structured_docs = await self.structure_multi_article_chunks(relevant_docs, query)
-                legal_context = self.format_legal_context_naturally(structured_docs)
-                contextual_prompt = f"""{legal_context}
-
-            السؤال: {query}"""
-                logger.info(f"Using {len(relevant_docs)} relevant legal documents with {category} approach (contextual)")
-            else:
-                contextual_prompt = query
-                logger.info(f"No relevant documents found - using {category} approach with contextual general knowledge")
+            # Stage 6: Add user query
+            messages.append({"role": "user", "content": query})
             
-            messages.append({
-                "role": "user", 
-                "content": contextual_prompt
-            })
+            logger.info(f"🎯 Processing with {len(messages)} enhanced messages")
             
-            # Stage 6: Stream intelligent contextual response
-            async for chunk in self._stream_ai_response(messages, category):
-                yield chunk
-                
+            # Stage 7: Stream response (keep existing)
+            async for chunk in self.ai_client.chat.completions.create(
+                model=self.ai_model,
+                messages=messages,
+                temperature=0.1,
+                max_tokens=6000,
+                stream=True
+            ):
+                if chunk.choices[0].delta.content:
+                    content = chunk.choices[0].delta.content
+                    content = self.post_process_response(content, relevant_docs)
+                    yield content
+                    
         except Exception as e:
-            logger.error(f"Intelligent contextual legal AI error: {e}")
-            yield f"عذراً، حدث خطأ في معالجة سؤالك: {str(e)}"
+            error_msg = str(e).lower()
+            if "rate limit" in error_msg or "quota" in error_msg:
+                yield "\n\n⏳ تم تجاوز حد الاستخدام المؤقت. يرجى الانتظار دقيقة وإعادة المحاولة."
+            elif "api key" in error_msg or "authentication" in error_msg:
+                yield "\n\n🔑 خطأ في مفتاح API. يرجى التواصل مع الدعم الفني."
+            else:
+                yield f"\n\n❌ خطأ تقني: {str(e)}"
     
     async def _stream_ai_response(self, messages: List[Dict[str, str]], category: str = "GENERAL_QUESTION") -> AsyncIterator[str]:
         """Stream AI response with error handling"""

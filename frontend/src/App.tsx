@@ -1266,14 +1266,6 @@ const FormattedMessage: React.FC<FormattedMessageProps> = ({
     >
       <div
         className="ai-response"
-        style={{
-          fontFamily: "'Noto Sans Arabic', sans-serif",
-          fontSize: '16px',
-          fontWeight: '400',
-          lineHeight: '1.6',
-          letterSpacing: '0.01em',
-          color: '#3c4043'
-        }}
         dangerouslySetInnerHTML={{ __html: content }}
       />
     </div>
@@ -1405,161 +1397,124 @@ const detectMultiAgentResponse = (content: string): boolean => {
 
 
 // SMART FIXED FORMATTER - Replace your formatAIResponse function
-const formatAIResponse = (content: string): string => {
-  console.log('🎯 SMART FORMATTER RUNNING');
-  
-  // Step 1: Fix all spacing issues BEFORE processing
+/**
+ * SIMPLE CLEAN FORMATTER - Creates proper HTML structure
+ */
+const formatPartialContent = (content: string): string => {
   let text = content
-    // Fix stuck markdown headers
     .replace(/([^\n])(#{3,4})/g, '$1\n\n$2')
-    // Fix Arabic ordinals stuck to other content
-    .replace(/([^\n])(أولاً|ثانياً|ثالثاً|رابعاً|خامساً|سادساً|سابعاً|ثامناً|تاسعاً|عاشراً):/g, '$1\n\n$2:')
-    // Fix numbered points stuck to headers
-    .replace(/(أولاً|ثانياً|ثالثاً|رابعاً|خامساً):\s*([^:]+)(\d+\.\s*\*\*)/g, '$1: $2\n\n$3')
-    // Fix bullet points stuck to content
-    .replace(/([^-])-\s*\*\*/g, '$1\n- **')
-    // Fix numbered lists stuck to headers
-    .replace(/([^:])(\d+\.\s*\*\*)/g, '$1\n\n$2')
-    // Clean up multiple newlines
-    .replace(/\n{3,}/g, '\n\n');
+    .replace(/([^\n])(أولاً|ثانياً|ثالثاً|رابعاً|خامساً):/g, '$1\n\n$2:');
 
-  console.log('After smart spacing fix:', text.substring(0, 150) + '...');
-  
-  // Step 2: Process line by line
   const lines = text.split('\n');
   const htmlLines = [];
   
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue; // Skip empty lines for cleaner output
     
-    if (!line) {
-      htmlLines.push('');
-      continue;
+    // Headers - Handle #### and ### and #
+    if (trimmed.startsWith('#### ')) {
+      htmlLines.push(`<h3>${trimmed.replace('#### ', '')}</h3>`);
+    } else if (trimmed.startsWith('### ')) {
+      htmlLines.push(`<h3>${trimmed.replace('### ', '')}</h3>`);
+    } else if (trimmed.startsWith('# ')) {
+      htmlLines.push(`<h3>${trimmed.replace('# ', '')}</h3>`);
     }
-    
-    // Skip standalone #### lines
-    if (line === '####' || line === '###' || line === '#') {
-      continue;
+    // Arabic ordinals
+    else if (/^(أولاً|ثانياً|ثالثاً|رابعاً|خامساً|سادساً|سابعاً|ثامناً|تاسعاً|عاشراً):\s*/.test(trimmed)) {
+      htmlLines.push(`<h3>${trimmed}</h3>`);
     }
-    
-    // Convert ### headers
-    if (line.startsWith('### ')) {
-      const headerText = line.replace('### ', '');
-      htmlLines.push(`<h3>${headerText}</h3>`);
-    }
-    // Convert #### headers
-    else if (line.startsWith('#### ')) {
-      const headerText = line.replace('#### ', '');
-      htmlLines.push(`<h3>${headerText}</h3>`);
-    }
-    // Convert Arabic ordinal headers
-    else if (/^(أولاً|ثانياً|ثالثاً|رابعاً|خامساً|سادساً|سابعاً|ثامناً|تاسعاً|عاشراً):\s*/.test(line)) {
-      htmlLines.push(`<h3>${line}</h3>`);
-    }
-    // Convert numbered lists with bold titles
-    else if (/^\d+\.\s*\*\*/.test(line)) {
-      const match = line.match(/^(\d+)\.\s*\*\*(.*?)\*\*:\s*(.*)$/);
+    // Numbered points
+    else if (/^\d+\.\s*/.test(trimmed)) {
+      const match = trimmed.match(/^(\d+)\.\s*\*\*(.*?)\*\*:\s*(.*)$/);
       if (match) {
-        htmlLines.push(`<div class="legal-point"><strong>${match[1]}. ${match[2]}:</strong> <p>${match[3]}</p></div>`);
+        htmlLines.push(`<div class="legal-point"><strong>${match[1]}. ${match[2]}:</strong> ${match[3]}</div>`);
       } else {
-        // Handle case where there's no colon
-        const simpleMatch = line.match(/^(\d+)\.\s*\*\*(.*?)\*\*(.*)$/);
-        if (simpleMatch) {
-          htmlLines.push(`<div class="legal-point"><strong>${simpleMatch[1]}. ${simpleMatch[2]}:</strong> <p>${simpleMatch[3]}</p></div>`);
-        } else {
-          htmlLines.push(`<p>${line}</p>`);
-        }
+        // Clean ** from numbered points without specific pattern
+        const processed = trimmed.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        htmlLines.push(`<div class="legal-point">${processed}</div>`);
       }
     }
-    // Convert bullet points with bold
-    else if (/^-\s*\*\*/.test(line)) {
-      const processed = line.replace(/^-\s*\*\*(.*?)\*\*:\s*/, '<strong>$1:</strong> ');
+    // Bullet points
+    else if (trimmed.startsWith('- ')) {
+      const processed = trimmed.replace('- ', '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
       htmlLines.push(`<li>${processed}</li>`);
     }
-    // Convert regular bullet points
-    else if (line.startsWith('- ')) {
-      const bulletText = line.replace('- ', '');
-      const processed = bulletText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      htmlLines.push(`<li>${processed}</li>`);
-    }
-    // Handle lines that start with # (section markers)
-    else if (line === '#') {
-      // Skip standalone # markers
-      continue;
-    }
-    // Regular paragraphs
+    // Regular paragraphs - Handle **bold** text properly
     else {
-      const processed = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      htmlLines.push(`<p>${processed}</p>`);
+      const processed = trimmed
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Convert **text** to <strong>text</strong>
+        .replace(/#{1,4}\s*/g, ''); // Remove remaining # symbols
+      if (processed.trim()) {
+        htmlLines.push(`<p>${processed}</p>`);
+      }
     }
   }
   
-  // Step 3: Clean up and wrap lists
+  // Wrap consecutive <li> in <ul>
   let html = htmlLines.join('\n');
-  
-  // Wrap consecutive <li> elements in <ul>
-  html = html.replace(/(<li>.*?<\/li>\s*)+/gs, (match) => {
-    return `<ul>${match}</ul>`;
-  });
-  
-  // Remove empty paragraphs
-  html = html.replace(/<p>\s*<\/p>/g, '');
-  
-  // Clean up extra spacing
-  html = html.replace(/\n{3,}/g, '\n\n');
-  
-  console.log('✅ SMART CONVERSION COMPLETE');
-  console.log('Final preview:', html.substring(0, 200) + '...');
-  console.log('Contains h3:', html.includes('<h3>'));
-  console.log('Contains legal-point:', html.includes('legal-point'));
+  html = html.replace(/(<li>.*?<\/li>\s*)+/gs, '<ul>$&</ul>');
   
   return html;
 };
 
-// Parse Arabic comparison text into table structure
-const parseArabicComparison = (lines: string[]): TableData => {
-  const result: TableData = { headers: [], rows: [] };
+/**
+ * FINAL FORMATTER - Same logic as streaming
+ */
+const formatAIResponse = (content: string): string => {
+  let text = content
+    .replace(/([^\n])(#{3,4})/g, '$1\n\n$2')
+    .replace(/([^\n])(أولاً|ثانياً|ثالثاً|رابعاً|خامساً):/g, '$1\n\n$2:');
+  const lines = text.split('\n');
+  const htmlLines = [];
   
-  // Look for header indicators
-  let processLines = lines;
-  const firstLine = lines[0];
-  if (firstLine && (firstLine.includes('مقارنة') || firstLine.includes('الفرق'))) {
-    // Skip title line
-    processLines = lines.slice(1);
-  }
-  
-  // Try to identify comparison patterns
-  const comparisonPatterns = [
-    // Pattern: "الأول: ... | الثاني: ..."
-    /^(.+?)[:：]\s*(.+?)(?:\s*\|\s*(.+?)[:：]\s*(.+?))?$/,
-    // Pattern: "- النوع الأول: ... - النوع الثاني: ..."
-    /^[-•]\s*(.+?)[:：]\s*(.+?)(?:\s*[-•]\s*(.+?)[:：]\s*(.+?))?$/,
-    // Pattern: "1. ... 2. ..."
-    /^(\d+)[.\-]\s*(.+?)(?:\s*(\d+)[.\-]\s*(.+?))?$/
-  ];
-  
-  for (const line of processLines) {
-    for (const pattern of comparisonPatterns) {
-      const match = line.match(pattern);
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue; // Skip empty lines for cleaner output
+    
+    // Headers - Handle #### and ### and #
+    if (trimmed.startsWith('#### ')) {
+      htmlLines.push(`<h3>${trimmed.replace('#### ', '')}</h3>`);
+    } else if (trimmed.startsWith('### ')) {
+      htmlLines.push(`<h3>${trimmed.replace('### ', '')}</h3>`);
+    } else if (trimmed.startsWith('# ')) {
+      htmlLines.push(`<h3>${trimmed.replace('# ', '')}</h3>`);
+    }
+    // Arabic ordinals
+    else if (/^(أولاً|ثانياً|ثالثاً|رابعاً|خامساً|سادساً|سابعاً|ثامناً|تاسعاً|عاشراً):\s*/.test(trimmed)) {
+      htmlLines.push(`<h3>${trimmed}</h3>`);
+    }
+    // Numbered points
+    else if (/^\d+\.\s*/.test(trimmed)) {
+      const match = trimmed.match(/^(\d+)\.\s*\*\*(.*?)\*\*:\s*(.*)$/);
       if (match) {
-        if (result.headers.length === 0) {
-          if (match[1] && match[3]) {
-            result.headers = [match[1], match[3]];
-          } else {
-            result.headers = ['العنصر الأول', 'العنصر الثاني'];
-          }
-        }
-        if (match[2] && match[4]) {
-          result.rows.push([match[2], match[4]]);
-        } else if (match[2]) {
-          result.rows.push([match[2], '']);
-        }
-        break; // Found a match, move to next line
+        htmlLines.push(`<div class="legal-point"><strong>${match[1]}. ${match[2]}:</strong> ${match[3]}</div>`);
+      } else {
+        // Clean ** from numbered points without specific pattern
+        const processed = trimmed.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        htmlLines.push(`<div class="legal-point">${processed}</div>`);
+      }
+    }
+    // Bullet points
+    else if (trimmed.startsWith('- ')) {
+      const processed = trimmed.replace('- ', '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      htmlLines.push(`<li>${processed}</li>`);
+    }
+    // Regular paragraphs - Handle **bold** text properly
+    else {
+      const processed = trimmed
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Convert **text** to <strong>text</strong>
+        .replace(/#{1,4}\s*/g, ''); // Remove remaining # symbols
+      if (processed.trim()) {
+        htmlLines.push(`<p>${processed}</p>`);
       }
     }
   }
   
-  return result;
+  let html = htmlLines.join('\n');
+  html = html.replace(/(<li>.*?<\/li>\s*)+/gs, '<ul>$&</ul>');
+  
+  return html;
 };
 
 // Generate HTML table for comparisons
@@ -2305,7 +2260,16 @@ const handleDeleteCancel = () => {
   setDeletePopup({ isOpen: false, conversationId: '', conversationTitle: '' });
 };
 
-  const handleSendMessage = async () => {
+  // Add this BEFORE your handleSendMessage function
+
+// DEAD SIMPLE ARABIC FORMATTER - EXACTLY LIKE CLAUDE'S RESPONSES
+
+/**
+ * Simple streaming formatter - formats as content comes in
+ */
+
+
+const handleSendMessage = async () => {
   if (!inputMessage.trim()) return;
 
   // ✅ UNIFIED: Check cooldown for both user types
@@ -2367,17 +2331,18 @@ const handleDeleteCancel = () => {
       selectedConversation || undefined,
       guestSessionId,
       
-            // 📡 Real-time streaming callback
-      (chunk: string) => {
-        streamingContent += chunk;
-        
-        // Update the assistant message in real-time with RAW content
-        setMessages(prev => prev.map(msg => 
-          msg.id === assistantMessageId 
-            ? { ...msg, content: streamingContent }  // ← FIX: No formatting during streaming
-            : msg
-        ));
-      },
+       // 📡 Simple streaming callback
+(chunk: string) => {
+  streamingContent += chunk;
+  
+  const formattedContent = formatPartialContent(streamingContent);
+  
+  setMessages(prev => prev.map(msg => 
+    msg.id === assistantMessageId 
+      ? { ...msg, content: formattedContent }
+      : msg
+  ));
+},
 
       // ✅ Completion handler
       (response: any) => {
