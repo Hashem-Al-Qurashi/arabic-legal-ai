@@ -7,7 +7,7 @@ import type {
   Consultation 
 } from '../types/auth';
 
-const API_BASE_URL = 'https://d2c979d13bkvf4.cloudfront.net';  // ✅ Let the concatenation handle it
+const API_BASE_URL = 'http://localhost:8001';  // ✅ Local development
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -232,6 +232,9 @@ export const chatAPI = {
 async sendMessage(message: string, conversationId?: string, sessionId?: string): Promise<any> {
   const formData = new FormData();
   formData.append('message', message);
+  
+  // Let the RAG system handle the prompting - don't override it
+  
   if (conversationId) {
     formData.append('conversation_id', conversationId);
   }
@@ -280,6 +283,8 @@ async sendMessageStreaming(
 ): Promise<void> {
   const formData = new FormData();
   formData.append('message', message);
+  
+  // Let the RAG system handle the prompting - don't override it
   
   if (conversationId) {
     formData.append('conversation_id', conversationId);

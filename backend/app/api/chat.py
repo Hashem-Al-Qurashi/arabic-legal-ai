@@ -15,6 +15,8 @@ from app.services.guest_service import GuestService
 from app.services.user_service import UserService
 from app.models.user import User
 from app.models.conversation import Conversation, Message
+from app.utils.streaming_processor import StreamingTextProcessor
+from app.utils.arabic_formatter import format_chatgpt_style
 from rag_engine import get_rag_engine
 
 router = APIRouter(prefix="/chat", tags=["chat"])
@@ -263,9 +265,12 @@ async def _generate_streaming_response(
         }
         yield f"data: {json.dumps(metadata_payload)}\n\n"
         
-        # ===== AI RESPONSE GENERATION =====
+        # ===== AI RESPONSE GENERATION WITH ARABIC FORMATTING =====
         full_response = ""
         chunk_count = 0
+        
+        # Initialize Arabic text processor for perfect streaming
+        text_processor = StreamingTextProcessor()
         
         # Get RAG engine and process
         rag_instance = get_rag_engine()
@@ -276,9 +281,19 @@ async def _generate_streaming_response(
                 full_response += chunk
                 chunk_count += 1
                 
+                # 🔍 DEBUG: Log what RAG engine actually outputs
+                print(f"📝 RAG Chunk {chunk_count}: {repr(chunk)}")
+                print(f"📊 Full response so far: {repr(full_response[-100:])}")  # Last 100 chars
+                
+                # 🚀 BORING SOLUTION: Apply formatting during streaming
+                formatted_chunk_content = text_processor.process_chunk(chunk)
+                
+                # 🔍 DEBUG: Log what formatter outputs
+                print(f"✨ Formatted chunk: {repr(formatted_chunk_content[-100:])}")  # Last 100 chars
+                
                 chunk_data = {
                     'type': 'chunk',
-                    'content': chunk,
+                    'content': formatted_chunk_content,  # Send formatted content
                     'chunk_id': chunk_count
                 }
                 yield f"data: {json.dumps(chunk_data)}\n\n"
@@ -286,10 +301,13 @@ async def _generate_streaming_response(
         # ===== SAVE AI RESPONSE =====
         processing_time = int((datetime.utcnow() - start_time).total_seconds() * 1000)
         
+        # Get the final formatted content (same as what was streamed)
+        final_formatted_content = text_processor.get_final_result()
+        
         if current_user:
-            # Save to database
+            # Save formatted content to database
             ai_message = ChatService.add_message(
-                db, conversation_id, "assistant", full_response,
+                db, conversation_id, "assistant", final_formatted_content,
                 processing_time_ms=str(processing_time)
             )
             
@@ -300,17 +318,17 @@ async def _generate_streaming_response(
             db.refresh(current_user)
             
         else:
-            # Save to session
+            # Save formatted content to session
             session["conversation_history"].append({
                 "role": "assistant",
-                "content": full_response,
+                "content": final_formatted_content,
                 "timestamp": datetime.utcnow().isoformat()
             })
             
-            # Create mock AI message
+            # Create mock AI message with formatted content
             ai_message = type('obj', (object,), {
                 'id': f"guest_ai_{int(datetime.utcnow().timestamp())}",
-                'content': full_response,
+                'content': final_formatted_content,
                 'created_at': datetime.utcnow(),
                 'processing_time_ms': str(processing_time)
             })()

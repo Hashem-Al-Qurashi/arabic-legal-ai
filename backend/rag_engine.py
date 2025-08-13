@@ -1329,17 +1329,18 @@ class IntelligentLegalRAG:
             
             logger.info(f"🎯 Processing with {len(messages)} enhanced messages")
             
-            # Stage 7: Stream response (keep existing)
-            async for chunk in self.ai_client.chat.completions.create(
+            # Stage 7: Stream response (FIXED async pattern)
+            stream = await self.ai_client.chat.completions.create(
                 model=self.ai_model,
                 messages=messages,
                 temperature=0.1,
                 max_tokens=6000,
                 stream=True
-            ):
+            )
+            
+            async for chunk in stream:
                 if chunk.choices[0].delta.content:
                     content = chunk.choices[0].delta.content
-                    content = self.post_process_response(content, relevant_docs)
                     yield content
                     
         except Exception as e:
