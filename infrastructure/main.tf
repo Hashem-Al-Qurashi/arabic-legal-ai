@@ -711,7 +711,7 @@ resource "aws_ecs_task_definition" "backend" {
         },
         {
           name  = "CORS_ORIGINS"
-          value = "https://${aws_cloudfront_distribution.frontend.domain_name},https://${aws_cloudfront_distribution.backend.domain_name},http://localhost:3000"
+          value = "https://hokm.ai,https://www.hokm.ai,https://${aws_cloudfront_distribution.frontend.domain_name},https://${aws_cloudfront_distribution.backend.domain_name}"
         }
       ]
       
