@@ -7,6 +7,21 @@ import RegisterForm from './components/auth/RegisterForm';
 import { legalAPI, chatAPI } from './services/api';
 import DOMPurify from 'dompurify';
 
+// Simple dark mode hook
+const useTheme = () => {
+  const [isDark, setIsDark] = useState(() => {
+    const saved = localStorage.getItem('dark-mode');
+    return saved ? JSON.parse(saved) : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark-mode', isDark);
+    localStorage.setItem('dark-mode', JSON.stringify(isDark));
+  }, [isDark]);
+
+  return { isDark, toggleTheme: () => setIsDark(!isDark) };
+};
+
 
 
 // =====================================================================
@@ -1374,6 +1389,7 @@ interface FormattedMessageProps {
   messages?: Message[];
   conversations?: Conversation[];
   selectedConversation?: string | null;
+  isDark?: boolean;
 }
 
 // Replace your FormattedMessage component with this GREEN-THEMED version
@@ -1385,7 +1401,8 @@ const FormattedMessage: React.FC<FormattedMessageProps> = ({
   isLastMessage = false,
   messages = [],
   conversations = [],
-  selectedConversation = null
+  selectedConversation = null,
+  isDark = false
 }) => {
   if (role === 'user') {
     return (
@@ -1393,7 +1410,8 @@ const FormattedMessage: React.FC<FormattedMessageProps> = ({
         lineHeight: '1.6',
         textAlign: 'right',
         direction: 'rtl',
-        fontSize: '25px'
+        fontSize: '25px',
+        color: '#ffffff' // Always white for user messages (green background in both themes)
       }}>
         {content}
       </div>
@@ -1405,18 +1423,25 @@ const FormattedMessage: React.FC<FormattedMessageProps> = ({
     <div
       className="ai-response-container"
       style={{
-        // Premium Legal Document Background
-        background: 'linear-gradient(145deg, #ffffff 0%, #fefffe 50%, #f6fdf9 100%)',
+        // Premium Legal Document Background - Theme Aware
+        background: isDark
+          ? 'linear-gradient(145deg, #1f2937 0%, #111827 50%, #0f1419 100%)'
+          : 'linear-gradient(145deg, #ffffff 0%, #fefffe 50%, #f6fdf9 100%)',
         
-        // Professional Border & Shadow - GREEN THEME
-        border: '1px solid #d1f5d3',
+        // Professional Border & Shadow - Theme Aware
+        border: isDark 
+          ? '1px solid rgba(75, 85, 99, 0.3)' 
+          : '1px solid #d1f5d3',
         borderRadius: '24px',
-        boxShadow: `
-          0 8px 32px rgba(0, 108, 53, 0.08),
-          0 4px 16px rgba(0, 108, 53, 0.04),
-          0 1px 4px rgba(0, 108, 53, 0.04),
-          inset 0 1px 0 rgba(255, 255, 255, 0.9)
-        `,
+        boxShadow: isDark
+          ? `0 8px 32px rgba(0, 0, 0, 0.4),
+             0 4px 16px rgba(0, 0, 0, 0.3),
+             0 1px 4px rgba(0, 0, 0, 0.3),
+             inset 0 1px 0 rgba(255, 255, 255, 0.1)`
+          : `0 8px 32px rgba(0, 108, 53, 0.08),
+             0 4px 16px rgba(0, 108, 53, 0.04),
+             0 1px 4px rgba(0, 108, 53, 0.04),
+             inset 0 1px 0 rgba(255, 255, 255, 0.9)`,
         
         // Spacing & Layout
         padding: '3.5rem 4rem 3rem 4rem',
@@ -2546,6 +2571,10 @@ const ChatApp: React.FC = () => {
   refreshUserData,
   logout
 } = useAuth();
+  
+  // Dark mode for authenticated users
+  const { isDark, toggleTheme } = useTheme();
+  
   const [isMobile, setIsMobile] = useState(false); // 🔧 ADD THIS LINE
   // Initialize sidebar state from localStorage, default to true if not found
   const [sidebarOpen, setSidebarOpen] = useState(() => {
@@ -3240,7 +3269,7 @@ const handleDeleteCancel = () => {
   height: isMobile ? 'auto' : '100vh',
   minHeight: isMobile ? '100vh' : 'auto',
   fontFamily: "'Noto Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-  background: '#f7f7f8',
+  background: 'var(--background-light)',
   direction: 'rtl',
   contain: 'layout style paint',
   // 🔧 MOBILE FIX: Allow scrolling
@@ -3352,8 +3381,42 @@ const handleDeleteCancel = () => {
     المحادثات
   </h2>
   
-  {/* Only show close button, properly spaced */}
-  <button
+  {/* Theme and close buttons */}
+  <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+    {/* Theme toggle */}
+    <button
+      onClick={toggleTheme}
+      style={{
+        background: 'rgba(255, 255, 255, 0.05)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        color: 'rgba(142, 142, 160, 0.8)',
+        cursor: 'pointer',
+        padding: '8px',
+        borderRadius: '8px',
+        transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+        width: '36px',
+        height: '36px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backdropFilter: 'blur(10px)'
+      }}
+      title={isDark ? 'تبديل للوضع الفاتح' : 'تبديل للوضع المظلم'}
+    >
+      {isDark ? (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+      ) : (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      )}
+    </button>
+    
+    {/* Close button */}
+    <button
     onClick={() => setSidebarOpen(false)}
     style={{
       background: 'rgba(255, 255, 255, 0.05)',
@@ -3386,6 +3449,7 @@ const handleDeleteCancel = () => {
       <line x1="6" y1="6" x2="18" y2="18"/>
     </svg>
   </button>
+  </div>
 </div>
 
           {/* New Chat Button */}
@@ -3951,7 +4015,7 @@ const handleDeleteCancel = () => {
   gridArea: 'main',
   display: 'flex',
   flexDirection: 'column',
-  background: 'white',
+  background: 'var(--background-white)',
   // 🔧 MOBILE FIX: Dynamic height
   height: isMobile ? 'auto' : '100vh',
   minHeight: isMobile ? '100vh' : 'auto',
@@ -4019,28 +4083,38 @@ const handleDeleteCancel = () => {
                       key={index}
                       className="suggested-card"
                       style={{
-                        background: 'white',
-                        border: '1px solid #e5e7eb',
+                        background: 'var(--background-white)',
+                        border: isDark 
+                          ? '1px solid rgba(75, 85, 99, 0.3)' 
+                          : '1px solid #e5e7eb',
                         borderRadius: '12px',
                         padding: '20px',
                         cursor: 'pointer',
                         textAlign: 'right',
-                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
+                        boxShadow: isDark 
+                          ? '0 2px 4px rgba(0, 0, 0, 0.2)' 
+                          : '0 2px 4px rgba(0, 0, 0, 0.05)',
                         animation: `fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s both`
                       }}
                       onClick={() => handleSuggestedQuestion(question)}
                       onMouseOver={(e) => {
                         (e.currentTarget as HTMLElement).style.borderColor = '#10a37f';
-                        (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 12px rgba(16, 163, 127, 0.15)';
+                        (e.currentTarget as HTMLElement).style.boxShadow = isDark 
+                          ? '0 4px 12px rgba(16, 163, 127, 0.3)' 
+                          : '0 4px 12px rgba(16, 163, 127, 0.15)';
                       }}
                       onMouseOut={(e) => {
-                        (e.currentTarget as HTMLElement).style.borderColor = '#e5e7eb';
-                        (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';
+                        (e.currentTarget as HTMLElement).style.borderColor = isDark 
+                          ? 'rgba(75, 85, 99, 0.3)' 
+                          : '#e5e7eb';
+                        (e.currentTarget as HTMLElement).style.boxShadow = isDark 
+                          ? '0 2px 4px rgba(0, 0, 0, 0.2)' 
+                          : '0 2px 4px rgba(0, 0, 0, 0.05)';
                       }}
                     >
                       <div style={{
                         fontSize: '22px',
-                        color: '#374151',
+                        color: isDark ? '#f9fafb' : '#374151',
                         fontWeight: '500',
                         lineHeight: '1.5'
                       }}>
@@ -4146,6 +4220,7 @@ const handleDeleteCancel = () => {
   messages={messages}
   conversations={conversations}
   selectedConversation={selectedConversation}
+  isDark={isDark}
 />
                       <div style={{
                         fontSize: '18px',
@@ -4182,13 +4257,19 @@ const handleDeleteCancel = () => {
           {/* Input Area */}
 <div style={{
   padding: '32px 24px',
-  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%)',
-  borderTop: '1px solid rgba(0, 108, 53, 0.1)',
+  background: isDark 
+    ? 'linear-gradient(135deg, rgba(31, 41, 55, 0.95) 0%, rgba(17, 24, 39, 0.9) 100%)'
+    : 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%)',
+  borderTop: isDark 
+    ? '1px solid rgba(55, 65, 81, 0.3)'
+    : '1px solid rgba(0, 108, 53, 0.1)',
   position: 'relative',
   display: 'flex',
   justifyContent: 'center',
   backdropFilter: 'blur(20px)',
-  boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 -4px 32px rgba(0, 108, 53, 0.05)'
+  boxShadow: isDark
+    ? 'inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 -4px 32px rgba(0, 0, 0, 0.2)'
+    : 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 -4px 32px rgba(0, 108, 53, 0.05)'
 }}>
   <div style={{
     position: 'relative',
@@ -4202,40 +4283,54 @@ const handleDeleteCancel = () => {
         display: 'flex',
         alignItems: 'flex-end',
         gap: '16px',
-        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.6) 100%)',
+        background: isDark
+          ? 'linear-gradient(135deg, rgba(55, 65, 81, 0.8) 0%, rgba(31, 41, 55, 0.6) 100%)'
+          : 'linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.6) 100%)',
         borderRadius: '24px',
         padding: '20px 24px',
-        border: '2px solid rgba(0, 108, 53, 0.1)',
+        border: isDark
+          ? '2px solid rgba(75, 85, 99, 0.3)'
+          : '2px solid rgba(0, 108, 53, 0.1)',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         minHeight: '80px',
         backdropFilter: 'blur(20px)',
-        boxShadow: `
-          0 8px 32px rgba(0, 108, 53, 0.08),
-          0 0 0 1px rgba(255, 255, 255, 0.1),
-          inset 0 1px 0 rgba(255, 255, 255, 0.2)
-        `,
+        boxShadow: isDark
+          ? `0 8px 32px rgba(0, 0, 0, 0.3),
+             0 0 0 1px rgba(255, 255, 255, 0.05),
+             inset 0 1px 0 rgba(255, 255, 255, 0.1)`
+          : `0 8px 32px rgba(0, 108, 53, 0.08),
+             0 0 0 1px rgba(255, 255, 255, 0.1),
+             inset 0 1px 0 rgba(255, 255, 255, 0.2)`,
         animation: inputMessage.length === 0 ? 'luxuryPulse 4s ease-in-out infinite' : 'none'
       }}
       onFocus={() => {
         // Stop animation on focus
       }}
       onMouseOver={(e) => {
-        e.currentTarget.style.borderColor = 'rgba(0, 108, 53, 0.2)';
+        e.currentTarget.style.borderColor = isDark 
+          ? 'rgba(75, 85, 99, 0.5)' 
+          : 'rgba(0, 108, 53, 0.2)';
         e.currentTarget.style.transform = 'translateY(-2px)';
-        e.currentTarget.style.boxShadow = `
-          0 12px 40px rgba(0, 108, 53, 0.12),
-          0 0 0 1px rgba(255, 255, 255, 0.1),
-          inset 0 1px 0 rgba(255, 255, 255, 0.2)
-        `;
+        e.currentTarget.style.boxShadow = isDark
+          ? `0 12px 40px rgba(0, 0, 0, 0.4),
+             0 0 0 1px rgba(255, 255, 255, 0.1),
+             inset 0 1px 0 rgba(255, 255, 255, 0.15)`
+          : `0 12px 40px rgba(0, 108, 53, 0.12),
+             0 0 0 1px rgba(255, 255, 255, 0.1),
+             inset 0 1px 0 rgba(255, 255, 255, 0.2)`;
       }}
       onMouseOut={(e) => {
-        e.currentTarget.style.borderColor = 'rgba(0, 108, 53, 0.1)';
+        e.currentTarget.style.borderColor = isDark 
+          ? 'rgba(75, 85, 99, 0.3)' 
+          : 'rgba(0, 108, 53, 0.1)';
         e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = `
-          0 8px 32px rgba(0, 108, 53, 0.08),
-          0 0 0 1px rgba(255, 255, 255, 0.1),
-          inset 0 1px 0 rgba(255, 255, 255, 0.2)
-        `;
+        e.currentTarget.style.boxShadow = isDark
+          ? `0 8px 32px rgba(0, 0, 0, 0.3),
+             0 0 0 1px rgba(255, 255, 255, 0.05),
+             inset 0 1px 0 rgba(255, 255, 255, 0.1)`
+          : `0 8px 32px rgba(0, 108, 53, 0.08),
+             0 0 0 1px rgba(255, 255, 255, 0.1),
+             inset 0 1px 0 rgba(255, 255, 255, 0.2)`;
       }}
     >
                  <textarea
@@ -4253,7 +4348,7 @@ const handleDeleteCancel = () => {
           outline: 'none',
           fontSize: '20px',
           lineHeight: '1.5',
-          color: '#1f2937',
+          color: isDark ? '#f9fafb' : '#1f2937',
           fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif',
           minHeight: '48px',
           maxHeight: '150px',
