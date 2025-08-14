@@ -7,7 +7,8 @@ import type {
   Consultation 
 } from '../types/auth';
 
-const API_BASE_URL = 'http://localhost:8000';   // ✅ No trailing slash
+// Production: Use backend CloudFront domain for secure HTTPS API access
+const API_BASE_URL = `https://${process.env.REACT_APP_BACKEND_DOMAIN || 'localhost:8000'}`;   // ✅ Production-ready config
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
