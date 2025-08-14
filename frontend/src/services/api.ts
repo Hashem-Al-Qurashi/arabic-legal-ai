@@ -13,10 +13,10 @@ const getApiBaseUrl = () => {
     return 'http://localhost:8000';
   }
   
-  // For hokm.ai production domains, use the actual backend CloudFront domain
+  // For hokm.ai production domains, use the backend ALB directly (CloudFront has issues)
   if (window.location.hostname.includes('hokm.ai') || window.location.hostname.includes('cloudfront.net')) {
-    // Use the deployed backend CloudFront domain from infrastructure
-    return 'https://d10drat4g0606g.cloudfront.net';
+    // Use the ALB directly since CloudFront backend is not working
+    return 'http://hokm-ai-alb-1845047249.eu-central-1.elb.amazonaws.com';
   }
   
   // Fallback for other domains
