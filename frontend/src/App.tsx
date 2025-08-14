@@ -739,9 +739,19 @@ const ActionsBar: React.FC<ActionsBarProps> = ({ content, isLastMessage, message
   // FIXED: Copy function that produces clean professional text
 const handleCopy = async () => {
   try {
-    // Step 1: Convert HTML to clean plain text (NO MARKDOWN SYMBOLS)
+    // Step 1: Clean markdown formatting (hashtags and asterisks)
     let cleanContent = content
+      // Remove markdown headers (### Header -> Header)
+      .replace(/^#{1,6}\s*(.+)$/gm, '$1')
+      // Remove markdown bold (**text** -> text)
+      .replace(/\*\*(.*?)\*\*/g, '$1')
+      // Remove markdown italic (*text* -> text)  
+      .replace(/\*(.*?)\*/g, '$1')
+      // Remove markdown code blocks (```code``` -> code)
+      .replace(/```[\s\S]*?```/g, '')
+      .replace(/`([^`]+)`/g, '$1')
       
+      // Step 2: Convert HTML to clean plain text (NO MARKDOWN SYMBOLS)
       // Main headers (h1, h2, h3) - convert to plain text with proper spacing
       .replace(/<h1[^>]*>(.*?)<\/h1>/gi, '\n\n$1\n\n')
       .replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n\n$1\n\n') 
@@ -824,9 +834,23 @@ const handleCopy = async () => {
     console.log('📋 CLEAN PROFESSIONAL COPY:');
     console.log(cleanContent);
 
-    // Copy to clipboard
+    // Copy to clipboard with RTL formatting
     if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(cleanContent);
+      // For modern browsers, we need to use clipboard API with HTML
+      try {
+        // Create a blob with RTL HTML formatting
+        const htmlContent = `<div dir="rtl" style="text-align: right; direction: rtl;">${cleanContent.replace(/\n/g, '<br>')}</div>`;
+        
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            'text/html': new Blob([htmlContent], { type: 'text/html' }),
+            'text/plain': new Blob([cleanContent], { type: 'text/plain' })
+          })
+        ]);
+      } catch (htmlError) {
+        // Fallback to plain text if HTML clipboard fails
+        await navigator.clipboard.writeText(cleanContent);
+      }
     } else {
       // Fallback for older browsers
       const textArea = document.createElement('textarea');
@@ -834,6 +858,8 @@ const handleCopy = async () => {
       textArea.style.position = 'fixed';
       textArea.style.left = '-999999px';
       textArea.style.top = '-999999px';
+      textArea.style.direction = 'rtl';
+      textArea.style.textAlign = 'right';
       document.body.appendChild(textArea);
       textArea.focus();
       textArea.select();
@@ -856,6 +882,12 @@ const handleCopy = async () => {
     try {
       // Use the same clean formatting logic as copy function
       let cleanContent = content
+        // Clean markdown formatting first
+        .replace(/^#{1,6}\s*(.+)$/gm, '$1')
+        .replace(/\*\*(.*?)\*\*/g, '$1')
+        .replace(/\*(.*?)\*/g, '$1')
+        .replace(/```[\s\S]*?```/g, '')
+        .replace(/`([^`]+)`/g, '$1')
         
         // Main headers (h1, h2, h3) - convert to plain text with proper spacing
         .replace(/<h1[^>]*>(.*?)<\/h1>/gi, '\n\n$1\n\n')
@@ -965,6 +997,12 @@ const handleCopy = async () => {
         
         // Use the same clean formatting logic as copy function
         let cleanContent = message.content
+          // Clean markdown formatting first
+          .replace(/^#{1,6}\s*(.+)$/gm, '$1')
+          .replace(/\*\*(.*?)\*\*/g, '$1')
+          .replace(/\*(.*?)\*/g, '$1')
+          .replace(/```[\s\S]*?```/g, '')
+          .replace(/`([^`]+)`/g, '$1')
           .replace(/<h1[^>]*>(.*?)<\/h1>/gi, '\n\n$1\n\n')
           .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n\n$1\n\n')
           .replace(/<h4[^>]*><strong>(.*?)<\/strong><\/h4>/gi, '\n\n$1\n\n')
@@ -1398,7 +1436,7 @@ const FormattedMessage: React.FC<FormattedMessageProps> = ({
         transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         
         // Auto margins for centering
-        marginLeft: sidebarOpen ? 'auto' : '7%',
+        marginLeft: 'auto',
         marginRight: 'auto',
       }}
       onMouseEnter={(e) => {
@@ -2195,7 +2233,7 @@ const AuthScreen: React.FC = () => {
               letterSpacing: '-0.02em',
               textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
             }}>
-              المساعد القانوني الذكي
+              {showRegister ? 'إنشاء حساب جديد' : 'تسجيل الدخول'}
             </h1>
             
             <p style={{
@@ -2206,37 +2244,9 @@ const AuthScreen: React.FC = () => {
               fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif',
               margin: 0
             }}>
-              استشارة قانونية متقدمة مبنية على الذكاء الاصطناعي
+              {showRegister ? 'انضم إلينا للحصول على استشارات قانونية متخصصة' : 'ادخل إلى حسابك للوصول إلى الاستشارات القانونية المتقدمة'}
             </p>
 
-            {/* Clean Premium Subtitle */}
-<div style={{
-  marginTop: '20px',
-  padding: '16px 24px',
-  background: `
-    linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.1) 0%, 
-      rgba(255, 255, 255, 0.05) 100%
-    )
-  `,
-  borderRadius: '16px',
-  backdropFilter: 'blur(20px)',
-  border: '1px solid rgba(255, 255, 255, 0.1)',
-  boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-}}>
-  <p style={{
-    color: 'rgba(255, 255, 255, 0.8)',
-    fontSize: '14px',
-    fontWeight: '500',
-    lineHeight: '1.4',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif',
-    margin: 0,
-    textAlign: 'center',
-    letterSpacing: '0.01em'
-  }}>
-    مدعوم بالقانون السعودي والأنظمة الحديثة
-  </p>
-</div>
           </div>
 
           {/* Form Content */}
@@ -2533,6 +2543,7 @@ const ChatApp: React.FC = () => {
   incrementQuestionUsage, 
   canSendMessage, 
   updateUserData,
+  refreshUserData,
   logout
 } = useAuth();
   const [isMobile, setIsMobile] = useState(false); // 🔧 ADD THIS LINE
@@ -2595,6 +2606,13 @@ const ChatApp: React.FC = () => {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // 🔄 Refresh user data on component mount to ensure accurate counters
+  useEffect(() => {
+    if (!isGuest && refreshUserData) {
+      refreshUserData();
+    }
+  }, [isGuest, refreshUserData]);
 
   const scrollToBottom = () => {
   setTimeout(() => {
@@ -2923,6 +2941,8 @@ const handleDeleteCancel = () => {
 
         if (!isGuest) {
           loadConversations();
+          // 🔄 Refresh user data to ensure accurate question counters
+          refreshUserData();
         }
 
         console.log('✅ Message processed successfully');
@@ -3257,29 +3277,33 @@ const handleDeleteCancel = () => {
     onClick={() => setSidebarOpen(true)}
     style={{
       position: 'fixed',
-      top: '20px',
-      right: '20px',
+      top: '24px',
+      right: '24px',
       zIndex: 100,
-      background: 'rgba(0, 0, 0, 0.8)',
+      background: 'linear-gradient(135deg, rgba(0, 108, 53, 0.95) 0%, rgba(0, 74, 36, 0.9) 50%, rgba(0, 108, 53, 0.85) 100%)',
       color: 'white',
-      border: 'none',
-      borderRadius: '8px',
-      padding: '12px',
+      border: '1px solid rgba(255, 255, 255, 0.15)',
+      borderRadius: '16px',
+      padding: '14px',
       cursor: 'pointer',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      transition: 'all 0.2s ease',
-      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-      backdropFilter: 'blur(10px)'
+      transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      boxShadow: '0 8px 32px rgba(0, 108, 53, 0.25), 0 4px 16px rgba(0, 108, 53, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+      backdropFilter: 'blur(20px)',
+      width: '48px',
+      height: '48px'
     }}
     onMouseOver={(e) => {
-      e.currentTarget.style.background = 'rgba(0, 0, 0, 0.9)';
-      e.currentTarget.style.transform = 'scale(1.05)';
+      e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 108, 53, 1) 0%, rgba(0, 74, 36, 0.95) 50%, rgba(0, 108, 53, 0.9) 100%)';
+      e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
+      e.currentTarget.style.boxShadow = '0 12px 48px rgba(0, 108, 53, 0.35), 0 8px 24px rgba(0, 108, 53, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15)';
     }}
     onMouseOut={(e) => {
-      e.currentTarget.style.background = 'rgba(0, 0, 0, 0.8)';
-      e.currentTarget.style.transform = 'scale(1)';
+      e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0, 108, 53, 0.95) 0%, rgba(0, 74, 36, 0.9) 50%, rgba(0, 108, 53, 0.85) 100%)';
+      e.currentTarget.style.transform = 'translateY(0) scale(1)';
+      e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 108, 53, 0.25), 0 4px 16px rgba(0, 108, 53, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
     }}
   >
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -3864,7 +3888,7 @@ const handleDeleteCancel = () => {
               fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
               letterSpacing: '-0.02em'
             }}>
-              {(cooldownInfo.maxQuestions - cooldownInfo.questionsUsed)} / 20
+              {(cooldownInfo.maxQuestions - cooldownInfo.questionsUsed)} / {cooldownInfo.maxQuestions}
             </div>
         <div style={{
           fontSize: '12px',
@@ -3935,55 +3959,6 @@ const handleDeleteCancel = () => {
   // 🔧 MOBILE FIX: Allow overflow on mobile
   overflow: isMobile ? 'visible' : 'hidden'
 }}>
-          <div style={{
-  background: isGuest 
-    ? cooldownInfo.questionsUsed >= cooldownInfo.maxQuestions
- 
-      ? 'linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)' 
-      : 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)'
-    : selectedConversation 
-      ? 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)' 
-      : 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
-  color: isGuest 
-    ? cooldownInfo.questionsUsed >= cooldownInfo.maxQuestions
- 
-      ? '#dc2626' 
-      : '#059669'
-    : selectedConversation ? '#2563eb' : '#059669',
-  padding: '8px 16px',
-  borderRadius: '12px',
-  fontSize: '13px',
-  fontWeight: '600',
-  transition: 'all 0.2s ease',
-  display: 'flex',
-  alignItems: 'center',
-  gap: '8px',
-  border: '1px solid',
-  borderColor: isGuest 
-    ? cooldownInfo.questionsUsed >= cooldownInfo.maxQuestions
- 
-      ? 'rgba(220, 38, 38, 0.2)' 
-      : 'rgba(5, 150, 105, 0.2)'
-    : selectedConversation ? 'rgba(37, 99, 235, 0.2)' : 'rgba(5, 150, 105, 0.2)'
-}}>
-  <div style={{
-    width: '8px',
-    height: '8px',
-    borderRadius: '50%',
-    background: 'currentColor'
-  }} />
-  {isGuest ? (
-    cooldownInfo.questionsUsed >= cooldownInfo.maxQuestions
- ? (
-      'تم استنفاد الرسائل المجانية'
-    ) : (
-      `${cooldownInfo.questionsUsed}/${cooldownInfo.maxQuestions
-} رسائل مجانية`
-    )
-  ) : (
-    selectedConversation ? 'محادثة نشطة' : 'محادثة جديدة'
-  )}
-</div>
 
           {/* Messages Area */}
           <div 
@@ -4118,7 +4093,7 @@ const handleDeleteCancel = () => {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: isMobile 
-  ? (message.role === 'user' ? 'flex-start' : 'center') 
+  ? (message.role === 'user' ? 'flex-end' : 'center') 
   : (message.role === 'user' ? 'flex-end' : 'center'),
     marginBottom: '24px',
     animationDelay: `${index * 0.1}s`
@@ -4129,8 +4104,9 @@ const handleDeleteCancel = () => {
   className={message.role === 'user' ? 'user-message-enhanced' : ''}
   style={{
     maxWidth: message.role === 'user' 
-      ? '85%' 
+      ? (isMobile ? '75%' : '60%')
       : '90%',
+    minWidth: message.role === 'user' ? '200px' : 'auto',
     background: message.role === 'user' 
       ? `linear-gradient(135deg, 
           rgba(0, 108, 53, 0.95) 0%, 
@@ -4152,9 +4128,8 @@ const handleDeleteCancel = () => {
     fontSize: message.role === 'user' ? '25px' : '25px',
     lineHeight: '1.5',
     textAlign: 'right',
-marginLeft: isMobile 
-  ? (message.role === 'user' ? '1rem' : 'auto')
-  : (message.role === 'user' ? (sidebarOpen ? '15%' : '10%') : '0%'),
+    marginLeft: message.role === 'user' ? 'auto' : '0%',
+    marginRight: message.role === 'user' ? '3cm' : '0',
     wordBreak: 'break-word',
     overflowWrap: 'break-word',
     whiteSpace: 'normal',
@@ -4388,7 +4363,7 @@ marginLeft: isMobile
             fontSize: '14px',
             fontWeight: '500'
           }}>
-            الأسئلة المتبقية: {(cooldownInfo.maxQuestions - cooldownInfo.questionsUsed)}/20
+            الأسئلة المتبقية: {(cooldownInfo.maxQuestions - cooldownInfo.questionsUsed)}/{cooldownInfo.maxQuestions}
           </div>
         </div>
       </div>

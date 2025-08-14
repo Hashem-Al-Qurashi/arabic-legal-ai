@@ -52,10 +52,10 @@ const LegalForm: React.FC<LegalFormProps> = ({ onNewConsultation }) => {
   const [showChatHistory, setShowChatHistory] = useState(false);
   const [conversationHistory, setConversationHistory] = useState<any[]>([]);
   
-  const { user } = useAuth();
+  const { user, cooldownInfo, isGuest } = useAuth();
 
   const maxChars = 1000;
-  const questionsRemaining = 3 - (user?.questions_used_this_month || 0);
+  const questionsRemaining = cooldownInfo.maxQuestions - cooldownInfo.questionsUsed;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -203,7 +203,7 @@ const LegalForm: React.FC<LegalFormProps> = ({ onNewConsultation }) => {
               fontWeight: '600',
               fontSize: '0.9rem'
             }}>
-              الأسئلة المتبقية: {questionsRemaining} من 3
+              الأسئلة المتبقية: {questionsRemaining} من {cooldownInfo.maxQuestions}
             </div>
           </div>
         </div>
