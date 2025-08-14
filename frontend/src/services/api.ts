@@ -7,8 +7,23 @@ import type {
   Consultation 
 } from '../types/auth';
 
-// Production: Use backend CloudFront domain for secure HTTPS API access
-const API_BASE_URL = `https://${process.env.REACT_APP_BACKEND_DOMAIN || 'localhost:8000'}`;   // ✅ Production-ready config
+// Production: Detect environment and use appropriate backend URL
+const getApiBaseUrl = () => {
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return 'http://localhost:8000';
+  }
+  
+  // For hokm.ai production domains, use the actual backend CloudFront domain
+  if (window.location.hostname.includes('hokm.ai') || window.location.hostname.includes('cloudfront.net')) {
+    // Use the deployed backend CloudFront domain from infrastructure
+    return 'https://d10drat4g0606g.cloudfront.net';
+  }
+  
+  // Fallback for other domains
+  return `https://api.${window.location.hostname}`;
+};
+
+const API_BASE_URL = getApiBaseUrl();
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
