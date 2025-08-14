@@ -1,18 +1,47 @@
 // Replace your entire frontend/src/App.tsx with this smooth implementation
 import React, { useState, useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, useParams, useNavigate, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import LoginForm from './components/auth/LoginForm';
 import RegisterForm from './components/auth/RegisterForm';
 import { legalAPI, chatAPI } from './services/api';
+import DOMPurify from 'dompurify';
 
 
 
-// Simple navigation helper
-const navigateTo = (path: string) => {
-  window.history.pushState({}, '', path);
-  window.dispatchEvent(new PopStateEvent('popstate'));
-};
+// =====================================================================
+// SENIOR-LEVEL TYPESCRIPT INTERFACES FOR URL ROUTING
+// =====================================================================
 
+/**
+ * Route parameters for conversation URLs
+ * @interface ConversationRouteParams
+ */
+interface ConversationRouteParams extends Record<string, string | undefined> {
+  conversationId?: string;
+}
+
+/**
+ * Props for conversation-aware components
+ * @interface ConversationRouteProps  
+ */
+interface ConversationRouteProps {
+  conversationId?: string;
+  onConversationChange?: (conversationId: string | null) => void;
+}
+
+/**
+ * Return type for the conversation routing hook
+ * @interface UseConversationRoutingReturn
+ */
+interface UseConversationRoutingReturn {
+  conversationId: string | null;
+  navigateToConversation: (conversationId: string) => void;
+  navigateToHome: () => void;
+  isValidConversationId: (conversationId: string) => boolean;
+}
+
+// =====================================================================
 
 interface RenamePopupProps {
   isOpen: boolean;
@@ -710,18 +739,22 @@ const ActionsBar: React.FC<ActionsBarProps> = ({ content, isLastMessage, message
   // FIXED: Copy function that produces clean professional text
 const handleCopy = async () => {
   try {
-    // Step 1: Convert HTML to clean, professional Arabic text
+    // Step 1: Convert HTML to clean plain text (NO MARKDOWN SYMBOLS)
     let cleanContent = content
       
-      // Convert headings to clean structured text
-      .replace(/<h1[^>]*>(.*?)<\/h1>/gi, '\n━━━ $1 ━━━\n\n')
-      .replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n▎$1\n\n') 
-      .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n▸ $1\n\n')
+      // Main headers (h1, h2, h3) - convert to plain text with proper spacing
+      .replace(/<h1[^>]*>(.*?)<\/h1>/gi, '\n\n$1\n\n')
+      .replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n\n$1\n\n') 
+      .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n\n$1\n\n')
       
-      // Convert legal-point divs to clean numbered format
-      .replace(/<div class="legal-point"><strong>(.*?)<\/strong><p>(.*?)<\/p><\/div>/gi, '$1 $2\n\n')
+      // Subsection headers (h4) - convert to plain text with colons
+      .replace(/<h4[^>]*><strong>(.*?)<\/strong><\/h4>/gi, '\n\n$1\n\n')
+      .replace(/<h4[^>]*>(.*?)<\/h4>/gi, '\n\n$1\n\n')
       
-      // 🔑 KEY FIX: Convert bold/strong to clean text (NO ASTERISKS!)
+      // Convert legal-point divs to plain text
+      .replace(/<div class="legal-point"><strong>(.*?)<\/strong><p>(.*?)<\/p><\/div>/gi, '\n\n$1\n$2\n\n')
+      
+      // Convert strong/bold to plain text (NO ASTERISKS)
       .replace(/<strong[^>]*>(.*?)<\/strong>/gi, '$1')
       .replace(/<b[^>]*>(.*?)<\/b>/gi, '$1')
       
@@ -729,20 +762,20 @@ const handleCopy = async () => {
       .replace(/<em[^>]*>(.*?)<\/em>/gi, '$1')
       .replace(/<i[^>]*>(.*?)<\/i>/gi, '$1')
       
-      // Convert lists to clean bullet points
-      .replace(/<ul[^>]*>/gi, '\n')
-      .replace(/<\/ul>/gi, '\n')
-      .replace(/<ol[^>]*>/gi, '\n') 
-      .replace(/<\/ol>/gi, '\n')
-      .replace(/<li[^>]*>(.*?)<\/li>/gi, '• $1\n')
+      // Convert lists to simple dashes
+      .replace(/<ul[^>]*>/gi, '')
+      .replace(/<\/ul>/gi, '')
+      .replace(/<ol[^>]*>/gi, '') 
+      .replace(/<\/ol>/gi, '')
+      .replace(/<li[^>]*>(.*?)<\/li>/gi, '\n- $1')
       
-      // Convert paragraphs with proper spacing
-      .replace(/<p[^>]*>(.*?)<\/p>/gi, '$1\n\n')
+      // Convert paragraphs with single line break
+      .replace(/<p[^>]*>(.*?)<\/p>/gi, '$1\n')
       
       // Convert line breaks
       .replace(/<br\s*\/?>/gi, '\n')
       
-      // Convert divs to clean text
+      // Convert divs to clean text with line break
       .replace(/<div[^>]*>(.*?)<\/div>/gi, '$1\n')
       
       // Remove any remaining HTML tags
@@ -757,32 +790,36 @@ const handleCopy = async () => {
       .replace(/&#39;/g, "'")
       .replace(/&hellip;/g, '...')
       
-      // Clean up whitespace while preserving structure
-      .replace(/[ \t]+/g, ' ')                    // Normalize horizontal spaces
-      .replace(/\n[ \t]+/g, '\n')                 // Remove leading spaces
-      .replace(/[ \t]+\n/g, '\n')                 // Remove trailing spaces  
-      .replace(/\n{4,}/g, '\n\n\n')               // Max 3 newlines for section breaks
-      
-      // Ensure proper Arabic text flow
-      .replace(/([أ-ي])\n+(أولاً|ثانياً|ثالثاً|رابعاً|خامساً)/g, '$1\n\n$2')
-      .replace(/([أ-ي])\n+(\d+\.)/g, '$1\n\n$2')
-      .replace(/([أ-ي])\n+(▸|•)/g, '$1\n\n$2')
-      
       .trim();
 
-    // Step 2: Final cleanup for professional appearance
+    // Step 2: Format for clean professional appearance (NO MARKDOWN)
     cleanContent = cleanContent
-      // Ensure sections have proper spacing
-      .replace(/(━━━.*━━━)\n{1,2}([^▸•])/g, '$1\n\n$2')
-      .replace(/(▸.*?)\n{1,2}([^▸•▎])/g, '$1\n\n$2')
       
-      // Clean bullet formatting
-      .replace(/•\s*/g, '• ')
-      .replace(/▸\s*/g, '▸ ')
+      // Ensure proper spacing between sections
+      .replace(/([.!؟])\n([أ-ي]*اً:)/g, '$1\n\n$2')
+      .replace(/([.!؟])\n([أ-ي])/g, '$1\n\n$2')
       
-      // Remove excess whitespace at beginning/end
-      .replace(/\n{2,}$/, '\n')
-      .replace(/^\n{2,}/, '');
+      // Add section separators (just line breaks, no symbols)
+      .replace(/\n\n([أ-ي]*اً: تحليل|[أ-ي]*اً: المنطق|[أ-ي]*اً: الاستشهاد|[أ-ي]*اً: استراتيجية|[أ-ي]*اً: الخاتمة)/g, '\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n$1')
+      
+      // Clean up multiple line breaks but keep structure
+      .replace(/\n{4,}/g, '\n\n\n')
+      
+      // Ensure bullet points have proper spacing
+      .replace(/\n- /g, '\n- ')
+      
+      // Add proper spacing after full stops before new sections
+      .replace(/([.!؟])([أ-ي].*?:)/g, '$1\n\n$2')
+      
+      // Ensure headers end with colons where appropriate
+      .replace(/^([أ-ي][^:\n]*?)([^:])$/gm, function(match, p1, p2) {
+        if (p1.length < 50 && /[أ-ي]/.test(p1)) {
+          return p1 + p2 + ':';
+        }
+        return match;
+      })
+      
+      .trim();
 
     console.log('📋 CLEAN PROFESSIONAL COPY:');
     console.log(cleanContent);
@@ -817,8 +854,88 @@ const handleCopy = async () => {
   const handleDownloadSingle = async () => {
     setDownloading(true);
     try {
-      // Clean content for download
-      const cleanContent = content.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim();
+      // Use the same clean formatting logic as copy function
+      let cleanContent = content
+        
+        // Main headers (h1, h2, h3) - convert to plain text with proper spacing
+        .replace(/<h1[^>]*>(.*?)<\/h1>/gi, '\n\n$1\n\n')
+        .replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n\n$1\n\n') 
+        .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n\n$1\n\n')
+        
+        // Subsection headers (h4) - convert to plain text with colons
+        .replace(/<h4[^>]*><strong>(.*?)<\/strong><\/h4>/gi, '\n\n$1\n\n')
+        .replace(/<h4[^>]*>(.*?)<\/h4>/gi, '\n\n$1\n\n')
+        
+        // Convert legal-point divs to plain text
+        .replace(/<div class="legal-point"><strong>(.*?)<\/strong><p>(.*?)<\/p><\/div>/gi, '\n\n$1\n$2\n\n')
+        
+        // Convert strong/bold to plain text (NO ASTERISKS)
+        .replace(/<strong[^>]*>(.*?)<\/strong>/gi, '$1')
+        .replace(/<b[^>]*>(.*?)<\/b>/gi, '$1')
+        
+        // Convert emphasis to clean text  
+        .replace(/<em[^>]*>(.*?)<\/em>/gi, '$1')
+        .replace(/<i[^>]*>(.*?)<\/i>/gi, '$1')
+        
+        // Convert lists to simple dashes
+        .replace(/<ul[^>]*>/gi, '')
+        .replace(/<\/ul>/gi, '')
+        .replace(/<ol[^>]*>/gi, '') 
+        .replace(/<\/ol>/gi, '')
+        .replace(/<li[^>]*>(.*?)<\/li>/gi, '\n- $1')
+        
+        // Convert paragraphs with single line break
+        .replace(/<p[^>]*>(.*?)<\/p>/gi, '$1\n')
+        
+        // Convert line breaks
+        .replace(/<br\s*\/?>/gi, '\n')
+        
+        // Convert divs to clean text with line break
+        .replace(/<div[^>]*>(.*?)<\/div>/gi, '$1\n')
+        
+        // Remove any remaining HTML tags
+        .replace(/<[^>]*>/g, '')
+        
+        // Convert HTML entities
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&hellip;/g, '...')
+        
+        .trim();
+
+      // Format for clean professional appearance (same as copy)
+      cleanContent = cleanContent
+        
+        // Ensure proper spacing between sections
+        .replace(/([.!؟])\n([أ-ي]*اً:)/g, '$1\n\n$2')
+        .replace(/([.!؟])\n([أ-ي])/g, '$1\n\n$2')
+        
+        // Add section separators (just line breaks, no symbols)
+        .replace(/\n\n([أ-ي]*اً: تحليل|[أ-ي]*اً: المنطق|[أ-ي]*اً: الاستشهاد|[أ-ي]*اً: استراتيجية|[أ-ي]*اً: الخاتمة)/g, '\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n$1')
+        
+        // Clean up multiple line breaks but keep structure
+        .replace(/\n{4,}/g, '\n\n\n')
+        
+        // Ensure bullet points have proper spacing
+        .replace(/\n- /g, '\n- ')
+        
+        // Add proper spacing after full stops before new sections
+        .replace(/([.!؟])([أ-ي].*?:)/g, '$1\n\n$2')
+        
+        // Ensure headers end with colons where appropriate
+        .replace(/^([أ-ي][^:\n]*?)([^:])$/gm, function(match, p1, p2) {
+          if (p1.length < 50 && /[أ-ي]/.test(p1)) {
+            return p1 + p2 + ':';
+          }
+          return match;
+        })
+        
+        .trim();
+      
       const lastUserMessage = messages.length > 1 ? messages[messages.length - 2]?.content || 'سؤال المستخدم' : 'سؤال المستخدم';
       
       await legalAPI.exportDocx(lastUserMessage, cleanContent);
@@ -833,7 +950,7 @@ const handleCopy = async () => {
   const handleDownloadFull = async () => {
     setDownloading(true);
     try {
-      // Generate full conversation content
+      // Generate full conversation content with clean formatting
       let fullContent = '';
       let conversationTitle = selectedConversation ? 
         conversations.find((c: any) => c.id === selectedConversation)?.title || 'محادثة قانونية' : 
@@ -845,7 +962,34 @@ const handleCopy = async () => {
 
       messages.forEach((message: any, index: any) => {
         const roleLabel = message.role === 'user' ? '👤 السؤال' : '🤖 الإجابة';
-        const cleanContent = message.content.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim();
+        
+        // Use the same clean formatting logic as copy function
+        let cleanContent = message.content
+          .replace(/<h1[^>]*>(.*?)<\/h1>/gi, '\n\n$1\n\n')
+          .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n\n$1\n\n')
+          .replace(/<h4[^>]*><strong>(.*?)<\/strong><\/h4>/gi, '\n\n$1\n\n')
+          .replace(/<strong[^>]*>(.*?)<\/strong>/gi, '$1')
+          .replace(/<li[^>]*>(.*?)<\/li>/gi, '\n- $1')
+          .replace(/<ul[^>]*>/gi, '\n')
+          .replace(/<\/ul>/gi, '\n')
+          .replace(/<ol[^>]*>/gi, '\n')
+          .replace(/<\/ol>/gi, '\n')
+          .replace(/<br\s*\/?>/gi, '\n')
+          .replace(/<p[^>]*>/gi, '\n')
+          .replace(/<\/p>/gi, '\n')
+          .replace(/<div[^>]*>/gi, '')
+          .replace(/<\/div>/gi, '')
+          .replace(/<span[^>]*>/gi, '')
+          .replace(/<\/span>/gi, '')
+          .replace(/&nbsp;/gi, ' ')
+          .replace(/&amp;/gi, '&')
+          .replace(/&lt;/gi, '<')
+          .replace(/&gt;/gi, '>')
+          .replace(/&quot;/gi, '"')
+          .replace(/&#x27;/gi, "'")
+          .replace(/\n\s*\n\s*\n/gi, '\n\n')
+          .replace(/^\s+|\s+$/gm, '')
+          .trim();
         
         fullContent += `${roleLabel} ${Math.floor(index / 2) + 1}:\n`;
         fullContent += `${cleanContent}\n\n`;
@@ -1241,7 +1385,7 @@ const FormattedMessage: React.FC<FormattedMessageProps> = ({
         margin: '2rem 0 2.5rem 0',
         position: 'relative' as const,
         overflow: 'hidden' as const,
-        maxWidth: sidebarOpen ? '85%' : '85%',
+        maxWidth: '90%',
         width: 'fit-content',
         minWidth: '400px',
         
@@ -1254,8 +1398,8 @@ const FormattedMessage: React.FC<FormattedMessageProps> = ({
         transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         
         // Auto margins for centering
-        marginLeft: sidebarOpen ? '0' : 'auto',
-        marginRight: sidebarOpen ? '0' : 'auto',
+        marginLeft: sidebarOpen ? 'auto' : '7%',
+        marginRight: 'auto',
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'translateY(-3px)';
@@ -1316,20 +1460,15 @@ const FormattedMessage: React.FC<FormattedMessageProps> = ({
           boxShadow: 'inset 1px 0 2px rgba(255, 255, 255, 0.3)'
         }}
       />
-      
+
       <div
   className="ai-response"
-   dangerouslySetInnerHTML={{ __html: formatAIResponse(content) }}
-  style={{
-    // Enhanced Typography
-    fontFamily: "'Noto Sans Arabic', 'SF Pro Text', -apple-system, sans-serif",
-    direction: 'rtl',
-    textAlign: 'right',
-    lineHeight: '1.75',
-    color: '#1a202c',
-    position: 'relative',
-    zIndex: 5
-  }}
+   dangerouslySetInnerHTML={{ __html: (() => {
+     const formatted = formatAIResponse(content);
+     console.log('🔍 FINAL HTML BEING RENDERED:');
+     console.log(formatted);
+     return formatted;
+   })() }}
 />
       
       {/* Add ActionsBar for AI messages */}
@@ -1526,21 +1665,21 @@ const formatAIResponse = (content: string): string => {
       continue;
     }
 
-    // Convert headers (order matters - start with longest)
+    // Convert headers - SIMPLE, NO INLINE STYLES (CSS will handle sizing)
     if (line.startsWith('####')) {
       line = line.replace(/^####\s*(.*)$/, '<h3>$1</h3>');
     } else if (line.startsWith('###')) {
-      line = line.replace(/^###\s*(.*)$/, '<h2>$1</h2>');
+      line = line.replace(/^###\s*(.*)$/, '<h3>$1</h3>');
     } else if (line.startsWith('##')) {
-      line = line.replace(/^##\s*(.*)$/, '<h2>$1</h2>');
+      line = line.replace(/^##\s*(.*)$/, '<h3>$1</h3>');
     } else if (line.startsWith('#')) {
-      line = line.replace(/^#\s*(.*)$/, '<h1>$1</h1>');
+      line = line.replace(/^#\s*(.*)$/, '<h3>$1</h3>');
     }
-    // Convert Arabic ordinal headers (MORE SPECIFIC PATTERN)
+    // Convert Arabic ordinal headers - SIMPLE
     else if (/^(أولاً|ثانياً|ثالثاً|رابعاً|خامساً|سادساً|سابعاً|ثامناً|تاسعاً|عاشراً):\s*.{0,100}$/.test(line)) {
       line = line.replace(/^(.*?)$/, '<h3>$1</h3>');
     }
-    // Handle OTHER Arabic headers ending with colon (LESS AGGRESSIVE)
+    // Handle OTHER Arabic headers - SIMPLE
     else if (/^[أ-ي\s]{4,25}:\s*$/.test(line) && !line.includes('أولاً') && !line.includes('ثانياً') && !line.includes('ثالثاً')) {
       line = line.replace(/^(.*?):\s*$/, '<h3>$1</h3>');
     }
@@ -1554,18 +1693,33 @@ const formatAIResponse = (content: string): string => {
   console.log('---- AFTER LINE PROCESSING ----');
   console.log(html);
 
-  // Step 6: Process remaining markdown elements
+  // Step 6: Process remaining markdown elements - CREATE PROPER SUBSECTIONS LIKE YOUR EXAMPLE
   html = html
-    // Convert bold text
+    // First, handle numbered items that should become subsections
+    .replace(/^(\d+)\.\s*\*\*(.*?)\*\*:\s*$/gm, '<h4><strong>$1. $2:</strong></h4>')
+    
+    // Handle standalone bold items that should be subsection headers (like **الحوالة البنكية:**)
+    .replace(/^\*\*(.*?):\*\*\s*$/gm, '<h4><strong>$1:</strong></h4>')
+    .replace(/^\*\*(.*?)\*\*:\s*$/gm, '<h4><strong>$1:</strong></h4>')
+    
+    // Convert remaining numbered items to clean bullet points
+    .replace(/^(\d+)\.\s+(.+)$/gm, '<li>$2</li>')
+    
+    // Convert standalone bullet points 
+    .replace(/^-\s+(.+)$/gm, '<li>$1</li>')
+    .replace(/^\*\s+(.+)$/gm, '<li>$1</li>')
+    .replace(/^•\s+(.+)$/gm, '<li>$1</li>')
+    
+    // Convert bold text (after headers are processed)
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    // Handle numbered lists with bold
-    .replace(/^(\d+)\.\s*\*\*(.*?)\*\*:\s*(.*?)$/gm,
-      '<div class="legal-point"><strong>$1. $2:</strong><p>$3</p></div>')
-    // Handle numbered lists plain
-    .replace(/^(\d+)\.\s*(.*?)$/gm,
-      '<div class="legal-point"><strong>$1.</strong> <p>$2</p></div>')
-    // Handle bullet points
-    .replace(/^[•·-]\s*(.*?)$/gm, '<li>$1</li>');
+    
+    // Clean up orphaned numbers
+    .replace(/^(\d+)\.\s*$/gm, '')
+    
+    // Group consecutive list items into ul tags
+    .replace(/(<li>.*?<\/li>(?:\n<li>.*?<\/li>)*)/gm, function(match) {
+      return '<ul>' + match.replace(/\n/g, '') + '</ul>';
+    })
 
   // Step 7: Wrap paragraphs and clean up
   const blocks = html.split(/\n\s*\n/);
@@ -1579,29 +1733,31 @@ const formatAIResponse = (content: string): string => {
     if (/^<(h[1-3]|div|ul|li)/.test(trimmed)) {
       finalBlocks.push(trimmed);
     } else {
-      // Wrap in paragraph
+      // Wrap in paragraph - SIMPLE (CSS will handle all styling)
       finalBlocks.push(`<p>${trimmed}</p>`);
     }
   }
 
-  // Step 8: Final cleanup
+  // Step 8: Final cleanup - SIMPLE
   let result = finalBlocks.join('\n\n')
-    // Wrap consecutive <li> elements in <ul>
-    .replace(/(<li>.*?<\/li>)(\s*<li>.*?<\/li>)*/gs, (match) => {
-      return '<ul>' + match + '</ul>';
-    })
-    .replace(/<\/ul>\s*<ul>/g, '')
     // Remove empty paragraphs
     .replace(/<p>\s*<\/p>/g, '')
     // Clean up strong tags inside headers
     .replace(/<h([1-3])><strong>(.*?)<\/strong><\/h[1-3]>/g, '<h$1>$2</h$1>')
+    // Fix nested headers
+    .replace(/<h([1-3])>\s*<h[1-3]>(.*?)<\/h[1-3]>\s*<\/h[1-3]>/g, '<h$1>$2</h$1>')
+    // Fix empty headers
+    .replace(/<h[1-3]>\s*<\/h[1-3]>/g, '')
     // Remove extra whitespace
     .replace(/\n{3,}/g, '\n\n');
 
-  console.log('---- FINAL RESULT ----');
-  console.log(result);
+  // 🛡️ SECURITY: Apply XSS protection before returning
+  const sanitizedResult = sanitizeHTML(result);
   
-  return result;
+  console.log('---- FINAL RESULT (SANITIZED) ----');
+  console.log(sanitizedResult);
+  
+  return sanitizedResult;
 };
 
 
@@ -2158,6 +2314,217 @@ const AuthScreen: React.FC = () => {
   );
 };
 
+// =====================================================================
+// 🛡️ SENIOR-LEVEL XSS PROTECTION & HTML SANITIZATION
+// =====================================================================
+
+/**
+ * Secure HTML sanitizer to prevent XSS attacks
+ * Uses DOMPurify with strict configuration for legal AI content
+ * @param html - Raw HTML content to sanitize
+ * @returns {string} Sanitized HTML safe for rendering
+ */
+const sanitizeHTML = (html: string): string => {
+  // Configure DOMPurify for legal AI content
+  const config = {
+    ALLOWED_TAGS: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'div', 'span', 'br', 'strong', 'b', 'em', 'i', 'ul', 'ol', 'li'],
+    ALLOWED_ATTR: ['class', 'style'], // Allow minimal styling
+    ALLOW_DATA_ATTR: false, // No data attributes
+    ALLOW_UNKNOWN_PROTOCOLS: false, // Block javascript: and other protocols
+    FORBID_TAGS: ['script', 'iframe', 'object', 'embed', 'form', 'input', 'button'],
+    FORBID_ATTR: ['onclick', 'onerror', 'onload', 'onmouseover', 'onfocus', 'onblur'],
+    KEEP_CONTENT: true // Keep text content even if tags are removed
+  };
+  
+  // Sanitize with strict rules
+  const sanitized = DOMPurify.sanitize(html, config);
+  
+  // Additional validation for conversation IDs in content
+  if (sanitized.includes('javascript:') || sanitized.includes('data:') || sanitized.includes('<script')) {
+    console.warn('🚨 Potential XSS attempt blocked in content');
+    return DOMPurify.sanitize(html.replace(/<[^>]*>/g, ''), { ALLOWED_TAGS: [] }); // Strip all HTML if suspicious
+  }
+  
+  return sanitized;
+};
+
+// =====================================================================
+// SENIOR-LEVEL CONVERSATION PARAMETER VALIDATION
+// =====================================================================
+
+/**
+ * Validates conversation ID format and content
+ * @param conversationId - The conversation ID to validate
+ * @returns {boolean} True if valid, false otherwise
+ */
+const isValidConversationIdFormat = (conversationId: string): boolean => {
+  if (!conversationId || typeof conversationId !== 'string') return false;
+  
+  // Conversation ID should be non-empty and not contain dangerous characters
+  const trimmed = conversationId.trim();
+  if (trimmed.length === 0) return false;
+  
+  // Basic security: no script injections, no path traversals
+  const dangerousPatterns = [
+    /<script/i,
+    /javascript:/i,
+    /\.\.\/\.\.\//,
+    /\0/,
+    /%00/,
+    /[<>'"]/
+  ];
+  
+  return !dangerousPatterns.some(pattern => pattern.test(trimmed));
+};
+
+/**
+ * Sanitizes conversation ID for safe usage
+ * @param conversationId - Raw conversation ID
+ * @returns {string} Sanitized conversation ID
+ */
+const sanitizeConversationId = (conversationId: string): string => {
+  if (!conversationId || typeof conversationId !== 'string') return '';
+  
+  return conversationId
+    .trim()
+    .replace(/[<>'"]/g, '') // Remove potential HTML/script characters
+    .replace(/\0|%00/g, ''); // Remove null bytes
+};
+
+// =====================================================================
+// SENIOR-LEVEL CUSTOM HOOK FOR CONVERSATION ROUTING
+// =====================================================================
+
+/**
+ * Senior-level custom hook for managing conversation URL routing
+ * Handles bidirectional URL ↔ State synchronization with error boundaries
+ * 
+ * @returns {UseConversationRoutingReturn} Hook interface with navigation methods
+ */
+const useConversationRouting = (
+  selectedConversation: string | null,
+  conversations: any[],
+  loadConversationMessages: (conversationId: string) => Promise<void>,
+  user: any,
+  loadingConversations: boolean,
+  loadConversations: () => Promise<void>
+): UseConversationRoutingReturn => {
+  const { conversationId } = useParams<ConversationRouteParams>();
+  const navigate = useNavigate();
+
+  // Comprehensive conversation ID validation
+  const isValidConversationId = (conversationId: string): boolean => {
+    // First check format and security
+    if (!isValidConversationIdFormat(conversationId)) return false;
+    
+    // Then check if it exists in user's conversations
+    const sanitized = sanitizeConversationId(conversationId);
+    return conversations.some(conv => conv.id === sanitized);
+  };
+
+  // Senior-level navigation methods with parameter validation and error handling
+  const navigateToConversation = (conversationId: string) => {
+    try {
+      if (!conversationId) {
+        console.warn('🚨 Empty conversation ID provided');
+        navigate('/');
+        return;
+      }
+      
+      // Validate format first for security
+      if (!isValidConversationIdFormat(conversationId)) {
+        console.warn('🚨 Invalid conversation ID format:', conversationId);
+        navigate('/', { replace: true });
+        return;
+      }
+      
+      const sanitizedId = sanitizeConversationId(conversationId);
+      
+      if (isValidConversationId(sanitizedId)) {
+        console.log('🎯 Navigating to conversation:', sanitizedId);
+        navigate(`/c/${sanitizedId}`);
+      } else {
+        console.warn('🚨 Conversation not found:', sanitizedId);
+        navigate('/', { replace: true });
+      }
+    } catch (error) {
+      console.error('🚨 Navigation error:', error);
+      navigate('/', { replace: true });
+    }
+  };
+
+  const navigateToHome = () => {
+    try {
+      console.log('🏠 Navigating to home');
+      navigate('/');
+    } catch (error) {
+      console.error('🚨 Home navigation error:', error);
+      window.location.href = '/'; // Fallback
+    }
+  };
+
+  // URL → State synchronization with race condition protection
+  useEffect(() => {
+    if (!conversationId) return;
+    
+    try {
+      // Validate conversation ID format first for security
+      if (!isValidConversationIdFormat(conversationId)) {
+        console.warn('🚨 Invalid conversation ID format in URL:', conversationId);
+        navigate('/', { replace: true });
+        return;
+      }
+      
+      const sanitizedId = sanitizeConversationId(conversationId);
+      
+      if (sanitizedId !== selectedConversation) {
+        // 🔧 FIX RACE CONDITION: Check if we have user AND if conversations are loading
+        if (!user) {
+          console.log('⏳ Waiting for user authentication...');
+          return;
+        }
+        
+        if (conversations.length === 0 && !loadingConversations) {
+          // Conversations not loaded and not loading - trigger load
+          console.log('🔄 Triggering conversation load for URL navigation');
+          loadConversations();
+          return;
+        }
+        
+        if (conversations.length === 0 && loadingConversations) {
+          // Still loading conversations - wait
+          console.log('⏳ Waiting for conversations to load...');
+          return;
+        }
+        
+        // Conversations are loaded - validate and navigate
+        if (isValidConversationId(sanitizedId)) {
+          console.log('🔄 Loading conversation from URL:', sanitizedId);
+          loadConversationMessages(sanitizedId).catch((error) => {
+            console.error('🚨 Failed to load conversation:', error);
+            navigate('/', { replace: true });
+          });
+        } else {
+          console.warn('🚨 Conversation not found in URL, redirecting to home');
+          navigate('/', { replace: true });
+        }
+      }
+    } catch (error) {
+      console.error('🚨 URL synchronization error:', error);
+      navigate('/', { replace: true });
+    }
+  }, [conversationId, conversations, selectedConversation, user, loadingConversations, loadConversations, loadConversationMessages, navigate]);
+
+  return {
+    conversationId: conversationId || null,
+    navigateToConversation,
+    navigateToHome,
+    isValidConversationId
+  };
+};
+
+// =====================================================================
+
 const ChatApp: React.FC = () => {
   const { 
   user, 
@@ -2169,7 +2536,11 @@ const ChatApp: React.FC = () => {
   logout
 } = useAuth();
   const [isMobile, setIsMobile] = useState(false); // 🔧 ADD THIS LINE
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  // Initialize sidebar state from localStorage, default to true if not found
+  const [sidebarOpen, setSidebarOpen] = useState(() => {
+    const saved = localStorage.getItem('sidebarOpen');
+    return saved !== null ? JSON.parse(saved) : true;
+  });
   const [conversations, setConversations] = useState<Conversation[]>([]);
   // ... rest of your state variables ...
   const [selectedConversation, setSelectedConversation] = useState<string | null>(null);
@@ -2201,17 +2572,23 @@ const ChatApp: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
+  // Save sidebar state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('sidebarOpen', JSON.stringify(sidebarOpen));
+  }, [sidebarOpen]);
+
   // Detect mobile screen size
   // Detect mobile screen size
   useEffect(() => {
     const checkMobile = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      if (!mobile) {
-        setSidebarOpen(true);
-      } else {
+      
+      // Only force sidebar closed on mobile, but preserve user preference on desktop
+      if (mobile) {
         setSidebarOpen(false);
       }
+      // On desktop, keep the user's saved preference (don't force open)
     };
     
     checkMobile();
@@ -2289,14 +2666,50 @@ updateUserData({
 
   const loadConversationMessages = async (conversationId: string) => {
     try {
-      const response = await chatAPI.getConversationMessages(conversationId);
+      // ✅ SENIOR-LEVEL PARAMETER VALIDATION
+      if (!conversationId || typeof conversationId !== 'string') {
+        console.warn('🚨 Invalid conversation ID provided to loadConversationMessages');
+        throw new Error('Invalid conversation ID');
+      }
+      
+      // Validate format for security
+      if (!isValidConversationIdFormat(conversationId)) {
+        console.warn('🚨 Invalid conversation ID format in loadConversationMessages:', conversationId);
+        throw new Error('Invalid conversation ID format');
+      }
+      
+      const sanitizedId = sanitizeConversationId(conversationId);
+      
+      console.log('📥 Loading conversation messages for:', sanitizedId);
+      const response = await chatAPI.getConversationMessages(sanitizedId);
       setMessages(response.messages || []);
-      setSelectedConversation(conversationId);
+      setSelectedConversation(sanitizedId);
       if (isMobile) setSidebarOpen(false);
     } catch (error) {
+      console.error('❌ Failed to load conversation messages:', error);
       showToast('فشل في تحميل المحادثة', 'error');
+      // Reset to clean state on error
+      setMessages([]);
+      setSelectedConversation(null);
+      throw error; // Re-throw for upstream error handling
     }
   };
+
+  // =====================================================================
+  // SENIOR-LEVEL URL ROUTING INTEGRATION
+  // =====================================================================
+  
+  // Integrate the custom hook for URL-state synchronization
+  const { navigateToConversation, navigateToHome } = useConversationRouting(
+    selectedConversation,
+    conversations,
+    loadConversationMessages,
+    user,
+    loadingConversations,
+    loadConversations
+  );
+
+  // =====================================================================
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -2330,6 +2743,8 @@ const stripCitations = (content: string): string => {
     setSelectedConversation(null);
     setInputMessage('');
     if (isMobile) setSidebarOpen(false);
+    // Navigate to home when starting new conversation
+    navigateToHome();
   };
   
 
@@ -2486,9 +2901,11 @@ const handleDeleteCancel = () => {
           : msg
         ));
 
-        // 🔄 Handle conversation and user data updates (your existing logic)
+        // 🔄 Handle conversation and user data updates with URL synchronization
         if (response.conversation_id && !selectedConversation) {
           setSelectedConversation(response.conversation_id);
+          // 🎯 SENIOR-LEVEL URL SYNC: Navigate to new conversation URL
+          navigateToConversation(response.conversation_id);
         }
 
         if (response.updated_user && !isGuest) {
@@ -3048,7 +3465,7 @@ const handleDeleteCancel = () => {
   >
     {/* Main content - clickable to load conversation */}
     <div
-      onClick={() => loadConversationMessages(conv.id)}
+      onClick={() => navigateToConversation(conv.id)}
       style={{ cursor: 'pointer', flex: 1 }}
     >
       <div style={{
@@ -3688,9 +4105,9 @@ const handleDeleteCancel = () => {
               <div 
   className="chat-messages-container"
   style={{
-    // 🔧 MOBILE FIX: Different calculations for mobile
-    maxWidth: isMobile ? '100%' : (sidebarOpen ? '1200%' : '1400%'),
-    padding: isMobile ? '0 1rem' : (sidebarOpen ? '0 3rem 0 0' : '0 2rem 0 11rem')
+    // 🔧 MOBILE FIX: Different calculations for mobile  
+    maxWidth: isMobile ? '100%' : '100%',
+    padding: isMobile ? '0 1rem' : '0 2rem'
   }}
 >
                 {messages.map((message, index) => (
@@ -3701,8 +4118,8 @@ const handleDeleteCancel = () => {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: isMobile 
-  ? (message.role === 'user' ? 'flex-end' : 'center') 
-  : (message.role === 'user' ? 'flex-start' : 'center'),
+  ? (message.role === 'user' ? 'flex-start' : 'center') 
+  : (message.role === 'user' ? 'flex-end' : 'center'),
     marginBottom: '24px',
     animationDelay: `${index * 0.1}s`
   }}
@@ -3712,8 +4129,8 @@ const handleDeleteCancel = () => {
   className={message.role === 'user' ? 'user-message-enhanced' : ''}
   style={{
     maxWidth: message.role === 'user' 
-      ? (sidebarOpen ? '75%' : '65%') 
-      : (sidebarOpen ? '85%' : '75%'),
+      ? '85%' 
+      : '90%',
     background: message.role === 'user' 
       ? `linear-gradient(135deg, 
           rgba(0, 108, 53, 0.95) 0%, 
@@ -3735,14 +4152,9 @@ const handleDeleteCancel = () => {
     fontSize: message.role === 'user' ? '25px' : '25px',
     lineHeight: '1.5',
     textAlign: 'right',
-    marginRight: isMobile 
-  ? (message.role === 'user' ? '0.2rem' : 'auto')
-  : (message.role === 'user' 
-      ? (sidebarOpen ? '5%' : '20%') 
-      : (sidebarOpen ? '0%' : '12%')),
 marginLeft: isMobile 
-  ? (message.role === 'user' ? 'auto' : 'auto')
-  : (message.role === 'user' ? '0%' : '0%'),
+  ? (message.role === 'user' ? '1rem' : 'auto')
+  : (message.role === 'user' ? (sidebarOpen ? '15%' : '10%') : '0%'),
     wordBreak: 'break-word',
     overflowWrap: 'break-word',
     whiteSpace: 'normal',
@@ -3805,7 +4217,7 @@ marginLeft: isMobile
 }}>
   <div style={{
     position: 'relative',
-    maxWidth: sidebarOpen ? '800px' : '1000px',
+    maxWidth: '1200px',
     width: '100%'
   }}>
     
@@ -4005,38 +4417,15 @@ marginLeft: isMobile
 const App: React.FC = () => {
   return (
     <AuthProvider>
-      <AppContent />
+      <Router>
+        <AppContent />
+      </Router>
     </AuthProvider>
   );
 };
 
 const AppContent: React.FC = () => {
   const { loading, user, isGuest } = useAuth();
-  const [currentRoute, setCurrentRoute] = useState(window.location.pathname);
-
-  useEffect(() => {
-    const handleRouteChange = () => {
-      console.log('🛣️ Route changed to:', window.location.pathname);
-      setCurrentRoute(window.location.pathname);
-    };
-
-    const handleAuthNavigation = () => {
-      console.log('🔄 Auth navigation event received');
-      setCurrentRoute(window.location.pathname);
-    };
-
-    window.addEventListener('popstate', handleRouteChange);
-    window.addEventListener('auth-navigation', handleAuthNavigation);
-    
-    return () => {
-      window.removeEventListener('popstate', handleRouteChange);
-      window.removeEventListener('auth-navigation', handleAuthNavigation);
-    };
-  }, []);
-
-  // Log current state for debugging
-// Removed infinite console log - use React DevTools instead
-  // Rest of your AppContent code stays the same..
 
   if (loading) {
     return (
@@ -4069,13 +4458,24 @@ const AppContent: React.FC = () => {
     );
   }
 
-  // Route to auth page
-  if (currentRoute === '/auth') {
-    return <AuthScreen />;
-  }
-
-  // Default route - Chat (for both guests and authenticated users)
-  return <ChatApp />;
+  // =====================================================================
+  // SENIOR-LEVEL REACT ROUTER IMPLEMENTATION
+  // =====================================================================
+  return (
+    <Routes>
+      {/* Authentication Route */}
+      <Route path="/auth" element={<AuthScreen />} />
+      
+      {/* Conversation Routes - Senior-level URL structure */}
+      <Route path="/c/:conversationId" element={<ChatApp />} />
+      
+      {/* Home Route - Default chat interface */}
+      <Route path="/" element={<ChatApp />} />
+      
+      {/* Fallback Route - Redirect invalid URLs to home */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
 };
 
 export default App;

@@ -474,7 +474,8 @@ button,
     height: 100vh;
     height: -webkit-fill-available;
   }
-  /* Better Text Organization */
+}
+/* Better Text Organization */
 
 
 /* Sidebar Toggle Animation */
@@ -522,84 +523,155 @@ button,
 }
 /* Better Text Organization - Replace existing if present */
 /* AI Message Formatting - Professional Legal Style */
-/* AI Message Formatting - Super Tight Spacing with Strong Selectors */
-.ai-message-formatted * {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.ai-message-formatted {
+/* ULTIMATE NUCLEAR OPTION: FORCE ALL TEXT TO BE 25px - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response,
+.ai-response-container .ai-response *,
+.ai-response-container .ai-response h1,
+.ai-response-container .ai-response h2, 
+.ai-response-container .ai-response h3,
+.ai-response-container .ai-response h4,
+.ai-response-container .ai-response h5,
+.ai-response-container .ai-response h6,
+.ai-response-container .ai-response p,
+.ai-response-container .ai-response div,
+.ai-response-container .ai-response span,
+.ai-response-container .ai-response strong,
+.ai-response-container .ai-response b,
+.ai-response-container .ai-response li,
+.ai-response-container .ai-response ul,
+.ai-response-container .ai-response ol,
+div.ai-response-container div.ai-response *,
+div.ai-response-container div.ai-response h1,
+div.ai-response-container div.ai-response h2,
+div.ai-response-container div.ai-response h3,
+div.ai-response-container div.ai-response h4,
+div.ai-response-container div.ai-response h5,
+div.ai-response-container div.ai-response h6,
+div.ai-response-container div.ai-response p,
+div.ai-response-container div.ai-response div,
+div.ai-response-container div.ai-response span,
+div.ai-response-container div.ai-response strong,
+div.ai-response-container div.ai-response b {
+  font-size: 25px !important;
   direction: rtl !important;
   text-align: right !important;
-  font-family: 'Noto Sans Arabic', sans-serif !important;
-  line-height: 1.4 !important;
-}
-
-.ai-message-formatted h1,
-.ai-message-formatted h2,
-.ai-message-formatted h3,
-.ai-message-formatted h4,
-.ai-message-formatted h5,
-.ai-message-formatted h6 {
-  font-weight: 700 !important;
-  color: #1e40af !important;
-  margin: 0.4rem 0 0.2rem 0 !important;
-  text-align: right !important;
-  line-height: 1.2 !important;
-  display: block !important;
-}
-
-.ai-message-formatted h1 { 
-  font-size: 1.2rem !important; 
-  color: #1e40af !important;
-  border-bottom: 1px solid #e5e7eb !important;
-  padding-bottom: 0.2rem !important;
-}
-
-.ai-message-formatted h2 { 
-  font-size: 1.15rem !important; 
-  color: #059669 !important; 
-}
-
-.ai-message-formatted h3 { 
-  font-size: 1.1rem !important; 
-  color: #dc2626 !important; 
-}
-
-.ai-message-formatted p {
-  margin: 0.3rem 0 !important;
+  font-family: 'Google Sans', 'Noto Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif !important;
   line-height: 1.5 !important;
+  box-sizing: border-box !important;
+}
+
+/* Subsection headers styling */
+.ai-response-container .ai-response h4 {
+  margin: 1.5rem 0 0.5rem 0 !important;
+  font-weight: 700 !important;
+}
+
+/* List styling to match your example */
+.ai-response-container .ai-response ul {
+  margin: 0.5rem 0 1rem 0 !important;
+  padding-right: 1.5rem !important;
+  list-style-type: disc !important;
+}
+
+.ai-response-container .ai-response li {
+  margin: 0.3rem 0 !important;
+  text-align: right !important;
+}
+
+/* Headers - Section Spacing - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response h1,
+.ai-response-container .ai-response h2,
+.ai-response-container .ai-response h3,
+.ai-response-container .ai-response h4,
+.ai-response-container .ai-response h5,
+.ai-response-container .ai-response h6 {
+  font-weight: 600 !important;
+  color: #1f1f1f !important;
+  margin: 2.5rem 0 1rem 0 !important; /* Even more generous spacing between sections */
+  text-align: right !important;
+  line-height: 1.4 !important;
+  display: block !important;
+  background: none !important; /* Override mobile green backgrounds */
+}
+
+/* REMOVED - All font sizes handled by nuclear rule above */
+
+/* Paragraphs - Generous Breathing Room - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response p {
+  margin: 1.5rem 0 !important; /* 1.5 line heights between paragraphs */
+  line-height: 1.8 !important; /* Generous line spacing for Arabic */
   text-align: right !important;
   display: block !important;
+  color: #1f1f1f !important;
+  padding: 0 !important; /* Override any padding */
 }
 
-.ai-message-formatted ul,
-.ai-message-formatted ol {
-  margin: 0.3rem 0 !important;
-  padding: 0 1rem 0 0 !important;
-  text-align: right !important;
-  list-style-position: inside !important;
+/* After Headers - Comfortable Gap - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response h1 + p,
+.ai-response-container .ai-response h2 + p,
+.ai-response-container .ai-response h3 + p,
+.ai-response-container .ai-response h4 + p,
+.ai-response-container .ai-response h5 + p,
+.ai-response-container .ai-response h6 + p {
+  margin-top: 0.75rem !important; /* Comfortable gap after headers */
 }
 
-.ai-message-formatted li {
-  margin: 0.1rem 0 !important;
-  line-height: 1.4 !important;
-  text-align: right !important;
-  display: list-item !important;
-}
-
-.ai-message-formatted strong,
-.ai-message-formatted b {
+/* Sub-section Headers - Bold phrases within paragraphs - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response strong,
+.ai-response-container .ai-response b {
   font-weight: 700 !important;
-  color: #1e40af !important;
+  color: #1f1f1f !important;
   display: inline !important;
+  margin: 0.5rem 0 !important; /* Micro-hierarchy spacing */
+  background: none !important; /* Remove mobile green backgrounds */
+  padding: 0 !important; /* Remove mobile padding */
+}
+
+/* Bold phrases that act as sub-headers - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response p strong:first-child,
+.ai-response-container .ai-response p b:first-child {
+  display: block !important;
+  margin-bottom: 0.5rem !important;
+  /* font-size removed - handled by nuclear rule */
+  color: #1f1f1f !important;
+}
+
+/* Lists - Hierarchical Structure - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response ul,
+.ai-response-container .ai-response ol {
+  margin: 1.5rem 0 !important; /* Same as paragraph spacing */
+  padding: 0 2rem 0 0 !important; /* Consistent indentation from right margin */
+  text-align: right !important;
+  list-style: none !important;
+  background: none !important; /* Remove mobile backgrounds */
+  border-radius: 0 !important; /* Remove mobile borders */
+}
+
+.ai-response-container .ai-response li {
+  margin: 0.75rem 0 !important; /* Comfortable spacing between list items */
+  line-height: 1.8 !important; /* Same generous line spacing */
+  text-align: right !important;
+  display: block !important;
+  color: #1f1f1f !important;
+  list-style: none !important;
+  position: relative !important;
+  padding-right: 1.5rem !important; /* Secondary indentation for sub-points */
+}
+
+/* Numbered Lists - Visual Hierarchy - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response li:before {
+  content: "•" !important; /* Clean bullet for hierarchy */
+  position: absolute !important;
+  right: 0 !important;
+  color: #666 !important;
+  font-weight: bold !important;
 }
 
 .ai-message-formatted em,
 .ai-message-formatted i {
   font-style: italic !important;
-  color: #059669 !important;
-  font-weight: 500 !important;
+  color: #1f1f1f !important;
+  font-weight: 400 !important;
   display: inline !important;
 }
 
@@ -738,14 +810,21 @@ button,
   }
 }
 
+/* ========================================
+   MOBILE RESPONSIVE DESIGN (768px and below)
+   ======================================== */
+
 @media (max-width: 768px) {
-  /* Nuclear approach - Override EVERYTHING with maximum specificity */
-  .ai-response-container *,
+  
+  /* MOBILE: Nuclear Font Size Override - All text 20px for mobile readability */
+  .ai-response-container .ai-response,
   .ai-response-container .ai-response *,
   .ai-response-container .ai-response h1,
   .ai-response-container .ai-response h2,
   .ai-response-container .ai-response h3,
   .ai-response-container .ai-response h4,
+  .ai-response-container .ai-response h5,
+  .ai-response-container .ai-response h6,
   .ai-response-container .ai-response p,
   .ai-response-container .ai-response div,
   .ai-response-container .ai-response span,
@@ -754,84 +833,160 @@ button,
   .ai-response-container .ai-response li,
   .ai-response-container .ai-response ul,
   .ai-response-container .ai-response ol {
-    font-size: 16px !important;
+    font-size: 20px !important;
     line-height: 1.6 !important;
-    font-family: 'Noto Sans Arabic', sans-serif !important;
+    font-family: 'Google Sans', 'Noto Sans Arabic', sans-serif !important;
+    direction: rtl !important;
+    text-align: right !important;
   }
   
-  /* Green header styling - same font size but distinctive appearance */
+  /* MOBILE: Main Headers - Green styled with larger spacing */
   .ai-response-container .ai-response h1,
   .ai-response-container .ai-response h2,
   .ai-response-container .ai-response h3 {
     background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
     color: #006C35 !important;
     font-weight: 700 !important;
+    padding: 16px 20px !important;
+    border-radius: 12px !important;
+    border-right: 6px solid #006C35 !important;
+    margin: 2rem 0 1.5rem 0 !important;
+    display: block !important;
+    box-shadow: 0 2px 8px rgba(0, 108, 53, 0.1) !important;
+  }
+  
+  /* MOBILE: Subsection Headers (h4) - Subtle styling */
+  .ai-response-container .ai-response h4 {
+    background: rgba(0, 108, 53, 0.05) !important;
+    color: #006C35 !important;
+    font-weight: 700 !important;
     padding: 12px 16px !important;
     border-radius: 8px !important;
-    border-right: 4px solid #006C35 !important;
+    border-right: 4px solid #22c55e !important;
     margin: 1.5rem 0 1rem 0 !important;
     display: block !important;
   }
   
-  /* Legal points - subtle styling for numbered content */
+  /* MOBILE: Paragraphs - Better spacing for touch screens */
+  .ai-response-container .ai-response p {
+    margin: 1.2rem 0 !important;
+    padding: 0 !important;
+    line-height: 1.7 !important;
+  }
+  
+  /* MOBILE: Bold text - Prominent highlighting */
+  .ai-response-container .ai-response strong,
+  .ai-response-container .ai-response b {
+    font-weight: 700 !important;
+    color: #006C35 !important;
+    background: rgba(0, 108, 53, 0.15) !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+    display: inline !important;
+  }
+
+  /* MOBILE: Remove background from bold text inside headers */
+  .ai-response-container .ai-response h1 strong,
+  .ai-response-container .ai-response h2 strong,
+  .ai-response-container .ai-response h3 strong,
+  .ai-response-container .ai-response h4 strong,
+  .ai-response-container .ai-response h1 b,
+  .ai-response-container .ai-response h2 b,
+  .ai-response-container .ai-response h3 b,
+  .ai-response-container .ai-response h4 b {
+    background: none !important;
+    padding: 0 !important;
+    color: inherit !important;
+  }
+  
+  /* MOBILE: Lists - Card-like appearance for better touch interaction */
+  .ai-response-container .ai-response ul,
+  .ai-response-container .ai-response ol {
+    background: #f8fdf9 !important;
+    padding: 1.5rem 2rem !important;
+    border-radius: 12px !important;
+    border-right: 6px solid #22c55e !important;
+    margin: 1.5rem 0 !important;
+    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.1) !important;
+  }
+  
+  /* MOBILE: List items - Better spacing for touch */
+  .ai-response-container .ai-response li {
+    margin: 0.8rem 0 !important;
+    text-align: right !important;
+    line-height: 1.7 !important;
+    padding-right: 0.5rem !important;
+  }
+  
+  /* MOBILE: Legal points - Enhanced card styling */
   .ai-response-container .ai-response .legal-point {
     background: rgba(0, 108, 53, 0.08) !important;
-    border-right: 3px solid #22c55e !important;
-    padding: 10px 14px !important;
-    margin: 0.8rem 0 !important;
-    border-radius: 6px !important;
+    border-right: 6px solid #22c55e !important;
+    padding: 16px 20px !important;
+    margin: 1.5rem 0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 108, 53, 0.1) !important;
   }
   
   .ai-response-container .ai-response .legal-point strong {
     color: #006C35 !important;
     font-weight: 700 !important;
+    display: block !important;
+    margin-bottom: 0.5rem !important;
   }
   
   .ai-response-container .ai-response .legal-point p {
-    margin: 0.3rem 0 0 0 !important;
+    margin: 0.5rem 0 0 0 !important;
+    line-height: 1.7 !important;
   }
   
-  /* Fix spacing between consecutive headers */
-  .ai-response-container .ai-response h3 + h3 {
-    margin-top: 0.5rem !important;
+  /* MOBILE: Fix spacing between consecutive headers */
+  .ai-response-container .ai-response h3 + h3,
+  .ai-response-container .ai-response h4 + h4 {
+    margin-top: 1rem !important;
   }
   
-  /* Style content sections properly */
-  .ai-response-container .ai-response p {
-    margin: 0.8rem 0 !important;
-    padding: 0 !important;
+  /* MOBILE: User message container adjustments */
+  .user-message-enhanced {
+    margin: 1rem 0 !important;
+    padding: 1rem !important;
   }
   
- /* Bold text styling - but NOT inside headers */
-.ai-response-container .ai-response strong,
-.ai-response-container .ai-response b {
-  font-weight: 700 !important;
-  color: #006C35 !important;
-  background: rgba(0, 108, 53, 0.1) !important;
-  padding: 2px 6px !important;
-  border-radius: 4px !important;
+  /* MOBILE: Main chat area adjustments */
+  .messages-area {
+    padding: 1rem !important;
+  }
+  
+  /* MOBILE: Message containers - Better touch targets */
+  .message {
+    margin: 1.5rem 0 !important;
+    padding: 0.5rem !important;
+  }
+  
+  /* MOBILE: User messages - Match mobile font size */
+  .user-message-enhanced {
+    font-size: 20px !important;
+    line-height: 1.6 !important;
+    padding: 1.2rem 1.5rem !important;
+    margin: 1rem 0.5rem !important;
+  }
+  
+  /* MOBILE: Container width adjustments */
+  .chat-container {
+    padding: 0.5rem !important;
+  }
+  
+  /* MOBILE: Input area adjustments */
+  .input-area {
+    padding: 1rem !important;
+  }
+  
+  /* MOBILE: Textarea adjustments */
+  .textarea {
+    font-size: 18px !important;
+    padding: 1rem !important;
+    min-height: 100px !important;
+  }
 }
 
-/* Remove background from bold text inside headers */
-.ai-response-container .ai-response h1 strong,
-.ai-response-container .ai-response h2 strong,
-.ai-response-container .ai-response h3 strong,
-.ai-response-container .ai-response h1 b,
-.ai-response-container .ai-response h2 b,
-.ai-response-container .ai-response h3 b {
-  background: none !important;
-  padding: 0 !important;
-  color: inherit !important;
-}
-  
-  /* List styling */
-  .ai-response-container .ai-response ol,
-  .ai-response-container .ai-response ul {
-    background: #f8fdf9 !important;
-    padding: 1rem 1.5rem !important;
-    border-radius: 8px !important;
-    border-right: 4px solid #22c55e !important;
-    margin: 1rem 0 !important;
-  }
-}
-}
+/* REMOVED - All font sizes handled by nuclear rule at top */

@@ -85,6 +85,33 @@ async def send_unified_chat_message(
     - Both modes support full conversation memory for guests and users
     """
     try:
+        # 🛡️ SECURITY: Input validation to prevent injection attacks
+        if not message or not isinstance(message, str):
+            raise HTTPException(status_code=400, detail="Message is required and must be a string")
+        
+        # Sanitize message input
+        message = message.strip()
+        if len(message) == 0:
+            raise HTTPException(status_code=400, detail="Message cannot be empty")
+        if len(message) > 10000:  # Reasonable limit for legal questions
+            raise HTTPException(status_code=400, detail="Message too long (max 10,000 characters)")
+        
+        # Validate conversation_id format if provided
+        if conversation_id:
+            if not isinstance(conversation_id, str) or len(conversation_id.strip()) == 0:
+                raise HTTPException(status_code=400, detail="Invalid conversation ID format")
+            # Basic UUID format validation
+            import re
+            if not re.match(r'^[a-f0-9-]{36}$', conversation_id.strip()):
+                raise HTTPException(status_code=400, detail="Invalid conversation ID format")
+            conversation_id = conversation_id.strip()
+        
+        # Validate session_id format if provided
+        if session_id:
+            if not isinstance(session_id, str) or len(session_id.strip()) == 0:
+                raise HTTPException(status_code=400, detail="Invalid session ID format")
+            session_id = session_id.strip()
+        
         print(f"🔄 Processing unified message from {'user' if current_user else 'guest'}: {message[:50]}...")
         print(f"📡 Response format requested: {accept}")
         
@@ -480,6 +507,21 @@ async def update_conversation_title(
     current_user: User = Depends(get_current_active_user)
 ):
     """Update conversation title."""
+    # 🛡️ SECURITY: Input validation
+    if not new_title or not isinstance(new_title, str):
+        raise HTTPException(status_code=400, detail="Title is required and must be a string")
+    
+    new_title = new_title.strip()
+    if len(new_title) == 0:
+        raise HTTPException(status_code=400, detail="Title cannot be empty")
+    if len(new_title) > 200:  # Reasonable limit for conversation titles
+        raise HTTPException(status_code=400, detail="Title too long (max 200 characters)")
+    
+    # Validate conversation_id format
+    import re
+    if not re.match(r'^[a-f0-9-]{36}$', conversation_id):
+        raise HTTPException(status_code=400, detail="Invalid conversation ID format")
+    
     conversation = db.query(Conversation).filter(
         Conversation.id == conversation_id,
         Conversation.user_id == current_user.id
@@ -488,7 +530,7 @@ async def update_conversation_title(
     if not conversation:
         raise HTTPException(status_code=404, detail="Conversation not found")
     
-    updated_conversation = ChatService.update_conversation_title(db, conversation_id, new_title.strip())
+    updated_conversation = ChatService.update_conversation_title(db, conversation_id, new_title)
     
     return {
         "conversation_id": conversation_id,

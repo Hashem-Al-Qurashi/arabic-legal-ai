@@ -6,6 +6,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { legalAPI, chatAPI } from '../../services/api';
 import ChatHistory from '../chat/ChatHistory';
 import type { Consultation } from '../../types/auth';
+import DOMPurify from 'dompurify';
 
 // Toast notification (keep your existing implementation)
 const showToast = (message: string, type: 'error' | 'success' = 'error') => {
@@ -257,7 +258,12 @@ const LegalForm: React.FC<LegalFormProps> = ({ onNewConsultation }) => {
                   {message.role === 'user' ? '👤 أنت' : '🤖 المساعد القانوني'}
                 </div>
                 <div 
-                  dangerouslySetInnerHTML={{ __html: message.content }}
+                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(message.content, {
+                    ALLOWED_TAGS: ['h1', 'h2', 'h3', 'h4', 'p', 'div', 'strong', 'b', 'em', 'i', 'ul', 'ol', 'li', 'br'],
+                    ALLOWED_ATTR: [],
+                    FORBID_TAGS: ['script', 'iframe', 'object', 'embed'],
+                    FORBID_ATTR: ['onclick', 'onerror', 'onload']
+                  }) }}
                   style={{ lineHeight: '1.5', fontSize: '0.9rem' }}
                 />
               </div>
