@@ -198,8 +198,10 @@ class Settings(BaseSettings):
     @property
     def allowed_origins(self) -> List[str]:
         """Get CORS origins from environment or use defaults"""
-        if self.cors_origins:
-            origins = [origin.strip() for origin in self.cors_origins.split(",")]
+        # Check both CORS_ORIGINS and cors_origins for compatibility
+        cors_env = os.environ.get('CORS_ORIGINS') or self.cors_origins
+        if cors_env:
+            origins = [origin.strip() for origin in cors_env.split(",")]
             return [origin for origin in origins if origin]  # Filter empty strings
         
         # Default origins based on environment
@@ -240,12 +242,15 @@ class Settings(BaseSettings):
                 # Your production domains (ADDED)
                 "http://hokm.ai",
                 "https://hokm.ai",
+                "http://www.hokm.ai",
+                "https://www.hokm.ai",
                 "http://app.hokm.ai",
                 "https://app.hokm.ai",
                 
-                # CloudFront distributions
-                "https://d10drat4g0606g.cloudfront.net",
-                "https://d2c979d13bkvf4.cloudfront.net",
+                # CloudFront distributions - UPDATED with current domains
+                "https://d19s2p97xyms4l.cloudfront.net",  # Current frontend CloudFront
+                "https://d10drat4g0606g.cloudfront.net",  # Backend CloudFront  
+                "https://d2c979d13bkvf4.cloudfront.net",  # Legacy CloudFront
                 
                 # Keep localhost for production testing (remove if not needed)
                 "http://localhost:3000"
