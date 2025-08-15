@@ -99,7 +99,7 @@ export const formatAIResponse = (content: string): string => {
       }
     });
 
-  // Convert line breaks to paragraphs
+  // Convert line breaks to paragraphs with better spacing
   const paragraphs = html.split(/\n\s*\n/).filter(p => p.trim());
   html = paragraphs.map(p => {
     p = p.trim();
@@ -108,7 +108,26 @@ export const formatAIResponse = (content: string): string => {
       return p;
     }
     return `<p>${p}</p>`;
-  }).join('\n');
+  }).join('\n\n'); // Double newlines for better spacing
+
+  // Add ChatGPT-style spacing and visual hierarchy - EXTRA generous
+  html = html
+    // Add maximum spacing around headers
+    .replace(/(<h[1-6][^>]*>.*?<\/h[1-6]>)/g, '\n\n\n\n$1\n\n\n\n')
+    // Add maximum spacing around lists
+    .replace(/(<[uo]l>)/g, '\n\n\n\n$1')
+    .replace(/(<\/[uo]l>)/g, '$1\n\n\n\n')
+    // Add maximum spacing between list items for better readability
+    .replace(/(<\/li>)(\s*)(<li>)/g, '$1\n\n\n$3')
+    // Add visual separators for sections (⸻ like ChatGPT) with maximum spacing
+    .replace(/(<\/[uo]l>)\s*(<p>)/g, '$1\n\n\n\n<div class="section-divider">⸻</div>\n\n\n\n$2')
+    .replace(/(<\/p>)\s*(<h[1-6])/g, '$1\n\n\n\n<div class="section-divider">⸻</div>\n\n\n\n$2')
+    .replace(/(<\/[uo]l>)\s*(<[uo]l>)/g, '$1\n\n\n\n<div class="section-divider">⸻</div>\n\n\n\n$2')
+    // Add maximum spacing between consecutive paragraphs
+    .replace(/(<\/p>)\s*(<p>)/g, '$1\n\n\n\n$2')
+    // Clean up multiple newlines (allow up to 6 for maximum spacing)
+    .replace(/\n{7,}/g, '\n\n\n\n\n\n')
+    .trim();
 
   console.log('---- FINAL HTML OUTPUT ----');
   console.log(html);

@@ -712,9 +712,297 @@ const handleDeleteCancel = () => {
         ::-webkit-scrollbar-thumb:hover {
           background: #9ca3af;
         }
+        
+        /* Sidebar specific scrollbar styling */
+        .sidebar-scroll::-webkit-scrollbar {
+          width: 8px;
+        }
+        
+        .sidebar-scroll::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 4px;
+        }
+        
+        .sidebar-scroll::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 4px;
+          transition: background 0.2s ease;
+        }
+        
+        .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Firefox scrollbar for sidebar */
+        .sidebar-scroll {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05);
+        }
+        
+        /* =====================================================================
+         * SENIOR-LEVEL HEIGHT CONSTRAINT ARCHITECTURE
+         * Advanced CSS Layout System for Proper Scroll Containment
+         * ===================================================================== */
+        
+        /* 1. VIEWPORT HEIGHT LOCKING SYSTEM */
+        :root {
+          --viewport-height: 100vh;
+          --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+          --dynamic-viewport-height: 100dvh; /* Modern browsers */
+          --stable-viewport-height: calc(100vh - var(--safe-area-bottom));
+        }
+        
+        /* Support for dynamic viewport units with fallback */
+        @supports (height: 100dvh) {
+          :root {
+            --viewport-height: 100dvh;
+          }
+        }
+        
+        /* 2. GRID CONTAINER HEIGHT PROPAGATION */
+        .chat-grid-container {
+          /* CRITICAL: Always constrained height, NEVER auto */
+          height: var(--viewport-height) !important;
+          min-height: var(--viewport-height) !important;
+          max-height: var(--viewport-height) !important;
+          /* Prevent content overflow breaking constraints */
+          overflow: hidden !important;
+          /* Establish proper stacking context */
+          contain: layout style !important;
+          /* Ensure no flex/grid conflicts */
+          box-sizing: border-box !important;
+        }
+        
+        /* 3. MOBILE VIEWPORT COMPATIBILITY LAYER */
+        @media (max-width: 768px) {
+          .chat-grid-container {
+            /* Advanced mobile viewport handling */
+            height: calc(100vh - var(--safe-area-bottom)) !important;
+            height: var(--dynamic-viewport-height) !important;
+            min-height: calc(100vh - var(--safe-area-bottom)) !important;
+            min-height: var(--dynamic-viewport-height) !important;
+            /* Prevent mobile address bar issues */
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            /* Mobile optimization */
+            -webkit-overflow-scrolling: touch !important;
+            overscroll-behavior: contain !important;
+          }
+        }
+        
+        /* 4. SIDEBAR HEIGHT CASCADE SYSTEM */
+        .sidebar-container {
+          /* Must inherit constrained height from grid */
+          height: 100% !important;
+          min-height: 100% !important;
+          max-height: 100% !important;
+          /* Establish flex context with height constraints */
+          display: flex !important;
+          flex-direction: column !important;
+          /* Prevent content overflow */
+          overflow: hidden !important;
+          /* Create isolation boundary */
+          contain: layout style !important;
+        }
+        
+        /* 5. FLEX HEIGHT PROPAGATION LAYER */
+        .sidebar-header {
+          /* Fixed height sections */
+          flex: none !important;
+          flex-shrink: 0 !important;
+        }
+        
+        .sidebar-scroll-container {
+          /* CRITICAL: This creates the scroll boundary */
+          flex: 1 !important;
+          min-height: 0 !important; /* Allow flex shrinking */
+          height: 0 !important; /* Force constraint respect */
+          /* Establish scroll context */
+          overflow: hidden !important;
+          contain: layout style !important;
+          /* Create isolated scroll area */
+          position: relative !important;
+        }
+        
+        .sidebar-scroll {
+          /* ISOLATED SCROLL IMPLEMENTATION */
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          /* Enable scrolling in constrained space */
+          overflow-y: auto !important;
+          overflow-x: hidden !important;
+          /* Performance optimizations */
+          -webkit-overflow-scrolling: touch !important;
+          overscroll-behavior: contain !important;
+          /* Scroll behavior */
+          scroll-behavior: smooth !important;
+          /* Content padding */
+          padding: 16px !important;
+          box-sizing: border-box !important;
+        }
+        
+        .sidebar-footer {
+          /* Fixed height sections */
+          flex: none !important;
+          flex-shrink: 0 !important;
+        }
+        
+        /* 6. MAIN CHAT AREA HEIGHT SYSTEM */
+        .main-chat-container {
+          height: 100% !important;
+          min-height: 100% !important;
+          max-height: 100% !important;
+          display: flex !important;
+          flex-direction: column !important;
+          overflow: hidden !important;
+          contain: layout style !important;
+        }
+        
+        .messages-container {
+          flex: 1 !important;
+          min-height: 0 !important;
+          overflow-y: auto !important;
+          -webkit-overflow-scrolling: touch !important;
+          overscroll-behavior: contain !important;
+        }
+        
+        .input-container {
+          flex: none !important;
+          flex-shrink: 0 !important;
+        }
+        
+        /* 7. MOBILE SIDEBAR OVERLAY SYSTEM */
+        @media (max-width: 768px) {
+          .sidebar-container.mobile {
+            /* Full viewport overlay */
+            position: fixed !important;
+            top: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 320px !important;
+            height: 100vh !important;
+            height: var(--dynamic-viewport-height) !important;
+            z-index: 50 !important;
+            /* Prevent parent constraints affecting overlay */
+            transform: none !important;
+          }
+        }
+        
+        /* 8. ADVANCED SCROLLBAR ARCHITECTURE */
+        .sidebar-scroll::-webkit-scrollbar {
+          width: 8px;
+        }
+        
+        .sidebar-scroll::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 4px;
+        }
+        
+        .sidebar-scroll::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 4px;
+          transition: background 0.2s ease;
+        }
+        
+        .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* 9. CLEAN PERFORMANCE ARCHITECTURE */
+        .messages-container {
+          /* Only enable GPU acceleration where needed */
+          will-change: scroll-position;
+          -webkit-overflow-scrolling: touch;
+        }
+        
+        /* 10. MODERN TOUCH EVENT ARCHITECTURE */
+        .mobile-backdrop {
+          /* Ensure backdrop captures all touches */
+          touch-action: none !important;
+          pointer-events: auto !important;
+          /* Prevent touch interference */
+          -webkit-touch-callout: none !important;
+          user-select: none !important;
+        }
+        
+        .sidebar-container {
+          /* Allow only vertical scrolling touches */
+          touch-action: pan-y !important;
+          /* Ensure sidebar captures touches */
+          pointer-events: auto !important;
+          /* Remove GPU conflicts */
+          will-change: auto !important;
+          transform: none !important;
+          backface-visibility: visible !important;
+        }
+        
+        .sidebar-scroll {
+          /* Precise touch control for scroll area */
+          touch-action: pan-y !important;
+          /* Remove containment conflicts */
+          contain: none !important;
+          /* Ensure proper touch targeting */
+          pointer-events: auto !important;
+          /* Remove transform conflicts */
+          transform: none !important;
+          will-change: scroll-position !important;
+        }
+        
+        .sidebar-container.mobile {
+          /* Mobile-specific touch fixes */
+          position: fixed !important;
+          top: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          width: 320px !important;
+          /* Critical: Higher z-index than backdrop */
+          z-index: 50 !important;
+          /* Ensure touch capture */
+          pointer-events: auto !important;
+          /* Remove transform conflicts */
+          transform: none !important;
+        }
+        
+        /* 11. Z-INDEX STACKING ARCHITECTURE */
+        .mobile-backdrop {
+          z-index: 40 !important;
+        }
+        
+        .sidebar-container.mobile {
+          z-index: 50 !important;
+        }
+        
+        .sidebar-scroll {
+          z-index: 51 !important;
+        }
+        
+        /* 12. REMOVE ALL GPU ACCELERATION CONFLICTS */
+        .chat-grid-container,
+        .sidebar-container,
+        .main-chat-container {
+          /* Remove problematic GPU acceleration */
+          will-change: auto !important;
+          backface-visibility: visible !important;
+          transform: none !important;
+        }
+        
+        /* 13. FALLBACK COMPATIBILITY */
+        @supports not (height: 100dvh) {
+          .chat-grid-container {
+            height: 100vh !important;
+          }
+        }
       `}</style>
       
-<div style={{
+<div 
+  className="chat-grid-container"
+  style={{
   display: 'grid',
   gridTemplateColumns: isMobile 
     ? (sidebarOpen ? '320px 1fr' : '1fr')
@@ -726,37 +1014,27 @@ const handleDeleteCancel = () => {
     : sidebarOpen 
       ? '"sidebar main"'
       : '"main"',
-  // 🔧 MOBILE FIX: Dynamic height
-  height: isMobile ? 'auto' : '100vh',
-  minHeight: isMobile ? '100vh' : 'auto',
+  // 🏗️ SENIOR-LEVEL: ALWAYS CONSTRAINED HEIGHT (CSS classes override inline)
   fontFamily: "'Noto Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
   background: 'var(--background-light)',
-  direction: 'rtl',
-  contain: 'layout style paint',
-  // 🔧 MOBILE FIX: Allow scrolling
-  overflow: isMobile ? 'visible' : 'hidden'
+  direction: 'rtl'
+  // ⚠️ REMOVED: All height/overflow props - handled by CSS classes
 }}>
         
         {/* Mobile Backdrop */}
        {/* Mobile Backdrop */}
 {isMobile && sidebarOpen && (
   <div 
+    className="mobile-backdrop"
     style={{
       position: 'fixed',
       inset: 0,
       background: 'rgba(0, 0, 0, 0.5)',
       zIndex: 40,
-      opacity: 1,
-      transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-      backdropFilter: 'blur(4px)',
-      willChange: 'opacity'
+      backdropFilter: 'blur(4px)'
     }}
-    onClick={(e) => {
-      // Only close if clicking the backdrop itself, not scrolling
-      if (e.target === e.currentTarget) {
-        toggleSidebar();
-      }
-    }}
+    data-touch-zone="backdrop"
+    onClick={() => setSidebarOpen(false)}
   />
 )}
 
@@ -806,24 +1084,22 @@ const handleDeleteCancel = () => {
 
 {/* Sidebar */}
 <div 
+  className={`sidebar-container ${isMobile ? 'mobile' : ''}`}
   style={{
     gridArea: 'sidebar',
-    position: isMobile ? 'fixed' : 'relative',
-    inset: isMobile ? '0 0 0 auto' : 'auto',  // ← This positions it on the RIGHT
-    width: isMobile ? '320px' : '100%',
-    // 🔧 MOBILE FIX: Dynamic height
-    height: isMobile ? '100vh' : '100vh', // Keep 100vh for sidebar
+    // 🏗️ SENIOR-LEVEL: Position handled by CSS classes
     background: '#171717',
     display: sidebarOpen ? 'flex' : 'none',
-    flexDirection: 'column',
     borderLeft: '1px solid #363739',
     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
     zIndex: isMobile ? 50 : 'auto',
     boxShadow: isMobile ? '0 10px 25px rgba(0, 0, 0, 0.15)' : 'none'
+    // ⚠️ REMOVED: All height/position props - handled by CSS classes
   }}
+  data-touch-zone="sidebar"
 >
           {/* Sidebar Header - Clean & Spaced */}
-<div style={{
+<div className="sidebar-header" style={{
   padding: '20px',
   borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
   display: 'flex',
@@ -914,7 +1190,7 @@ const handleDeleteCancel = () => {
 </div>
 
           {/* New Chat Button */}
-          <div style={{ padding: '16px' }}>
+          <div className="sidebar-header" style={{ padding: '16px' }}>
             <button
               onClick={startNewConversation}
               style={{
@@ -951,12 +1227,31 @@ const handleDeleteCancel = () => {
             </button>
           </div>
 
-          {/* Conversations List */}
-          <div style={{
-            flex: 1,
-            overflowY: 'auto',
-            padding: '0 16px'
+          {/* Section Divider */}
+          <div className="sidebar-header" style={{
+            height: '1px',
+            background: 'rgba(255, 255, 255, 0.1)',
+            margin: '0 16px',
+            position: 'relative'
           }}>
+            <div style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
+              background: '#171717',
+              padding: '0 12px',
+              color: 'rgba(255, 255, 255, 0.5)',
+              fontSize: '12px',
+              fontWeight: '500'
+            }}>
+              ————
+            </div>
+          </div>
+
+          {/* 🏗️ SENIOR-LEVEL: ISOLATED SCROLL CONTAINER ARCHITECTURE */}
+          <div className="sidebar-scroll-container">
+            <div className="sidebar-scroll">
             {loadingConversations ? (
               <div style={{ 
                 color: '#8e8ea0', 
@@ -977,11 +1272,12 @@ const handleDeleteCancel = () => {
               </div>
             ) : (
               conversations.map((conv, index) => (
+  <div key={`conversation-${conv.id}`}>
   <div
     key={conv.id}
     style={{
       padding: '12px 16px',
-      margin: '4px 0',
+      margin: '8px 0',
       borderRadius: '8px',
       background: selectedConversation === conv.id ? '#2d2d30' : 'transparent',
       color: 'white',
@@ -1139,11 +1435,35 @@ const handleDeleteCancel = () => {
   </button>
 </div>
   </div>
+  </div>
 )))}
+            </div>
+          </div>
+
+          {/* Section Divider before User Info */}
+          <div className="sidebar-footer" style={{
+            height: '1px',
+            background: 'rgba(255, 255, 255, 0.1)',
+            margin: '16px 16px 0 16px',
+            position: 'relative'
+          }}>
+            <div style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
+              background: '#171717',
+              padding: '0 12px',
+              color: 'rgba(255, 255, 255, 0.5)',
+              fontSize: '12px',
+              fontWeight: '500'
+            }}>
+              ————
+            </div>
           </div>
 
           {/* User Info - Premium Clean Design */}
-<div style={{
+<div className="sidebar-footer" style={{
   padding: '24px 20px',
   borderTop: '1px solid rgba(255, 255, 255, 0.08)',
   background: 'linear-gradient(180deg, rgba(23, 23, 23, 0.8) 0%, rgba(23, 23, 23, 1) 100%)'
@@ -1472,31 +1792,19 @@ const handleDeleteCancel = () => {
         </div>
 
         {/* Main Chat Area */}
-        <div style={{
+        <div className="main-chat-container" style={{
   gridArea: 'main',
-  display: 'flex',
-  flexDirection: 'column',
   background: 'var(--background-white)',
-  // 🔧 MOBILE FIX: Dynamic height
-  height: isMobile ? 'auto' : '100vh',
-  minHeight: isMobile ? '100vh' : 'auto',
-  position: 'relative',
-  // 🔧 MOBILE FIX: Allow overflow on mobile
-  overflow: isMobile ? 'visible' : 'hidden'
+  position: 'relative'
+  // 🏗️ SENIOR-LEVEL: All height/overflow handled by CSS classes
 }}>
 
           {/* Messages Area */}
           <div 
-  className="chat-main-area"
+  className="messages-container"
   style={{
-    flex: 1,
-    overflowY: 'auto',
-    padding: '24px 0',
-    scrollBehavior: 'smooth',
-    // 🔧 MOBILE FIX: Better touch scrolling
-    WebkitOverflowScrolling: 'touch',
-    // 🔧 MOBILE FIX: Ensure proper height on mobile
-    minHeight: isMobile ? '60vh' : 'auto'
+    padding: '24px 0'
+    // 🏗️ SENIOR-LEVEL: All scroll properties handled by CSS classes
   }}
 >
             {messages.length === 0 ? (
@@ -1517,14 +1825,14 @@ const handleDeleteCancel = () => {
                 <h2 style={{
                   fontSize: 'clamp(50px, 4vw, 26px)',
                   fontWeight: '600',
-                  color: 'white',
+                  color: isDark ? '#f9fafb' : '#1f2937',
                   marginBottom: '16px'
                 }}>
                   اهلا بك في حكم
                 </h2>
                 <p style={{
                   fontSize: 'clamp(24px, 2vw, 16px)',
-                  color: 'white',
+                  color: isDark ? '#d1d5db' : '#4b5563',
                   marginBottom: '32px',
                   maxWidth: '600px',
                   lineHeight: '1.6'
@@ -1716,7 +2024,7 @@ const handleDeleteCancel = () => {
           </div>
 
           {/* Input Area */}
-<div style={{
+<div className="input-container" style={{
   padding: '32px 24px',
   background: isDark 
     ? 'linear-gradient(135deg, rgba(31, 41, 55, 0.95) 0%, rgba(17, 24, 39, 0.9) 100%)'

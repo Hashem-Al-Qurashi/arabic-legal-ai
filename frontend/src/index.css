@@ -66,3 +66,105 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* ChatGPT-style Message Formatting - Extra generous spacing */
+.ai-response p {
+  margin: 3em 0;
+  line-height: 1.8;
+}
+
+.ai-response h1,
+.ai-response h2,
+.ai-response h3,
+.ai-response h4,
+.ai-response h5,
+.ai-response h6 {
+  margin: 4em 0 3em 0;
+  font-weight: 600;
+}
+
+.ai-response ul,
+.ai-response ol {
+  margin: 3.5em 0;
+  padding-left: 2em; /* Fix RTL - bullets should be on the left */
+  padding-right: 0;
+  direction: rtl;
+  text-align: right;
+}
+
+.ai-response li {
+  margin: 1.8em 0;
+  line-height: 1.8;
+  direction: rtl;
+  text-align: right;
+}
+
+.ai-response .section-divider {
+  text-align: center;
+  color: #9ca3af;
+  margin: 4.5em 0;
+  font-size: 1.2em;
+  opacity: 0.6;
+}
+
+/* Dark mode section divider */
+.dark-mode .ai-response .section-divider {
+  color: #6b7280;
+}
+
+/* Better spacing for nested content */
+.ai-response li > p {
+  margin: 1.5em 0;
+}
+
+.ai-response li > ul,
+.ai-response li > ol {
+  margin: 2em 0;
+}
+
+/* Extra spacing between major sections */
+.ai-response > p + ul,
+.ai-response > p + ol,
+.ai-response > ul + p,
+.ai-response > ol + p {
+  margin-top: 4em;
+}
+
+/* More generous spacing for first and last elements */
+.ai-response > *:first-child {
+  margin-top: 0;
+}
+
+.ai-response > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Additional spacing between consecutive elements */
+.ai-response > p + p {
+  margin-top: 3.5em;
+}
+
+.ai-response > ul + ul,
+.ai-response > ol + ol {
+  margin-top: 4em;
+}
+
+/* Custom Scrollbar for Sidebar */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
