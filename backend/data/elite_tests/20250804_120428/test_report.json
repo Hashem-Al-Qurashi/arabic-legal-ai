@@ -1,0 +1,299 @@
+{
+  "success": true,
+  "test_id": "20250804_120428",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/08381293-6388-48e2-8ad2-a9a700f2aa94/1",
+  "title": "نظام العمل",
+  "extraction_summary": {
+    "total_characters": 175863,
+    "estimated_tokens": 97701,
+    "quality_score": 7.736275098050694,
+    "arabic_ratio": 1.0145100392202775
+  },
+  "chunking_results": {
+    "total_chunks": 81,
+    "chunk_sizes": {
+      "min_chars": 50,
+      "max_chars": 3513,
+      "avg_chars": 2153,
+      "min_tokens": 27,
+      "max_tokens": 1951,
+      "avg_tokens": 1195
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 15,
+      "sections_detected": 0,
+      "articles_detected": 66,
+      "total_chunks": 81
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 1,
+      "missing_context": 0,
+      "violations": [
+        "Chunk 1: 1951 tokens (significantly oversized)"
+      ],
+      "saudi_legal_patterns_detected": [
+        "Article sequence pattern: ['3→5']",
+        "Article sequence pattern: ['2→8', '8→10']",
+        "Article sequence pattern: ['3→5']",
+        "Article sequence pattern: ['4→9']",
+        "Article sequence pattern: ['5→7']",
+        "Article sequence pattern: ['2→8']",
+        "Article sequence pattern: ['2→9']",
+        "Article sequence pattern: ['2→8']",
+        "Article sequence pattern: ['3→8']",
+        "Article sequence pattern: ['6→8']",
+        "Article sequence pattern: ['1→6', '6→8']",
+        "Article 1 mid-sequence (likely amendment structure)",
+        "Article sequence pattern: ['3→9']",
+        "Article sequence pattern: ['5→8']",
+        "Article sequence pattern: ['2→6', '6→8']",
+        "Article sequence pattern: ['4→6']",
+        "Article sequence pattern: ['6→8']",
+        "Article sequence pattern: ['3→8']",
+        "Article sequence pattern: ['4→6']",
+        "Article sequence pattern: ['3→8']",
+        "Article 1 mid-sequence (likely amendment structure)",
+        "Article sequence pattern: ['3→5']",
+        "Article sequence pattern: ['4→9']",
+        "Article sequence pattern: ['5→9']",
+        "Article 1 mid-sequence (likely amendment structure)",
+        "Article 1 mid-sequence (likely amendment structure)",
+        "Article 1 mid-sequence (likely amendment structure)"
+      ],
+      "quality_warnings": [],
+      "overall_quality": "GOOD"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام العمل - الباب الأول > الفصل الأول  - المادة الأولى + المادة الثانية",
+      "hierarchy_level": "chapter",
+      "chars": 372,
+      "tokens": 206,
+      "metadata": {
+        "items_count": 5,
+        "hierarchy_levels": [
+          "section",
+          "article",
+          "chapter"
+        ],
+        "token_count": 200,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الأول "
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الأول ",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الأول ",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 2,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 2,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الأول:\n\nالتعريفات والأحكام العامة\n\\ن\n\nالفصل الأول :\n\nالتعريفات\n\nالمادة الأولى :يسمى هذا النظام نظام العمل.\n\nالمادة الثانية\n\n\n\nتعديلات المادة\n\nالمادة الثانية- تعديل تعريف العامل وذلك بموجب المرسو..."
+    },
+    {
+      "index": 1,
+      "title": "نظام العمل - الباب الأول > الفصل الأول  - المادة الثانية",
+      "hierarchy_level": "article",
+      "chars": 3513,
+      "tokens": 1951,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1951,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الأول "
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الأول ",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الأول ",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية- صدر المرسوم الملكي رقم (م/44) وتاريخ 1446/2/8هـ، وذلك بالموافقة على تعديلات بعض مواد نظام العمل (ويعمل بها من تاريخ 1446/8/20هـ)وتم إضافة تعريفين إلى هذه المادة وتكون بالنص الآتي:1-\"ال..."
+    },
+    {
+      "index": 2,
+      "title": "نظام العمل - الباب الأول > الفصل الأول  - المادة الثالثة ... المادة السابعة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2207,
+      "tokens": 1226,
+      "metadata": {
+        "items_count": 6,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1219,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الأول "
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الأول ",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الأول ",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثالثة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثالثة :\n\n\n\nتعديلات\n\nالمادة الثالثة :عُدلت هذه المادة بموجب المرسوم الملكي رقم (م / 134) وتاريخ 27 / 11 / 1440هـ، لتكون بالنص الآتي: \"العمل حق للمواطن، لا يجوز لغيره ممارسته إلا بعد توافر الشر..."
+    },
+    {
+      "index": 3,
+      "title": "نظام العمل - الباب الأول > الفصل الأول  - المادة السابعة",
+      "hierarchy_level": "article",
+      "chars": 2517,
+      "tokens": 1398,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1396,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الأول "
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الأول ",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الأول ",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة السابعة :تم تعديل هذه المادة بموجب المرسوم الملكي رقم ( م/ 46) وتاريخ 5 / 6 / 1436 هـ ؛لتكون بالنص الآتي :\"1 - يستثنى من تطبيق أحكام هذا النظام كل من :أ - أفراد أسرة صاحب العمل، وهم زوجه وأصوله..."
+    },
+    {
+      "index": 4,
+      "title": "نظام العمل - الباب الأول > الفصل الأول  - المادة الثامنة ... المادة الثانية (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2172,
+      "tokens": 1206,
+      "metadata": {
+        "items_count": 7,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1196,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الأول "
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الأول ",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الأول ",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة :يبطل كل شرط يخالف أحكام هذا النظام، ويبطل كل إبراء أو مصالحة عن الحقوق الناشئة للعامل بموجب هذا النظام أثناء سريان عقد العمل، ما لم يكن أكثر فائدة للعامل.\n\nالمادة التاسعة :\n\nاللغة العر..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "GOOD",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.736275098050694,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 27,
+    "technical_violations": 1
+  },
+  "recommendations": [
+    "🔧 MINOR: 1 oversized chunks detected",
+    "📊 INFO: 27 Saudi legal document patterns detected (normal)",
+    "⚡ INFO: High chunk count - monitor performance",
+    "✅ GOOD: Strong performance - proceed with confidence!"
+  ]
+}

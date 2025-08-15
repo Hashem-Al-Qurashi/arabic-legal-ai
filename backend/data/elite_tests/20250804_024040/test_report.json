@@ -1,0 +1,148 @@
+{
+  "success": true,
+  "test_id": "20250804_024040",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/a4d3a985-a838-47e8-977e-a9a700f16c1c/1",
+  "title": "نظام الوثائق والمحفوظات",
+  "extraction_summary": {
+    "total_characters": 5786,
+    "estimated_tokens": 3214,
+    "quality_score": 5.784865983874482,
+    "arabic_ratio": 1.013946393549793
+  },
+  "chunking_results": {
+    "total_chunks": 2,
+    "chunk_sizes": {
+      "min_chars": 882,
+      "max_chars": 2738,
+      "avg_chars": 1810,
+      "min_tokens": 490,
+      "max_tokens": 1521,
+      "avg_tokens": 1005
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 0,
+      "sections_detected": 0,
+      "articles_detected": 2,
+      "total_chunks": 2
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 0,
+      "missing_context": 2,
+      "violations": [],
+      "saudi_legal_patterns_detected": [],
+      "quality_warnings": [
+        "Chunk 0: Missing hierarchical context",
+        "Chunk 1: Missing hierarchical context"
+      ],
+      "overall_quality": "EXCELLENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام الوثائق والمحفوظات - المادة الأولى ... المادة السابعة (11 مواد)",
+      "hierarchy_level": "article",
+      "chars": 2738,
+      "tokens": 1521,
+      "metadata": {
+        "items_count": 17,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 1495,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الأولى",
+          "المادة الثانية",
+          "المادة الثالثة",
+          "المادة الرابعة",
+          "المادة الخامسة",
+          "المادة السادسة",
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة",
+          "المادة السابعة"
+        ],
+        "unique_articles_count": 11,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 11,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الأولىيكون للمسميات التالية أينما وردت في هذا النظام - الدلالات الواردة قرين كل منها :1 - المركز :هو المركز الوطني للوثائق والمحفوظات .2 - الجهاز :أي وزارة، أو مصلحة مستقلة، أو أي جهة حكومية ذا..."
+    },
+    {
+      "index": 1,
+      "title": "نظام الوثائق والمحفوظات - المادة الثامنة ... المادة الحادية عشرة (4 مواد)",
+      "hierarchy_level": "article",
+      "chars": 882,
+      "tokens": 490,
+      "metadata": {
+        "items_count": 4,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 484,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {},
+        "chapter_context": null,
+        "section_context": null,
+        "subsection_context": null,
+        "full_legal_path": "مستقل",
+        "chunk_size_strategy": "article_grouping",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثامنة",
+          "المادة التاسعة",
+          "المادة العاشرة",
+          "المادة الحادية عشرة"
+        ],
+        "unique_articles_count": 4,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 4,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثامنة\n\nالمادة التاسعة\n\nالمادة العاشرة\n\nالمادة الحادية عشرةحقل المادة مطلوبالوصف*رمز التحقق*قيمة الرمز المدخل غير صحيحالإسم*البريد الإلكترونييرجى اختيار الحدث ليصلكم اشعار بذلك على البريد الإل..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "GOOD",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "ACCEPTABLE",
+    "elite_compliance": "EXCELLENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - GOOD",
+    "quality_score": 5.784865983874482,
+    "recommendation": "✅ PROCEED: Start crawling with light monitoring",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 0,
+    "technical_violations": 0
+  },
+  "recommendations": [
+    "🏗️ ENHANCE: 2 chunks missing context",
+    "✅ EXCELLENT: Perfect technical performance - ready for mass crawling!"
+  ]
+}

@@ -1,0 +1,266 @@
+{
+  "success": true,
+  "test_id": "20250804_010019",
+  "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/08381293-6388-48e2-8ad2-a9a700f2aa94/1",
+  "title": "نظام العمل",
+  "extraction_summary": {
+    "total_characters": 175863,
+    "estimated_tokens": 97701,
+    "quality_score": 7.736275098050694,
+    "arabic_ratio": 1.0145100392202775
+  },
+  "chunking_results": {
+    "total_chunks": 24,
+    "chunk_sizes": {
+      "min_chars": 81,
+      "max_chars": 36967,
+      "avg_chars": 7225,
+      "min_tokens": 45,
+      "max_tokens": 20537,
+      "avg_tokens": 4013
+    },
+    "hierarchy_detection": {
+      "chapters_detected": 16,
+      "sections_detected": 0,
+      "articles_detected": 8,
+      "total_chunks": 24
+    },
+    "elite_compliance": {
+      "articles_never_split": true,
+      "hierarchical_context_preserved": true,
+      "chunk_size_violations": 14,
+      "missing_context": 0,
+      "violations": [
+        "Chunk 1: 9265 tokens (significantly oversized)",
+        "Chunk 2: 3703 tokens (significantly oversized)",
+        "Chunk 3: 3283 tokens (significantly oversized)",
+        "Chunk 4: 2596 tokens (significantly oversized)",
+        "Chunk 6: 2731 tokens (significantly oversized)",
+        "Chunk 8: 11390 tokens (significantly oversized)",
+        "Chunk 11: 6645 tokens (significantly oversized)",
+        "Chunk 13: 5345 tokens (significantly oversized)",
+        "Chunk 14: 4317 tokens (significantly oversized)",
+        "Chunk 16: 3908 tokens (significantly oversized)",
+        "Chunk 19: 4762 tokens (significantly oversized)",
+        "Chunk 20: 4324 tokens (significantly oversized)",
+        "Chunk 21: 20537 tokens (significantly oversized)",
+        "Chunk 23: 4239 tokens (significantly oversized)"
+      ],
+      "saudi_legal_patterns_detected": [],
+      "quality_warnings": [],
+      "overall_quality": "NEEDS_IMPROVEMENT"
+    }
+  },
+  "chunks_preview": [
+    {
+      "index": 0,
+      "title": "نظام العمل - الباب الأول > الفصل الأول ",
+      "hierarchy_level": "chapter",
+      "chars": 135,
+      "tokens": 75,
+      "metadata": {
+        "items_count": 2,
+        "hierarchy_levels": [
+          "chapter",
+          "section"
+        ],
+        "token_count": 73,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الأول "
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الأول ",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الأول ",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [],
+        "unique_articles_count": 0,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 0,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الأول: التعريفات والأحكام العامة\n\nالفصل الأول : التعريفاتالمادة الأولى :يسمى هذا النظام نظام العمل.المادة الثانية\n\nتعديلات المادة"
+    },
+    {
+      "index": 1,
+      "title": "نظام العمل - الباب الأول > الفصل الأول  - المادة الثانية",
+      "hierarchy_level": "article",
+      "chars": 16677,
+      "tokens": 9265,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "article"
+        ],
+        "token_count": 9265,
+        "is_oversized": true,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الأول",
+          "section": "الفصل الأول "
+        },
+        "chapter_context": "الباب الأول",
+        "section_context": "الفصل الأول ",
+        "subsection_context": null,
+        "full_legal_path": "الباب الأول > الفصل الأول ",
+        "chunk_size_strategy": "oversized_atomic_preservation",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [
+          "المادة الثانية"
+        ],
+        "unique_articles_count": 1,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 1,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "المادة الثانية- تعديل تعريف العامل وذلك بموجب المرسوم الملكي رقم (م/134) وتاريخ 1440/11/27هـ، ليكون بالنص الآتي:\"كل شخص طبيعي - ذكراً أو أنثى - يعمل لمصلحة صاحب عمل وتحت إدارته أو إشرافه مقابل أجر، ول..."
+    },
+    {
+      "index": 2,
+      "title": "نظام العمل - الباب الثاني > الفصل الأول ",
+      "hierarchy_level": "chapter",
+      "chars": 6667,
+      "tokens": 3703,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "chapter"
+        ],
+        "token_count": 3703,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثاني",
+          "section": "الفصل الأول "
+        },
+        "chapter_context": "الباب الثاني",
+        "section_context": "الفصل الأول ",
+        "subsection_context": null,
+        "full_legal_path": "الباب الثاني > الفصل الأول ",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [],
+        "unique_articles_count": 0,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 0,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الثاني: تنظيم عمليات التوظيفالمادة الثانية والعشرون :تعديلات المادةالمادة الثانية والعشرون :- صدر المرسوم الملكي رقم (م/44) وتاريخ 1446/2/8هـ، وذلك بالموافقة على تعديلات بعض مواد نظام العمل (ويع..."
+    },
+    {
+      "index": 3,
+      "title": "نظام العمل - الباب الثالث > الفصل الأول ",
+      "hierarchy_level": "chapter",
+      "chars": 5911,
+      "tokens": 3283,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "chapter"
+        ],
+        "token_count": 3283,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الثالث",
+          "section": "الفصل الأول "
+        },
+        "chapter_context": "الباب الثالث",
+        "section_context": "الفصل الأول ",
+        "subsection_context": null,
+        "full_legal_path": "الباب الثالث > الفصل الأول ",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [],
+        "unique_articles_count": 0,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 0,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الثالث: توظيف غير السعوديينالمادة الثانية والثلاثون :لا يجوز الاستقدام بقصد العمل إلا بعد موافقة الوزارة .المادة الثالثة والثلاثون :لا يجوز لغير السعودي أن يمارس عملًا، ولا يجوز أن يسمح له بمزاو..."
+    },
+    {
+      "index": 4,
+      "title": "نظام العمل - الباب الرابع > الفصل الأول ",
+      "hierarchy_level": "chapter",
+      "chars": 4674,
+      "tokens": 2596,
+      "metadata": {
+        "items_count": 1,
+        "hierarchy_levels": [
+          "chapter"
+        ],
+        "token_count": 2596,
+        "is_oversized": false,
+        "legal_boundaries_respected": true,
+        "contains_complete_articles": true,
+        "hierarchical_context": {
+          "chapter": "الباب الرابع",
+          "section": "الفصل الأول "
+        },
+        "chapter_context": "الباب الرابع",
+        "section_context": "الفصل الأول ",
+        "subsection_context": null,
+        "full_legal_path": "الباب الرابع > الفصل الأول ",
+        "chunk_size_strategy": "chapter_boundary_split",
+        "natural_boundaries_preserved": true,
+        "context_inheritance_complete": true,
+        "articles": [],
+        "unique_articles_count": 0,
+        "article_detection_method": "comprehensive_pattern_matching",
+        "article_integrity_validated": true,
+        "complete_articles_count": 0,
+        "elite_chunker_validated": true,
+        "no_split_articles": true,
+        "metadata_quality": "comprehensive_detection",
+        "duplicate_articles_removed": true
+      },
+      "preview": "الباب الرابع: التدريب والتأهيلالمادة الثانية والأربعون :تعديلات المادةالمادة الثانية والأربعون :- صدر المرسوم الملكي رقم (م/44) وتاريخ 1446/2/8هـ، وذلك بالموافقة على تعديلات بعض مواد نظام العمل (ويعمل..."
+    }
+  ],
+  "quality_assessment": {
+    "content_quality": "EXCELLENT",
+    "arabic_adequacy": "EXCELLENT",
+    "chunking_quality": "EXCELLENT",
+    "elite_compliance": "NEEDS_IMPROVEMENT",
+    "ready_for_database": true,
+    "database_readiness_level": "READY - EXCELLENT",
+    "quality_score": 7.736275098050694,
+    "recommendation": "🚀 PROCEED: Start mass crawling with current settings",
+    "proceed_to_mass_crawling": true,
+    "saudi_patterns_detected": 0,
+    "technical_violations": 14
+  },
+  "recommendations": [
+    "🔧 CRITICAL: Too many oversized chunks - reduce max_tokens_per_chunk",
+    "⚠️ REVIEW: Technical issues detected - investigate before scaling"
+  ]
+}

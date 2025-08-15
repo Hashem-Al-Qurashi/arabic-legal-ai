@@ -1,0 +1,34 @@
+{
+  "crawl_summary": {
+    "total_duration_seconds": 135.215494,
+    "crawl_timestamp": "2025-08-04T02:40:03.286996",
+    "base_url": "https://laws.boe.gov.sa",
+    "max_concurrent": 3
+  },
+  "discovery_results": {
+    "main_categories_found": 4,
+    "domain_categories_found": 0,
+    "total_law_documents_found": 0,
+    "failed_urls": 0
+  },
+  "categories": {
+    "main_categories": [
+      "أنظمة أساسية",
+      "أنظمة عادية",
+      "لوائح وما في حكمها",
+      "تنظيمات، وترتيبات تنظيمية"
+    ],
+    "domain_categories": [],
+    "category_breakdown": {}
+  },
+  "pagination_analysis": {
+    "max_pages_per_domain": 1,
+    "total_pages_crawled": 0
+  },
+  "law_documents": [],
+  "quality_metrics": {
+    "successful_categories": 4,
+    "coverage_percentage": 0.0,
+    "error_rate": 0.0
+  }
+}

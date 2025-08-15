@@ -7,7 +7,36 @@ import type {
   Consultation 
 } from '../types/auth';
 
-const API_BASE_URL = 'http://localhost:8000/';
+// Production: Detect environment and use appropriate backend URL
+const getApiBaseUrl = () => {
+  const hostname = window.location.hostname;
+  
+  // Local development (localhost or 127.0.0.1)
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'http://localhost:8000';
+  }
+  
+  // Local network IP (like 172.20.10.2, 192.168.x.x, 10.x.x.x)
+  if (hostname.match(/^(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[0-1])\.)/)) {
+    return `http://${hostname}:8000`;
+  }
+  
+  // ngrok or similar tunneling service
+  if (hostname.includes('ngrok') || hostname.includes('localtunnel')) {
+    return 'http://localhost:8000';
+  }
+  
+  // For hokm.ai production domains, use the correct backend CloudFront domain
+  if (hostname.includes('hokm.ai') || hostname.includes('cloudfront.net')) {
+    // Use the actual backend CloudFront distribution
+    return 'https://d14ao1bx3dkdxo.cloudfront.net';
+  }
+  
+  // Fallback for other domains
+  return `https://api.${hostname}`;
+};
+
+const API_BASE_URL = getApiBaseUrl();
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -291,7 +320,7 @@ async sendMessageStreaming(
 
   try {
     // ✅ FIXED: Removed conflicting headers, let browser set Content-Type for FormData
-    const response = await fetch(`${API_BASE_URL}api/chat/message`, {  // ← Removed double slash
+    const response = await fetch(`${API_BASE_URL}/api/chat/message`, {  // ← Removed double slash
       method: 'POST',
       headers: {
         'Accept': 'text/event-stream',

@@ -11,9 +11,10 @@ export default defineConfig({
     strictPort: true,
     open: false,
     cors: true,
-    // Disable host checking entirely (for development only)
-    disableHostCheck: true,
-    allowedHosts: 'all',
+    // Allow external connections including ngrok
+    hmr: {
+      clientPort: 443
+    },
     // Add proxy for API calls
     proxy: {
       '/api': {

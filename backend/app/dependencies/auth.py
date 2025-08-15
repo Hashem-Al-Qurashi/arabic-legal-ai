@@ -28,23 +28,31 @@ def get_current_user_optional(
         return None
     
     try:
-        # Decode JWT token
+        # 🛡️ SECURITY: Decode JWT token with explicit algorithm verification
         payload = jwt.decode(
             credentials.credentials,
             settings.secret_key,
-            algorithms=[settings.algorithm]
+            algorithms=[settings.algorithm],  # Explicit algorithm whitelist
+            options={
+                "verify_exp": True,  # Verify expiration
+                "verify_iat": True,  # Verify issued at
+                "verify_signature": True,  # Verify signature
+                "require": ["exp", "sub"]  # Require these claims
+            }
         )
         
         user_id: str = payload.get("sub")
-        if user_id is None:
+        if user_id is None or not user_id.isdigit():
             return None
             
-        # Check token expiration
-        exp = payload.get("exp")
-        if exp is None or datetime.fromtimestamp(exp, timezone.utc) < datetime.now(timezone.utc):
+        # Additional token type validation
+        token_type = payload.get("type")
+        if token_type != "access":
             return None
             
-    except jwt.PyJWTError:
+    except (jwt.PyJWTError, jwt.ExpiredSignatureError, jwt.InvalidTokenError) as e:
+        # Log security events (in production, use proper logging)
+        print(f"🚨 JWT validation failed: {type(e).__name__}")
         return None
     
     # Get user from database

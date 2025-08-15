@@ -26,6 +26,107 @@
   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Dark Theme Variables */
+[data-theme="dark"], 
+.dark-mode {
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-light: #9ca3af;
+  --background-light: #1f2937;
+  --background-white: #111827;
+  --border-light: #374151;
+  --border-medium: #4b5563;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* Dark mode body background */
+[data-theme="dark"] body,
+.dark-mode body {
+  background: #111827;
+}
+
+/* Apply dark mode variables to body and all elements */
+.dark-mode {
+  background: var(--background-light);
+  color: var(--text-primary);
+}
+
+/* Ensure sidebar uses dark mode colors */
+.dark-mode .sidebar {
+  background: #0f1419;
+  border-left: 1px solid #2d3748;
+}
+
+/* Ensure main chat uses dark mode colors */
+.dark-mode .main-chat {
+  background: var(--background-white);
+}
+
+/* Ensure input area uses dark mode colors */
+.dark-mode .input-area {
+  background: var(--background-white);
+  border-top: 1px solid var(--border-light);
+}
+
+/* Placeholder text styling for dark mode */
+.dark-mode textarea::placeholder,
+.dark-mode input::placeholder {
+  color: rgba(156, 163, 175, 0.8);
+  opacity: 1;
+}
+
+/* Light mode placeholder */
+textarea::placeholder,
+input::placeholder {
+  color: rgba(107, 114, 128, 0.8);
+  opacity: 1;
+}
+
+/* Dark mode message styles */
+.dark-mode .message {
+  color: var(--text-primary);
+}
+
+/* Dark mode AI response text styling */
+.dark-mode .ai-response-container,
+.dark-mode .ai-response-container *,
+.dark-mode .ai-response-container .ai-response,
+.dark-mode .ai-response-container .ai-response * {
+  color: #f9fafb !important;
+}
+
+/* Dark mode AI response headers */
+.dark-mode .ai-response-container h1,
+.dark-mode .ai-response-container h2,
+.dark-mode .ai-response-container h3,
+.dark-mode .ai-response-container h4,
+.dark-mode .ai-response-container h5,
+.dark-mode .ai-response-container h6 {
+  color: #f9fafb !important;
+}
+
+/* Dark mode AI response strong/bold text */
+.dark-mode .ai-response-container strong,
+.dark-mode .ai-response-container b {
+  color: #f9fafb !important;
+}
+
+/* Dark mode form elements */
+.dark-mode .form-group input,
+.dark-mode .textarea {
+  background: var(--background-white);
+  color: var(--text-primary);
+  border-color: var(--border-light);
+}
+
+.dark-mode .form-group input:focus,
+.dark-mode .textarea:focus {
+  border-color: var(--primary-color);
+}
+
 /* Reset and Base Styles */
 * {
   margin: 0;
@@ -37,7 +138,7 @@ body {
   font-family: 'Noto Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.6;
   color: var(--text-primary);
-  background: #f7f7f8;
+  background: var(--background-light);
   direction: rtl;
   text-align: right;
   font-feature-settings: "liga" 1, "kern" 1;
@@ -46,6 +147,7 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  transition: var(--transition);
 }
 
 #root {
@@ -263,7 +365,7 @@ body {
 }
 
 .main-chat {
-  background: white;
+  background: var(--background-white);
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -283,8 +385,8 @@ body {
 }
 
 .input-area {
-  border-top: 1px solid #e5e5e5;
-  background: white;
+  border-top: 1px solid var(--border-light);
+  background: var(--background-white);
   position: sticky;
   bottom: 0;
   z-index: 10;
@@ -474,7 +576,8 @@ button,
     height: 100vh;
     height: -webkit-fill-available;
   }
-  /* Better Text Organization */
+}
+/* Better Text Organization */
 
 
 /* Sidebar Toggle Animation */
@@ -522,84 +625,155 @@ button,
 }
 /* Better Text Organization - Replace existing if present */
 /* AI Message Formatting - Professional Legal Style */
-/* AI Message Formatting - Super Tight Spacing with Strong Selectors */
-.ai-message-formatted * {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.ai-message-formatted {
+/* ULTIMATE NUCLEAR OPTION: FORCE ALL TEXT TO BE 25px - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response,
+.ai-response-container .ai-response *,
+.ai-response-container .ai-response h1,
+.ai-response-container .ai-response h2, 
+.ai-response-container .ai-response h3,
+.ai-response-container .ai-response h4,
+.ai-response-container .ai-response h5,
+.ai-response-container .ai-response h6,
+.ai-response-container .ai-response p,
+.ai-response-container .ai-response div,
+.ai-response-container .ai-response span,
+.ai-response-container .ai-response strong,
+.ai-response-container .ai-response b,
+.ai-response-container .ai-response li,
+.ai-response-container .ai-response ul,
+.ai-response-container .ai-response ol,
+div.ai-response-container div.ai-response *,
+div.ai-response-container div.ai-response h1,
+div.ai-response-container div.ai-response h2,
+div.ai-response-container div.ai-response h3,
+div.ai-response-container div.ai-response h4,
+div.ai-response-container div.ai-response h5,
+div.ai-response-container div.ai-response h6,
+div.ai-response-container div.ai-response p,
+div.ai-response-container div.ai-response div,
+div.ai-response-container div.ai-response span,
+div.ai-response-container div.ai-response strong,
+div.ai-response-container div.ai-response b {
+  font-size: 25px !important;
   direction: rtl !important;
   text-align: right !important;
-  font-family: 'Noto Sans Arabic', sans-serif !important;
-  line-height: 1.4 !important;
-}
-
-.ai-message-formatted h1,
-.ai-message-formatted h2,
-.ai-message-formatted h3,
-.ai-message-formatted h4,
-.ai-message-formatted h5,
-.ai-message-formatted h6 {
-  font-weight: 700 !important;
-  color: #1e40af !important;
-  margin: 0.4rem 0 0.2rem 0 !important;
-  text-align: right !important;
-  line-height: 1.2 !important;
-  display: block !important;
-}
-
-.ai-message-formatted h1 { 
-  font-size: 1.2rem !important; 
-  color: #1e40af !important;
-  border-bottom: 1px solid #e5e7eb !important;
-  padding-bottom: 0.2rem !important;
-}
-
-.ai-message-formatted h2 { 
-  font-size: 1.15rem !important; 
-  color: #059669 !important; 
-}
-
-.ai-message-formatted h3 { 
-  font-size: 1.1rem !important; 
-  color: #dc2626 !important; 
-}
-
-.ai-message-formatted p {
-  margin: 0.3rem 0 !important;
+  font-family: 'Google Sans', 'Noto Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif !important;
   line-height: 1.5 !important;
+  box-sizing: border-box !important;
+}
+
+/* Subsection headers styling */
+.ai-response-container .ai-response h4 {
+  margin: 1.5rem 0 0.5rem 0 !important;
+  font-weight: 700 !important;
+}
+
+/* List styling to match your example */
+.ai-response-container .ai-response ul {
+  margin: 0.5rem 0 1rem 0 !important;
+  padding-right: 1.5rem !important;
+  list-style-type: disc !important;
+}
+
+.ai-response-container .ai-response li {
+  margin: 0.3rem 0 !important;
+  text-align: right !important;
+}
+
+/* Headers - Section Spacing - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response h1,
+.ai-response-container .ai-response h2,
+.ai-response-container .ai-response h3,
+.ai-response-container .ai-response h4,
+.ai-response-container .ai-response h5,
+.ai-response-container .ai-response h6 {
+  font-weight: 600 !important;
+  color: #1f1f1f !important;
+  margin: 2.5rem 0 1rem 0 !important; /* Even more generous spacing between sections */
+  text-align: right !important;
+  line-height: 1.4 !important;
+  display: block !important;
+  background: none !important; /* Override mobile green backgrounds */
+}
+
+/* REMOVED - All font sizes handled by nuclear rule above */
+
+/* Paragraphs - Generous Breathing Room - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response p {
+  margin: 1.5rem 0 !important; /* 1.5 line heights between paragraphs */
+  line-height: 1.8 !important; /* Generous line spacing for Arabic */
   text-align: right !important;
   display: block !important;
+  color: #1f1f1f !important;
+  padding: 0 !important; /* Override any padding */
 }
 
-.ai-message-formatted ul,
-.ai-message-formatted ol {
-  margin: 0.3rem 0 !important;
-  padding: 0 1rem 0 0 !important;
-  text-align: right !important;
-  list-style-position: inside !important;
+/* After Headers - Comfortable Gap - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response h1 + p,
+.ai-response-container .ai-response h2 + p,
+.ai-response-container .ai-response h3 + p,
+.ai-response-container .ai-response h4 + p,
+.ai-response-container .ai-response h5 + p,
+.ai-response-container .ai-response h6 + p {
+  margin-top: 0.75rem !important; /* Comfortable gap after headers */
 }
 
-.ai-message-formatted li {
-  margin: 0.1rem 0 !important;
-  line-height: 1.4 !important;
-  text-align: right !important;
-  display: list-item !important;
-}
-
-.ai-message-formatted strong,
-.ai-message-formatted b {
+/* Sub-section Headers - Bold phrases within paragraphs - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response strong,
+.ai-response-container .ai-response b {
   font-weight: 700 !important;
-  color: #1e40af !important;
+  color: #1f1f1f !important;
   display: inline !important;
+  margin: 0.5rem 0 !important; /* Micro-hierarchy spacing */
+  background: none !important; /* Remove mobile green backgrounds */
+  padding: 0 !important; /* Remove mobile padding */
+}
+
+/* Bold phrases that act as sub-headers - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response p strong:first-child,
+.ai-response-container .ai-response p b:first-child {
+  display: block !important;
+  margin-bottom: 0.5rem !important;
+  /* font-size removed - handled by nuclear rule */
+  color: #1f1f1f !important;
+}
+
+/* Lists - Hierarchical Structure - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response ul,
+.ai-response-container .ai-response ol {
+  margin: 1.5rem 0 !important; /* Same as paragraph spacing */
+  padding: 0 2rem 0 0 !important; /* Consistent indentation from right margin */
+  text-align: right !important;
+  list-style: none !important;
+  background: none !important; /* Remove mobile backgrounds */
+  border-radius: 0 !important; /* Remove mobile borders */
+}
+
+.ai-response-container .ai-response li {
+  margin: 0.75rem 0 !important; /* Comfortable spacing between list items */
+  line-height: 1.8 !important; /* Same generous line spacing */
+  text-align: right !important;
+  display: block !important;
+  color: #1f1f1f !important;
+  list-style: none !important;
+  position: relative !important;
+  padding-right: 1.5rem !important; /* Secondary indentation for sub-points */
+}
+
+/* Numbered Lists - Visual Hierarchy - MAXIMUM SPECIFICITY */
+.ai-response-container .ai-response li:before {
+  content: "•" !important; /* Clean bullet for hierarchy */
+  position: absolute !important;
+  right: 0 !important;
+  color: #666 !important;
+  font-weight: bold !important;
 }
 
 .ai-message-formatted em,
 .ai-message-formatted i {
   font-style: italic !important;
-  color: #059669 !important;
-  font-weight: 500 !important;
+  color: #1f1f1f !important;
+  font-weight: 400 !important;
   display: inline !important;
 }
 
@@ -738,100 +912,105 @@ button,
   }
 }
 
+/* ========================================
+   CLEAN MOBILE RESPONSIVE DESIGN 
+   ======================================== */
+
 @media (max-width: 768px) {
-  /* Nuclear approach - Override EVERYTHING with maximum specificity */
-  .ai-response-container *,
-  .ai-response-container .ai-response *,
-  .ai-response-container .ai-response h1,
-  .ai-response-container .ai-response h2,
-  .ai-response-container .ai-response h3,
-  .ai-response-container .ai-response h4,
-  .ai-response-container .ai-response p,
-  .ai-response-container .ai-response div,
-  .ai-response-container .ai-response span,
-  .ai-response-container .ai-response strong,
-  .ai-response-container .ai-response b,
-  .ai-response-container .ai-response li,
-  .ai-response-container .ai-response ul,
-  .ai-response-container .ai-response ol {
+  
+  /* MOBILE: Clean AI Response Container */
+  .ai-response-container {
+    margin: 1rem 0.5rem !important;
+    padding: 1.5rem !important;
+    border-radius: 16px !important;
+    min-width: unset !important;
+    max-width: 95% !important;
+  }
+  
+  /* MOBILE: Simple, readable text */
+  .ai-response-container,
+  .ai-response-container * {
     font-size: 18px !important;
     line-height: 1.6 !important;
-    font-family: 'Noto Sans Arabic', sans-serif !important;
+    font-family: 'Noto Sans Arabic', -apple-system, sans-serif !important;
   }
   
-  /* Green header styling - same font size but distinctive appearance */
-  .ai-response-container .ai-response h1,
-  .ai-response-container .ai-response h2,
-  .ai-response-container .ai-response h3 {
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
-    color: #006C35 !important;
-    font-weight: 700 !important;
-    padding: 12px 16px !important;
-    border-radius: 8px !important;
-    border-right: 4px solid #006C35 !important;
-    margin: 1.5rem 0 1rem 0 !important;
-    display: block !important;
+  /* MOBILE: Clean headers - no backgrounds, just typography */
+  .ai-response-container h1,
+  .ai-response-container h2,
+  .ai-response-container h3,
+  .ai-response-container h4 {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    margin: 1.5rem 0 0.75rem 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: inherit !important;
   }
   
-  /* Legal points - subtle styling for numbered content */
-  .ai-response-container .ai-response .legal-point {
-    background: rgba(0, 108, 53, 0.08) !important;
-    border-right: 3px solid #22c55e !important;
-    padding: 10px 14px !important;
-    margin: 0.8rem 0 !important;
-    border-radius: 6px !important;
-  }
-  
-  .ai-response-container .ai-response .legal-point strong {
-    color: #006C35 !important;
-    font-weight: 700 !important;
-  }
-  
-  .ai-response-container .ai-response .legal-point p {
-    margin: 0.3rem 0 0 0 !important;
-  }
-  
-  /* Fix spacing between consecutive headers */
-  .ai-response-container .ai-response h3 + h3 {
-    margin-top: 0.5rem !important;
-  }
-  
-  /* Style content sections properly */
-  .ai-response-container .ai-response p {
-    margin: 0.8rem 0 !important;
+  /* MOBILE: Clean paragraphs */
+  .ai-response-container p {
+    margin: 1rem 0 !important;
     padding: 0 !important;
   }
   
- /* Bold text styling - but NOT inside headers */
-.ai-response-container .ai-response strong,
-.ai-response-container .ai-response b {
-  font-weight: 700 !important;
-  color: #006C35 !important;
-  background: rgba(0, 108, 53, 0.1) !important;
-  padding: 2px 6px !important;
-  border-radius: 4px !important;
-}
-
-/* Remove background from bold text inside headers */
-.ai-response-container .ai-response h1 strong,
-.ai-response-container .ai-response h2 strong,
-.ai-response-container .ai-response h3 strong,
-.ai-response-container .ai-response h1 b,
-.ai-response-container .ai-response h2 b,
-.ai-response-container .ai-response h3 b {
-  background: none !important;
-  padding: 0 !important;
-  color: inherit !important;
-}
+  /* MOBILE: Simple bold text - no backgrounds */
+  .ai-response-container strong,
+  .ai-response-container b {
+    font-weight: 600 !important;
+    background: none !important;
+    padding: 0 !important;
+    color: inherit !important;
+  }
   
-  /* List styling */
-  .ai-response-container .ai-response ol,
-  .ai-response-container .ai-response ul {
-    background: #f8fdf9 !important;
-    padding: 1rem 1.5rem !important;
-    border-radius: 8px !important;
-    border-right: 4px solid #22c55e !important;
+  /* MOBILE: Clean lists - no card styling */
+  .ai-response-container ul,
+  .ai-response-container ol {
     margin: 1rem 0 !important;
+    padding: 0 0 0 1.5rem !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  
+  .ai-response-container li {
+    margin: 0.5rem 0 !important;
+    padding: 0 !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* MOBILE: User messages - simpler styling */
+  .user-message-enhanced {
+    margin: 1rem 0.5rem !important;
+    padding: 1rem 1.25rem !important;
+    font-size: 18px !important;
+    border-radius: 16px !important;
+  }
+  
+  /* MOBILE: Main chat area - more padding */
+  .messages-area {
+    padding: 1rem !important;
+  }
+  
+  /* MOBILE: Input area - cleaner */
+  .input-area {
+    padding: 1rem !important;
+  }
+  
+  /* MOBILE: Textarea - better sizing */
+  .textarea {
+    font-size: 16px !important;
+    padding: 1rem !important;
+    min-height: 80px !important;
+  }
+  
+  /* MOBILE: Chat container - no extra padding */
+  .chat-container {
+    padding: 0 !important;
   }
 }
-}
+
+/* REMOVED - All font sizes handled by nuclear rule at top */

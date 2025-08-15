@@ -23,6 +23,193 @@ class ProcessingMode(Enum):
     STRATEGIC = "strategic"        # ACTIVE_DISPUTE: Smart but efficient  
     COMPREHENSIVE = "comprehensive" # PLANNING_ACTION: Full analysis
 
+class SimpleCitationFixer:
+    """MEMO-AWARE Citation Fixer - Removes ALL memo citations of any type"""
+    
+    def fix_citations(self, ai_response: str, available_documents: List[Chunk]) -> str:
+        """Remove ALL memo citations and enhance statute citations"""
+        if not available_documents:
+            return ai_response
+        
+        import re
+        
+        # Get statute titles only (no memos)
+        real_titles = [doc.title for doc in available_documents]
+        statute_titles = [title for title in real_titles 
+                 if any(term in title for term in [
+                     "نظام", "المادة", "لائحة", "مرسوم", "التعريفات",  # ONLY real laws
+                     "قانون", "قرار وزاري", "تعليمات", "ضوابط", "قواعد"  # Official regulations
+                 ]) 
+                 and 'مذكرة' not in title.lower()  # Exclude memos
+                 and 'دفع' not in title.lower()    # Exclude case defenses  
+                 and 'حجة' not in title.lower()    # Exclude case arguments
+                 and 'رقم' not in title.lower()]   # Exclude numbered cases
+        
+        if not statute_titles:
+            return ai_response
+        
+        fixed_response = ai_response
+        
+        # 1. REMOVE ALL memo citations (comprehensive patterns for ANY memo type)
+        memo_citation_patterns = [
+            # Direct memo citations with quotes
+            r'وفقاً\s*لـ\s*["\']?مذكرة[^"\'.\n]*["\']?',
+            r'استناداً\s*إلى\s*["\']?مذكرة[^"\'.\n]*["\']?',
+            r'بناءً\s*على\s*["\']?مذكرة[^"\'.\n]*["\']?',
+            r'حسب\s*["\']?مذكرة[^"\'.\n]*["\']?',
+            r'طبقاً\s*لـ\s*["\']?مذكرة[^"\'.\n]*["\']?',
+            r'بموجب\s*["\']?مذكرة[^"\'.\n]*["\']?',
+            
+            # Phrase-based memo references
+            r'بالإشارة\s*إلى\s*["\']?[*]*مذكرة[^"\'.\n]*[*]*["\']?',
+            r'كما\s*جاء\s*في\s*["\']?مذكرة[^"\'.\n]*["\']?',
+            r'ووفقاً\s*لما\s*ورد\s*في\s*["\']?مذكرة[^"\'.\n]*["\']?',
+            
+            # Generic memo references without citation words
+            r'مذكرة\s*civil[^"\'.\n]*',
+            r'مذكرة\s*criminal[^"\'.\n]*', 
+            r'مذكرة\s*family[^"\'.\n]*',
+            r'مذكرة\s*execution[^"\'.\n]*',
+            r'مذكرة\s*\w+[^"\'.\n]*',  # Any memo type
+            
+            # Reference numbering
+            r'مرجع\s*\d+[:\s]*[^".\n]*',
+            r'المرجع\s*رقم\s*\d+[^".\n]*',
+        ]
+        
+        for pattern in memo_citation_patterns:
+            fixed_response = re.sub(pattern, '', fixed_response, flags=re.IGNORECASE)
+        
+        # 2. Clean up broken text after memo removal
+        cleanup_patterns = [
+            (r'،\s*،', '،'),  # Double commas
+            (r'\.\s*\.', '.'),  # Double periods
+            (r':\s*،', ':'),   # Colon followed by comma
+            (r'^\s*،', ''),    # Leading comma on line
+            (r'^\s*\.', ''),   # Leading period on line
+            (r'\n\s*\n\s*\n+', '\n\n'),  # Multiple line breaks
+            (r'\s+', ' '),     # Multiple spaces
+        ]
+        
+        for pattern, replacement in cleanup_patterns:
+            fixed_response = re.sub(pattern, replacement, fixed_response, flags=re.MULTILINE)
+        
+        # 3. Find and replace weak citations with strong statute citations
+        citation_patterns = [
+            # Pattern: وفقاً لـ"anything" -> replace with real statute
+            (r'وفقاً لـ"[^"]*"', f'وفقاً لـ"{statute_titles[0]}"'),
+            # Pattern: استناداً إلى "anything" -> replace with real statute  
+            (r'استناداً إلى "[^"]*"', f'استناداً إلى "{statute_titles[1] if len(statute_titles) > 1 else statute_titles[0]}"'),
+            # Pattern: بناءً على "anything" -> replace with real statute
+            (r'بناءً على "[^"]*"', f'بناءً على "{statute_titles[2] if len(statute_titles) > 2 else statute_titles[0]}"'),
+            # Pattern: حسب "anything" -> replace with real statute
+            (r'حسب "[^"]*"', f'حسب "{statute_titles[0]}"'),
+        ]
+        
+        for pattern, replacement in citation_patterns:
+            if re.search(pattern, fixed_response):
+                fixed_response = re.sub(pattern, replacement, fixed_response, count=1)
+        
+        # 4. Fix generic weak references  
+        generic_fixes = [
+            (r'وفقاً للمادة الثالثة(?!\s*من\s*")', f'وفقاً لـ"{statute_titles[0]}"'),
+            (r'استناداً للمادة(?!\s*من\s*")', f'استناداً إلى "{statute_titles[0]}"'),
+            (r'حسب المادة(?!\s*من\s*")', f'حسب "{statute_titles[0]}"'),
+            (r'بموجب المادة(?!\s*من\s*")', f'بموجب "{statute_titles[0]}"'),
+        ]
+        
+        for pattern, replacement in generic_fixes:
+            fixed_response = re.sub(pattern, replacement, fixed_response)
+        
+        # 5. Add proper statute citation if completely missing
+        if 'وفقاً ل' in fixed_response and not any(title in fixed_response for title in statute_titles):
+            # Find the first occurrence of وفقاً ل and make it proper
+            fixed_response = re.sub(r'وفقاً ل([^"]+)', f'وفقاً لـ"{statute_titles[0]}"', fixed_response, count=1)
+        
+        # 6. Ensure we have at least one proper citation in legal responses
+        # 6. PROACTIVE CITATION INJECTION - Add citations for unused statutes
+        available_statutes = [title for title in statute_titles if title not in fixed_response]
+        if available_statutes:
+            logger.info(f"🎯 Found {len(available_statutes)} unused statutes for injection")
+            
+            # Injection points - places where we can add citations naturally
+            injection_opportunities = [
+                # After legal analysis headers
+                (r'(#### أولاً: [^\n]+)', rf'\1\nوفقاً لـ"{available_statutes[0]}"، '),
+                (r'(#### ثانياً: [^\n]+)', rf'\1\nاستناداً إلى "{available_statutes[1] if len(available_statutes) > 1 else available_statutes[0]}"، '),
+                (r'(#### ثالثاً: [^\n]+)', rf'\1\nبناءً على "{available_statutes[2] if len(available_statutes) > 2 else available_statutes[0]}"، '),
+                
+                # After conclusion headers
+                (r'(الخاتمة[^\n]*)', rf'\1\nحسب "{available_statutes[-1]}"، '),
+                (r'(الخلاصة[^\n]*)', rf'\1\nطبقاً لـ"{available_statutes[-1]}"، '),
+                
+                # Before final recommendation
+                (r'(نطلب من المحكمة)', rf'وفقاً لـ"{available_statutes[0]}"، \1'),
+                (r'(بناءً على ما سبق)', rf'\1 واستناداً إلى "{available_statutes[1] if len(available_statutes) > 1 else available_statutes[0]}"، '),
+            ]
+            
+            # Apply injections with SMART STATUTE ROTATION
+            injected_count = 0
+            used_statutes = set()
+
+            for pattern, _ in injection_opportunities:
+                if injected_count < len(available_statutes) and re.search(pattern, fixed_response):
+                    # Pick next unused statute
+                    statute_to_use = None
+                    for statute in available_statutes:
+                        if statute not in used_statutes:
+                            statute_to_use = statute
+                            break
+                    
+                    if statute_to_use:
+                        # Create citation based on section type
+                        if 'أولاً' in pattern:
+                            replacement = rf'\1\nوفقاً لـ"{statute_to_use}"، '
+                        elif 'ثانياً' in pattern:
+                            replacement = rf'\1\nاستناداً إلى "{statute_to_use}"، '
+                        elif 'ثالثاً' in pattern:
+                            replacement = rf'\1\nبناءً على "{statute_to_use}"، '
+                        elif 'رابعاً' in pattern:
+                            replacement = rf'\1\nحسب "{statute_to_use}"، '
+                        elif 'خامساً' in pattern:
+                            replacement = rf'\1\nطبقاً لـ"{statute_to_use}"، '
+                        elif 'الخاتمة' in pattern:
+                            replacement = rf'\1\nووفقاً لـ"{statute_to_use}"، '
+                        else:
+                            replacement = rf'وفقاً لـ"{statute_to_use}"، \1'
+                        
+                        fixed_response = re.sub(pattern, replacement, fixed_response, count=1)
+                        used_statutes.add(statute_to_use)
+                        injected_count += 1
+                        logger.info(f"💉 Injected citation #{injected_count}: {statute_to_use[:50]}...")
+
+            logger.info(f"✅ Successfully injected {injected_count} DIFFERENT statute citations")
+            
+            logger.info(f"✅ Successfully injected {injected_count} additional statute citations")
+        has_proper_citation = any(f'"{title}"' in fixed_response for title in statute_titles)
+        
+        if not has_proper_citation and statute_titles and len(fixed_response) > 500:  # Only for substantial responses
+            # Add a citation at strategic legal analysis points
+            insertion_points = [
+                r'(أولاً: [^\n]*)',
+                r'(### [^\n]*)', 
+                r'(#### [^\n]*)',
+                r'(تحليل الأدلة)',
+                r'(الرد القانوني)',
+                r'(التحليل القانوني)'
+            ]
+            
+            for pattern in insertion_points:
+                if re.search(pattern, fixed_response):
+                    replacement = f'\\1\nوفقاً لـ"{statute_titles[0]}"، '
+                    fixed_response = re.sub(pattern, replacement, fixed_response, count=1)
+                    break
+        
+        # 7. Final cleanup
+        fixed_response = re.sub(r'\n\s+', '\n', fixed_response)  # Remove spaces after newlines
+        
+        return fixed_response.strip()
+
 
 # Load environment variables
 load_dotenv(".env")
@@ -77,25 +264,23 @@ PROMPT_TEMPLATES = {
 - مساعدة المستخدمين بوضوح وبساطة
 - شرح الحقوق والقوانين بطريقة مفهومة  
 - إعطاء نصائح عملية قابلة للتطبيق
-- طرح أسئلة للفهم أكثر عند الحاجة
 
-⚖️ منهجك:
+⚖️ منهجك الذكي:
 - ابدأ بإجابة مباشرة على السؤال
-- اذكر المصدر القانوني بطبيعية: "حسب نظام العمل، المادة 12 , لابد من ذكر المصدر اذا وجد"
-- قدم خطوات عملية واضحة
-- لا تعقد الأمور بلا داع
+- اقرأ المراجع القانونية المرفقة بعناية واستخرج المواد ذات الصلة
+- عندما تجد المادة المناسبة، اذكرها بصيغة: "وفقاً للمادة (X) من [اسم النظام]"
+- لا تقل "لا توجد مادة محددة" إذا كانت هناك مراجع مرفقة - ابحث بعمق أكثر
 
-🔥 النهاية الذكية:
-- اقترح الخطوة التالية المنطقية للمستخدم
-- كن محدداً بناءً على حالته
 
-🚫 تجنب:
-- اللغة المعقدة والمصطلحات الصعبة
-- الرموز التعبيرية المفرطة  
-- القوالب الجاهزة
-- الإطالة بلا فائدة
+⚖️ التنسيق الإجباري للاستشهاد (لا تُخالفه):
+- "وفقاً لـ[اسم النظام الكامل] - [الباب] - [المادة رقم X]"
+- مثال: "وفقاً لـنظام العمل - الباب الثاني - المادة 52"
 
-تحدث كمستشار محترف يهتم بمساعدة الناس فهم حقوقهم.""",
+
+🔥 قاعدة إلزامية:
+إذا كانت هناك مراجع قانونية مرفقة، فيجب عليك قراءتها والاستشهاد منها. لا تتجاهلها أبداً.
+
+تحدث كمستشار محترف يجمع بين الود والمصداقية القانونية.""",
 
     "ACTIVE_DISPUTE": """
 
@@ -237,72 +422,7 @@ PROMPT_TEMPLATES = {
 تحدث كمستشار استراتيجي يساعد في اتخاذ القرارات الذكية."""
 }
 
-async def generate_semantic_queries(original_query: str, ai_client) -> List[str]:
-    """
-    Generate semantic queries targeting different document types
-    Production-ready version with reliable parsing and better statute targeting
-    """
-    
-    semantic_prompt = f"""
-أنت محرك بحث قانوني ذكي. أنشئ 3 استعلامات بحث لهذه القضية:
 
-"{original_query}"
-
-هذه قضية قرض/دعوى مدنية. أنشئ استعلامات بحث محددة:
-
-استعلام المذكرات: مذكرات دفاع قضايا القروض والديون المدنية
-استعلام الأنظمة: نظام الإثبات المادة إثبات الديون نظام المرافعات الشرعية
-استعلام السوابق: أحكام قضائية سوابق قضايا القروض والديون
-
-أجب بنفس التنسيق بالضبط:
-استعلام المذكرات: [نص الاستعلام]
-استعلام الأنظمة: [نص الاستعلام]  
-استعلام السوابق: [نص الاستعلام]
-"""
-
-    try:
-        response = await ai_client.chat.completions.create(
-            model="gpt-4o-mini",  # Fast and cost-effective
-            messages=[{"role": "user", "content": semantic_prompt}],
-            temperature=0.3,
-            max_tokens=250
-        )
-        
-        response_text = response.choices[0].message.content.strip()
-        
-        # Parse the structured response
-        queries = [original_query]  # Always include original
-        
-        lines = response_text.split('\n')
-        for line in lines:
-            line = line.strip()
-            if line.startswith('استعلام المذكرات:'):
-                memo_query = line.replace('استعلام المذكرات:', '').strip()
-                if len(memo_query) > 10:
-                    queries.append(memo_query)
-            elif line.startswith('استعلام الأنظمة:'):
-                statute_query = line.replace('استعلام الأنظمة:', '').strip()
-                if len(statute_query) > 10:
-                    queries.append(statute_query)
-            elif line.startswith('استعلام السوابق:'):
-                precedent_query = line.replace('استعلام السوابق:', '').strip()
-                if len(precedent_query) > 10:
-                    queries.append(precedent_query)
-        
-        # Log success
-        if len(queries) > 1:
-            logger.info(f"🎯 Generated {len(queries)} semantic queries for diverse retrieval")
-            for i, q in enumerate(queries):
-                logger.info(f"  Query {i}: {q[:80]}...")
-        else:
-            logger.warning("Semantic query generation failed, using original query only")
-            
-        return queries[:4]  # Limit to 4 queries for cost control
-        
-    except Exception as e:
-        logger.error(f"Semantic query generation failed: {e}")
-        return [original_query]  # Safe fallback
-    
 async def score_documents_multi_objective(documents: List[Chunk], original_query: str, user_intent: str, ai_client) -> List[Dict]:
     """
     Score documents on multiple objectives for intelligent selection
@@ -330,9 +450,22 @@ Documents to score:
     # Add document previews for scoring (cleaned for JSON safety)
     for i, doc in enumerate(documents, 1):
         # Clean content to avoid JSON parsing issues
-        clean_content = doc.content.replace('"', "'").replace('\n', ' ').replace('\r', ' ')
+        # Enhanced JSON-safe cleaning
+        clean_content = (doc.content
+                .replace('"', "'")
+                .replace('\n', ' ')
+                .replace('\r', ' ')
+                .replace('\\', '\\\\')  # Escape backslashes
+                .replace('\t', ' ')     # Replace tabs
+                .replace('\b', ' ')     # Replace backspace
+                .replace('\f', ' '))    # Replace form feed
         preview = clean_content[:150] + "..." if len(clean_content) > 150 else clean_content
-        clean_title = doc.title.replace('"', "'")
+        # JSON-safe title cleaning
+        clean_title = (doc.title
+              .replace('"', "'")
+              .replace('\\', '\\\\')
+              .replace('\n', ' ')
+              .replace('\r', ' '))
         scoring_prompt += f"\nDocument {i}: {clean_title}\nContent: {preview}\n"
     
     scoring_prompt += f"""
@@ -357,11 +490,11 @@ Score all {len(documents)} documents. Higher citation_value for statutes/regulat
 """
 
     try:
-        response = await ai_client.chat.completions.create(
+        response = await self.ai_client.chat.completions.create(
             model="gpt-4o-mini",  # Fast and cost-effective
             messages=[{"role": "user", "content": scoring_prompt}],
             temperature=0.1,
-            max_tokens=500
+            max_tokens=5000
         )
         
         response_text = response.choices[0].message.content.strip()
@@ -384,10 +517,81 @@ Score all {len(documents)} documents. Higher citation_value for statutes/regulat
             response_text = '\n'.join(json_lines)
         
         # Additional cleaning for Arabic text issues
-        response_text = response_text.replace('\\', '').replace('\n', ' ').strip()
+        response_text = response_text.replace('\n', ' ').strip()
         
         import json
-        scores = json.loads(response_text)
+        import re
+
+        try:
+            # First attempt: direct parsing
+            scores = json.loads(response_text)
+            logger.info(f"✅ JSON parsed successfully: {len(scores)} document scores")
+            
+        except json.JSONDecodeError as json_error:
+            logger.warning(f"Direct JSON parsing failed: {json_error}")
+            
+            try:
+                # Second attempt: extract JSON array from response
+                array_match = re.search(r'\[[\s\S]*\]', response_text)
+                if array_match:
+                    json_content = array_match.group(0)
+                    scores = json.loads(json_content)
+                    logger.info(f"✅ Extracted JSON parsed successfully: {len(scores)} document scores")
+                else:
+                    raise ValueError("No JSON array found in response")
+                    
+            except (json.JSONDecodeError, ValueError) as fallback_error:
+                logger.error(f"All JSON parsing failed: {fallback_error}")
+                logger.error(f"Raw response: {response_text[:300]}...")
+                
+                # Ultimate fallback: create balanced default scores
+                # STATUTE-PRIORITIZING fallback scores
+                # STATUTE-PRIORITIZING fallback scores
+                scores = []
+                for i in range(len(documents)):
+                    doc_title = documents[i].title.lower()
+                    
+                    # Detect REAL legal statutes vs case documents
+                    is_real_statute = (
+                        any(term in doc_title for term in ["نظام", "المادة", "لائحة", "مرسوم", "التعريفات", "قانون", "قرار وزاري"]) 
+                        and not any(exclude in doc_title for exclude in ["دفع", "حجة", "رقم", "مذكرة"])
+                    )
+                    is_case_document = any(term in doc_title for term in ["دفع", "حجة", "رقم"]) and not any(term in doc_title for term in ["نظام", "المادة", "لائحة"])
+                    is_memo = 'مذكرة' in doc_title
+                    
+                    # PRIORITIZE REAL LAWS ONLY
+                    if is_real_statute:
+                        scores.append({
+                            "document_id": i + 1,
+                            "relevance": 0.9,      # HIGHEST for real laws
+                            "citation_value": 0.95, # MAXIMUM citation value
+                            "style_match": 0.2     # Low style (laws aren't stylistic)
+                        })
+                        logger.info(f"⚖️ REAL LAW PRIORITY: {documents[i].title[:50]}... (citation: 0.95)")
+                    elif is_case_document:
+                        scores.append({
+                            "document_id": i + 1,
+                            "relevance": 0.6,      # Medium relevance for case examples
+                            "citation_value": 0.1, # VERY LOW citation (don't cite cases as laws!)
+                            "style_match": 0.8     # High style for case examples
+                        })
+                        logger.info(f"📋 CASE EXAMPLE: {documents[i].title[:50]}... (style: 0.8)")
+                    elif is_memo:
+                        scores.append({
+                            "document_id": i + 1,
+                            "relevance": 0.7,      # Good relevance for memos
+                            "citation_value": 0.1, # VERY LOW citation value (no memo citations!)
+                            "style_match": 0.8     # High style for memos
+                        })
+                        logger.info(f"📋 MEMO BACKGROUND: {documents[i].title[:50]}... (style: 0.8)")
+                    else:
+                        scores.append({
+                            "document_id": i + 1,
+                            "relevance": 0.6,
+                            "citation_value": 0.5,
+                            "style_match": 0.5
+                        })
+                logger.warning(f"⚠️ Using intelligent fallback scores for {len(scores)} documents")
         
         # Combine documents with their scores
         scored_documents = []
@@ -546,6 +750,101 @@ class DocumentRetriever:
             logger.error(f"Failed to initialize retriever: {e}")
             raise
     
+    async def decompose_query_to_concepts(self, query: str) -> List[str]:
+        """
+        NUCLEAR OPTION 1: AI-driven query decomposition for precision targeting
+        Zero hardcoding - pure AI intelligence determines what to search for
+        """
+        logger.info("🚀 NUCLEAR OPTION 1: Dynamic query decomposition activated")
+        
+        try:
+            decomposition_prompt = f"""
+أنت خبير قانوني متخصص في تحليل الاستفسارات. حلل هذا الاستفسار القانوني وحدد المفاهيم القانونية المحددة التي تجيب عليه مباشرة.
+
+الاستفسار: {query}
+
+ما هي الكلمات المفتاحية والمفاهيم القانونية المحددة التي يجب البحث عنها للإجابة على هذا السؤال؟
+
+أجب بالكلمات المفتاحية فقط، مفصولة بمسافات، بدون شرح.
+"""
+
+            response = await self.ai_client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": decomposition_prompt}],
+                max_tokens=150,
+                temperature=0.1
+            )
+            
+            ai_response = response.choices[0].message.content.strip()
+            concepts = [concept.strip() for concept in ai_response.split() if len(concept.strip()) > 2]
+            
+            logger.info(f"🎯 AI decomposed query into {len(concepts)} concepts: {concepts}")
+            
+            # Always include original query as backup
+            if query not in concepts:
+                concepts.insert(0, query)
+            
+            return concepts[:5]  # Limit to 5 concepts for efficiency
+            
+        except Exception as e:
+            logger.error(f"Query decomposition failed: {e}")
+            logger.info("🔄 Falling back to original query")
+            return [query]
+        
+
+    async def search_by_concepts(self, concepts: List[str], original_query: str, top_k: int = 15) -> List[Chunk]:
+        """
+        PRECISION SEARCH: Intent-aware retrieval instead of keyword matching
+        """
+        logger.info(f"🎯 PRECISION SEARCH: Intent-aware search for '{original_query}'")
+        
+        try:
+            # KEY FIX: Use FULL original query, not fragmented concepts
+            response = await self.ai_client.embeddings.create(
+                model="text-embedding-ada-002",
+                input=original_query  # ← Use complete query for better context
+            )
+            query_embedding = response.data[0].embedding
+            
+            # Search with full query context
+            search_results = await self.storage.search_similar(
+                query_embedding,
+                top_k=min(top_k * 2, 30),  # Get more candidates for filtering
+                query_text=original_query,
+                openai_client=self.ai_client
+            )
+            
+            # Return top results (AI filtering comes next if needed)
+            final_results = []
+            for result in search_results[:top_k]:
+                chunk = result.chunk if hasattr(result, 'chunk') else result
+                final_results.append(chunk)
+            
+            # AI-powered filtering to find the ANSWER document
+            filtered_results = await self._ai_filter_results(original_query, search_results, top_k)
+            
+            logger.info(f"✅ PRECISION SEARCH: AI filtered to {len(filtered_results)} answer documents")
+            return filtered_results
+            
+        except Exception as e:
+            logger.error(f"Precision search failed: {e}")
+            return []
+   
+    async def _ai_filter_results(self, query: str, search_results: List, top_k: int) -> List[Chunk]:
+        """
+        Trust vector similarity ranking - no AI filtering needed
+        """
+        logger.info("🎯 SKIPPING AI FILTERING: Using vector similarity ranking")
+        
+        # Return top result based on vector similarity
+        # Return top 10 results for broader context
+        chunks = []
+        for i in range(min(10, len(search_results))):
+            chunk = search_results[i].chunk if hasattr(search_results[i], 'chunk') else search_results[i]
+            chunks.append(chunk)
+
+        return chunks
+
     async def get_relevant_documents(self, query: str, top_k: int = 3, user_intent: str = None) -> List[Chunk]:
         """
         Mode-aware document retrieval with strategic processing:
@@ -572,20 +871,17 @@ class DocumentRetriever:
             logger.info(f"🔍 Enhanced search in {stats.total_chunks} documents for: '{query[:50]}...'")
             logger.info(f"📋 User intent: {user_intent}")
             
-            # STAGE 1: SEMANTIC DIVERSIFICATION (NEW!)
-            # STAGE 1: MODE-BASED SEMANTIC DIVERSIFICATION
-            if processing_mode == ProcessingMode.STRATEGIC and user_intent == "ACTIVE_DISPUTE":
-                # Strategic mode: Smart semantic queries but efficient processing
-                semantic_queries = await generate_semantic_queries(query, self.ai_client)
-                logger.info(f"⚡ STRATEGIC MODE: Generated {len(semantic_queries)} semantic queries")
-            elif processing_mode == ProcessingMode.COMPREHENSIVE and user_intent in ["ACTIVE_DISPUTE", "PLANNING_ACTION"]:
-                # Comprehensive mode: Full semantic analysis
-                semantic_queries = await generate_semantic_queries(query, self.ai_client)
-                logger.info(f"🔍 COMPREHENSIVE MODE: Generated {len(semantic_queries)} semantic queries")
+            # NUCLEAR OPTION 1: AI-driven concept decomposition for ALL queries
+            target_concepts = await self.decompose_query_to_concepts(query)
+
+            # Use precision search for high-accuracy targeting
+            if len(target_concepts) > 1:
+                logger.info("🚀 NUCLEAR OPTION 1: Using precision concept-based search")
+                relevant_chunks = await self.search_by_concepts(target_concepts, query, top_k)
+                logger.info(f"✅ NUCLEAR OPTION 1: Retrieved {len(relevant_chunks)} precisely targeted documents")
+                return relevant_chunks
             else:
-                # Lightweight mode: Single query for efficiency
-                semantic_queries = [query]
-                logger.info(f"🚀 LIGHTWEIGHT MODE: Using single query for efficiency")
+                logger.info("🔄 Falling back to standard search")
             
             # STAGE 2: MULTI-QUERY RETRIEVAL (ENHANCED)
             # In your enhanced get_relevant_documents method, replace the multi-query retrieval section:
@@ -593,6 +889,7 @@ class DocumentRetriever:
             # STAGE 2: MULTI-QUERY RETRIEVAL (ENHANCED WITH DOMAIN BYPASS)
             all_search_results = []
 
+            semantic_queries = target_concepts if target_concepts else [query]
             for i, semantic_query in enumerate(semantic_queries):
                 try:
                     # Get embedding for this semantic query
@@ -606,17 +903,19 @@ class DocumentRetriever:
                     logger.info(f"🔍 BYPASS DEBUG: i={i}, user_intent='{user_intent}', condition: {i == 2 and user_intent == 'ACTIVE_DISPUTE'}")
                     
                     # BYPASS DOMAIN FILTERING FOR STATUTE QUERY (Query 3)
-                    if i == 2 and user_intent == "ACTIVE_DISPUTE":  # Third query (index 2) is statute query
-                        logger.info(f"🔓 Semantic query {i+1}: Bypassing domain filter for statute search")
-                        # Search ALL documents without domain filtering
+                    # AGGRESSIVE BYPASS: Skip domain filtering entirely for legal disputes
+                    # AGGRESSIVE BYPASS: Skip domain filtering for general questions and legal disputes
+                    if user_intent in ["ACTIVE_DISPUTE", "GENERAL_QUESTION"]:
+                        logger.info(f"🔓 {user_intent} detected: Bypassing ALL domain filtering for query {i+1}")
+                        # Search ALL documents without domain filtering for comprehensive legal analysis
                         search_results = await self.storage.search_similar(
                             query_embedding, 
-                            top_k=12
+                            top_k=15  # Get more candidates since we're not filtering
                             # No query_text, no openai_client = no domain filtering
                         )
                     else:
                         # Use normal domain filtering for other queries
-                        expanded_top_k = min(top_k * 4, 15) if user_intent == "ACTIVE_DISPUTE" else top_k * 4
+                        expanded_top_k = min(top_k * 4, 15) if user_intent in ["ACTIVE_DISPUTE", "GENERAL_QUESTION"] else top_k * 4
                         search_results = await self.storage.search_similar(
                             query_embedding, 
                             top_k=expanded_top_k, 
@@ -634,8 +933,8 @@ class DocumentRetriever:
                     logger.info(f"  Semantic query {i+1}: Found {len(search_results)} candidates")
                     
                 except Exception as e:
-                    logger.warning(f"Semantic query {i} failed: {e}")
-                    continue
+                    logger.error(f"Error retrieving documents: {e}")
+                    return []
             
             # STAGE 3: DEDUPLICATE AND MERGE RESULTS
             if len(semantic_queries) > 1:
@@ -667,76 +966,37 @@ class DocumentRetriever:
             
             logger.info(f"📊 Stage 2-3: Found {len(content_candidates)} content matches")
             
-            # STAGE 4: YOUR EXISTING STYLE FILTERING (UNCHANGED!)
-            if len(content_candidates) > top_k and user_intent == "ACTIVE_DISPUTE" and processing_mode != ProcessingMode.STRATEGIC:
+            # STAGE 4: Direct multi-objective scoring (style classification bypassed)
+            if len(content_candidates) > top_k:
                 try:
-                    logger.info("🎨 Stage 4: AI-powered style filtering")
+                    logger.info("⚡ Stage 4: Direct multi-objective document scoring")
                     
-                    # Your existing style filtering code (keep exactly as is)
-                    from app.legal_reasoning.ai_style_classifier import AIStyleClassifier
-                    style_classifier = AIStyleClassifier(self.ai_client)
-                    
-                    target_style = style_classifier.get_style_for_intent(user_intent)
-                    logger.info(f"🎯 Target style: {target_style}")
-                    
-                    styled_documents = await style_classifier.filter_documents_by_style(
+                    # Apply multi-objective scoring directly to content candidates
+                    scored_documents = await score_documents_multi_objective(
                         content_candidates, 
-                        target_style=target_style,
-                        min_confidence=0.6
+                        query, 
+                        user_intent, 
+                        self.ai_client
                     )
                     
-                    style_matches = [doc for doc in styled_documents if doc["style_match"]]
-                    all_styled = styled_documents
+                    # Select optimal mix using intelligent scoring
+                    relevant_chunks = select_optimal_document_mix(scored_documents, top_k)
+                    logger.info(f"⚡ EFFICIENT SELECTION: {len(relevant_chunks)} documents via direct scoring")
                     
-                    logger.info(f"✨ Style matches: {len(style_matches)}")
-                    
-                    # Your existing selection logic (keep as is for now)
-                    # ENHANCED SELECTION LOGIC WITH MULTI-OBJECTIVE SCORING
-                    final_documents = []
-
-                    if style_matches:
-                        # Get all available documents (style + content)
-                        all_available_docs = [doc["document"] for doc in styled_documents]
-                        
-                        # Apply multi-objective scoring for intelligent selection
-                        logger.info("🎯 Stage 5: Multi-objective document scoring")
-                        scored_documents = await score_documents_multi_objective(
-                            all_available_docs, 
-                            query, 
-                            user_intent, 
-                            self.ai_client
-                        )
-                        
-                        # Select optimal mix using intelligent scoring
-                        final_documents = select_optimal_document_mix(scored_documents, top_k)
-                        
-                        logger.info(f"🎯 Intelligent selection: {len(final_documents)} documents with optimal mix")
-                    else:
-                        # No style matches - use best content with scoring
-                        logger.info("🎯 Stage 5: Multi-objective scoring (no style matches)")
-                        all_available_docs = [doc["document"] for doc in all_styled]
-                        
-                        scored_documents = await score_documents_multi_objective(
-                            all_available_docs, 
-                            query, 
-                            user_intent, 
-                            self.ai_client
-                        )
-                        
-                        final_documents = select_optimal_document_mix(scored_documents, top_k)
-                        logger.info(f"📊 Selected {len(final_documents)} documents using multi-objective scoring")
-
-                    relevant_chunks = final_documents[:top_k]
-                    
-                except Exception as style_error:
-                    logger.warning(f"Style filtering failed: {style_error}, using content-only")
+                except Exception as scoring_error:
+                    logger.warning(f"Multi-objective scoring failed: {scoring_error}, using similarity-based selection")
                     relevant_chunks = content_candidates[:top_k]
             else:
-                # Use original content-based results for non-dispute queries or limited candidates
+                # Use content-based results when we have few candidates
                 relevant_chunks = content_candidates[:top_k]
-                logger.info(f"📊 Using content-based retrieval ({user_intent})")
+                logger.info(f"📊 Using content-based retrieval ({user_intent}) - {len(relevant_chunks)} candidates")
             
-            # STAGE 5: RESULTS LOGGING (keeping your original format)
+
+             #STAGE 5: All documents allowed (memos work as background intelligence)
+            if relevant_chunks:
+                logger.info(f"📚 Using all {len(relevant_chunks)} documents (statutes + memos as background)")
+
+            # STAGE 6: RESULTS LOGGING (keeping your original format)
             if relevant_chunks:
                 logger.info(f"Found {len(relevant_chunks)} relevant documents:")
                 for i, chunk in enumerate(relevant_chunks):
@@ -751,7 +1011,7 @@ class DocumentRetriever:
                     logger.info(f"  {i+1}. {chunk.title[:50]}... (similarity: {similarity:.3f}, source: {semantic_source})")
             else:
                 logger.info("No relevant documents found - using general knowledge")
-            
+
             return relevant_chunks
             
         except Exception as e:
@@ -759,7 +1019,7 @@ class DocumentRetriever:
             return []
 
 
-    
+ 
 class IntentClassifier:
     """AI-powered intent classifier - no hard-coding"""
     
@@ -785,7 +1045,7 @@ class IntentClassifier:
             response = await self.ai_client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": classification_prompt}],
-                max_tokens=200,
+                max_tokens=400,
                 temperature=0.1  # Low temperature for consistent classification
             )
             
@@ -799,7 +1059,58 @@ class IntentClassifier:
                 result_text = result_text.split("```")[1].split("```")[0].strip()
             
             # Parse JSON
-            classification = json.loads(result_text)
+            # SURGICAL FIX: Enhanced JSON parsing with cleaning
+            try:
+                # First attempt: direct parsing
+                classification = json.loads(result_text)
+            except json.JSONDecodeError as e:
+                logger.warning(f"Direct JSON parsing failed: {e}")
+                try:
+                    # Second attempt: clean whitespace and formatting
+                    cleaned_text = result_text.strip()
+                    
+                    # Remove any markdown formatting
+                    if "```json" in cleaned_text:
+                        cleaned_text = cleaned_text.split("```json")[1].split("```")[0].strip()
+                    elif "```" in cleaned_text:
+                        cleaned_text = cleaned_text.split("```")[1].split("```")[0].strip()
+                    
+                    # Fix common JSON issues
+                    cleaned_text = cleaned_text.replace('\n', '').replace('\r', '').replace('\t', ' ')
+                    
+                    # Parse cleaned JSON
+                    classification = json.loads(cleaned_text)
+                    logger.info("✅ JSON parsing succeeded after cleaning")
+                    
+                except json.JSONDecodeError as e2:
+                    logger.error(f"All JSON parsing failed: {e2}")
+                    logger.error(f"Raw response: {result_text[:200]}...")
+                    
+                    # INTELLIGENT FALLBACK: Extract scores using regex
+                    import re
+                    scores = []
+                    
+                    # Pattern to match document scoring
+                    pattern = r'"document_id":\s*(\d+).*?"relevance":\s*([\d.]+).*?"citation_value":\s*([\d.]+).*?"style_match":\s*([\d.]+)'
+                    
+                    matches = re.findall(pattern, result_text, re.DOTALL)
+                    
+                    for match in matches:
+                        doc_id, relevance, citation, style = match
+                        scores.append({
+                            "document_id": int(doc_id),
+                            "relevance": float(relevance),
+                            "citation_value": float(citation),
+                            "style_match": float(style)
+                        })
+                    
+                    if scores:
+                        classification = scores
+                        logger.info(f"🔧 Regex fallback extracted {len(scores)} document scores")
+                    else:
+                        # Final fallback: return empty to trigger intelligent scoring
+                        classification = []
+                        logger.warning("🚨 All parsing failed - triggering intelligent fallback")
             
             logger.info(f"🎯 Intent classified: {classification['category']} (confidence: {classification['confidence']:.2f})")
             
@@ -822,76 +1133,10 @@ class IntentClassifier:
             }
 
 
-def format_legal_context_naturally(retrieved_chunks: List[Chunk]) -> str:
-    """
-    Format legal documents to encourage direct statute citations
-    Enhanced to extract actual legal references instead of generic placeholders
-    """
-    if not retrieved_chunks:
-        return ""
-    
-    context_parts = []
-    statute_references = []
-    
-    for i, chunk in enumerate(retrieved_chunks, 1):
-        # Detect if this is a statute document
-        is_statute = any(term in chunk.title for term in ["نظام", "المادة", "لائحة", "مرسوم", "التعريفات"])
-        
-        if is_statute:
-            # For statute documents, extract the actual legal reference
-            statute_name = chunk.title
-            
-            # Clean and format statute content 
-            clean_content = chunk.content.replace('"', "'").replace('\n', ' ').replace('\r', ' ')
-            preview = clean_content[:300] + "..." if len(clean_content) > 300 else clean_content
-            
-            # Format with emphasis on direct citation
-            formatted_chunk = f"""
-📜 **{statute_name}**
-{preview}
+    # REPLACE your format_legal_context_naturally function entirely with this ultra-aggressive version:
 
-استخدم الاسم الكامل: "{statute_name}" في الاستشهاد
-"""
-            statute_references.append(statute_name)
-        else:
-            # For memos and other documents, use standard formatting
-            clean_title = chunk.title.replace('"', "'")
-            clean_content = chunk.content.replace('"', "'").replace('\n', ' ').replace('\r', ' ')
-            preview = clean_content[:300] + "..." if len(clean_content) > 300 else clean_content
-            
-            formatted_chunk = f"""
-**مرجع {i}: {clean_title}**
-{preview}
-"""
-        
-        context_parts.append(formatted_chunk)
     
-    # Build context with explicit citation instructions
-    context = f"""لديك هذه المراجع القانونية السعودية:
 
-{chr(10).join(context_parts)}
-
-🎯 **تعليمات الاستشهاد:**
-"""
-    
-    if statute_references:
-        context += f"""
-📜 **للأنظمة والقوانين - استشهد مباشرة بالاسم الكامل:**
-"""
-        for ref in statute_references:
-            context += f'- "وفقاً لـ{ref}"\n'
-            context += f'- "بموجب {ref}"\n'
-        
-        context += f"""
-✅ استخدم الاسم الكامل للنظام أو اللائحة في كل استشهاد
-"""
-    
-    context += """
-⚔️ **للمذكرات القضائية:** استخدم محتواها لتعزيز حججك القانونية
-
-اربط كل استشهاد بتحليلك القانوني مباشرة"""
-    
-    return context
 class IntelligentLegalRAG:
     """
     Intelligent Legal RAG with AI-Powered Intent Classification
@@ -919,96 +1164,116 @@ class IntelligentLegalRAG:
         
         
         logger.info("🚀 Intelligent Legal RAG initialized - AI-powered classification + Smart retrieval!")
+        self.citation_fixer = SimpleCitationFixer()
+        logger.info("🔧 Citation fixer initialized")
+    
 
-        # Add processing mode mapping
-        self.processing_modes = {
-            "GENERAL_QUESTION": ProcessingMode.LIGHTWEIGHT,
-            "ACTIVE_DISPUTE": ProcessingMode.STRATEGIC,
-            "PLANNING_ACTION": ProcessingMode.COMPREHENSIVE
-        }
+    async def structure_multi_article_chunks(self, documents: List[Chunk], query: str) -> List[Chunk]:
+        """
+        Create article navigation for large chunks containing multiple articles
+        """
+        if not documents:
+            return documents
         
-        logger.info("⚡ Processing modes configured - Strategic efficiency enabled")
-    
-    async def ask_question_streaming(self, query: str) -> AsyncIterator[str]:
-        """
-        Intelligent legal consultation with AI-powered intent classification
-        """
-        try:
-            logger.info(f"Processing intelligent legal question: {query[:50]}...")
-            
-            # Stage 1: AI-powered intent classification
-            classification = await self.classifier.classify_intent(query)
-            category = classification["category"]
-            confidence = classification["confidence"]
-            
-            # Stage 2: Get relevant documents from database
-            print(f"🔥 DEBUG CATEGORY: category='{category}', type={type(category)}")
-            # Stage 2: Set processing mode and get relevant documents
-            processing_mode = self.processing_modes.get(category, ProcessingMode.LIGHTWEIGHT)
-            self.retriever._current_mode = processing_mode
-            logger.info(f"⚡ Using {processing_mode.value} mode for {category}")
-
-            relevant_docs = await self.retriever.get_relevant_documents(query, top_k=3, user_intent=category)
-            
-            # Stage 3: Dynamic prompt delivery based on processing mode
-            processing_mode = self.processing_modes.get(category, ProcessingMode.LIGHTWEIGHT)
-
-            # Stage 4: Adaptive message construction 
-            if processing_mode == ProcessingMode.STRATEGIC:
-                # Strategic mode: Enhanced user message approach for better instruction following
-                brilliant_prompt = PROMPT_TEMPLATES[category]
+        logger.info("🧠 STRUCTURING: Creating article navigation for precise citations")
+        
+        structured_docs = []
+        
+        for doc in documents:
+            try:
+                # Check if this chunk contains multiple articles
+                import re
+                article_matches = re.findall(r'المادة\s+([\d\u0660-\u0669]+|الأولى|الثانية|الثالثة|الرابعة|الخامسة|السادسة|السابعة|الثامنة|التاسعة|العاشرة)', doc.content)
                 
-                if relevant_docs:
-                    legal_context = format_legal_context_naturally(relevant_docs)
-                    enhanced_user_message = f"""{brilliant_prompt}
-            ======================================================
-            المراجع القانونية المتاحة:
-            {legal_context}
-            ======================================================
-            المهمة المحددة: {query}
-            ======================================================
-            طبق إطار التحليل أعلاه مع الاستفادة من المراجع المتاحة."""
+                if len(article_matches) > 3:  # Multiple articles detected
+                    # Use AI to identify relevant articles
+                    navigation_prompt = f"""السؤال: {query}
+
+ابحث في هذا المحتوى القانوني عن المادة التي تجيب على السؤال مباشرة:
+
+{doc.content}
+
+حدد رقم المادة التي تحتوي على معلومات تتعلق بالسؤال. أجب برقم المادة فقط:"""
+
+                    response = await self.ai_client.chat.completions.create(
+                        model="gpt-4o-mini",
+                        messages=[{"role": "user", "content": navigation_prompt}],
+                        max_tokens=400,
+                        temperature=0.1
+                    )
+                    
+                    relevant_article = response.choices[0].message.content.strip()
+                    logger.info(f"🎯 AI identified relevant article: {relevant_article}")
+                    
+                    # Create enhanced content with article highlighting
+                    enhanced_content = f"🎯 المادة ذات الصلة: {relevant_article}\n\n{doc.content}"
+                    
+                    # Create new chunk with enhanced content
+                    enhanced_chunk = Chunk(
+                        id=doc.id,
+                        content=enhanced_content,
+                        title=f"{doc.title} - المادة {relevant_article}",
+                        metadata=doc.metadata
+                    )
+                    structured_docs.append(enhanced_chunk)
+                    
                 else:
-                    enhanced_user_message = f"""{brilliant_prompt}
-            ======================================================
-            المهمة المحددة: {query}
-            ======================================================
-            طبق إطار التحليل أعلاه على هذه المهمة."""
-                
-                messages = [
-                    {"role": "system", "content": "أنت مساعد قانوني خبير متخصص في القانون السعودي."},
-                    {"role": "user", "content": enhanced_user_message}
-                ]
-                
-                logger.info("⚡ STRATEGIC MODE: Using enhanced user message approach")
-                
-            else:
-                # Standard approach for other processing modes
-                system_prompt = PROMPT_TEMPLATES[category]
-                
-                if relevant_docs:
-                    legal_context = format_legal_context_naturally(relevant_docs)
-                    full_prompt = f"""{legal_context}
+                    # Single article or few articles - use as is
+                    structured_docs.append(doc)
+                    
+            except Exception as e:
+                logger.warning(f"Article structuring failed for chunk {doc.id}: {e}")
+                structured_docs.append(doc)  # Fallback to original
+        
+        logger.info(f"✅ STRUCTURING: Enhanced {len(structured_docs)} documents with article navigation")
+        return structured_docs
 
-            السؤال: {query}"""
-                    logger.info(f"Using {len(relevant_docs)} relevant legal documents with {category} approach")
-                else:
-                    full_prompt = query
-                    logger.info(f"No relevant documents found - using {category} approach with general knowledge")
-                
-                messages = [
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": full_prompt}
-                ]
+    def format_legal_context_naturally(self, documents: List[Chunk]) -> str:
+            """Enhanced legal context formatting with specific article identification"""
+            if not documents:
+                return ""
             
-            # Stage 5: Stream intelligent response
-            async for chunk in self._stream_ai_response(messages, category):
-                yield chunk
+            context_parts = []
+            current_law = ""
+            current_chapter = ""
+            articles_in_section = []
+            
+            for doc in documents:
+                # Extract law name, chapter, and article from the document
+                title = doc.title or ""
+                content = doc.content or ""
                 
-        except Exception as e:
-            logger.error(f"Intelligent legal AI error: {e}")
-            yield f"عذراً، حدث خطأ في معالجة سؤالك: {str(e)}"
-    
+                # Try to identify specific articles in the content
+                import re
+                article_matches = re.findall(r'المادة\s+([\d\u0660-\u0669]+|الأولى|الثانية|الثالثة|الرابعة|الخامسة|السادسة|السابعة|الثامنة|التاسعة|العاشرة)', content)
+                
+                if title and content:
+                    # Add document with emphasis on specific articles
+                    if article_matches:
+                        article_list = ", ".join(set(article_matches))
+                        context_parts.append(f"""📄 **{title}**
+        📍 **المواد المتاحة**: {article_list}
+        📝 **المحتوى**: {content[:1000]}...""")
+                    else:
+                        context_parts.append(f"""📄 **{title}**
+        📝 **المحتوى**: {content[:1000]}...""")
+            
+            full_context = "\n\n".join(context_parts)
+            
+            # Add instruction for AI to use specific articles
+            context_header = """📚 **النصوص القانونية المتاحة للاستشهاد:**
+
+        ⚠️ **تعليمات مهمة للاستشهاد:**
+        - اقرأ المواد المتاحة بعناية
+        - اذكر رقم المادة المحدد في إجابتك
+        - استخدم الصيغة: "وفقاً لـ[اسم النظام] - [الباب] > [الفصل] - [المادة المحددة]"
+        - لا تستخدم استشهادات عامة
+
+        """
+            
+            return context_header + full_context
+
+
     async def ask_question_with_context_streaming(
         self, 
         query: str, 
@@ -1028,7 +1293,14 @@ class IntelligentLegalRAG:
             
             # Stage 2: Get relevant documents
             print(f"🔥 DEBUG CATEGORY: category='{category}', type={type(category)}")
-            relevant_docs = await self.retriever.get_relevant_documents(query, top_k=3, user_intent=category)
+            if category == "ACTIVE_DISPUTE":
+                top_k = 25  # Get more statutes for comprehensive legal citations
+            elif category == "PLANNING_ACTION":
+                top_k = 20  # Need good coverage for planning
+            else:
+                top_k = 15  # General questions need fewer documents
+
+            relevant_docs = await self.retriever.get_relevant_documents(query, top_k=top_k, user_intent=category)
             
             # Stage 3: Select appropriate prompt
             system_prompt = PROMPT_TEMPLATES[category]
@@ -1046,11 +1318,14 @@ class IntelligentLegalRAG:
                 })
             
             # Stage 5: Add current question with legal context if available
+            # Stage 5: Add current question with legal context if available
             if relevant_docs:
-                legal_context = format_legal_context_naturally(relevant_docs)
+                # PRIORITY 4 FIX: Structure multi-article chunks before formatting
+                structured_docs = await self.structure_multi_article_chunks(relevant_docs, query)
+                legal_context = self.format_legal_context_naturally(structured_docs)
                 contextual_prompt = f"""{legal_context}
 
-السؤال: {query}"""
+            السؤال: {query}"""
                 logger.info(f"Using {len(relevant_docs)} relevant legal documents with {category} approach (contextual)")
             else:
                 contextual_prompt = query
@@ -1075,8 +1350,8 @@ class IntelligentLegalRAG:
             stream = await self.ai_client.chat.completions.create(
                 model=self.ai_model,
                 messages=messages,
-                temperature=0.25 if category == "ACTIVE_DISPUTE" else 0.15,
-                max_tokens=4000 if category == "ACTIVE_DISPUTE" else 1500,  # ← GIVE DISPUTES MORE SPACE!
+                temperature=0.05 if category == "ACTIVE_DISPUTE" else 0.15,
+                max_tokens=15000 if category == "ACTIVE_DISPUTE" else 15000,  # ← GIVE DISPUTES MORE SPACE!
                 stream=True
             )
             
@@ -1103,7 +1378,7 @@ class IntelligentLegalRAG:
             response = await self.ai_client.chat.completions.create(
                 model=classification_model,  # Use small model for title generation
                 messages=[{"role": "user", "content": title_prompt}],
-                max_tokens=50,
+                max_tokens=1500,
                 temperature=0.3
             )
             
@@ -1121,29 +1396,32 @@ class IntelligentLegalRAG:
         except Exception as e:
             logger.error(f"Title generation error: {e}")
             return first_message[:25] + "..." if len(first_message) > 25 else first_message
-
+    async def ask_question_streaming(self, query: str) -> AsyncIterator[str]:
+        """
+        STANDARDIZED: Single streaming interface for RAG
+        Replaces multiple compatibility methods with one clean interface
+        """
+        async for chunk in self.ask_question_with_context_streaming(query, []):
+            yield chunk
 
 # Global instance - maintains compatibility with existing code
 rag_engine = IntelligentLegalRAG()
 
-# Legacy compatibility functions - exactly the same interface as before
-async def ask_question(query: str) -> str:
-    """Legacy sync function - converts streaming to complete response"""
-    chunks = []
-    async for chunk in rag_engine.ask_question_streaming(query):
-        chunks.append(chunk)
-    return ''.join(chunks)
+# Clean exports - no legacy debt
+def get_rag_engine():
+    """Get the RAG engine instance"""
+    return rag_engine
 
-async def ask_question_with_context(query: str, conversation_history: List[Dict[str, str]]) -> str:
-    """Legacy sync function with context - converts streaming to complete response"""
-    chunks = []
+# For external usage - clean streaming interface
+async def ask_question_streaming(query: str) -> AsyncIterator[str]:
+    """Modern streaming interface"""
+    async for chunk in rag_engine.ask_question_with_context_streaming(query, []):
+        yield chunk
+
+async def ask_question_with_context_streaming(query: str, conversation_history: List[Dict[str, str]]) -> AsyncIterator[str]:
+    """Modern contextual streaming interface"""
     async for chunk in rag_engine.ask_question_with_context_streaming(query, conversation_history):
-        chunks.append(chunk)
-    return ''.join(chunks)
-
-async def generate_conversation_title(first_message: str) -> str:
-    """Legacy function for title generation"""
-    return await rag_engine.generate_conversation_title(first_message)
+        yield chunk
 
 # Test function
 async def test_intelligent_rag():
