@@ -43,6 +43,47 @@ export const ChatApp: React.FC = () => {
   const [selectedConversation, setSelectedConversation] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [exchangeCount, setExchangeCount] = useState(0);
+  
+  // 🧠 PERSISTENT GUEST SESSION - Just like authenticated users!
+  const [guestSessionId] = useState<string>(() => {
+    // Check if we have an existing session in localStorage
+    const existingSession = localStorage.getItem('guestSessionId');
+    if (existingSession) {
+      console.log('🔄 Resuming guest session:', existingSession);
+      return existingSession;
+    }
+    // Create new session and save it
+    const newSession = `guest_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    localStorage.setItem('guestSessionId', newSession);
+    console.log('🆕 Created new guest session:', newSession);
+    return newSession;
+  });
+  
+  // 🧠 GUEST CONVERSATION MEMORY - Store messages locally
+  useEffect(() => {
+    if (isGuest && guestSessionId) {
+      // Load previous messages for this session
+      const savedMessages = localStorage.getItem(`guestMessages_${guestSessionId}`);
+      if (savedMessages) {
+        try {
+          const parsed = JSON.parse(savedMessages);
+          setMessages(parsed);
+          console.log('📚 Loaded guest conversation history:', parsed.length, 'messages');
+        } catch (e) {
+          console.error('Failed to load guest messages:', e);
+        }
+      }
+    }
+  }, [isGuest, guestSessionId]);
+  
+  // Save guest messages whenever they change
+  useEffect(() => {
+    if (isGuest && guestSessionId && messages.length > 0) {
+      localStorage.setItem(`guestMessages_${guestSessionId}`, JSON.stringify(messages));
+      console.log('💾 Saved guest conversation:', messages.length, 'messages');
+    }
+  }, [isGuest, guestSessionId, messages]);
+  
   const [showUpgradePrompt, setShowUpgradePrompt] = useState(false);
   const [upgradePromptType, setUpgradePromptType] = useState<'messages' | 'exchanges' | 'exports' | 'citations'>('messages');
   const [renamePopup, setRenamePopup] = useState<{
@@ -347,14 +388,14 @@ const handleDeleteCancel = () => {
   incrementQuestionUsage();
 
   // ✅ UNIFIED: Use chatAPI for both guests and auth users
-  const guestSessionId = isGuest ?
-    `guest_${Date.now()}_${Math.random().toString(36).substr(2, 9)}` :
-    undefined;
+  // 🧠 FIX: Use persistent session ID for guests (just like users have conversation_id)
+  const sessionId = isGuest ? guestSessionId : undefined;
 
   console.log('📤 Sending message:', {
     isGuest,
     conversationId: selectedConversation,
-    sessionId: guestSessionId
+    sessionId: sessionId,
+    guestSessionPersistent: isGuest ? guestSessionId : 'N/A'
   });
 
   try {
@@ -371,10 +412,11 @@ const handleDeleteCancel = () => {
     }]);
 
     // 🚀 REAL STREAMING with conversation memory
+    // 🧠 FIX: Pass persistent sessionId for guests (maintains conversation memory)
     await chatAPI.sendMessageStreaming(
       currentMessage,
       selectedConversation || undefined,
-      guestSessionId,
+      sessionId,
       
             // 📡 Real-time streaming callback
       (chunk: string) => {
@@ -1468,6 +1510,21 @@ const handleDeleteCancel = () => {
       </button>
     </div>
   )}
+  
+  {/* Simple Version Indicator */}
+  <div style={{
+    padding: '8px 16px',
+    borderTop: '1px solid rgba(255, 255, 255, 0.1)'
+  }}>
+    <div style={{
+      fontSize: '11px',
+      color: 'rgba(255, 255, 255, 0.4)',
+      textAlign: 'center',
+      fontFamily: 'monospace'
+    }}>
+      v2.7.1
+    </div>
+  </div>
 </div> 
         </div>
 
