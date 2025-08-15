@@ -1,0 +1,1293 @@
+{
+    "events": [
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185568259,
+            "message": "INFO:rag_engine:Processing intelligent contextual legal question: فى حال دفع صاحب العمل لرسوم المرافقين لاحد العمال ...",
+            "ingestionTime": 1755185570535,
+            "eventId": "39141946133882137552611634616759144599826868547423371264"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185568259,
+            "message": "INFO:rag_engine:Conversation context: 0 messages",
+            "ingestionTime": 1755185570535,
+            "eventId": "39141946133882137552611634616759144599826868547423371265"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185568259,
+            "message": "INFO:rag_engine:🧠 Classifying intent for: فى حال دفع صاحب العمل لرسوم ال...",
+            "ingestionTime": 1755185570535,
+            "eventId": "39141946133882137552611634616759144599826868547423371266"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185572135,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185575509,
+            "eventId": "39141946220319825942116329919364784003308101594054393856"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185572138,
+            "message": "INFO:rag_engine:🎯 Intent classified: GENERAL_QUESTION (confidence: 0.85)",
+            "ingestionTime": 1755185575509,
+            "eventId": "39141946220386728177711921788789391158126046678572335105"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185572138,
+            "message": "INFO:rag_engine:🚀 NUCLEAR OPTION 1: Dynamic query decomposition activated",
+            "ingestionTime": 1755185575509,
+            "eventId": "39141946220386728177711921788789391158126046678572335106"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185573435,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185575509,
+            "eventId": "39141946249310794700206140003361217757750971551828934659"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185573443,
+            "message": "INFO:rag_engine:🎯 AI decomposed query into 12 concepts: ['رسوم', 'المرافقين', 'نقل', 'الكفالة', 'صاحب', 'العمل', 'العامل', 'الرسوم', 'الالتزامات', 'القانونية', 'العقود', 'العمل']",
+            "ingestionTime": 1755185575509,
+            "eventId": "39141946249489200661794384988493503503932158443876777988"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185573443,
+            "message": "INFO:rag_engine:🚀 NUCLEAR OPTION 1: Using precision concept-based search",
+            "ingestionTime": 1755185575509,
+            "eventId": "39141946249489200661794384988493503503932158443876777989"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185573443,
+            "message": "INFO:rag_engine:🎯 PRECISION SEARCH: Intent-aware search for 'فى حال دفع صاحب العمل لرسوم المرافقين لاحد العمال  لنقل كفالته هل يلزم رد العامل لهذه الرسوم؟'",
+            "ingestionTime": 1755185575509,
+            "eventId": "39141946249489200661794384988493503503932158443876777990"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185574719,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185575509,
+            "eventId": "39141946277944951535119460117093080019831467725507788807"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185574721,
+            "message": "INFO:app.storage.sqlite_store:🔍 Domain filtering disabled - searching all documents",
+            "ingestionTime": 1755185575509,
+            "eventId": "39141946277989553025516521363376151456376764448519749640"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185574960,
+            "message": "INFO:app.storage.sqlite_store:Domain filtering returned 1187 candidate documents",
+            "ingestionTime": 1755185575509,
+            "eventId": "39141946283319431127965340294203188123539722848449069065"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185579149,
+            "message": "INFO:app.storage.sqlite_store:Successfully processed 1187 chunks, returning top 30",
+            "ingestionTime": 1755185580509,
+            "eventId": "39141946376737252764610120640140743075500547830756343808"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185579149,
+            "message": "INFO:app.storage.sqlite_store:Top result similarity: 0.879",
+            "ingestionTime": 1755185580509,
+            "eventId": "39141946376737252764610120640140743075500547830756343809"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185579255,
+            "message": "INFO:rag_engine:🎯 SKIPPING AI FILTERING: Using vector similarity ranking",
+            "ingestionTime": 1755185580509,
+            "eventId": "39141946379101131755654366693143529212401274150390267906"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185579255,
+            "message": "INFO:rag_engine:✅ PRECISION SEARCH: AI filtered to 10 answer documents",
+            "ingestionTime": 1755185580509,
+            "eventId": "39141946379101131755654366693143529212401274150390267907"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185579256,
+            "message": "INFO:rag_engine:✅ NUCLEAR OPTION 1: Retrieved 10 precisely targeted documents",
+            "ingestionTime": 1755185580509,
+            "eventId": "39141946379123432500852897316285064930673922511896248324"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185579256,
+            "message": "INFO:rag_engine:🧠 STRUCTURING: Creating article navigation for precise citations",
+            "ingestionTime": 1755185580509,
+            "eventId": "39141946379123432500852897316285064930673922511896248325"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185580507,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185585514,
+            "eventId": "39141946407021664744214706872397038251568024764460433408"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185580514,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: لا توجد مادة في المحتوى القانوني المقدم تتعلق بالسؤال حول رد رسوم المرافقين من قبل العامل.",
+            "ingestionTime": 1755185585514,
+            "eventId": "39141946407177769960604421234387788279476563295002296321"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185581363,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185585514,
+            "eventId": "39141946426111102634156920281551613092955022213579669506"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185581371,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الثامنة والثمانون",
+            "ingestionTime": 1755185585514,
+            "eventId": "39141946426289508595745165266683898839136209105627512835"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185581833,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185585514,
+            "eventId": "39141946436592452877466313158073400681099752121390465028"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185581844,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الرابعة والتسعون.",
+            "ingestionTime": 1755185585514,
+            "eventId": "39141946436837761074650150012630293582098884097956249605"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185583506,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185585514,
+            "eventId": "39141946473901599594608045673862657351240460920895700998"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185583530,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الأربعون",
+            "ingestionTime": 1755185585514,
+            "eventId": "39141946474436817479372780629259514589784021597039230983"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185584590,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185585514,
+            "eventId": "39141946498075607389815241159287375958791284793378471944"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185584602,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: لا توجد مادة محددة في المحتوى القانوني المقدم تتعلق بشكل مباشر بسؤال دفع صاحب العمل لرسوم المرافقين وما إذا كان يلزم رد العامل لهذه الرسوم.",
+            "ingestionTime": 1755185585514,
+            "eventId": "39141946498343216332197608636985804578063065131450236937"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185585471,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185585514,
+            "eventId": "39141946517722563909720720146980343756994491280147218442"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185585472,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: لا توجد مادة في المحتوى القانوني المقدم تتعلق بالسؤال حول رد العامل لرسوم المرافقين.",
+            "ingestionTime": 1755185585514,
+            "eventId": "39141946517744864654919250770121879475267139641653198859"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185586017,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185590510,
+            "eventId": "39141946529898770788118440388298801234644433891311353856"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185586025,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة العشرون",
+            "ingestionTime": 1755185590510,
+            "eventId": "39141946530077176749706685373431086980825620783359197185"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185586025,
+            "message": "INFO:rag_engine:✅ STRUCTURING: Enhanced 10 documents with article navigation",
+            "ingestionTime": 1755185590510,
+            "eventId": "39141946530077176749706685373431086980825620783359197186"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185586026,
+            "message": "INFO:rag_engine:Using 10 relevant legal documents with GENERAL_QUESTION approach (contextual)",
+            "ingestionTime": 1755185590510,
+            "eventId": "39141946530099477494905215996572622699098269144865177603"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185586499,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185590510,
+            "eventId": "39141946540647729973810200742519017442060944137193914372"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185630082,
+            "message": "INFO:rag_engine:Processing intelligent contextual legal question: ايضا رفع على دعوى يطالبنى فيها برد مبلع 3450 ريال ...",
+            "ingestionTime": 1755185630530,
+            "eventId": "39141947512581107961370349168451402146168242493636673536"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185630082,
+            "message": "INFO:rag_engine:Conversation context: 0 messages",
+            "ingestionTime": 1755185630530,
+            "eventId": "39141947512581107961370349168451402146168242493636673537"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185630082,
+            "message": "INFO:rag_engine:🧠 Classifying intent for: ايضا رفع على دعوى يطالبنى فيها...",
+            "ingestionTime": 1755185630530,
+            "eventId": "39141947512581107961370349168451402146168242493636673538"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185631637,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185635512,
+            "eventId": "39141947547258766745085468159562195216524241298572181504"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185631643,
+            "message": "INFO:rag_engine:🎯 Intent classified: ACTIVE_DISPUTE (confidence: 0.85)",
+            "ingestionTime": 1755185635512,
+            "eventId": "39141947547392571216276651898411409526160131467608064001"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185631643,
+            "message": "INFO:rag_engine:🚀 NUCLEAR OPTION 1: Dynamic query decomposition activated",
+            "ingestionTime": 1755185635512,
+            "eventId": "39141947547392571216276651898411409526160131467608064002"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185632377,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185635512,
+            "eventId": "39141947563761318191998129284298626738284028812997689347"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185632384,
+            "message": "INFO:rag_engine:🎯 AI decomposed query into 12 concepts: ['دعوى', 'المبلغ', 'غرامات', 'مرور', 'وزارة', 'الداخلية', 'حساب', 'الشركة', 'سداد', 'قانوني', 'مسؤولية', 'مالية']",
+            "ingestionTime": 1755185635512,
+            "eventId": "39141947563917423408387843646289376766192567343539552260"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185632384,
+            "message": "INFO:rag_engine:🚀 NUCLEAR OPTION 1: Using precision concept-based search",
+            "ingestionTime": 1755185635512,
+            "eventId": "39141947563917423408387843646289376766192567343539552261"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185632384,
+            "message": "INFO:rag_engine:🎯 PRECISION SEARCH: Intent-aware search for 'ايضا رفع على دعوى يطالبنى فيها برد مبلع 3450 ريال سددته الشركة من حسابها الى حساب وزارة الداخلية لتسديد غرامات مرور على'",
+            "ingestionTime": 1755185635512,
+            "eventId": "39141947563917423408387843646289376766192567343539552262"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185632613,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185635512,
+            "eventId": "39141947569024294058851356345701056250629042128409067527"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185632614,
+            "message": "INFO:app.storage.sqlite_store:🔍 Domain filtering disabled - searching all documents",
+            "ingestionTime": 1755185635512,
+            "eventId": "39141947569046594804049886968842591968901690489915047944"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185632839,
+            "message": "INFO:app.storage.sqlite_store:Domain filtering returned 1187 candidate documents",
+            "ingestionTime": 1755185635512,
+            "eventId": "39141947574064262473719277175688128580247571828760641545"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185636951,
+            "message": "INFO:app.storage.sqlite_store:Successfully processed 1187 chunks, returning top 30",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947665764926730077199539724134761286553324393463808"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185636951,
+            "message": "INFO:app.storage.sqlite_store:Top result similarity: 0.852",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947665764926730077199539724134761286553324393463809"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185637057,
+            "message": "INFO:rag_engine:🎯 SKIPPING AI FILTERING: Using vector similarity ranking",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947668128805721121445592726920898187279644027387906"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185637057,
+            "message": "INFO:rag_engine:✅ PRECISION SEARCH: AI filtered to 10 answer documents",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947668128805721121445592726920898187279644027387907"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185637057,
+            "message": "INFO:rag_engine:✅ NUCLEAR OPTION 1: Retrieved 10 precisely targeted documents",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947668128805721121445592726920898187279644027387908"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185637057,
+            "message": "INFO:rag_engine:🧠 STRUCTURING: Creating article navigation for precise citations",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947668128805721121445592726920898187279644027387909"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185637918,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947687329747337056312117589174330937518900676526086"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185637923,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة السادسة عشرة",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947687441251063048965233296852922300760708206428167"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185638396,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947697989503541953949979243247665263435700535164936"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185638397,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الخامسة والثلاثون",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947698011804287152480602384783383536084062041145353"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185638757,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947706040072558623504933337641961689494204194095114"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185638764,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة 147",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947706196177775013219295328391989598032734735958027"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185639569,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947724148277659830370924264645199079963747050192908"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185639580,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة السادسة والخمسون",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947724393585857014207778821538100079095723615977485"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185639580,
+            "message": "INFO:rag_engine:✅ STRUCTURING: Enhanced 10 documents with article navigation",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947724393585857014207778821538100079095723615977486"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185639580,
+            "message": "INFO:rag_engine:Using 10 relevant legal documents with ACTIVE_DISPUTE approach (contextual)",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947724393585857014207778821538100079095723615977487"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185640409,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185640509,
+            "eventId": "39141947742880903626596094363154648548104587412073742352"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185790584,
+            "message": "INFO:rag_engine:Processing intelligent contextual legal question: لا يوجد ما يثبت انه ينبغى ان ادفع الغرامة دفعتها ا...",
+            "ingestionTime": 1755185795533,
+            "eventId": "39141951091895313815932424830693449548354379459408494592"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185790584,
+            "message": "INFO:rag_engine:Conversation context: 0 messages",
+            "ingestionTime": 1755185795533,
+            "eventId": "39141951091895313815932424830693449548354379459408494593"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185790584,
+            "message": "INFO:rag_engine:🧠 Classifying intent for: لا يوجد ما يثبت انه ينبغى ان ا...",
+            "ingestionTime": 1755185795533,
+            "eventId": "39141951091895313815932424830693449548354379459408494594"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185792306,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185795533,
+            "eventId": "39141951130297197047802157880417956413854857972706770947"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185792308,
+            "message": "INFO:rag_engine:🎯 Intent classified: ACTIVE_DISPUTE (confidence: 0.85)",
+            "ingestionTime": 1755185795533,
+            "eventId": "39141951130341798538199219126701027850400154695718731780"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185792308,
+            "message": "INFO:rag_engine:🚀 NUCLEAR OPTION 1: Dynamic query decomposition activated",
+            "ingestionTime": 1755185795533,
+            "eventId": "39141951130341798538199219126701027850400154695718731781"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185793457,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185795533,
+            "eventId": "39141951155965354771310905116325568145673122066090229766"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185793459,
+            "message": "INFO:rag_engine:🎯 AI decomposed query into 13 concepts: ['غرامة', 'سيارة', 'شخصية', 'شركة', 'دفع', 'حساب', 'وزارة', 'الداخلية', 'مسؤولية', 'قانونية', 'تعويضات', 'حقوق', 'الموظف']",
+            "ingestionTime": 1755185795533,
+            "eventId": "39141951156009956261707966362608639582218418789102190599"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185793459,
+            "message": "INFO:rag_engine:🚀 NUCLEAR OPTION 1: Using precision concept-based search",
+            "ingestionTime": 1755185795533,
+            "eventId": "39141951156009956261707966362608639582218418789102190600"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185793459,
+            "message": "INFO:rag_engine:🎯 PRECISION SEARCH: Intent-aware search for 'لا يوجد ما يثبت انه ينبغى ان ادفع الغرامة دفعتها الشركة بالفعل من حسابها الى حساب وازارة الداخلية لسيارتى الشخصية لان الشركة لم توفر لى سيارة من الشركة'",
+            "ingestionTime": 1755185795533,
+            "eventId": "39141951156009956261707966362608639582218418789102190601"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185793658,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185795533,
+            "eventId": "39141951160447804556215560367774247518475442728792293386"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185793660,
+            "message": "INFO:app.storage.sqlite_store:🔍 Domain filtering disabled - searching all documents",
+            "ingestionTime": 1755185795533,
+            "eventId": "39141951160492406046612621614057318955020739451804254219"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185793855,
+            "message": "INFO:app.storage.sqlite_store:Domain filtering returned 1187 candidate documents",
+            "ingestionTime": 1755185795533,
+            "eventId": "39141951164841051360326093126656784018187169945470435340"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185798133,
+            "message": "INFO:app.storage.sqlite_store:Successfully processed 1187 chunks, returning top 30",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951260243639319640098932163438855528069606326861824"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185798133,
+            "message": "INFO:app.storage.sqlite_store:Top result similarity: 0.864",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951260243639319640098932163438855528069606326861825"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185798240,
+            "message": "INFO:rag_engine:🎯 SKIPPING AI FILTERING: Using vector similarity ranking",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951262629819055882875608307760710701444287466766338"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185798240,
+            "message": "INFO:rag_engine:✅ PRECISION SEARCH: AI filtered to 10 answer documents",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951262629819055882875608307760710701444287466766339"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185798242,
+            "message": "INFO:rag_engine:✅ NUCLEAR OPTION 1: Retrieved 10 precisely targeted documents",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951262674420546279936854590832147246741010478727172"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185798242,
+            "message": "INFO:rag_engine:🧠 STRUCTURING: Creating article navigation for precise citations",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951262674420546279936854590832147246741010478727173"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185798768,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951274404612520707044627038619958659779162624425990"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185798769,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة السادسة عشرة",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951274426913265905575250180155676932427524130406407"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185799168,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951283324910600119293883652907267719123765016592392"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185799177,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الرابعة",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951283525617306906069491926728732172959018570416137"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185799779,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951296950665916421504623131231132307272645170626570"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185799782,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: لا توجد مادة في المحتوى القانوني المقدم تتعلق بالسؤال المطروح.",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951297017568152017096492555838287125217729688567819"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185800131,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951304800528226304283968951803964279495895275733004"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185800153,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة التاسعة",
+            "ingestionTime": 1755185800510,
+            "eventId": "39141951305291144620671957678065589766277759848407302157"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185800829,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185805510,
+            "eventId": "39141951320366448374878658927788357078146409075710754816"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185800838,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الثامنة والسبعون",
+            "ingestionTime": 1755185805510,
+            "eventId": "39141951320567155081665434536062178542600244329264578561"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185801253,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185805510,
+            "eventId": "39141951329821964339055643139799501625749314354246451202"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185801264,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة التاسعة والثلاثون",
+            "ingestionTime": 1755185805510,
+            "eventId": "39141951330067272536239479994356394526748446330812235779"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185801936,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185805510,
+            "eventId": "39141951345053373309652058745468397205968145262831075332"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185801942,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: لا توجد مادة في المحتوى القانوني المقدم تتعلق بالسؤال حول دفع الغرامة من قبل الشركة.",
+            "ingestionTime": 1755185805510,
+            "eventId": "39141951345187177780843242484317611515604035431866957829"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185801942,
+            "message": "INFO:rag_engine:✅ STRUCTURING: Enhanced 10 documents with article navigation",
+            "ingestionTime": 1755185805510,
+            "eventId": "39141951345187177780843242484317611515604035431866957830"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185801942,
+            "message": "INFO:rag_engine:Using 10 relevant legal documents with ACTIVE_DISPUTE approach (contextual)",
+            "ingestionTime": 1755185805510,
+            "eventId": "39141951345187177780843242484317611515604035431866957831"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185802620,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185805510,
+            "eventId": "39141951360307083025447004974278828504459624532921679880"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185857770,
+            "message": "INFO:rag_engine:Processing intelligent contextual legal question: اكتب لى مذكرة دفاع اقدمها للقاضى...",
+            "ingestionTime": 1755185860531,
+            "eventId": "39141952590193180724410871296490333337288171241763962880"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185857770,
+            "message": "INFO:rag_engine:Conversation context: 0 messages",
+            "ingestionTime": 1755185860531,
+            "eventId": "39141952590193180724410871296490333337288171241763962881"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185857770,
+            "message": "INFO:rag_engine:🧠 Classifying intent for: اكتب لى مذكرة دفاع اقدمها للقا...",
+            "ingestionTime": 1755185860531,
+            "eventId": "39141952590193180724410871296490333337288171241763962882"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185859063,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185860531,
+            "eventId": "39141952619028044266110967018496017063822502668996640771"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185859074,
+            "message": "INFO:rag_engine:🎯 Intent classified: ACTIVE_DISPUTE (confidence: 0.85)",
+            "ingestionTime": 1755185860531,
+            "eventId": "39141952619273352463294803873052909964821634645562425348"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185859074,
+            "message": "INFO:rag_engine:🚀 NUCLEAR OPTION 1: Dynamic query decomposition activated",
+            "ingestionTime": 1755185860531,
+            "eventId": "39141952619273352463294803873052909964821634645562425349"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185860457,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185860531,
+            "eventId": "39141952650115283072862655677796808335894318608333340678"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185860464,
+            "message": "INFO:rag_engine:🎯 AI decomposed query into 19 concepts: ['مذكرة', 'دفاع', 'قاضي', 'قانون', 'إجراءات', 'قانونية', 'دفاع', 'حقوق', 'قانونية', 'محكمة', 'استئناف', 'أدلة', 'قانونية', 'نصوص', 'قانونية', 'صياغة', 'قانونية', 'استشارة', 'قانونية']",
+            "ingestionTime": 1755185860531,
+            "eventId": "39141952650271388289252370039787558363802857138875203591"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185860464,
+            "message": "INFO:rag_engine:🚀 NUCLEAR OPTION 1: Using precision concept-based search",
+            "ingestionTime": 1755185860531,
+            "eventId": "39141952650271388289252370039787558363802857138875203592"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185860464,
+            "message": "INFO:rag_engine:🎯 PRECISION SEARCH: Intent-aware search for 'اكتب لى مذكرة دفاع اقدمها للقاضى'",
+            "ingestionTime": 1755185860531,
+            "eventId": "39141952650271388289252370039787558363802857138875203593"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185860649,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185865515,
+            "eventId": "39141952654397026150980535326996900477911779104497401856"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185860652,
+            "message": "INFO:app.storage.sqlite_store:🔍 Domain filtering disabled - searching all documents",
+            "ingestionTime": 1755185865515,
+            "eventId": "39141952654463928386576127196421507632729724189015343105"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185860858,
+            "message": "INFO:app.storage.sqlite_store:Domain filtering returned 1187 candidate documents",
+            "ingestionTime": 1755185865515,
+            "eventId": "39141952659057881897473435563577865596895286659247308802"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185865055,
+            "message": "INFO:app.storage.sqlite_store:Successfully processed 1187 chunks, returning top 30",
+            "ingestionTime": 1755185865515,
+            "eventId": "39141952752654109495706460888603275187200459899847114755"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185865055,
+            "message": "INFO:app.storage.sqlite_store:Top result similarity: 0.849",
+            "ingestionTime": 1755185865515,
+            "eventId": "39141952752654109495706460888603275187200459899847114756"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185865233,
+            "message": "INFO:rag_engine:🎯 SKIPPING AI FILTERING: Using vector similarity ranking",
+            "ingestionTime": 1755185865515,
+            "eventId": "39141952756623642141044911807796633039731868247911628805"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185865233,
+            "message": "INFO:rag_engine:✅ PRECISION SEARCH: AI filtered to 10 answer documents",
+            "ingestionTime": 1755185865515,
+            "eventId": "39141952756623642141044911807796633039731868247911628806"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185865234,
+            "message": "INFO:rag_engine:✅ NUCLEAR OPTION 1: Retrieved 10 precisely targeted documents",
+            "ingestionTime": 1755185865515,
+            "eventId": "39141952756645942886243442430938168758004516609417609223"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185865234,
+            "message": "INFO:rag_engine:🧠 STRUCTURING: Creating article navigation for precise citations",
+            "ingestionTime": 1755185865515,
+            "eventId": "39141952756645942886243442430938168758004516609417609224"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185865969,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952773036990607163450446005509647697084227777593344"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185865971,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة السادسة عشرة بعد المائة.",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952773081592097560511692288581084242380950789554177"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185866446,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952783674446066862557684518047263750352666130251778"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185866451,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة السادسة",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952783785949792855210800225725855113594473660153859"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185866889,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952793553676189811623736218370458533576813279576068"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185866893,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الرابعة والستون",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952793642879170605746228784513331624170259303497733"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185867334,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952803477507803157751034201765089862097683440861190"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185867338,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الخامسة والثلاثون",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952803566710783951873526767907962952691129464782855"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185867909,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952816300436292312859340584803096634905549379600392"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185867914,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الرابعة",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952816411940018305512456292481687998147356909502473"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185868437,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952828075229757137028359315662344593240424537260042"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185868441,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الحادية والثلاثون بعد المائة.",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952828164432737931150851881805217683833870561181707"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185868809,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952836371106970990420167966949542018430904761974796"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185868811,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة المائة.",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952836415708461387481414250020978563727627773935629"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185869273,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952846718652743108629305639522820527270643536887822"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185869278,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة التسعون بعد المائة.",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952846830156469101282421347201411890512451066789903"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185870075,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952864603850392330189065151168875191256571333181456"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185870081,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الخامسة عشرة بعد المائة.",
+            "ingestionTime": 1755185870510,
+            "eventId": "39141952864737654863521372804000383184827146740369063953"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185870689,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185875510,
+            "eventId": "39141952878296507944227991680098542325283265810411028480"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185870691,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة السادسة والتسعون.",
+            "ingestionTime": 1755185875510,
+            "eventId": "39141952878341109434625052926381613761828562533422989313"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185870691,
+            "message": "INFO:rag_engine:✅ STRUCTURING: Enhanced 10 documents with article navigation",
+            "ingestionTime": 1755185875510,
+            "eventId": "39141952878341109434625052926381613761828562533422989314"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185870691,
+            "message": "INFO:rag_engine:Using 10 relevant legal documents with ACTIVE_DISPUTE approach (contextual)",
+            "ingestionTime": 1755185875510,
+            "eventId": "39141952878341109434625052926381613761828562533422989315"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755185872062,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755185875510,
+            "eventId": "39141952908915431101810537253427083513629466158122139652"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188469977,
+            "message": "INFO:rag_engine:Processing intelligent contextual legal question: اكتب لى مذكرة دفاع خاصة بدعوى المطالبة بمبلغ غراما...",
+            "ingestionTime": 1755188470531,
+            "eventId": "39142010844355893542494359133380693083065196336728965120"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188469977,
+            "message": "INFO:rag_engine:Conversation context: 0 messages",
+            "ingestionTime": 1755188470531,
+            "eventId": "39142010844355893542494359133380693083065196336728965121"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188469977,
+            "message": "INFO:rag_engine:🧠 Classifying intent for: اكتب لى مذكرة دفاع خاصة بدعوى ...",
+            "ingestionTime": 1755188470531,
+            "eventId": "39142010844355893542494359133380693083065196336728965122"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188471732,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755188475510,
+            "eventId": "39142010883493701365915602752794778563456690258639519744"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188471733,
+            "message": "INFO:rag_engine:🎯 Intent classified: ACTIVE_DISPUTE (confidence: 0.85)",
+            "ingestionTime": 1755188475510,
+            "eventId": "39142010883516002111114133375936314281729338620145500161"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188471733,
+            "message": "INFO:rag_engine:🚀 NUCLEAR OPTION 1: Dynamic query decomposition activated",
+            "ingestionTime": 1755188475510,
+            "eventId": "39142010883516002111114133375936314281729338620145500162"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188472588,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755188475510,
+            "eventId": "39142010902583139255857816161949353404843687707758755843"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188472593,
+            "message": "INFO:rag_engine:🎯 AI decomposed query into 22 concepts: ['مذكرة', 'دفاع', 'غرامات', 'مرور', 'دعوى', 'مطالبة', 'قانون', 'المرور', 'الدفاع', 'القانوني', 'الإجراءات', 'القانونية', 'حقوق', 'المتهم', 'التظلم', 'التعويضات', 'القانونية', 'الشروط', 'القانونية', 'الدفع', 'بعدم', 'القبول']",
+            "ingestionTime": 1755188475510,
+            "eventId": "39142010902694642981850469277657031996206929515288657924"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188472593,
+            "message": "INFO:rag_engine:🚀 NUCLEAR OPTION 1: Using precision concept-based search",
+            "ingestionTime": 1755188475510,
+            "eventId": "39142010902694642981850469277657031996206929515288657925"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188472593,
+            "message": "INFO:rag_engine:🎯 PRECISION SEARCH: Intent-aware search for 'اكتب لى مذكرة دفاع خاصة بدعوى المطالبة بمبلغ غرامات المرور'",
+            "ingestionTime": 1755188475510,
+            "eventId": "39142010902694642981850469277657031996206929515288657926"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188472987,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/embeddings \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755188475510,
+            "eventId": "39142010911481136590071534795422104995630383948644941831"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188472989,
+            "message": "INFO:app.storage.sqlite_store:🔍 Domain filtering disabled - searching all documents",
+            "ingestionTime": 1755188475510,
+            "eventId": "39142010911525738080468596041705176432175680671656902664"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188473247,
+            "message": "INFO:app.storage.sqlite_store:Domain filtering returned 1187 candidate documents",
+            "ingestionTime": 1755188475510,
+            "eventId": "39142010917279330341689496812221391746518957940199849993"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188477832,
+            "message": "INFO:app.storage.sqlite_store:Successfully processed 1187 chunks, returning top 30",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011019528247076952403922207232422598580521263955968"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188477832,
+            "message": "INFO:app.storage.sqlite_store:Top result similarity: 0.856",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011019528247076952403922207232422598580521263955969"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188477937,
+            "message": "INFO:rag_engine:🎯 SKIPPING AI FILTERING: Using vector similarity ranking",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011021869825322798119352068482841226658479391899650"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188477937,
+            "message": "INFO:rag_engine:✅ PRECISION SEARCH: AI filtered to 10 answer documents",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011021869825322798119352068482841226658479391899651"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188477938,
+            "message": "INFO:rag_engine:✅ NUCLEAR OPTION 1: Retrieved 10 precisely targeted documents",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011021892126067996649975210018559499306840897880068"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188477938,
+            "message": "INFO:rag_engine:🧠 STRUCTURING: Creating article navigation for precise citations",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011021892126067996649975210018559499306840897880069"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188478483,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011034046032201195839587346985018092663861657206790"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188478490,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة السادسة عشرة",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011034202137417585553949337735046001202392199069703"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188479180,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011049589651604571683916997380654128571831325556744"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188479182,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة السادسة",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011049634253094968745163280452090673868554337517577"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188479796,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011063326910646866547772183383110079962519009493002"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188479799,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الثانية",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011063393812882462139641607990264897907603527434251"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188480368,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011076082936900426064209141813962034825300430290956"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188480383,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الرابعة",
+            "ingestionTime": 1755188480510,
+            "eventId": "39142011076417448078404023556264849736124550723019997197"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188480771,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755188485514,
+            "eventId": "39142011085070137215433905341230539662960169329052418048"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188480800,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الثامنة",
+            "ingestionTime": 1755188485514,
+            "eventId": "39142011085716858826191293412335075492866971812725850113"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188481351,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755188485514,
+            "eventId": "39142011098004569430581666763321256261096219002521059330"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188481359,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة السادسة والسبعونية",
+            "ingestionTime": 1755188485514,
+            "eventId": "39142011098182975392169911748453542007277405894568902659"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188482218,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755188485514,
+            "eventId": "39142011117339315517707717027032724003482348428206080004"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188482328,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة الثامنة والسبعون",
+            "ingestionTime": 1755188485514,
+            "eventId": "39142011119792397489546085572601653013473668193863925765"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188483243,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755188485514,
+            "eventId": "39142011140197579346201605747106835232946918971836006406"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188483255,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: لا توجد مادة في المحتوى القانوني المقدم تتعلق مباشرة بدعوى المطالبة بمبلغ غرامات المرور.",
+            "ingestionTime": 1755188485514,
+            "eventId": "39142011140465188288583973224805263852218699309907771399"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188485025,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755188485514,
+            "eventId": "39142011179937507289983176185323485194806299175493107720"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188485032,
+            "message": "INFO:rag_engine:🎯 AI identified relevant article: المادة السادسة",
+            "ingestionTime": 1755188485514,
+            "eventId": "39142011180093612506372890547314235222714837706034970633"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188485032,
+            "message": "INFO:rag_engine:✅ STRUCTURING: Enhanced 10 documents with article navigation",
+            "ingestionTime": 1755188485514,
+            "eventId": "39142011180093612506372890547314235222714837706034970634"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188485033,
+            "message": "INFO:rag_engine:Using 10 relevant legal documents with ACTIVE_DISPUTE approach (contextual)",
+            "ingestionTime": 1755188485514,
+            "eventId": "39142011180115913251571421170455770940987486067540951051"
+        },
+        {
+            "logStreamName": "backend/backend-container/35cd841aa45b42d9bf7c03fcd7e3fe3c",
+            "timestamp": 1755188485960,
+            "message": "INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions \"HTTP/1.1 200 OK\"",
+            "ingestionTime": 1755188490512,
+            "eventId": "39142011200788704050609308828701684171154041136052174848"
+        }
+    ],
+    "searchedLogStreams": []
+}
