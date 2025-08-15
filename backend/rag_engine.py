@@ -600,7 +600,7 @@ class DocumentRetriever:
                 model="gpt-4o-mini",
                 messages=[{"role": "user", "content": decomposition_prompt}],
                 max_tokens=150,
-                temperature=0.1
+                temperature=0.3
             )
             
             ai_response = response.choices[0].message.content.strip()
@@ -874,7 +874,7 @@ class IntentClassifier:
                 model=self.model,
                 messages=[{"role": "user", "content": classification_prompt}],
                 max_tokens=400,
-                temperature=0.1  # Low temperature for consistent classification
+                temperature=0.3  # Low temperature for consistent classification
             )
             
             # Parse AI response
@@ -1027,7 +1027,7 @@ class IntelligentLegalRAG:
                         model="gpt-4o-mini",
                         messages=[{"role": "user", "content": navigation_prompt}],
                         max_tokens=400,
-                        temperature=0.1
+                        temperature=0.3
                     )
                     
                     relevant_article = response.choices[0].message.content.strip()
@@ -1150,7 +1150,7 @@ class IntelligentLegalRAG:
             stream = await self.ai_client.chat.completions.create(
                 model=self.ai_model,
                 messages=messages,
-                temperature=0.1,  # Low temperature for accuracy and consistency
+                temperature=0.3,  # Natural conversational flow while maintaining accuracy through document grounding
                 max_tokens=15000,  # Generous token limit for comprehensive responses
                 stream=True
             )
@@ -1180,7 +1180,7 @@ class IntelligentLegalRAG:
                 model=classification_model,
                 messages=[{"role": "user", "content": title_prompt}],
                 max_tokens=50,
-                temperature=0.1
+                temperature=0.3
             )
             
             title = response.choices[0].message.content.strip()
