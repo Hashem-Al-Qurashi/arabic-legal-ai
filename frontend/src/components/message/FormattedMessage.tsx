@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { FormattedMessageProps } from '../../types';
 import { formatAIResponse } from '../../utils/messageParser';
 import { ActionsBar } from '../actions';
@@ -13,6 +13,19 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
   selectedConversation = null,
   isDark = false
 }) => {
+  // AI messages: Mobile ChatGPT-style vs Desktop Legal theme
+  const isMobile = window.innerWidth <= 768;
+  
+  // Check actual dark mode state
+  const actualIsDark = document.documentElement.classList.contains('dark-mode');
+  
+  console.log('🎨 Dark Mode Debug:', { 
+    isDarkProp: isDark,
+    actualIsDark,
+    isMobile,
+    role 
+  });
+
   if (role === 'user') {
     return (
       <div style={{
@@ -27,12 +40,9 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
     );
   }
 
-  // AI messages: Mobile ChatGPT-style vs Desktop Legal theme
-  const isMobile = window.innerWidth <= 768;
-  
   return (
     <div
-      className="ai-response-container"
+      className={`ai-response-container ${actualIsDark ? 'dark-mode' : ''}`}
       style={{
         // Background - Mobile: clean white, Desktop: premium legal theme
         background: isMobile 
@@ -161,12 +171,9 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
           // Content styling - Mobile: clean, Desktop: default
           fontSize: isMobile ? '16px' : undefined,
           lineHeight: isMobile ? '1.7' : undefined,
-          color: isMobile ? '#374151' : undefined,
+          color: isMobile ? '#374151' : isDark ? '#ffffff' : '#000000',
         }}
-        dangerouslySetInnerHTML={{ __html: (() => {
-          const formatted = formatAIResponse(content);
-          return formatted;
-        })() }}
+        dangerouslySetInnerHTML={{ __html: formatAIResponse(content) }}
       />
       
       {/* Add ActionsBar for AI messages */}
