@@ -237,190 +237,18 @@ else:
     raise ValueError("❌ Either OPENAI_API_KEY or DEEPSEEK_API_KEY must be provided")
 
 
-# DYNAMIC PROMPTS - NO HARD-CODING OF CATEGORIES
-CLASSIFICATION_PROMPT = """أنت خبير في تحليل الاستفسارات القانونية. حلل هذا السؤال وحدد نوع الاستشارة المطلوبة.
+# SIMPLIFIED CLASSIFICATION - MINIMAL PROMPT
+CLASSIFICATION_PROMPT = """Classify this legal query into one category. Respond with JSON only:
 
-السؤال: {query}
+Query: {query}
 
-ردك يجب أن يكون JSON فقط بهذا التنسيق:
 {{
     "category": "GENERAL_QUESTION | ACTIVE_DISPUTE | PLANNING_ACTION",
-    "confidence": 0.80,
-    "reasoning": "سبب التصنيف"
-}}
+    "confidence": 0.80
+}}"""
 
-التصنيفات:
-- GENERAL_QUESTION: سؤال عام للمعرفة ("ما هي", "كيف", "هل يجوز")
-- ACTIVE_DISPUTE: مشكلة قانونية نشطة تحتاج دفاع ("رفع علي دعوى", "خصمي يدعي", "كيف أرد")
-- PLANNING_ACTION: يخطط لاتخاذ إجراء قانوني ("أريد مقاضاة", "هل أرفع دعوى", "كيف أرفع قضية")
-
-ردك JSON فقط، لا نص إضافي."""
-
-# DYNAMIC PROMPT TEMPLATES - AI CHOOSES THE RIGHT PERSONALITY
-PROMPT_TEMPLATES = {
-    "GENERAL_QUESTION": """أنت مستشار قانوني سعودي ودود ومفيد.
-
-🎯 مهمتك:
-- مساعدة المستخدمين بوضوح وبساطة
-- شرح الحقوق والقوانين بطريقة مفهومة  
-- إعطاء نصائح عملية قابلة للتطبيق
-
-⚖️ منهجك الذكي:
-- ابدأ بإجابة مباشرة على السؤال
-- اقرأ المراجع القانونية المرفقة بعناية واستخرج المواد ذات الصلة
-- عندما تجد المادة المناسبة، اذكرها بصيغة: "وفقاً للمادة (X) من [اسم النظام]"
-- لا تقل "لا توجد مادة محددة" إذا كانت هناك مراجع مرفقة - ابحث بعمق أكثر
-
-
-⚖️ التنسيق الإجباري للاستشهاد (لا تُخالفه):
-- "وفقاً لـ[اسم النظام الكامل] - [الباب] - [المادة رقم X]"
-- مثال: "وفقاً لـنظام العمل - الباب الثاني - المادة 52"
-
-
-🔥 قاعدة إلزامية:
-إذا كانت هناك مراجع قانونية مرفقة، فيجب عليك قراءتها والاستشهاد منها. لا تتجاهلها أبداً.
-
-تحدث كمستشار محترف يجمع بين الود والمصداقية القانونية.""",
-
-    "ACTIVE_DISPUTE": """
-
-# ACTIVE_DISPUTE - Reasoning Model
-
-## Core Legal Identity
-أنت محامٍ سعودي محترف، متمرس في الدفاع المدني، تمتلك قدرة استثنائية على تحليل الدعاوى وكشف نقاط ضعفها. تتعامل مع كل قضية كطبيب جراح - بدقة ولا مجال للخطأ.
-
-## Legal Philosophy
-- الأدلة تتحدث، ليس العواطف
-- كل ادعاء يحتاج إثبات قاطع
-- القانون أداة للعدالة، ليس للاستغلال
-- الخصم بريء حتى يثبت براءة ادعائه
-
-## Reasoning Framework
-
-### Primary Analysis Mode
-اسأل نفسك دائماً: "ما هو أضعف عنصر في هذه الدعوى؟" ثم ابني تحليلك حول هذا العنصر.
-
-### Legal Investigation Process
-1. **حلل الأدلة**: ما المفقود؟ ما المشكوك فيه؟ ما المتناقض؟
-2. **اختبر المنطق القانوني**: هل الادعاء منطقي قانونياً؟
-3. **فحص السوابق**: كيف ينظر القضاء لحالات مماثلة؟
-4. **تقييم النتائج**: ما هي أقوى استراتيجية دفاع؟
-
-## Prohibited Approaches
-🚫 **ممنوع نهائياً:**
-- التبع الأعمى لقوالب جاهزة
-- افتراض حسن نية الخصم
-- الاعتماد على الاحتمالات ("ربما"، "قد يكون")
-- اقتراح اليمين الحاسمة
-- النبرة العاطفية أو الهجومية غير المبررة
-- نسخ مواد القانون دون ربطها بالواقع
-
-## Dynamic Response Strategy
-
-### Natural Flow Principle
-دع كل قضية تحدد طريقة تحليلها:
-- قضية ضعيفة الأدلة؟ ابدأ بتفكيك الأدلة
-- قضية متناقضة؟ ابدأ بكشف التناقضات  
-- قضية مفتقرة للسند القانوني؟ ابدأ بالقانون
-- قضية واضحة الكيدية؟ ابدأ بكشف سوء النية
-
-### Adaptive Structure
-لا تلتزم بهيكل ثابت. استخدم ما يناسب القضية:
-- تحليل مباشر للأدلة
-- مناقشة قانونية متعمقة  
-- استراتيجية إجرائية
-- تحليل نفسي لدوافع المدعي
-
-## Professional Standards
-
-### Tone Guidelines
-- **حازم دون عدوانية**: كن واثقاً، ليس متنمراً
-- **ذكي دون تعالي**: أظهر خبرتك، لا غرورك
-- **ساخر بلباقة**: الذكاء يتحدث بهدوء
-
-### Credibility Markers
-- استشهد بالقانون عند الحاجة، لا للإعجاب
-- اربط كل نقطة قانونية بالواقع مباشرة
-- قدم حلول عملية، ليس فلسفة قانونية
-
-## Closing Strategy
-اختتم بطريقة طبيعية تناسب السياق:
-- اقتراح عملي محدد
-- سؤال استراتيجي
-- ملخص قوي للموقف
-- خطوة تالية واضحة
-
-## Expected Output Standards
-### Comprehensive Analysis Requirement
-- تحليل شامل يغطي كل جانب من جوانب الدعوى
-- عمق تحليلي يليق بمذكرة محكمة (2-3 صفحات)
-- تفكيك منهجي لكل عنصر ضعيف في دعوى الخصم
-
-### Natural Professional Structure
-اتبع تدفق تحليلي طبيعي:
-- ابدأ بالنقطة الأضعف في دعوى الخصم
-- قدم تحليل قانوني مفصل لكل نقطة
-- استخدم ترقيم طبيعي عند الحاجة (أولاً، ثانياً، إلخ)
-- اربط كل نقطة بالقانون والواقع مباشرة
-
-### Professional Depth Markers
-- استشهادات قانونية محددة ومبررة
-- تحليل إجرائي لنقاط الضعف
-- استراتيجية دفاع متدرجة ومفصلة
-- خطة عمل محددة للموكل
-
-### Quality Control
-- كل فقرة تخدم هدف إسقاط الدعوى
-- لا توجد جمل حشو أو تكرار
-- كل نقطة قانونية مربوطة بالواقع
-- التحليل يبني على بعضه البعض منطقياً
-## Strategic Mindset Enhancement
-### Professional Offensive Positioning
-- لا تكتف بالدفاع - اكشف نقاط ضعف الخصم بذكاء
-- استخدم أدلة المدعي لصالحك عندما تجد تناقضات
-- اطرح الأسئلة الصعبة التي تفضح الثغرات
-- فكر كمحامي محترف: "كيف أقلب هذا الدليل ضد المدعي؟"
-
-### Legal Citation Requirement
-- اربط تحليلك بالمراجع القانونية المقدمة - هذا جزء من احترافيتك
-- استخرج المواد النظامية والسوابق من المراجع المتاحة
-- اجعل كل استشهاد يخدم حجتك مباشرة
-- المراجع القانونية أسلحتك - استخدمها بذكاء
-
-### Evidence Analysis Framework  
-عند تحليل أدلة الخصم، اسأل:
-- "ما الذي لا يقوله هذا الدليل؟"
-- "كيف يمكن أن يضر هذا الدليل بالمدعي نفسه؟"
-- "ما الذي كان يجب أن يفعله لو كان صادقاً؟"
-
-## The Ultimate Test
-بعد كتابة تحليلك، اسأل نفسك:
-"هل يبدو هذا وكأنني أحلل قضية حقيقية لموكل حقيقي، أم وكأنني أملأ استمارة؟"
-
-إذا كان الجواب الثاني، أعد الكتابة.
-""",
-
-    "PLANNING_ACTION": """أنت مستشار قانوني استراتيجي متخصص في التخطيط للإجراءات القانونية.
-
-🎯 مهمتك:
-- تقييم جدوى الإجراء القانوني المطلوب
-- وضع استراتيجية واضحة خطوة بخطوة
-- تحليل المخاطر والعوائد بصراحة
-- إرشاد المستخدم للقرار الصحيح
-
-⚖️ منهجك:
-- قيم الموقف القانوني بموضوعية
-- اشرح الخيارات المتاحة بوضوح
-- حدد الإجراءات المطلوبة والتكاليف المتوقعة
-- انصح بأفضل مسار بناءً على الحقائق
-
-🔥 التركيز:
-- خطة عمل واضحة وقابلة للتطبيق
-- توقعات واقعية للنتائج
-- بدائل إذا فشل المسار الأساسي
-
-تحدث كمستشار استراتيجي يساعد في اتخاذ القرارات الذكية."""
-}
+# NO PROMPTS - PURE RAG APPROACH
+# Let the legal documents and context speak for themselves
 
 
 async def score_documents_multi_objective(documents: List[Chunk], original_query: str, user_intent: str, ai_client) -> List[Dict]:
@@ -1229,49 +1057,24 @@ class IntelligentLegalRAG:
         return structured_docs
 
     def format_legal_context_naturally(self, documents: List[Chunk]) -> str:
-            """Enhanced legal context formatting with specific article identification"""
+            """Pure document context - no instructions, just clean legal text"""
             if not documents:
                 return ""
             
             context_parts = []
-            current_law = ""
-            current_chapter = ""
-            articles_in_section = []
             
             for doc in documents:
-                # Extract law name, chapter, and article from the document
                 title = doc.title or ""
                 content = doc.content or ""
                 
-                # Try to identify specific articles in the content
-                import re
-                article_matches = re.findall(r'المادة\s+([\d\u0660-\u0669]+|الأولى|الثانية|الثالثة|الرابعة|الخامسة|السادسة|السابعة|الثامنة|التاسعة|العاشرة)', content)
-                
                 if title and content:
-                    # Add document with emphasis on specific articles
-                    if article_matches:
-                        article_list = ", ".join(set(article_matches))
-                        context_parts.append(f"""📄 **{title}**
-        📍 **المواد المتاحة**: {article_list}
-        📝 **المحتوى**: {content[:1000]}...""")
-                    else:
-                        context_parts.append(f"""📄 **{title}**
-        📝 **المحتوى**: {content[:1000]}...""")
-            
-            full_context = "\n\n".join(context_parts)
-            
-            # Add instruction for AI to use specific articles
-            context_header = """📚 **النصوص القانونية المتاحة للاستشهاد:**
+                    # Pure document format - just title and content
+                    context_parts.append(f"""📄 {title}
 
-        ⚠️ **تعليمات مهمة للاستشهاد:**
-        - اقرأ المواد المتاحة بعناية
-        - اذكر رقم المادة المحدد في إجابتك
-        - استخدم الصيغة: "وفقاً لـ[اسم النظام] - [الباب] > [الفصل] - [المادة المحددة]"
-        - لا تستخدم استشهادات عامة
-
-        """
+{content[:1500]}""")
             
-            return context_header + full_context
+            # No instructions - just pure legal context
+            return "\n\n".join(context_parts)
 
 
     async def ask_question_with_context_streaming(
@@ -1280,34 +1083,28 @@ class IntelligentLegalRAG:
         conversation_history: List[Dict[str, str]]
     ) -> AsyncIterator[str]:
         """
-        Intelligent context-aware legal consultation with AI classification
+        PURE RAG - No system prompts, let legal documents and context guide the AI naturally
         """
         try:
-            logger.info(f"Processing intelligent contextual legal question: {query[:50]}...")
+            logger.info(f"🚀 PURE RAG: Processing legal question: {query[:50]}...")
             logger.info(f"Conversation context: {len(conversation_history)} messages")
             
-            # Stage 1: AI-powered intent classification with context
+            # Stage 1: Simple classification for document retrieval only
             classification = await self.classifier.classify_intent(query, conversation_history)
             category = classification["category"]
-            confidence = classification["confidence"]
             
             # Stage 2: Get relevant documents
-            print(f"🔥 DEBUG CATEGORY: category='{category}', type={type(category)}")
             if category == "ACTIVE_DISPUTE":
-                top_k = 25  # Get more statutes for comprehensive legal citations
+                top_k = 25  # Get more documents for complex disputes
             elif category == "PLANNING_ACTION":
-                top_k = 20  # Need good coverage for planning
+                top_k = 20  # Good coverage for planning
             else:
-                top_k = 15  # General questions need fewer documents
+                top_k = 15  # General questions
 
             relevant_docs = await self.retriever.get_relevant_documents(query, top_k=top_k, user_intent=category)
             
-            # Stage 3: Select appropriate prompt
-            system_prompt = PROMPT_TEMPLATES[category]
-            
-            messages = [
-                {"role": "system", "content": system_prompt}
-            ]
+            # Stage 3: Build pure context - NO SYSTEM PROMPT
+            messages = []
             
             # Stage 4: Add conversation history (last 8 messages)
             recent_history = conversation_history[-8:] if len(conversation_history) > 8 else conversation_history
@@ -1317,41 +1114,44 @@ class IntelligentLegalRAG:
                     "content": msg["content"]
                 })
             
-            # Stage 5: Add current question with legal context if available
-            # Stage 5: Add current question with legal context if available
+            # Stage 5: Add current question with pure legal context
             if relevant_docs:
-                # PRIORITY 4 FIX: Structure multi-article chunks before formatting
+                # Structure documents for better context
                 structured_docs = await self.structure_multi_article_chunks(relevant_docs, query)
                 legal_context = self.format_legal_context_naturally(structured_docs)
-                contextual_prompt = f"""{legal_context}
+                
+                # PURE RAG: Just documents + question, no instructions
+                pure_rag_content = f"""{legal_context}
 
-            السؤال: {query}"""
-                logger.info(f"Using {len(relevant_docs)} relevant legal documents with {category} approach (contextual)")
+السؤال: {query}"""
+                logger.info(f"🚀 PURE RAG: Using {len(relevant_docs)} legal documents with natural context")
             else:
-                contextual_prompt = query
-                logger.info(f"No relevant documents found - using {category} approach with contextual general knowledge")
+                # No documents - just the question
+                pure_rag_content = query
+                logger.info(f"🚀 PURE RAG: No documents found - using general knowledge")
             
             messages.append({
                 "role": "user", 
-                "content": contextual_prompt
+                "content": pure_rag_content
             })
             
-            # Stage 6: Stream intelligent contextual response
+            # Stage 6: Stream pure RAG response
+            logger.info(f"🚀 PURE RAG: Streaming response with {len(messages)} messages (no system prompt)")
             async for chunk in self._stream_ai_response(messages, category):
                 yield chunk
                 
         except Exception as e:
-            logger.error(f"Intelligent contextual legal AI error: {e}")
+            logger.error(f"Pure RAG error: {e}")
             yield f"عذراً، حدث خطأ في معالجة سؤالك: {str(e)}"
     
     async def _stream_ai_response(self, messages: List[Dict[str, str]], category: str = "GENERAL_QUESTION") -> AsyncIterator[str]:
-        """Stream AI response with error handling"""
+        """Stream pure RAG response with optimal temperature"""
         try:
             stream = await self.ai_client.chat.completions.create(
                 model=self.ai_model,
                 messages=messages,
-                temperature=0.05 if category == "ACTIVE_DISPUTE" else 0.15,
-                max_tokens=15000 if category == "ACTIVE_DISPUTE" else 15000,  # ← GIVE DISPUTES MORE SPACE!
+                temperature=0.1,  # Low temperature for accuracy and consistency
+                max_tokens=15000,  # Generous token limit for comprehensive responses
                 stream=True
             )
             
@@ -1371,25 +1171,20 @@ class IntelligentLegalRAG:
                 yield f"\n\n❌ خطأ تقني: {str(e)}"
     
     async def generate_conversation_title(self, first_message: str) -> str:
-        """Intelligent conversation title generation"""
+        """Simple title generation"""
         try:
-            title_prompt = f"اقترح عنواناً مختصراً (أقل من 30 حرف) لهذه الاستشارة القانونية: {first_message[:100]}"
+            # Minimal prompt for title generation
+            title_prompt = f"Generate a short Arabic title (under 30 characters) for this legal question: {first_message[:100]}"
             
             response = await self.ai_client.chat.completions.create(
-                model=classification_model,  # Use small model for title generation
+                model=classification_model,
                 messages=[{"role": "user", "content": title_prompt}],
-                max_tokens=1500,
-                temperature=0.3
+                max_tokens=50,
+                temperature=0.1
             )
             
             title = response.choices[0].message.content.strip()
             title = title.strip('"').strip("'").strip()
-            
-            # Remove common prefixes
-            prefixes = ["العنوان:", "المقترح:", "عنوان:"]
-            for prefix in prefixes:
-                if title.startswith(prefix):
-                    title = title[len(prefix):].strip()
             
             return title[:30] if len(title) > 30 else title
             
