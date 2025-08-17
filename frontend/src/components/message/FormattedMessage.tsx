@@ -27,69 +27,119 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
     );
   }
 
-  // AI messages: Mobile ChatGPT-style vs Desktop Legal theme
+  // ✅ COMPLETE SEPARATION: Mobile ChatGPT vs Desktop Legal
   const isMobile = window.innerWidth <= 768;
   
+  // 🎯 MOBILE: Exact ChatGPT replica - NO containers, page background, same font as user
+  if (isMobile) {
+    return (
+      <div
+        style={{
+          // ✅ NO CONTAINER: Use page background, no borders, no padding, no shadows
+          background: 'transparent',
+          border: 'none',
+          borderRadius: '0',
+          boxShadow: 'none',
+          padding: '0',
+          margin: '0',
+          
+          // ✅ EXACT CHATGPT: Same font size as user question (25px)
+          fontSize: '25px',
+          lineHeight: '1.6',
+          
+          // ✅ CHATGPT TYPOGRAPHY
+          fontFamily: '"Söhne", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+          
+          // ✅ RTL Support
+          direction: 'rtl' as const,
+          textAlign: 'right' as const,
+          
+          // ✅ ChatGPT colors - responsive to theme
+          color: isDark ? '#d1d5db' : '#374151',
+          
+          // ✅ Full width, no containers
+          width: '100%',
+          maxWidth: '100%',
+        }}
+      >
+        <div
+          className="ai-response"
+          dangerouslySetInnerHTML={{ __html: (() => {
+            const formatted = formatAIResponse(content);
+            return formatted;
+          })() }}
+        />
+        
+        {/* Add ActionsBar for mobile */}
+        <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #f3f4f6' }}>
+          <ActionsBar
+            content={content}
+            isLastMessage={isLastMessage}
+            messages={messages}
+            conversations={conversations}
+            selectedConversation={selectedConversation}
+            isDark={isDark}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // 🏢 DESKTOP: Premium Legal Theme (unchanged)
   return (
     <div
       className="ai-response-container"
       style={{
-        // Background - Mobile: clean white, Desktop: premium legal theme
-        background: isMobile 
-          ? '#ffffff'
-          : isDark
-            ? 'linear-gradient(145deg, #1f2937 0%, #111827 50%, #0f1419 100%)'
-            : 'linear-gradient(145deg, #ffffff 0%, #fefffe 50%, #f6fdf9 100%)',
+        // Desktop: Premium legal theme
+        background: isDark
+          ? 'linear-gradient(145deg, #1f2937 0%, #111827 50%, #0f1419 100%)'
+          : 'linear-gradient(145deg, #ffffff 0%, #fefffe 50%, #f6fdf9 100%)',
         
-        // Border - Mobile: minimal, Desktop: premium legal
-        border: isMobile
-          ? '1px solid #e5e5e5'
-          : isDark 
-            ? '1px solid rgba(75, 85, 99, 0.3)' 
-            : '1px solid #d1f5d3',
+        // Desktop: Premium borders
+        border: isDark 
+          ? '1px solid rgba(75, 85, 99, 0.3)' 
+          : '1px solid #d1f5d3',
         
-        // Border radius - Mobile: simple, Desktop: rounded
-        borderRadius: isMobile ? '8px' : '24px',
+        // Desktop: Rounded corners
+        borderRadius: '24px',
         
-        // Shadow - Mobile: subtle, Desktop: premium
-        boxShadow: isMobile
-          ? '0 1px 3px rgba(0, 0, 0, 0.1)'
-          : isDark
-            ? `0 8px 32px rgba(0, 0, 0, 0.4),
-               0 4px 16px rgba(0, 0, 0, 0.3),
-               0 1px 4px rgba(0, 0, 0, 0.3),
-               inset 0 1px 0 rgba(255, 255, 255, 0.1)`
-            : `0 8px 32px rgba(0, 108, 53, 0.08),
-               0 4px 16px rgba(0, 108, 53, 0.04),
-               0 1px 4px rgba(0, 108, 53, 0.04),
-               inset 0 1px 0 rgba(255, 255, 255, 0.9)`,
+        // Desktop: Premium shadows
+        boxShadow: isDark
+          ? `0 8px 32px rgba(0, 0, 0, 0.4),
+             0 4px 16px rgba(0, 0, 0, 0.3),
+             0 1px 4px rgba(0, 0, 0, 0.3),
+             inset 0 1px 0 rgba(255, 255, 255, 0.1)`
+          : `0 8px 32px rgba(0, 108, 53, 0.08),
+             0 4px 16px rgba(0, 108, 53, 0.04),
+             0 1px 4px rgba(0, 108, 53, 0.04),
+             inset 0 1px 0 rgba(255, 255, 255, 0.9)`,
         
-        // Padding - Mobile: compact, Desktop: spacious
-        padding: isMobile ? '24px' : '3.5rem 4rem 3rem 4rem',
+        // Desktop: Spacious padding
+        padding: '3.5rem 4rem 3rem 4rem',
         
-        // Margin - Mobile: tight, Desktop: generous
-        margin: isMobile ? '16px 0' : '2rem 0 2.5rem 0',
+        // Desktop: Generous margins
+        margin: '2rem 0 2.5rem 0',
         
-        // Position - Mobile: static, Desktop: relative for badges
-        position: isMobile ? 'static' : 'relative' as const,
-        overflow: isMobile ? 'visible' : 'hidden' as const,
+        // Desktop: Relative positioning for badges
+        position: 'relative' as const,
+        overflow: 'hidden' as const,
         
-        // Width - Mobile: full width, Desktop: fitted
-        maxWidth: isMobile ? '100%' : '90%',
-        width: isMobile ? '100%' : 'fit-content',
-        minWidth: isMobile ? 'auto' : '400px',
+        // Desktop: Fitted width
+        maxWidth: '90%',
+        width: 'fit-content',
+        minWidth: '400px',
         
-        // Typography
+        // Desktop: Typography
         fontFamily: "'Noto Sans Arabic', 'SF Pro Display', -apple-system, sans-serif",
         direction: 'rtl' as const,
         textAlign: 'right' as const,
         
-        // Transitions - Mobile: none, Desktop: smooth
-        transition: isMobile ? 'none' : 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        // Desktop: Smooth transitions
+        transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         
-        // Centering - Mobile: normal, Desktop: auto margins
-        marginLeft: isMobile ? '0' : 'auto',
-        marginRight: isMobile ? '0' : 'auto',
+        // Desktop: Auto centering
+        marginLeft: 'auto',
+        marginRight: 'auto',
       }}
       onMouseEnter={!isMobile ? (e) => {
         e.currentTarget.style.transform = 'translateY(-3px)';

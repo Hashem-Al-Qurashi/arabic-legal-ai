@@ -918,21 +918,16 @@ div.ai-response-container div.ai-response b {
 
 @media (max-width: 768px) {
   
-  /* MOBILE: Clean AI Response Container */
+  /* 🚫 MOBILE: OLD container styling disabled - now using pure ChatGPT approach */
   .ai-response-container {
-    margin: 1rem 0.5rem !important;
-    padding: 1.5rem !important;
-    border-radius: 16px !important;
-    min-width: unset !important;
-    max-width: 95% !important;
+    /* These styles are disabled - mobile now uses direct AI response without containers */
+    display: none !important;
   }
   
-  /* MOBILE: Simple, readable text */
+  /* 🚫 MOBILE: Disable old text overrides - ChatGPT styling takes precedence */
   .ai-response-container,
   .ai-response-container * {
-    font-size: 18px !important;
-    line-height: 1.6 !important;
-    font-family: 'Noto Sans Arabic', -apple-system, sans-serif !important;
+    /* Disabled - mobile uses inline ChatGPT styling */
   }
   
   /* MOBILE: Clean headers - no backgrounds, just typography */
