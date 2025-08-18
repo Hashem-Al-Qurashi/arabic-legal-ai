@@ -1497,12 +1497,12 @@ const handleDeleteCancel = () => {
   display: 'flex',
   flexDirection: 'column',
   background: 'var(--background-white)',
-  // 🔧 MOBILE FIX: Dynamic height
-  height: isMobile ? 'auto' : '100vh',
-  minHeight: isMobile ? '100vh' : 'auto',
+  height: isMobile ? '100vh' : '100vh',
+  minHeight: '100vh',
   position: 'relative',
-  // 🔧 MOBILE FIX: Allow overflow on mobile
-  overflow: isMobile ? 'visible' : 'hidden'
+  overflow: 'hidden',
+  width: isMobile ? '100vw' : 'auto',
+  maxWidth: isMobile ? '100vw' : 'none'
 }}>
 
           {/* Messages Area */}
@@ -1511,12 +1511,12 @@ const handleDeleteCancel = () => {
   style={{
     flex: 1,
     overflowY: 'auto',
-    padding: '24px 0',
+    padding: isMobile ? '16px 0' : '24px 0',
     scrollBehavior: 'smooth',
-    // 🔧 MOBILE FIX: Better touch scrolling
     WebkitOverflowScrolling: 'touch',
-    // 🔧 MOBILE FIX: Ensure proper height on mobile
-    minHeight: isMobile ? '60vh' : 'auto'
+    minHeight: 'calc(100vh - 200px)',
+    width: '100%',
+    maxWidth: '100%'
   }}
 >
             {messages.length === 0 ? (
@@ -1635,9 +1635,11 @@ const handleDeleteCancel = () => {
               <div 
   className="chat-messages-container"
   style={{
-    // 🔧 MOBILE FIX: Different calculations for mobile  
-    maxWidth: isMobile ? '100%' : '100%',
-    padding: isMobile ? '0 1rem' : '0 2rem'
+    width: '100%',
+    maxWidth: '100%',
+    padding: isMobile ? '0 12px' : '0 2rem',
+    margin: 0,
+    boxSizing: 'border-box'
   }}
 >
                 {messages.map((message, index) => (
@@ -1648,10 +1650,11 @@ const handleDeleteCancel = () => {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: isMobile 
-  ? (message.role === 'user' ? 'flex-end' : 'center') 
+  ? (message.role === 'user' ? 'flex-end' : 'flex-start') 
   : (message.role === 'user' ? 'flex-end' : 'center'),
-    marginBottom: '24px',
-    animationDelay: `${index * 0.1}s`
+    marginBottom: isMobile ? '16px' : '24px',
+    animationDelay: `${index * 0.1}s`,
+    width: '100%'
   }}
 >
 
@@ -1659,32 +1662,40 @@ const handleDeleteCancel = () => {
   className={message.role === 'user' ? 'user-message-enhanced' : ''}
   style={{
     maxWidth: message.role === 'user' 
-      ? (isMobile ? '75%' : '60%')
+      ? (isMobile ? '85%' : '60%')
       : '90%',
-    minWidth: message.role === 'user' ? '200px' : 'auto',
+    minWidth: message.role === 'user' ? (isMobile ? '120px' : '200px') : 'auto',
     background: message.role === 'user' 
-      ? `linear-gradient(135deg, 
-          rgba(0, 108, 53, 0.95) 0%, 
-          rgba(0, 74, 36, 0.9) 50%,
-          rgba(0, 108, 53, 0.85) 100%
-        )` 
+      ? (isMobile 
+          ? 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)'
+          : `linear-gradient(135deg, 
+              rgba(0, 108, 53, 0.95) 0%, 
+              rgba(0, 74, 36, 0.9) 50%,
+              rgba(0, 108, 53, 0.85) 100%
+            )`)
       : 'transparent',
     color: message.role === 'user' ? 'white' : '#2d333a',
-    borderRadius: message.role === 'user' ? '20px 20px 4px 16px' : '0',
-    padding: message.role === 'user' ? '18px 22px' : '0',
+    borderRadius: message.role === 'user' 
+      ? (isMobile ? '18px 18px 4px 18px' : '20px 20px 4px 16px')
+      : '0',
+    padding: message.role === 'user' 
+      ? (isMobile ? '12px 16px' : '18px 22px')
+      : '0',
     boxShadow: message.role === 'user' 
-      ? `0 8px 32px rgba(0, 108, 53, 0.25),
-         0 4px 16px rgba(0, 108, 53, 0.15),
-         inset 0 1px 0 rgba(255, 255, 255, 0.1),
-         0 0 0 1px rgba(255, 255, 255, 0.05)` 
+      ? (isMobile 
+          ? '0 2px 8px rgba(37, 211, 102, 0.3)'
+          : `0 8px 32px rgba(0, 108, 53, 0.25),
+             0 4px 16px rgba(0, 108, 53, 0.15),
+             inset 0 1px 0 rgba(255, 255, 255, 0.1),
+             0 0 0 1px rgba(255, 255, 255, 0.05)`)
       : 'none',
     border: message.role === 'user' ? '1px solid rgba(255, 255, 255, 0.1)' : 'none',
     backdropFilter: message.role === 'user' ? 'blur(20px)' : 'none',
-    fontSize: message.role === 'user' ? '25px' : '25px',
+    fontSize: isMobile ? '16px' : (message.role === 'user' ? '25px' : '25px'),
     lineHeight: '1.5',
     textAlign: 'right',
     marginLeft: message.role === 'user' ? 'auto' : '0%',
-    marginRight: message.role === 'user' ? '3cm' : '0',
+    marginRight: message.role === 'user' ? (isMobile ? '0' : '3cm') : '0',
     wordBreak: 'break-word',
     overflowWrap: 'break-word',
     whiteSpace: 'normal',
