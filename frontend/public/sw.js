@@ -1,82 +1,95 @@
-// Service Worker for cache management
-const CACHE_NAME = 'islamic-legal-ai-v1.0.0';
-const urlsToCache = [
+// PWA Service Worker - Network First (No Offline Mode)
+const CACHE_NAME = 'hokm-legal-ai-v2.0.0';
+const STATIC_ASSETS = [
   '/',
-  '/assets/index-933add3c.js',
-  '/assets/index-ae9bc01c.css',
-  '/vite.svg'
+  '/manifest.json',
+  '/icons/icon-192x192.png',
+  '/icons/icon-512x512.png'
 ];
 
-self.addEventListener('install', function(event) {
-  // Skip waiting to activate immediately
+// Install - cache only essential static assets
+self.addEventListener('install', (event) => {
+  console.log('🔧 Service Worker: Installing...');
   self.skipWaiting();
   
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(function(cache) {
-        return cache.addAll(urlsToCache);
+      .then(cache => {
+        console.log('💾 Service Worker: Caching static assets');
+        return cache.addAll(STATIC_ASSETS);
       })
+      .catch(err => console.log('❌ Service Worker: Cache failed', err))
   );
 });
 
-self.addEventListener('activate', function(event) {
-  // Take control of all clients immediately
+// Activate - cleanup old caches
+self.addEventListener('activate', (event) => {
+  console.log('✅ Service Worker: Activating...');
   event.waitUntil(self.clients.claim());
   
   event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          // Delete old caches
+    caches.keys().then(cacheNames =>
+      Promise.all(
+        cacheNames.map(cacheName => {
           if (cacheName !== CACHE_NAME) {
+            console.log('🗑️ Service Worker: Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
-      );
-    })
+      )
+    )
   );
 });
 
-self.addEventListener('fetch', function(event) {
-  // For HTML requests, always go to network first (cache-busting)
-  if (event.request.destination === 'document') {
-    event.respondWith(
-      fetch(event.request)
-        .catch(function() {
-          return caches.match(event.request);
-        })
-    );
-    return;
-  }
+// Fetch - Network First Strategy (NO OFFLINE FALLBACK)
+self.addEventListener('fetch', (event) => {
+  // Skip non-GET requests
+  if (event.request.method !== 'GET') return;
   
-  // For other resources, use cache first strategy
+  // Skip cross-origin requests
+  if (!event.request.url.startsWith(self.location.origin)) return;
+  
   event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        if (response) {
-          return response;
+    fetch(event.request)
+      .then(response => {
+        // Network request successful - return response
+        console.log('🌐 Service Worker: Network response for:', event.request.url);
+        return response;
+      })
+      .catch(error => {
+        // Network failed - only serve cached static assets
+        console.log('⚠️ Service Worker: Network failed for:', event.request.url);
+        
+        if (event.request.destination === 'document') {
+          return caches.match('/');
         }
-        return fetch(event.request);
+        
+        // For other resources, try cache but don't create offline experience
+        return caches.match(event.request);
       })
   );
 });
 
-// Handle message from main thread to clear cache
-self.addEventListener('message', function(event) {
+// Handle cache management messages
+self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'CLEAR_CACHE') {
+    console.log('🧹 Service Worker: Clearing all caches');
     event.waitUntil(
-      caches.keys().then(function(cacheNames) {
-        return Promise.all(
-          cacheNames.map(function(cacheName) {
-            return caches.delete(cacheName);
-          })
-        );
-      }).then(function() {
-        // Reload all clients
-        return self.clients.matchAll().then(function(clients) {
-          clients.forEach(client => client.postMessage({type: 'CACHE_CLEARED'}));
+      caches.keys().then(cacheNames =>
+        Promise.all(
+          cacheNames.map(cacheName => caches.delete(cacheName))
+        )
+      ).then(() => {
+        return self.clients.matchAll().then(clients => {
+          clients.forEach(client => 
+            client.postMessage({type: 'CACHE_CLEARED'})
+          );
         });
       })
     );
+  }
+  
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
   }
 });

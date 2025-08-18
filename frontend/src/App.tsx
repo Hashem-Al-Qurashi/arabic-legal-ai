@@ -18,6 +18,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { AuthScreen } from './components/auth';
 import { ChatApp } from './components/chat';
+import { InstallPrompt } from './components/InstallPrompt';
 import './App.css';
 
 // 🏗️ APP LOADING COMPONENT
@@ -78,6 +79,7 @@ const App: React.FC = () => {
     <AuthProvider>
       <Router>
         <AppContent />
+        <InstallPrompt />
       </Router>
     </AuthProvider>
   );
