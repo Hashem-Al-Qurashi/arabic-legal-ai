@@ -285,7 +285,82 @@ class TestRegressionPrevention:
 
 ---
 
+## Quranic Integration Enhancement - Al-Qurtubi Tafsir Dataset
+
+### Current Quranic Integration Status
+The system currently has:
+- **3,160 Quranic foundations** in the database
+- Basic semantic concepts ("justice", "rights", "guidance")
+- Working integration returning 3+ foundations per query
+- Simplified legal principles without full scholarly commentary
+
+### Recommended Enhancement: Al-Qurtubi Complete Tafsir
+**Dataset**: https://huggingface.co/datasets/MohamedRashad/Quran-Tafseer
+
+#### Dataset Contents
+- **Full Quranic verses** - Complete Arabic text for all 6,236 ayahs
+- **Complete Al-Qurtubi commentary** (تفسير الجامع لأحكام القرآن)
+- **Legal focus** - Al-Qurtubi specifically extracts Islamic legal rulings
+- **Structured format** - Organized by surah/ayah for easy integration
+
+#### Why Al-Qurtubi is Perfect for Legal AI
+1. **Legal-oriented commentary** - Focuses on أحكام (legal rulings)
+2. **Scholarly authority** - Widely accepted in Islamic jurisprudence
+3. **Comprehensive coverage** - Explains legal implications of every verse
+4. **Historical authenticity** - Classical scholarship (died 671 AH/1273 CE)
+
+### Integration Goal: Universal Quranic Foundation
+
+**CRITICAL OBJECTIVE**: The goal is NOT to use Quranic verses only in "some cases" but to ensure **EVERY legal answer includes relevant Quranic foundation when applicable**.
+
+#### Implementation Strategy
+1. **Complete Dataset Import**
+   - Import all 6,236 verses with full Al-Qurtubi commentary
+   - Extract legal principles from each verse's tafsir
+   - Generate embeddings for semantic search
+
+2. **Enhanced Legal Mapping**
+   - Map each verse to specific legal domains (عبادات، معاملات، أحوال شخصية)
+   - Create semantic relationships between verses and modern legal concepts
+   - Build comprehensive legal principle ontology
+
+3. **Intelligent Integration Logic**
+   ```python
+   # CURRENT: Basic concept matching
+   if "عمل" in query:
+       return generic_justice_verses
+   
+   # ENHANCED: Deep semantic understanding
+   if query_involves_employment:
+       return specific_verses_about_labor_rights_with_full_tafsir
+   ```
+
+4. **Response Structure Enhancement**
+   - **Current**: Civil law with occasional Quranic reference
+   - **Enhanced**: Every answer starts with Quranic foundation, then civil implementation
+   - **Format**: "القاعدة الشرعية → التطبيق النظامي"
+
+### Expected Impact
+- **Authenticity**: Every legal answer grounded in authentic Islamic sources
+- **Comprehensiveness**: Full scholarly interpretation, not simplified concepts
+- **Legal Depth**: Proper extraction of أحكام (rulings) from verses
+- **User Trust**: Clear Islamic foundation builds confidence in Saudi users
+
+### Technical Requirements
+1. **Storage**: ~500MB for complete dataset with embeddings
+2. **Processing**: One-time embedding generation for all verses
+3. **Integration**: Update QuranicFoundationStore to handle full tafsir
+4. **Search**: Enhanced semantic search with legal domain filtering
+
+---
+
 ## Future Recommendations
+
+### Immediate Priority: Al-Qurtubi Integration
+1. **Import Complete Dataset**: Full Quran with Al-Qurtubi tafsir
+2. **Generate Legal Embeddings**: Create specialized legal-focused embeddings
+3. **Update Search Logic**: Ensure relevant verses for EVERY query
+4. **Test Integration**: Validate comprehensive Quranic foundation in all responses
 
 ### Short-term Enhancements
 1. **Semantic Engine Improvement**: Enhance concept extraction accuracy
