@@ -12,7 +12,6 @@ import { useConversationRouting } from '../../hooks/useConversationRouting';
 import { RenamePopup, DeletePopup } from '../ui';
 import { PremiumProgress, FeatureTease } from '../premium';
 import { FormattedMessage } from '../message';
-import { FileUploadButton } from './FileUploadButton';
 import { showToast, formatDate, cleanHtmlContent, containsCitations, stripCitations } from '../../utils/helpers';
 import { formatAIResponse } from '../../utils/messageParser';
 import { sanitizeHTML, isValidConversationIdFormat, sanitizeConversationId } from '../../utils/security';
@@ -478,14 +477,6 @@ const handleDeleteCancel = () => {
     }, 100);
   };
 
-  const handleTextExtracted = (extractedText: string) => {
-    setInputMessage(extractedText);
-    // Auto-focus the input after setting the text
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 100);
-  };
-
  const suggestedQuestions = [
   'ما هي إجراءات تأسيس شركة تجارية؟',
   'حقوق الموظف عند إنهاء الخدمة',
@@ -840,27 +831,16 @@ const handleDeleteCancel = () => {
   justifyContent: 'space-between',
   minHeight: '80px'
 }}>
-  <div>
-    <h2 style={{
-      color: 'rgba(255, 255, 255, 0.95)',
-      fontSize: '20px',
-      fontWeight: '600',
-      margin: 0,
-      fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
-      letterSpacing: '-0.01em'
-    }}>
-      المحادثات
-    </h2>
-    <div style={{
-      color: 'rgba(142, 142, 160, 0.7)',
-      fontSize: '11px',
-      marginTop: '2px',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
-      fontWeight: '500'
-    }}>
-      v3.0.0 • OCR • RAG • قرآني
-    </div>
-  </div>
+  <h2 style={{
+    color: 'rgba(255, 255, 255, 0.95)',
+    fontSize: '20px',
+    fontWeight: '600',
+    margin: 0,
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
+    letterSpacing: '-0.01em'
+  }}>
+    المحادثات
+  </h2>
   
   {/* Theme and close buttons */}
   <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -1497,12 +1477,12 @@ const handleDeleteCancel = () => {
   display: 'flex',
   flexDirection: 'column',
   background: 'var(--background-white)',
-  height: isMobile ? '100vh' : '100vh',
-  minHeight: '100vh',
+  // 🔧 MOBILE FIX: Dynamic height
+  height: isMobile ? 'auto' : '100vh',
+  minHeight: isMobile ? '100vh' : 'auto',
   position: 'relative',
-  overflow: 'hidden',
-  width: isMobile ? '100vw' : 'auto',
-  maxWidth: isMobile ? '100vw' : 'none'
+  // 🔧 MOBILE FIX: Allow overflow on mobile
+  overflow: isMobile ? 'visible' : 'hidden'
 }}>
 
           {/* Messages Area */}
@@ -1511,12 +1491,12 @@ const handleDeleteCancel = () => {
   style={{
     flex: 1,
     overflowY: 'auto',
-    padding: isMobile ? '16px 0' : '24px 0',
+    padding: '24px 0',
     scrollBehavior: 'smooth',
+    // 🔧 MOBILE FIX: Better touch scrolling
     WebkitOverflowScrolling: 'touch',
-    minHeight: 'calc(100vh - 200px)',
-    width: '100%',
-    maxWidth: '100%'
+    // 🔧 MOBILE FIX: Ensure proper height on mobile
+    minHeight: isMobile ? '60vh' : 'auto'
   }}
 >
             {messages.length === 0 ? (
@@ -1635,11 +1615,9 @@ const handleDeleteCancel = () => {
               <div 
   className="chat-messages-container"
   style={{
-    width: '100%',
-    maxWidth: '100%',
-    padding: isMobile ? '0 12px' : '0 2rem',
-    margin: 0,
-    boxSizing: 'border-box'
+    // 🔧 MOBILE FIX: Different calculations for mobile  
+    maxWidth: isMobile ? '100%' : '100%',
+    padding: isMobile ? '0 1rem' : '0 2rem'
   }}
 >
                 {messages.map((message, index) => (
@@ -1650,11 +1628,10 @@ const handleDeleteCancel = () => {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: isMobile 
-  ? (message.role === 'user' ? 'flex-end' : 'flex-start') 
+  ? (message.role === 'user' ? 'flex-end' : 'center') 
   : (message.role === 'user' ? 'flex-end' : 'center'),
-    marginBottom: isMobile ? '16px' : '24px',
-    animationDelay: `${index * 0.1}s`,
-    width: '100%'
+    marginBottom: '24px',
+    animationDelay: `${index * 0.1}s`
   }}
 >
 
@@ -1662,40 +1639,32 @@ const handleDeleteCancel = () => {
   className={message.role === 'user' ? 'user-message-enhanced' : ''}
   style={{
     maxWidth: message.role === 'user' 
-      ? (isMobile ? '85%' : '60%')
+      ? (isMobile ? '75%' : '60%')
       : '90%',
-    minWidth: message.role === 'user' ? (isMobile ? '120px' : '200px') : 'auto',
+    minWidth: message.role === 'user' ? '200px' : 'auto',
     background: message.role === 'user' 
-      ? (isMobile 
-          ? 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)'
-          : `linear-gradient(135deg, 
-              rgba(0, 108, 53, 0.95) 0%, 
-              rgba(0, 74, 36, 0.9) 50%,
-              rgba(0, 108, 53, 0.85) 100%
-            )`)
+      ? `linear-gradient(135deg, 
+          rgba(0, 108, 53, 0.95) 0%, 
+          rgba(0, 74, 36, 0.9) 50%,
+          rgba(0, 108, 53, 0.85) 100%
+        )` 
       : 'transparent',
     color: message.role === 'user' ? 'white' : '#2d333a',
-    borderRadius: message.role === 'user' 
-      ? (isMobile ? '18px 18px 4px 18px' : '20px 20px 4px 16px')
-      : '0',
-    padding: message.role === 'user' 
-      ? (isMobile ? '12px 16px' : '18px 22px')
-      : '0',
+    borderRadius: message.role === 'user' ? '20px 20px 4px 16px' : '0',
+    padding: message.role === 'user' ? '18px 22px' : '0',
     boxShadow: message.role === 'user' 
-      ? (isMobile 
-          ? '0 2px 8px rgba(37, 211, 102, 0.3)'
-          : `0 8px 32px rgba(0, 108, 53, 0.25),
-             0 4px 16px rgba(0, 108, 53, 0.15),
-             inset 0 1px 0 rgba(255, 255, 255, 0.1),
-             0 0 0 1px rgba(255, 255, 255, 0.05)`)
+      ? `0 8px 32px rgba(0, 108, 53, 0.25),
+         0 4px 16px rgba(0, 108, 53, 0.15),
+         inset 0 1px 0 rgba(255, 255, 255, 0.1),
+         0 0 0 1px rgba(255, 255, 255, 0.05)` 
       : 'none',
     border: message.role === 'user' ? '1px solid rgba(255, 255, 255, 0.1)' : 'none',
     backdropFilter: message.role === 'user' ? 'blur(20px)' : 'none',
-    fontSize: isMobile ? '16px' : (message.role === 'user' ? '25px' : '25px'),
+    fontSize: message.role === 'user' ? '25px' : '25px',
     lineHeight: '1.5',
     textAlign: 'right',
     marginLeft: message.role === 'user' ? 'auto' : '0%',
-    marginRight: message.role === 'user' ? (isMobile ? '0' : '3cm') : '0',
+    marginRight: message.role === 'user' ? '3cm' : '0',
     wordBreak: 'break-word',
     overflowWrap: 'break-word',
     whiteSpace: 'normal',
@@ -1870,13 +1839,6 @@ const handleDeleteCancel = () => {
           }
         }}
       />
-                
-                <FileUploadButton
-                  onTextExtracted={handleTextExtracted}
-                  isLoading={isLoading}
-                  user={user}
-                  sessionId={!user ? 'guest_session' : undefined}
-                />
                 
                 <button
         onClick={handleSendMessage}
