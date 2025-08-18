@@ -29,13 +29,13 @@
 /* Dark Theme Variables */
 [data-theme="dark"], 
 .dark-mode {
-  --text-primary: #f9fafb;
-  --text-secondary: #d1d5db;
-  --text-light: #9ca3af;
-  --background-light: #1f2937;
-  --background-white: #111827;
-  --border-light: #374151;
-  --border-medium: #4b5563;
+  --text-primary: #ffffff; /* Pure white for dark mode */
+  --text-secondary: #e5e7eb; /* Lighter gray for dark mode */
+  --text-light: #d1d5db;
+  --background-light: #0f0f0f; /* Darker background for mobile */
+  --background-white: #1a1a1a; /* Darker container background */
+  --border-light: #2d2d2d;
+  --border-medium: #404040;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
@@ -45,7 +45,7 @@
 /* Dark mode body background */
 [data-theme="dark"] body,
 .dark-mode body {
-  background: #111827;
+  background: #0f0f0f; /* Darker background for better contrast */
 }
 
 /* Apply dark mode variables to body and all elements */
@@ -918,6 +918,21 @@ div.ai-response-container div.ai-response b {
 
 @media (max-width: 768px) {
   
+  /* Mobile-specific body styles */
+  body {
+    color: #000000 !important; /* Black text in light mode */
+  }
+  
+  .dark-mode body {
+    color: #ffffff !important; /* White text in dark mode */
+    background: #0f0f0f !important; /* Match desktop: darkest background */
+  }
+  
+  /* Mobile container backgrounds - match desktop */
+  .dark-mode .chat-container {
+    background: #0f0f0f !important; /* Match desktop body background */
+  }
+  
   /* 🚫 MOBILE: OLD container styling disabled - now using pure ChatGPT approach */
   .ai-response-container {
     /* These styles are disabled - mobile now uses direct AI response without containers */
@@ -931,10 +946,10 @@ div.ai-response-container div.ai-response b {
   }
   
   /* MOBILE: Clean headers - no backgrounds, just typography */
-  .ai-response-container h1,
-  .ai-response-container h2,
-  .ai-response-container h3,
-  .ai-response-container h4 {
+  .ai-response h1,
+  .ai-response h2,
+  .ai-response h3,
+  .ai-response h4 {
     font-size: 20px !important;
     font-weight: 600 !important;
     margin: 1.5rem 0 0.75rem 0 !important;
@@ -943,6 +958,24 @@ div.ai-response-container div.ai-response b {
     border: none !important;
     box-shadow: none !important;
     color: inherit !important;
+  }
+  
+  /* Mobile: Force proper text colors */
+  .ai-response,
+  .ai-response * {
+    color: inherit !important;
+  }
+  
+  /* Dark mode text colors for mobile */
+  .dark-mode .ai-response,
+  .dark-mode .ai-response * {
+    color: #ffffff !important;
+  }
+  
+  /* Light mode text colors for mobile */
+  body:not(.dark-mode) .ai-response,
+  body:not(.dark-mode) .ai-response * {
+    color: #000000 !important;
   }
   
   /* MOBILE: Clean paragraphs */
@@ -988,6 +1021,28 @@ div.ai-response-container div.ai-response b {
   /* MOBILE: Main chat area - more padding */
   .messages-area {
     padding: 1rem !important;
+    background: transparent !important;
+  }
+  
+  /* Mobile dark mode - messages area background */
+  .dark-mode .messages-area {
+    background: #1a1a1a !important; /* Match desktop main area */
+  }
+  
+  /* Mobile dark mode backgrounds - EXACT DESKTOP REPLICA */
+  .dark-mode .main-chat {
+    background: #1a1a1a !important; /* Match desktop var(--background-white) */
+  }
+  
+  .dark-mode .input-area {
+    background: #1a1a1a !important; /* Match desktop var(--background-white) */
+    border-top: 1px solid #2d2d2d !important;
+  }
+  
+  /* Mobile sidebar - match desktop exactly */
+  .dark-mode .sidebar {
+    background: #171717 !important; /* Exact desktop sidebar color */
+    border-left: 1px solid #363739 !important; /* Exact desktop border */
   }
   
   /* MOBILE: Input area - cleaner */

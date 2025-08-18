@@ -74,23 +74,28 @@ export const ChatApp: React.FC = () => {
     localStorage.setItem('sidebarOpen', JSON.stringify(sidebarOpen));
   }, [sidebarOpen]);
 
-  // Detect mobile screen size
-  // Detect mobile screen size
+  // Detect mobile screen size - FIXED: Separate initial detection from resize handling
   useEffect(() => {
-    const checkMobile = () => {
+    const checkMobileOnly = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      
-      // Only force sidebar closed on mobile, but preserve user preference on desktop
-      if (mobile) {
-        setSidebarOpen(false);
-      }
-      // On desktop, keep the user's saved preference (don't force open)
+      // MOBILE FIX: Do NOT auto-close sidebar on resize events
+      // Only close on initial load if mobile (but even that should be user preference)
     };
     
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const initialMobileCheck = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      // MOBILE FIX: Don't force close sidebar even on initial load
+      // Let user open/close manually
+    };
+    
+    // Initial check only
+    initialMobileCheck();
+    
+    // Resize listener only updates isMobile state, doesn't touch sidebar
+    window.addEventListener('resize', checkMobileOnly);
+    return () => window.removeEventListener('resize', checkMobileOnly);
   }, []);
 
   // 🔄 Refresh user data on component mount to ensure accurate counters
@@ -188,7 +193,8 @@ updateUserData({
       const response = await chatAPI.getConversationMessages(sanitizedId);
       setMessages(response.messages || []);
       setSelectedConversation(sanitizedId);
-      if (isMobile) setSidebarOpen(false);
+      // MOBILE: Keep sidebar open - user must close manually
+      // if (isMobile) setSidebarOpen(false);
     } catch (error) {
       console.error('❌ Failed to load conversation messages:', error);
       showToast('فشل في تحميل المحادثة', 'error');
@@ -246,7 +252,8 @@ const stripCitations = (content: string): string => {
     setMessages([]);
     setSelectedConversation(null);
     setInputMessage('');
-    if (isMobile) setSidebarOpen(false);
+    // MOBILE: Keep sidebar open - user must close manually
+    // if (isMobile) setSidebarOpen(false);
     // Navigate to home when starting new conversation
     navigateToHome();
   };
@@ -751,12 +758,7 @@ const handleDeleteCancel = () => {
       backdropFilter: 'blur(4px)',
       willChange: 'opacity'
     }}
-    onClick={(e) => {
-      // Only close if clicking the backdrop itself, not scrolling
-      if (e.target === e.currentTarget) {
-        toggleSidebar();
-      }
-    }}
+    // MOBILE: Removed onClick - sidebar stays open until close button pressed
   />
 )}
 

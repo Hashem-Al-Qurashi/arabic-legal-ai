@@ -55,7 +55,7 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
           textAlign: 'right' as const,
           
           // ✅ ChatGPT colors - responsive to theme
-          color: isDark ? '#d1d5db' : '#374151',
+          color: isDark ? '#ffffff' : '#000000', // Pure white in dark, pure black in light
           
           // ✅ Full width, no containers
           width: '100%',
