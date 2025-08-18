@@ -88,15 +88,11 @@ export const formatAIResponse = (content: string): string => {
     // Numbered lists
     .replace(/^\d+\.\s+(.*)$/gm, '<li>$1</li>');
 
-  // Wrap consecutive list items in ul/ol tags
+  // Wrap consecutive list items in ul tags only (no numbered lists)
   html = html
     .replace(/(<li>.*?<\/li>)(\s*<li>.*?<\/li>)*/gs, (match) => {
-      // Check if this is a numbered list (contains digits)
-      if (cleaned.match(/^\d+\.\s/m)) {
-        return '<ol>' + match + '</ol>';
-      } else {
-        return '<ul>' + match + '</ul>';
-      }
+      // Always use ul (bullet lists) - no numbered lists for mobile
+      return '<ul>' + match + '</ul>';
     });
 
   // Convert line breaks to paragraphs

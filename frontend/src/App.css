@@ -1256,13 +1256,14 @@ div.ai-response-container div.ai-response b {
     border-right: 4px solid #006C35 !important;
   }
   
-  /* ====== LISTS: Well-Organized Points ====== */
+  /* ====== LISTS: Well-Organized Points (NO NUMBERING) ====== */
   .mobile-ai-response-wrapper .ai-response ul,
   .mobile-ai-response-wrapper .ai-response ol {
     margin: 1.5rem 0 !important;
     padding-right: 2rem !important;
     direction: rtl !important;
     text-align: right !important;
+    list-style: none !important; /* Remove all default list styling */
   }
   
   .mobile-ai-response-wrapper .ai-response li {
@@ -1273,11 +1274,13 @@ div.ai-response-container div.ai-response b {
     text-align: right !important;
     direction: rtl !important;
     position: relative !important;
+    list-style: none !important; /* Ensure no numbering */
   }
   
-  /* Custom bullet styling for RTL */
-  .mobile-ai-response-wrapper .ai-response ul li::before {
-    content: "•" !important;
+  /* Custom bullet styling for RTL - bullets only, no numbers */
+  .mobile-ai-response-wrapper .ai-response ul li::before,
+  .mobile-ai-response-wrapper .ai-response ol li::before {
+    content: "•" !important; /* Force bullet for both ul and ol */
     color: #006C35 !important;
     font-weight: bold !important;
     position: absolute !important;
