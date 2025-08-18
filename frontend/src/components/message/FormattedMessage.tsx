@@ -44,9 +44,9 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
           padding: '0',
           margin: '0',
           
-          // ✅ EXACT CHATGPT: Same font size as user question (25px)
-          fontSize: '25px',
-          lineHeight: '1.6',
+          // ✅ PROFESSIONAL MOBILE: Base font size - specific elements controlled by CSS
+          fontSize: '18px', // Base font size - headers and specific elements will be larger via CSS
+          lineHeight: '1.7',
           
           // ✅ CHATGPT TYPOGRAPHY
           fontFamily: '"Söhne", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',

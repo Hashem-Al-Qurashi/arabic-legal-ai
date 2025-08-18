@@ -1184,8 +1184,125 @@ div.ai-response-container div.ai-response b {
 
 /* REMOVED - All font sizes handled by nuclear rule at top */
 
-/* 🚨 FINAL OVERRIDE: Ultimate specificity for mobile dark mode text */
+/* 📱 MOBILE TEXT ORGANIZATION & SPACING - PROFESSIONAL LEGAL FORMATTING */
 @media (max-width: 768px) {
+  
+  /* ====== HEADERS: Clear Visual Hierarchy ====== */
+  .mobile-ai-response-wrapper .ai-response h1,
+  .mobile-ai-response-wrapper .ai-response h2,
+  .mobile-ai-response-wrapper .ai-response h3,
+  .mobile-ai-response-wrapper .ai-response h4,
+  .mobile-ai-response-wrapper .ai-response h5,
+  .mobile-ai-response-wrapper .ai-response h6 {
+    font-weight: 700 !important;
+    line-height: 1.4 !important;
+    text-align: right !important;
+    direction: rtl !important;
+    margin: 2rem 0 1.5rem 0 !important; /* Generous spacing between sections */
+    padding: 0.75rem 0 !important;
+    border-bottom: 2px solid rgba(0, 108, 53, 0.2) !important; /* Subtle divider */
+  }
+  
+  /* Header size hierarchy */
+  .mobile-ai-response-wrapper .ai-response h1 { font-size: 28px !important; }
+  .mobile-ai-response-wrapper .ai-response h2 { font-size: 26px !important; }
+  .mobile-ai-response-wrapper .ai-response h3 { font-size: 24px !important; }
+  .mobile-ai-response-wrapper .ai-response h4 { font-size: 22px !important; }
+  .mobile-ai-response-wrapper .ai-response h5 { font-size: 21px !important; }
+  .mobile-ai-response-wrapper .ai-response h6 { font-size: 20px !important; }
+  
+  /* ====== PARAGRAPHS: Comfortable Reading Experience ====== */
+  .mobile-ai-response-wrapper .ai-response p {
+    font-size: 18px !important; /* Slightly smaller than 25px for better readability */
+    line-height: 1.8 !important; /* Generous line spacing for Arabic */
+    margin: 1.5rem 0 !important; /* Breathing room between paragraphs */
+    padding: 0 !important;
+    text-align: right !important;
+    direction: rtl !important;
+    text-indent: 1rem !important; /* Professional paragraph indentation */
+  }
+  
+  /* First paragraph after header - no indent */
+  .mobile-ai-response-wrapper .ai-response h1 + p,
+  .mobile-ai-response-wrapper .ai-response h2 + p,
+  .mobile-ai-response-wrapper .ai-response h3 + p,
+  .mobile-ai-response-wrapper .ai-response h4 + p,
+  .mobile-ai-response-wrapper .ai-response h5 + p,
+  .mobile-ai-response-wrapper .ai-response h6 + p {
+    text-indent: 0 !important;
+    margin-top: 0.75rem !important;
+  }
+  
+  /* ====== STRONG/BOLD: Subsection Emphasis ====== */
+  .mobile-ai-response-wrapper .ai-response strong,
+  .mobile-ai-response-wrapper .ai-response b {
+    font-weight: 700 !important;
+    font-size: 19px !important; /* Slightly larger than paragraph text */
+    display: inline-block !important;
+    margin: 1rem 0 0.5rem 0 !important;
+    padding: 0.5rem 0 !important;
+    border-right: 3px solid #006C35 !important; /* Green accent bar */
+    padding-right: 1rem !important;
+  }
+  
+  /* Bold text at start of paragraph = subsection */
+  .mobile-ai-response-wrapper .ai-response p strong:first-child,
+  .mobile-ai-response-wrapper .ai-response p b:first-child {
+    display: block !important;
+    margin: 2rem 0 1rem 0 !important;
+    padding: 0.75rem 1rem !important;
+    background: rgba(0, 108, 53, 0.1) !important; /* Light green background */
+    border-radius: 8px !important;
+    border-right: 4px solid #006C35 !important;
+  }
+  
+  /* ====== LISTS: Well-Organized Points ====== */
+  .mobile-ai-response-wrapper .ai-response ul,
+  .mobile-ai-response-wrapper .ai-response ol {
+    margin: 1.5rem 0 !important;
+    padding-right: 2rem !important;
+    direction: rtl !important;
+    text-align: right !important;
+  }
+  
+  .mobile-ai-response-wrapper .ai-response li {
+    font-size: 18px !important;
+    line-height: 1.7 !important;
+    margin: 1rem 0 !important;
+    padding: 0.5rem 0 !important;
+    text-align: right !important;
+    direction: rtl !important;
+    position: relative !important;
+  }
+  
+  /* Custom bullet styling for RTL */
+  .mobile-ai-response-wrapper .ai-response ul li::before {
+    content: "•" !important;
+    color: #006C35 !important;
+    font-weight: bold !important;
+    position: absolute !important;
+    right: -1.5rem !important;
+  }
+  
+  /* ====== EMPHASIS & INLINE ELEMENTS ====== */
+  .mobile-ai-response-wrapper .ai-response em,
+  .mobile-ai-response-wrapper .ai-response i {
+    font-style: italic !important;
+    opacity: 0.9 !important;
+  }
+  
+  /* ====== SPACING BETWEEN MAJOR SECTIONS ====== */
+  .mobile-ai-response-wrapper .ai-response > *:not(:last-child) {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  /* Extra spacing before new major sections */
+  .mobile-ai-response-wrapper .ai-response h2,
+  .mobile-ai-response-wrapper .ai-response h3 {
+    margin-top: 3rem !important;
+  }
+  
+  /* ====== DARK MODE COLORS ====== */
   html.dark-mode body div.mobile-ai-response-wrapper div.ai-response,
   html.dark-mode body div.mobile-ai-response-wrapper div.ai-response *,
   html.dark-mode body div.mobile-ai-response-wrapper div.ai-response p,
@@ -1204,5 +1321,30 @@ div.ai-response-container div.ai-response b {
   html.dark-mode body div.mobile-ai-response-wrapper div.ai-response ol {
     color: #ffffff !important;
     background-color: transparent !important;
+  }
+  
+  /* Dark mode accent colors */
+  .dark-mode .mobile-ai-response-wrapper .ai-response h1,
+  .dark-mode .mobile-ai-response-wrapper .ai-response h2,
+  .dark-mode .mobile-ai-response-wrapper .ai-response h3,
+  .dark-mode .mobile-ai-response-wrapper .ai-response h4,
+  .dark-mode .mobile-ai-response-wrapper .ai-response h5,
+  .dark-mode .mobile-ai-response-wrapper .ai-response h6 {
+    border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .dark-mode .mobile-ai-response-wrapper .ai-response strong,
+  .dark-mode .mobile-ai-response-wrapper .ai-response b {
+    border-right-color: #4ade80 !important;
+  }
+  
+  .dark-mode .mobile-ai-response-wrapper .ai-response p strong:first-child,
+  .dark-mode .mobile-ai-response-wrapper .ai-response p b:first-child {
+    background: rgba(74, 222, 128, 0.1) !important;
+    border-right-color: #4ade80 !important;
+  }
+  
+  .dark-mode .mobile-ai-response-wrapper .ai-response ul li::before {
+    color: #4ade80 !important;
   }
 }
