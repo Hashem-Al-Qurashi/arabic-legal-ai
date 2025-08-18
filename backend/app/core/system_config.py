@@ -90,7 +90,8 @@ class ConfigManager:
         """Load configuration from environment variables with sensible defaults"""
         
         # Get base directory (works in any environment)
-        base_dir = os.getenv("ARABIC_LEGAL_AI_BASE_DIR", "backend")
+        # Since we're running from backend/, we need to go up one level to access data/
+        base_dir = os.getenv("ARABIC_LEGAL_AI_BASE_DIR", ".")
         data_dir = os.path.join(base_dir, "data")
         
         # Database paths (environment-aware with defaults)

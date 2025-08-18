@@ -5,6 +5,7 @@ Zero-downtime integration with existing systems, enterprise-grade architecture
 """
 
 import asyncio
+import aiosqlite
 import logging
 from typing import List, Dict, Optional, Any, Tuple, Union
 from dataclasses import dataclass, field
@@ -172,8 +173,8 @@ class IntelligentStrategySelector(StrategySelector):
                 "islamic basis", "sharia principle", "religious foundation"
             ],
             "civil_only": [
-                "إجراءات", "خطوات", "كيف أقدم", "نموذج", "استمارة", "رسوم",
-                "procedure", "steps", "how to submit", "form", "fee"
+                "نموذج رقم", "استمارة رقم", "رسوم محددة", "رسوم دقيقة", 
+                "specific form number", "exact fee amount", "form number"
             ],
             "contextual_blend": [
                 "تطبيق", "في الواقع", "عملياً", "في النظام السعودي",
@@ -194,8 +195,9 @@ class IntelligentStrategySelector(StrategySelector):
                 if strategy == "foundation_first":
                     return IntegrationStrategy.FOUNDATION_FIRST
                 elif strategy == "civil_only":
-                    # Only use CIVIL_ONLY for pure procedural queries, otherwise include foundations
-                    if any(proc in query_lower for proc in ["نموذج", "استمارة", "رسوم", "form", "fee"]):
+                    # Saudi law is Sharia-based - minimize CIVIL_ONLY usage 
+                    # Only for very specific form/fee requests, otherwise include foundations
+                    if any(proc in query_lower for proc in ["نموذج رقم", "استمارة رقم", "رسوم دقيقة", "exact form", "specific fee"]):
                         return IntegrationStrategy.CIVIL_ONLY
                     else:
                         return IntegrationStrategy.CIVIL_WITH_FOUNDATION
@@ -205,10 +207,10 @@ class IntelligentStrategySelector(StrategySelector):
         # Analyze concept types
         concept_types = [concept.concept_type for concept in concepts]
         
-        # Check if purely procedural - only for very specific procedural queries
+        # Check if purely procedural - minimize CIVIL_ONLY as Saudi law is Sharia-based
         if all(ct in self.civil_only_concepts for ct in concept_types) and len(concept_types) > 0:
-            # Even procedural queries might benefit from Islamic principles of justice
-            if any(proc in query_lower for proc in ["نموذج", "استمارة", "رسوم", "خطوات التقديم"]):
+            # Even procedural queries benefit from Islamic principles of justice in Saudi context
+            if any(proc in query_lower for proc in ["نموذج رقم", "استمارة رقم", "رسوم محددة", "specific form number"]):
                 return IntegrationStrategy.CIVIL_ONLY
             else:
                 return IntegrationStrategy.CIVIL_WITH_FOUNDATION
@@ -232,8 +234,8 @@ class IntelligentStrategySelector(StrategySelector):
             islamic_ratio = islamic_domain_count / total_domains
             procedural_ratio = procedural_domain_count / total_domains
             
-            # Only use CIVIL_ONLY for overwhelming procedural content
-            if procedural_ratio > 0.9 and any(proc in query_lower for proc in ["نموذج", "استمارة", "رسوم"]):
+            # Minimize CIVIL_ONLY - Saudi law is Sharia-based, include foundations when possible
+            if procedural_ratio > 0.95 and any(proc in query_lower for proc in ["نموذج رقم", "استمارة رقم", "رسوم محددة"]):
                 return IntegrationStrategy.CIVIL_ONLY
             elif islamic_ratio > 0.5:
                 return IntegrationStrategy.FOUNDATION_FIRST
@@ -492,14 +494,15 @@ class RetrievalOrchestrator:
             
             if not concepts:
                 logger.warning(f"No legal concepts extracted from query: {query}")
-                # Fallback to simple civil search
-                return await self._fallback_civil_search(query, limit, start_time)
+                # Since Saudi law is Sharia-based, attempt basic Quranic integration even without concepts
+                return await self._fallback_with_basic_integration(query, limit, start_time)
             
             # Step 2: Select integration strategy
             strategy = await self.strategy_selector.select_strategy(query, concepts, context)
             
             # Step 3: Execute parallel searches based on strategy
-            civil_results, quranic_results, search_times = await self._execute_parallel_searches(
+            # Use improved search for better Quranic relevance
+            civil_results, quranic_results, search_times = await self._execute_enhanced_parallel_searches(
                 query, concepts, context, strategy, limit
             )
             
@@ -922,9 +925,319 @@ class RetrievalOrchestrator:
         
         return explanations.get(strategy, f"Strategy {strategy.value} selected for concepts: {concept_types}")
     
+    async def _execute_enhanced_parallel_searches(self, query: str, concepts: List[LegalConcept],
+                                                context: Dict[str, Any], strategy: IntegrationStrategy,
+                                                limit: int) -> Tuple[List[SearchResult], List[SearchResult], Dict[str, float]]:
+        """
+        Enhanced parallel search that uses better Quranic search methods
+        """
+        try:
+            # Always search civil law in parallel
+            civil_task = asyncio.create_task(
+                self._search_civil_law(query, concepts, context, limit)
+            )
+            
+            # Determine if we should use enhanced Quranic search
+            should_use_enhanced = self._should_use_enhanced_quranic_search(concepts)
+            
+            if should_use_enhanced:
+                # Use our better basic search for more relevant results
+                logger.info("Using enhanced Quranic search for better relevance")
+                quranic_task = asyncio.create_task(
+                    self._basic_quranic_search(query, limit)
+                )
+            else:
+                # Use regular semantic search for specific concepts
+                quranic_task = asyncio.create_task(
+                    self._search_quranic_foundations(query, concepts, context, limit)
+                )
+            
+            # Wait for both searches to complete
+            civil_result, quranic_result = await asyncio.gather(civil_task, quranic_task)
+            
+            # Unpack results
+            civil_results, civil_time = civil_result
+            quranic_results, quranic_time = quranic_result
+            
+            search_times = {
+                "civil_search_time": civil_time,
+                "quranic_search_time": quranic_time
+            }
+            
+            return civil_results, quranic_results, search_times
+            
+        except Exception as e:
+            logger.error(f"Enhanced parallel searches failed: {e}")
+            # Fallback to basic searches
+            civil_results, civil_time = await self._search_civil_law(query, [], {}, limit)
+            quranic_results, quranic_time = await self._basic_quranic_search(query, limit)
+            
+            search_times = {
+                "civil_search_time": civil_time,
+                "quranic_search_time": quranic_time
+            }
+            
+            return civil_results, quranic_results, search_times
+
+    def _should_use_enhanced_quranic_search(self, concepts: List[LegalConcept]) -> bool:
+        """
+        Determine if we should use enhanced Quranic search instead of semantic search
+        """
+        if not concepts:
+            return True  # No concepts, use enhanced search
+        
+        # Check if concepts are too generic
+        generic_fields = {"general_legal", "general_law", "substantive_law", "procedural_law"}
+        
+        for concept in concepts:
+            # If all semantic fields are generic, use enhanced search
+            if all(field in generic_fields for field in concept.semantic_fields):
+                return True
+            
+            # If confidence is too low, use enhanced search
+            if concept.confidence_score < 0.7:
+                return True
+        
+        # Use enhanced search for most cases to ensure relevance
+        return True
+
+    async def _fallback_with_basic_integration(self, query: str, limit: int, 
+                                            start_time: datetime) -> IntegratedResponse:
+        """
+        Fallback with basic Quranic integration when concept extraction fails
+        Since Saudi law is Sharia-based, we still attempt to include Islamic foundations
+        """
+        try:
+            # Perform basic searches without complex concept analysis
+            civil_search_start = datetime.now()
+            civil_results, civil_time = await self._search_civil_law(query, [], {}, limit)
+            
+            # Basic Quranic search using simple query matching
+            quranic_search_start = datetime.now()
+            quranic_results, quranic_time = await self._basic_quranic_search(query, limit)
+            
+            total_time = (datetime.now() - start_time).total_seconds() * 1000
+            
+            # Determine strategy based on results
+            if quranic_results and civil_results:
+                strategy = IntegrationStrategy.CIVIL_WITH_FOUNDATION
+                primary_sources = civil_results[:3] + quranic_results[:2]
+                supporting_sources = quranic_results[2:5] + civil_results[3:5]
+            elif quranic_results:
+                strategy = IntegrationStrategy.FOUNDATION_FIRST
+                primary_sources = quranic_results[:5]
+                supporting_sources = civil_results[:5]
+            else:
+                strategy = IntegrationStrategy.CIVIL_ONLY
+                primary_sources = civil_results[:5]
+                supporting_sources = []
+            
+            return IntegratedResponse(
+                query=query,
+                strategy=strategy,
+                execution_time_ms=total_time,
+                civil_results=civil_results,
+                quranic_results=quranic_results,
+                primary_sources=primary_sources,
+                supporting_sources=supporting_sources,
+                contextual_sources=civil_results[5:] + quranic_results[5:],
+                integration_quality=0.7 if quranic_results else 0.5,
+                cultural_appropriateness=0.9 if quranic_results else 0.6,
+                legal_completeness=0.8 if (civil_results and quranic_results) else 0.6,
+                extracted_concepts=[],
+                concept_coverage={},
+                civil_search_time=civil_time,
+                quranic_search_time=quranic_time,
+                integration_time=0.0,
+                total_sources=len(civil_results) + len(quranic_results),
+                confidence_distribution=self._calculate_confidence_distribution(primary_sources),
+                strategy_explanation="Basic integration fallback - concept extraction failed but Islamic foundations included"
+            )
+            
+        except Exception as e:
+            logger.error(f"Basic integration fallback failed: {e}")
+            return await self._fallback_civil_search(query, limit, start_time)
+
+    async def _basic_quranic_search(self, query: str, limit: int) -> Tuple[List[SearchResult], float]:
+        """
+        Basic Quranic search without complex concept analysis
+        Uses direct database query for universal Islamic foundation
+        """
+        try:
+            start_time = datetime.now()
+            
+            # Use direct text search in the Quranic database for universal coverage
+            # This ensures we always find some Islamic foundations when possible
+            async with aiosqlite.connect(self.quranic_store.db_path) as db:
+                # Simple text search across multiple fields for broad coverage
+                search_query = f"%{query}%"
+                
+                query_sql = """
+                SELECT foundation_id, verse_text, surah_name, ayah_number, verse_reference,
+                       qurtubi_commentary, legal_principle, principle_category,
+                       applicable_legal_domains, modern_applications, 
+                       cultural_appropriateness, scholarship_confidence, legal_relevance_score
+                FROM quranic_foundations 
+                WHERE verse_text LIKE ? 
+                   OR qurtubi_commentary LIKE ? 
+                   OR legal_principle LIKE ?
+                   OR applicable_legal_domains LIKE ?
+                   OR modern_applications LIKE ?
+                ORDER BY cultural_appropriateness DESC, scholarship_confidence DESC, legal_relevance_score DESC
+                LIMIT ?
+                """
+                
+                async with db.execute(query_sql, [search_query] * 5 + [limit]) as cursor:
+                    rows = await cursor.fetchall()
+                
+                # If no direct matches, try broader concept matching
+                if not rows:
+                    # Extract key concepts from query for semantic matching
+                    query_concepts = self._extract_query_concepts(query)
+                    
+                    if query_concepts:
+                        # Try broader search with extracted concepts
+                        concept_patterns = [f"%{concept}%" for concept in query_concepts]
+                        concept_search_sql = """
+                        SELECT foundation_id, verse_text, surah_name, ayah_number, verse_reference,
+                               qurtubi_commentary, legal_principle, principle_category,
+                               applicable_legal_domains, modern_applications, 
+                               cultural_appropriateness, scholarship_confidence, legal_relevance_score
+                        FROM quranic_foundations 
+                        WHERE """ + " OR ".join(["applicable_legal_domains LIKE ?" for _ in query_concepts]) + """
+                           OR """ + " OR ".join(["legal_principle LIKE ?" for _ in query_concepts]) + """
+                           OR """ + " OR ".join(["qurtubi_commentary LIKE ?" for _ in query_concepts]) + """
+                        ORDER BY legal_relevance_score DESC, scholarship_confidence DESC, cultural_appropriateness DESC
+                        LIMIT ?
+                        """
+                        
+                        search_params = concept_patterns * 3 + [limit]
+                        async with db.execute(concept_search_sql, search_params) as cursor:
+                            rows = await cursor.fetchall()
+                    
+                    # If still no matches, get relevant foundations by category
+                    if not rows:
+                        category_query_sql = """
+                        SELECT foundation_id, verse_text, surah_name, ayah_number, verse_reference,
+                               qurtubi_commentary, legal_principle, principle_category,
+                               applicable_legal_domains, modern_applications, 
+                               cultural_appropriateness, scholarship_confidence, legal_relevance_score
+                        FROM quranic_foundations 
+                        WHERE principle_category IN ('Justice and Rights', 'Social Relations', 'Business Ethics', 'Legal Foundations')
+                           OR legal_principle LIKE '%justice%'
+                           OR legal_principle LIKE '%fairness%'
+                           OR legal_principle LIKE '%rights%'
+                        ORDER BY legal_relevance_score DESC, scholarship_confidence DESC, cultural_appropriateness DESC
+                        LIMIT ?
+                        """
+                        
+                        async with db.execute(category_query_sql, [limit]) as cursor:
+                            rows = await cursor.fetchall()
+            
+            # Convert to SearchResult format
+            quranic_results = []
+            for row in rows:
+                foundation_id, verse_text, surah_name, ayah_number, verse_reference, \
+                qurtubi_commentary, legal_principle, principle_category, \
+                applicable_legal_domains, modern_applications, \
+                cultural_appropriateness, scholarship_confidence, legal_relevance_score = row
+                
+                # Parse JSON fields if they exist
+                try:
+                    applicable_domains = json.loads(applicable_legal_domains) if applicable_legal_domains else []
+                    modern_apps = json.loads(modern_applications) if modern_applications else []
+                except:
+                    applicable_domains = []
+                    modern_apps = []
+                
+                # Create a chunk from foundation
+                chunk = Chunk(
+                    id=f"quranic_{foundation_id}",
+                    content=qurtubi_commentary or legal_principle,
+                    title=f"{verse_reference}: {legal_principle[:50] if legal_principle else 'قاعدة شرعية'}...",
+                    embedding=None,  # Not needed for results
+                    metadata={
+                        "foundation_type": "quranic",
+                        "verse_reference": verse_reference,
+                        "surah": surah_name,
+                        "ayah": ayah_number,
+                        "legal_principle": legal_principle,
+                        "cultural_appropriateness": cultural_appropriateness or 0.8,
+                        "modern_applications": modern_apps,
+                        "applicable_legal_domains": applicable_domains
+                    }
+                )
+                
+                # Use legal relevance score as similarity score
+                result = SearchResult(
+                    chunk=chunk,
+                    similarity_score=legal_relevance_score or 0.8
+                )
+                quranic_results.append(result)
+            
+            search_time = (datetime.now() - start_time).total_seconds() * 1000
+            logger.info(f"Basic Quranic search found {len(quranic_results)} foundations in {search_time:.1f}ms")
+            
+            return quranic_results, search_time
+            
+        except Exception as e:
+            logger.error(f"Basic Quranic search failed: {e}")
+            return [], 0.0
+
+    def _extract_query_concepts(self, query: str) -> List[str]:
+        """
+        Extract key concepts from query for better Quranic foundation matching
+        """
+        query_lower = query.lower()
+        
+        # Employment and work concepts
+        employment_concepts = []
+        if any(word in query_lower for word in ["موظف", "عمل", "عامل", "وظيفة", "شغل"]):
+            employment_concepts.extend(["work", "employment", "labor", "worker", "justice"])
+        
+        if any(word in query_lower for word in ["فصل", "طرد", "إنهاء", "terminate", "dismiss"]):
+            employment_concepts.extend(["dismissal", "termination", "justice", "fairness"])
+            
+        if any(word in query_lower for word in ["حق", "حقوق", "مستحقات", "rights"]):
+            employment_concepts.extend(["rights", "justice", "fairness", "due"])
+            
+        if any(word in query_lower for word in ["أجر", "راتب", "مكافأة", "wage", "salary"]):
+            employment_concepts.extend(["compensation", "payment", "justice", "fairness"])
+            
+        # Justice and fairness concepts
+        if any(word in query_lower for word in ["عدل", "إنصاف", "ظلم", "justice", "fair"]):
+            employment_concepts.extend(["justice", "fairness", "equity", "righteousness"])
+            
+        # Commercial and business concepts
+        if any(word in query_lower for word in ["شركة", "تجارة", "عقد", "شراكة", "business"]):
+            employment_concepts.extend(["business", "commercial", "contract", "partnership"])
+            
+        # Family and personal concepts
+        if any(word in query_lower for word in ["زوجة", "طلاق", "زواج", "أسرة", "family"]):
+            employment_concepts.extend(["family", "marriage", "rights", "justice"])
+            
+        # Criminal and legal concepts
+        if any(word in query_lower for word in ["سرقة", "جريمة", "قانون", "نظام", "crime"]):
+            employment_concepts.extend(["law", "crime", "justice", "punishment", "legal"])
+            
+        # Neighbor and social concepts
+        if any(word in query_lower for word in ["جار", "جيران", "مجتمع", "neighbor"]):
+            employment_concepts.extend(["social", "community", "neighbor", "rights", "justice"])
+            
+        # Contract and agreement concepts
+        if any(word in query_lower for word in ["عقد", "اتفاق", "التزام", "contract"]):
+            employment_concepts.extend(["contract", "agreement", "obligation", "justice"])
+            
+        # If no specific concepts found, use general justice terms
+        if not employment_concepts:
+            employment_concepts = ["justice", "fairness", "rights", "guidance"]
+        
+        # Remove duplicates and return
+        return list(set(employment_concepts))
+
     async def _fallback_civil_search(self, query: str, limit: int, 
                                    start_time: datetime) -> IntegratedResponse:
-        """Fallback to civil-only search when integration fails"""
+        """Pure civil-only fallback when even basic integration fails"""
         try:
             civil_results, search_time = await self._search_civil_law(query, [], {}, limit)
             total_time = (datetime.now() - start_time).total_seconds() * 1000
@@ -938,8 +1251,8 @@ class RetrievalOrchestrator:
                 primary_sources=civil_results[:5],
                 supporting_sources=[],
                 contextual_sources=civil_results[5:],
-                integration_quality=0.7,
-                cultural_appropriateness=0.8,
+                integration_quality=0.5,
+                cultural_appropriateness=0.6,
                 legal_completeness=0.6,
                 extracted_concepts=[],
                 concept_coverage={},
@@ -948,11 +1261,11 @@ class RetrievalOrchestrator:
                 integration_time=0.0,
                 total_sources=len(civil_results),
                 confidence_distribution=self._calculate_confidence_distribution(civil_results),
-                strategy_explanation="Fallback to civil law due to integration failure"
+                strategy_explanation="Pure civil law fallback - all Islamic integration attempts failed"
             )
             
         except Exception as e:
-            logger.error(f"Even fallback search failed: {e}")
+            logger.error(f"Even civil-only fallback search failed: {e}")
             return self._create_empty_response(query, start_time)
     
     def _create_empty_response(self, query: str, start_time: datetime) -> IntegratedResponse:

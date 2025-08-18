@@ -471,7 +471,10 @@ class EnhancedChatProcessor:
         return enhanced_context
     
     def _should_enhance_query(self, query: str, context: Dict[str, Any]) -> bool:
-        """Determine if query should be enhanced with Quranic integration"""
+        """
+        Determine if query should be enhanced with Quranic integration
+        Since Saudi law is Sharia-based, we enhance ALL queries except when explicitly disabled
+        """
         
         # Check feature flags
         if not self.feature_flags.get("quranic_integration", False):
@@ -482,20 +485,21 @@ class EnhancedChatProcessor:
         if user_prefs.get("disable_islamic_integration", False):
             return False
         
-        # Simple heuristics (can be made more sophisticated)
+        # Universal Quranic integration - Saudi law is Sharia-based
+        # Only skip for non-Arabic technical queries
         query_lower = query.lower()
         
-        # Always enhance for legal queries
-        legal_indicators = ["حكم", "قانون", "نظام", "قضية", "محكمة", "دعوى"]
-        if any(indicator in query_lower for indicator in legal_indicators):
-            return True
-        
-        # Skip purely procedural queries
-        procedural_indicators = ["كيف أقدم", "أين أذهب", "ما الرسوم", "نموذج"]
-        if any(indicator in query_lower for indicator in procedural_indicators):
+        # Skip only for pure technical/system queries
+        non_relevant_indicators = ["test", "debug", "ping", "health check", "status"]
+        if any(indicator in query_lower for indicator in non_relevant_indicators):
             return False
         
-        # Default to enhancement for most queries
+        # Skip for empty or very short non-Arabic queries
+        if len(query.strip()) < 3:
+            return False
+        
+        # ALWAYS enhance - Saudi law is fundamentally based on Sharia principles
+        # Universal Islamic integration for all queries
         return True
     
     async def _emergency_fallback(self, query: str, 
