@@ -1048,27 +1048,34 @@ div.ai-response-container div.ai-response b {
     color: inherit !important;
   }
   
-  /* ROOT FIX: Unified mobile color system - target the new wrapper class */
-  /* Dark mode text colors for mobile - UNIFIED APPROACH */
-  .dark-mode .mobile-ai-response-wrapper,
-  .dark-mode .mobile-ai-response-wrapper *,
-  .dark-mode .mobile-ai-response-wrapper .ai-response,
-  .dark-mode .mobile-ai-response-wrapper .ai-response *,
-  .dark-mode .mobile-ai-response-wrapper .ai-response p,
-  .dark-mode .mobile-ai-response-wrapper .ai-response div,
-  .dark-mode .mobile-ai-response-wrapper .ai-response span,
-  .dark-mode .mobile-ai-response-wrapper .ai-response strong,
-  .dark-mode .mobile-ai-response-wrapper .ai-response b,
-  .dark-mode .mobile-ai-response-wrapper .ai-response h1,
-  .dark-mode .mobile-ai-response-wrapper .ai-response h2,
-  .dark-mode .mobile-ai-response-wrapper .ai-response h3,
-  .dark-mode .mobile-ai-response-wrapper .ai-response h4,
-  .dark-mode .mobile-ai-response-wrapper .ai-response h5,
-  .dark-mode .mobile-ai-response-wrapper .ai-response h6,
-  .dark-mode .mobile-ai-response-wrapper .ai-response li,
-  .dark-mode .mobile-ai-response-wrapper .ai-response ul,
-  .dark-mode .mobile-ai-response-wrapper .ai-response ol {
+  /* 🔥 NUCLEAR OPTION: Maximum specificity mobile dark mode fix */
+  /* Target all possible text elements with highest specificity */
+  html.dark-mode body .mobile-ai-response-wrapper,
+  html.dark-mode body .mobile-ai-response-wrapper *,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response *,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response p,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response div,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response span,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response strong,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response b,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response em,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response i,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response h1,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response h2,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response h3,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response h4,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response h5,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response h6,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response li,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response ul,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response ol,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response a,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response code,
+  html.dark-mode body .mobile-ai-response-wrapper .ai-response pre {
     color: #ffffff !important;
+    /* Debug border to verify CSS is applied */
+    border-left: 2px solid #ff0000 !important;
   }
   
   /* Light mode text colors for mobile - UNIFIED APPROACH */
@@ -1178,3 +1185,28 @@ div.ai-response-container div.ai-response b {
 }
 
 /* REMOVED - All font sizes handled by nuclear rule at top */
+
+/* 🚨 FINAL OVERRIDE: Ultimate specificity for mobile dark mode text */
+@media (max-width: 768px) {
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response *,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response p,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response span,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response div,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response strong,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response b,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response h1,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response h2,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response h3,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response h4,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response h5,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response h6,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response li,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response ul,
+  html.dark-mode body div.mobile-ai-response-wrapper div.ai-response ol {
+    color: #ffffff !important;
+    background-color: transparent !important;
+    /* Temporary red border to verify this CSS is being applied */
+    border-right: 3px solid #ff0000 !important;
+  }
+}
