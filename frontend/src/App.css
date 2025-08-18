@@ -1074,8 +1074,6 @@ div.ai-response-container div.ai-response b {
   html.dark-mode body .mobile-ai-response-wrapper .ai-response code,
   html.dark-mode body .mobile-ai-response-wrapper .ai-response pre {
     color: #ffffff !important;
-    /* Debug border to verify CSS is applied */
-    border-left: 2px solid #ff0000 !important;
   }
   
   /* Light mode text colors for mobile - UNIFIED APPROACH */
@@ -1206,7 +1204,5 @@ div.ai-response-container div.ai-response b {
   html.dark-mode body div.mobile-ai-response-wrapper div.ai-response ol {
     color: #ffffff !important;
     background-color: transparent !important;
-    /* Temporary red border to verify this CSS is being applied */
-    border-right: 3px solid #ff0000 !important;
   }
 }
