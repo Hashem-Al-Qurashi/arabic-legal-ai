@@ -27,7 +27,7 @@ class SqliteVectorStore(VectorStore):
     Perfect for development and small to medium datasets.
     """
     
-    def __init__(self, db_path: str = "data/vectors.db"):
+    def __init__(self, db_path: str = "backend/data/vectors.db"):
         """
         Initialize SQLite vector store
         

@@ -168,8 +168,8 @@ class IslamicPrimaryOrchestrator:
     
     def __init__(self):
         # Initialize stores
-        self.civil_store = SqliteVectorStore("data/vectors.db")
-        self.islamic_store = IslamicVectorStore("data/islamic_vectors.db")
+        self.civil_store = SqliteVectorStore("backend/data/vectors.db")
+        self.islamic_store = IslamicVectorStore("backend/data/islamic_vectors.db")
         
         # Initialize classifier
         self.classifier = IslamicPrimaryClassifier()

@@ -241,7 +241,7 @@ class QuranicFoundationStore(VectorStore):
     Implements advanced semantic retrieval with multiple indexing strategies
     """
     
-    def __init__(self, db_path: str = "data/quranic_foundation.db"):
+    def __init__(self, db_path: str = "backend/data/quranic_foundation.db"):
         self.db_path = Path(db_path)
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         

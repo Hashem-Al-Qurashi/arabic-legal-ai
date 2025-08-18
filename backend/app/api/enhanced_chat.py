@@ -78,10 +78,12 @@ class EnhancedChatProcessor:
             
             if should_enhance and self.integration_enabled:
                 # Enhanced processing with Quranic integration
+                logger.info(f"Using ENHANCED processing for query: {query[:30]}...")
                 response = await self._process_enhanced_query(query, enhanced_context)
                 self.performance_metrics["enhanced_queries"] += 1
             else:
                 # Fallback to traditional processing
+                logger.info(f"Using TRADITIONAL processing for query: {query[:30]}...")
                 response = await self._process_traditional_query(query, enhanced_context)
                 self.performance_metrics["fallback_queries"] += 1
             
@@ -113,10 +115,16 @@ class EnhancedChatProcessor:
         enhanced_response = await self._apply_response_enhancements(formatted_response, context)
         
         # Step 4: Add integration metadata
+        quranic_count = len(integrated_response.quranic_results)
+        civil_count = len(integrated_response.civil_results)
+        
+        # Debug logging to trace the issue
+        logger.info(f"Enhanced chat formatting: Civil={civil_count}, Quranic={quranic_count}, Strategy={integrated_response.strategy.value}")
+        
         enhanced_response["enhancement_info"] = {
             "integration_strategy": integrated_response.strategy.value,
-            "quranic_sources_count": len(integrated_response.quranic_results),
-            "civil_sources_count": len(integrated_response.civil_results),
+            "quranic_sources_count": quranic_count,
+            "civil_sources_count": civil_count,
             "integration_quality": integrated_response.integration_quality,
             "cultural_appropriateness": integrated_response.cultural_appropriateness,
             "processing_time_ms": integrated_response.execution_time_ms

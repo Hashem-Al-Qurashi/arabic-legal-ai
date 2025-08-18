@@ -1,0 +1,18 @@
+{
+  "model": {
+    "model_name": "text-embedding-3-small",
+    "dimension": 1536,
+    "cost_per_1k_tokens": 2e-05
+  },
+  "database_path": "data/quranic_foundation.db",
+  "embedding_columns": {
+    "embedding": "tafseer_chunks.embedding",
+    "verse_embedding": "quranic_foundations.verse_embedding",
+    "principle_embedding": "quranic_foundations.principle_embedding",
+    "application_embedding": "quranic_foundations.application_embedding"
+  },
+  "is_consistent": true,
+  "detected_automatically": true,
+  "migration_needed": false,
+  "last_validated": null
+}

@@ -41,7 +41,7 @@ class IslamicVectorStore(VectorStore):
     ZERO conflicts with existing civil law system
     """
     
-    def __init__(self, db_path: str = "data/islamic_vectors.db"):
+    def __init__(self, db_path: str = "backend/data/islamic_vectors.db"):
         """
         Initialize Islamic SQLite vector store
         

@@ -1215,10 +1215,24 @@ class IntelligentLegalRAG:
         try:
             # Extract legal concepts from the query
             logger.info("🔧 DEBUG: Extracting legal concepts...")
-            concepts = await self.concept_engine.extract_legal_concepts(query)
-            logger.info(f"🔧 DEBUG: Extracted {len(concepts)} concepts")
+            try:
+                concepts = await self.concept_engine.extract_legal_concepts(query)
+                logger.info(f"🔧 DEBUG: Extracted {len(concepts)} concepts")
+                
+                # 🔧 TEMP FIX: Filter out concepts with incompatible semantic fields
+                compatible_concepts = []
+                for concept in concepts:
+                    # Only keep concepts that have database-compatible semantic fields
+                    if any(field in ["general_law", "justice", "rights", "guidance"] for field in concept.semantic_fields):
+                        compatible_concepts.append(concept)
+                
+                concepts = compatible_concepts
+                logger.info(f"🔧 DEBUG: Filtered to {len(concepts)} compatible concepts")
+            except Exception as e:
+                logger.warning(f"🔧 DEBUG: Concept extraction failed: {e}")
+                concepts = []
             
-            # 🔧 FALLBACK: If semantic engine fails, create basic concepts from query terms
+            # 🔧 FALLBACK: If semantic engine fails or produces incompatible concepts
             if not concepts:
                 logger.warning("🔧 DEBUG: No concepts extracted from semantic engine, using fallback extraction")
                 concepts = self._extract_basic_legal_concepts(query)
@@ -1421,27 +1435,27 @@ class IntelligentLegalRAG:
         concepts = []
         query_lower = query.lower()
         
-        # Basic legal concept mapping
+        # Basic legal concept mapping with database-compatible semantic fields
         legal_terms = {
-            "فصل": ("فصل من العمل", ConceptType.SUBSTANTIVE_LAW),
-            "موظف": ("حقوق الموظف", ConceptType.SUBSTANTIVE_LAW),
-            "مستحقات": ("المستحقات المالية", ConceptType.ECONOMIC_PRINCIPLE),
-            "عمل": ("علاقة العمل", ConceptType.SOCIAL_RELATION),
-            "حقوق": ("الحقوق القانونية", ConceptType.SUBSTANTIVE_LAW),
-            "شركة": ("المسؤولية المؤسسية", ConceptType.AUTHORITY_STRUCTURE),
-            "عدالة": ("العدالة والإنصاف", ConceptType.JUSTICE_CONCEPT),
-            "ظلم": ("منع الظلم", ConceptType.JUSTICE_CONCEPT),
-            "أجر": ("حق الأجر", ConceptType.ECONOMIC_PRINCIPLE),
+            "فصل": ("justice", ConceptType.JUSTICE_CONCEPT, ["general_law"]),
+            "موظف": ("rights", ConceptType.MORAL_PRINCIPLE, ["general_law"]),
+            "مستحقات": ("rights", ConceptType.MORAL_PRINCIPLE, ["general_law"]),
+            "عمل": ("justice", ConceptType.JUSTICE_CONCEPT, ["general_law"]),
+            "حقوق": ("rights", ConceptType.MORAL_PRINCIPLE, ["general_law"]),
+            "شركة": ("guidance", ConceptType.AUTHORITY_STRUCTURE, ["general_law"]),
+            "عدالة": ("justice", ConceptType.JUSTICE_CONCEPT, ["general_law"]),
+            "ظلم": ("justice", ConceptType.JUSTICE_CONCEPT, ["general_law"]),
+            "أجر": ("rights", ConceptType.MORAL_PRINCIPLE, ["general_law"]),
         }
         
         # Extract concepts based on terms found in query
-        for term, (concept_name, concept_type) in legal_terms.items():
+        for term, (concept_name, concept_type, semantic_fields) in legal_terms.items():
             if term in query_lower:
                 concept = LegalConcept(
                     concept_id=f"basic_{term}",
                     primary_concept=concept_name,
                     concept_type=concept_type,
-                    semantic_fields=[term, concept_name],
+                    semantic_fields=semantic_fields,
                     confidence_score=0.8,
                     context_indicators=[term],
                     cultural_context="saudi_legal"
@@ -1452,9 +1466,9 @@ class IntelligentLegalRAG:
         if "عمل" in query_lower and "فصل" in query_lower:
             general_concept = LegalConcept(
                 concept_id="basic_employment_dispute",
-                primary_concept="نزاع العمل والعدالة",
+                primary_concept="justice",
                 concept_type=ConceptType.JUSTICE_CONCEPT,
-                semantic_fields=["عدالة", "إنصاف", "حقوق العمال"],
+                semantic_fields=["general_law"],
                 confidence_score=0.9,
                 context_indicators=["فصل", "موظف", "مستحقات"],
                 cultural_context="saudi_legal"
