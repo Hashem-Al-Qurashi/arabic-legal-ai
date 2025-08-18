@@ -1,0 +1,283 @@
+{
+  "concept_mappings": {
+    "employment_dismissal": {
+      "islamic_concepts": [
+        {
+          "arabic_term": "العدالة",
+          "english_term": "justice",
+          "quranic_references": ["4:58", "16:90", "5:8", "7:29"],
+          "relevance_weight": 0.9,
+          "domain": "employment",
+          "explanation": "القرآن يؤكد على العدالة في جميع التعاملات، بما في ذلك علاقات العمل"
+        },
+        {
+          "arabic_term": "الوفاء بالعهد",
+          "english_term": "covenant_keeping",
+          "quranic_references": ["17:34", "23:8", "5:1"],
+          "relevance_weight": 0.85,
+          "domain": "employment",
+          "explanation": "عقود العمل هي عهود يجب الوفاء بها من قبل الطرفين"
+        },
+        {
+          "arabic_term": "كرامة الإنسان",
+          "english_term": "human_dignity",
+          "quranic_references": ["17:70", "2:30"],
+          "relevance_weight": 0.8,
+          "domain": "employment",
+          "explanation": "احترام كرامة الإنسان في بيئة العمل مبدأ قرآني أساسي"
+        },
+        {
+          "arabic_term": "عدم الظلم",
+          "english_term": "no_oppression",
+          "quranic_references": ["2:279", "11:117", "16:90"],
+          "relevance_weight": 0.85,
+          "domain": "employment",
+          "explanation": "النهي عن الظلم في التعاملات، بما في ذلك فصل العمال بغير حق"
+        }
+      ],
+      "mapping_confidence": 0.85,
+      "context_indicators": ["فصل", "طرد", "إنهاء خدمة", "dismissal", "termination", "firing"]
+    },
+    
+    "unpaid_wages": {
+      "islamic_concepts": [
+        {
+          "arabic_term": "أداء الحق",
+          "english_term": "fulfilling_rights",
+          "quranic_references": ["2:282", "4:29", "83:1-3"],
+          "relevance_weight": 0.95,
+          "domain": "employment",
+          "explanation": "وجوب أداء حقوق العمال وأجورهم كاملة"
+        },
+        {
+          "arabic_term": "تحريم أكل أموال الناس بالباطل",
+          "english_term": "prohibition_unlawful_consumption",
+          "quranic_references": ["2:188", "4:29", "4:161"],
+          "relevance_weight": 0.9,
+          "domain": "employment",
+          "explanation": "تحريم حبس أجور العمال أو أكل أموالهم بغير حق"
+        },
+        {
+          "arabic_term": "الوفاء بالكيل والميزان",
+          "english_term": "fair_measure",
+          "quranic_references": ["17:35", "55:9", "83:1-3"],
+          "relevance_weight": 0.8,
+          "domain": "employment",
+          "explanation": "العدل في إعطاء كل ذي حق حقه، بما في ذلك الأجور"
+        }
+      ],
+      "mapping_confidence": 0.9,
+      "context_indicators": ["مستحقات", "راتب", "أجر", "مكافأة", "wages", "salary", "compensation", "dues"]
+    },
+    
+    "worker_rights": {
+      "islamic_concepts": [
+        {
+          "arabic_term": "حقوق العباد",
+          "english_term": "rights_of_people",
+          "quranic_references": ["4:58", "2:188", "16:90"],
+          "relevance_weight": 0.9,
+          "domain": "employment",
+          "explanation": "حقوق العمال من حقوق العباد التي أمر الله بأدائها"
+        },
+        {
+          "arabic_term": "الإحسان",
+          "english_term": "excellence_kindness",
+          "quranic_references": ["16:90", "2:195", "6:84"],
+          "relevance_weight": 0.8,
+          "domain": "employment",
+          "explanation": "الإحسان في معاملة العمال والموظفين"
+        }
+      ],
+      "mapping_confidence": 0.8,
+      "context_indicators": ["حقوق", "حق", "rights", "entitlements", "worker", "employee"]
+    },
+    
+    "criminal_justice": {
+      "islamic_concepts": [
+        {
+          "arabic_term": "القصاص",
+          "english_term": "retribution",
+          "quranic_references": ["2:178", "5:45", "17:33"],
+          "relevance_weight": 0.9,
+          "domain": "criminal",
+          "explanation": "العدالة في تطبيق العقوبات الجنائية"
+        },
+        {
+          "arabic_term": "الشورى في الحكم",
+          "english_term": "consultation_in_judgment",
+          "quranic_references": ["42:38", "3:159"],
+          "relevance_weight": 0.7,
+          "domain": "criminal",
+          "explanation": "الشورى وسيلة لضمان العدالة في الأحكام"
+        },
+        {
+          "arabic_term": "البينة والشهادة",
+          "english_term": "evidence_testimony",
+          "quranic_references": ["2:282", "4:135", "5:8"],
+          "relevance_weight": 0.85,
+          "domain": "criminal",
+          "explanation": "أهمية البينة والشهادة في إقامة العدل"
+        }
+      ],
+      "mapping_confidence": 0.8,
+      "context_indicators": ["جريمة", "عقوبة", "جزاء", "حد", "crime", "punishment", "penalty", "sentence"]
+    },
+    
+    "commercial_contracts": {
+      "islamic_concepts": [
+        {
+          "arabic_term": "تحريم الربا",
+          "english_term": "prohibition_usury",
+          "quranic_references": ["2:275", "3:130", "2:278-279"],
+          "relevance_weight": 0.9,
+          "domain": "commercial",
+          "explanation": "تحريم الربا في المعاملات التجارية"
+        },
+        {
+          "arabic_term": "التجارة بالتراضي",
+          "english_term": "mutual_consent_trade",
+          "quranic_references": ["4:29", "2:282"],
+          "relevance_weight": 0.85,
+          "domain": "commercial",
+          "explanation": "وجوب التراضي في العقود التجارية"
+        },
+        {
+          "arabic_term": "الوفاء بالعقود",
+          "english_term": "fulfilling_contracts",
+          "quranic_references": ["5:1", "17:34"],
+          "relevance_weight": 0.9,
+          "domain": "commercial",
+          "explanation": "وجوب الوفاء بالعقود والالتزامات التجارية"
+        },
+        {
+          "arabic_term": "تحريم الغش",
+          "english_term": "prohibition_fraud",
+          "quranic_references": ["83:1-3", "6:152"],
+          "relevance_weight": 0.85,
+          "domain": "commercial",
+          "explanation": "تحريم الغش والخداع في المعاملات التجارية"
+        }
+      ],
+      "mapping_confidence": 0.85,
+      "context_indicators": ["تجارة", "بيع", "شراء", "عقد تجاري", "trade", "commerce", "business", "commercial"]
+    },
+    
+    "inheritance_law": {
+      "islamic_concepts": [
+        {
+          "arabic_term": "آيات المواريث",
+          "english_term": "inheritance_verses",
+          "quranic_references": ["4:11", "4:12", "4:176"],
+          "relevance_weight": 0.95,
+          "domain": "family",
+          "explanation": "الأحكام القرآنية المفصلة للمواريث"
+        },
+        {
+          "arabic_term": "العدل في التوزيع",
+          "english_term": "just_distribution",
+          "quranic_references": ["4:7", "4:32"],
+          "relevance_weight": 0.9,
+          "domain": "family",
+          "explanation": "العدالة في توزيع الميراث حسب الشريعة"
+        }
+      ],
+      "mapping_confidence": 0.95,
+      "context_indicators": ["ميراث", "تركة", "وراثة", "inheritance", "estate", "legacy"]
+    },
+    
+    "family_law": {
+      "islamic_concepts": [
+        {
+          "arabic_term": "أحكام الأسرة",
+          "english_term": "family_rulings",
+          "quranic_references": ["4:1", "30:21", "25:74"],
+          "relevance_weight": 0.9,
+          "domain": "family",
+          "explanation": "الأحكام القرآنية المتعلقة بتنظيم الأسرة"
+        },
+        {
+          "arabic_term": "المعاشرة بالمعروف",
+          "english_term": "kind_treatment",
+          "quranic_references": ["4:19", "2:228"],
+          "relevance_weight": 0.85,
+          "domain": "family",
+          "explanation": "وجوب المعاشرة بالمعروف بين أفراد الأسرة"
+        }
+      ],
+      "mapping_confidence": 0.85,
+      "context_indicators": ["زواج", "طلاق", "أسرة", "نفقة", "marriage", "divorce", "family", "alimony"]
+    },
+    
+    "administrative_justice": {
+      "islamic_concepts": [
+        {
+          "arabic_term": "ولي الأمر",
+          "english_term": "legitimate_authority",
+          "quranic_references": ["4:59", "4:83"],
+          "relevance_weight": 0.8,
+          "domain": "administrative",
+          "explanation": "طاعة ولي الأمر في المعروف والعدل"
+        },
+        {
+          "arabic_term": "العدل في الحكم",
+          "english_term": "justice_in_governance",
+          "quranic_references": ["4:58", "5:42", "38:26"],
+          "relevance_weight": 0.9,
+          "domain": "administrative",
+          "explanation": "وجوب العدل في الإدارة والحكم"
+        }
+      ],
+      "mapping_confidence": 0.75,
+      "context_indicators": ["إدارة", "حكومة", "سلطة", "administrative", "government", "authority"]
+    },
+    
+    "general_justice": {
+      "islamic_concepts": [
+        {
+          "arabic_term": "العدل",
+          "english_term": "justice",
+          "quranic_references": ["4:58", "16:90", "5:8", "7:29"],
+          "relevance_weight": 0.95,
+          "domain": "justice",
+          "explanation": "العدل أساس الحكم والقضاء في الإسلام"
+        },
+        {
+          "arabic_term": "الإنصاف",
+          "english_term": "fairness",
+          "quranic_references": ["60:8", "5:42"],
+          "relevance_weight": 0.9,
+          "domain": "justice",
+          "explanation": "الإنصاف والعدالة في جميع الأحكام"
+        },
+        {
+          "arabic_term": "نصرة المظلوم",
+          "english_term": "supporting_oppressed",
+          "quranic_references": ["4:75", "2:279"],
+          "relevance_weight": 0.85,
+          "domain": "justice",
+          "explanation": "وجوب نصرة المظلوم وإقامة العدل"
+        }
+      ],
+      "mapping_confidence": 0.9,
+      "context_indicators": ["عدالة", "إنصاف", "قضاء", "محكمة", "justice", "fairness", "court", "judicial"]
+    }
+  },
+  
+  "domain_priorities": {
+    "employment": 0.9,
+    "criminal": 0.8,
+    "commercial": 0.85,
+    "family": 0.95,
+    "administrative": 0.7,
+    "justice": 0.95
+  },
+  
+  "search_enhancement_rules": {
+    "minimum_relevance_threshold": 0.6,
+    "maximum_concepts_per_mapping": 5,
+    "arabic_term_weight_multiplier": 1.2,
+    "english_term_weight_multiplier": 0.8,
+    "quranic_reference_bonus": 0.1
+  }
+}

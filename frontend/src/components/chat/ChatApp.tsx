@@ -12,6 +12,7 @@ import { useConversationRouting } from '../../hooks/useConversationRouting';
 import { RenamePopup, DeletePopup } from '../ui';
 import { PremiumProgress, FeatureTease } from '../premium';
 import { FormattedMessage } from '../message';
+import { FileUploadButton } from './FileUploadButton';
 import { showToast, formatDate, cleanHtmlContent, containsCitations, stripCitations } from '../../utils/helpers';
 import { formatAIResponse } from '../../utils/messageParser';
 import { sanitizeHTML, isValidConversationIdFormat, sanitizeConversationId } from '../../utils/security';
@@ -477,6 +478,14 @@ const handleDeleteCancel = () => {
     }, 100);
   };
 
+  const handleTextExtracted = (extractedText: string) => {
+    setInputMessage(extractedText);
+    // Auto-focus the input after setting the text
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 100);
+  };
+
  const suggestedQuestions = [
   'ما هي إجراءات تأسيس شركة تجارية؟',
   'حقوق الموظف عند إنهاء الخدمة',
@@ -831,16 +840,27 @@ const handleDeleteCancel = () => {
   justifyContent: 'space-between',
   minHeight: '80px'
 }}>
-  <h2 style={{
-    color: 'rgba(255, 255, 255, 0.95)',
-    fontSize: '20px',
-    fontWeight: '600',
-    margin: 0,
-    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
-    letterSpacing: '-0.01em'
-  }}>
-    المحادثات
-  </h2>
+  <div>
+    <h2 style={{
+      color: 'rgba(255, 255, 255, 0.95)',
+      fontSize: '20px',
+      fontWeight: '600',
+      margin: 0,
+      fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
+      letterSpacing: '-0.01em'
+    }}>
+      المحادثات
+    </h2>
+    <div style={{
+      color: 'rgba(142, 142, 160, 0.7)',
+      fontSize: '11px',
+      marginTop: '2px',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
+      fontWeight: '500'
+    }}>
+      v3.0.0 • OCR • RAG • قرآني
+    </div>
+  </div>
   
   {/* Theme and close buttons */}
   <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -1839,6 +1859,13 @@ const handleDeleteCancel = () => {
           }
         }}
       />
+                
+                <FileUploadButton
+                  onTextExtracted={handleTextExtracted}
+                  isLoading={isLoading}
+                  user={user}
+                  sessionId={!user ? 'guest_session' : undefined}
+                />
                 
                 <button
         onClick={handleSendMessage}

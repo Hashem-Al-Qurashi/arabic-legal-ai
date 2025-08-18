@@ -9,13 +9,17 @@ import logging
 from datetime import datetime
 from dotenv import load_dotenv
 from openai import AsyncOpenAI
-from typing import List, Dict, Optional, AsyncIterator
+from typing import List, Dict, Optional, AsyncIterator, Any
 import json
 
 # Import the smart database components from old RAG
 from app.storage.vector_store import VectorStore, Chunk
 from app.storage.sqlite_store import SqliteVectorStore
 from enum import Enum
+
+# Import Quranic foundation system for automatic Islamic basis integration
+from app.storage.quranic_foundation_store import QuranicFoundationStore
+from app.core.semantic_concepts import SemanticConceptEngine
 
 class ProcessingMode(Enum):
     """Processing modes for different query types"""
@@ -1139,12 +1143,13 @@ class IntentClassifier:
 
 class IntelligentLegalRAG:
     """
-    Intelligent Legal RAG with AI-Powered Intent Classification
+    Intelligent Legal RAG with AI-Powered Intent Classification + Automatic Quranic Integration
     No hard-coding - AI handles classification and prompt selection
+    Automatically strengthens legal arguments with Quranic foundations
     """
     
     def __init__(self):
-        """Initialize intelligent RAG with AI classification"""
+        """Initialize intelligent RAG with AI classification and Quranic integration"""
         self.ai_client = ai_client
         self.ai_model = ai_model
         
@@ -1160,12 +1165,110 @@ class IntelligentLegalRAG:
             ai_client=self.ai_client,
             model=classification_model
         )
-
         
+        # 🕌 ADD QURANIC FOUNDATION INTEGRATION
+        self.quranic_store = None
+        self.concept_engine = None
+        self.quranic_integration_enabled = True
         
-        logger.info("🚀 Intelligent Legal RAG initialized - AI-powered classification + Smart retrieval!")
+        logger.info("🚀 Intelligent Legal RAG initialized - AI-powered classification + Smart retrieval + Quranic Integration!")
         self.citation_fixer = SimpleCitationFixer()
         logger.info("🔧 Citation fixer initialized")
+    
+    async def initialize_quranic_integration(self):
+        """Initialize the Quranic foundation integration system"""
+        try:
+            logger.info("🕌 Initializing Quranic foundation integration...")
+            
+            # Initialize Quranic store
+            self.quranic_store = QuranicFoundationStore()
+            await self.quranic_store.initialize()
+            
+            # Initialize concept engine
+            self.concept_engine = SemanticConceptEngine()
+            
+            # Check system health
+            health = await self.quranic_store.health_check()
+            if health:
+                stats = await self.quranic_store.get_stats()
+                logger.info(f"✅ Quranic integration ready! Database has {stats.total_chunks} foundations")
+                self.quranic_integration_enabled = True
+            else:
+                logger.warning("⚠️ Quranic store not healthy, disabling integration")
+                self.quranic_integration_enabled = False
+                
+        except Exception as e:
+            logger.error(f"❌ Failed to initialize Quranic integration: {e}")
+            self.quranic_integration_enabled = False
+    
+    async def get_quranic_foundations(self, query: str, context: Dict[str, str] = None) -> List[Dict[str, Any]]:
+        """Get relevant Quranic foundations for strengthening legal arguments"""
+        
+        logger.info(f"🔧 DEBUG: get_quranic_foundations called with query: {query[:50]}...")
+        logger.info(f"🔧 DEBUG: quranic_store = {self.quranic_store is not None}")
+        logger.info(f"🔧 DEBUG: concept_engine = {self.concept_engine is not None}")
+        
+        if not self.quranic_integration_enabled or not self.quranic_store or not self.concept_engine:
+            logger.warning(f"🔧 DEBUG: Quranic integration prerequisites not met - enabled: {self.quranic_integration_enabled}, store: {self.quranic_store is not None}, engine: {self.concept_engine is not None}")
+            return []
+        
+        try:
+            # Extract legal concepts from the query
+            logger.info("🔧 DEBUG: Extracting legal concepts...")
+            concepts = await self.concept_engine.extract_legal_concepts(query)
+            logger.info(f"🔧 DEBUG: Extracted {len(concepts)} concepts")
+            
+            # 🔧 FALLBACK: If semantic engine fails, create basic concepts from query terms
+            if not concepts:
+                logger.warning("🔧 DEBUG: No concepts extracted from semantic engine, using fallback extraction")
+                concepts = self._extract_basic_legal_concepts(query)
+                logger.info(f"🔧 DEBUG: Fallback extracted {len(concepts)} basic concepts")
+            
+            if not concepts:
+                logger.warning("🔧 DEBUG: No concepts available even after fallback")
+                return []
+            
+            # Show first few concepts for debugging
+            for i, concept in enumerate(concepts[:3]):
+                concept_text = concept.primary_concept if hasattr(concept, 'primary_concept') else str(concept)
+                confidence = concept.confidence_score if hasattr(concept, 'confidence_score') else 0.8
+                logger.info(f"🔧 DEBUG: Concept {i+1}: {concept_text} (confidence: {confidence})")
+            
+            # Search for relevant Quranic foundations
+            logger.info("🔧 DEBUG: Searching Quranic foundations...")
+            quranic_context = {"domain": "legal", "integration": True}
+            results = await self.quranic_store.semantic_search_foundations(
+                concepts, quranic_context, limit=3
+            )
+            logger.info(f"🔧 DEBUG: Search returned {len(results)} results")
+            
+            # Format results for integration
+            foundations = []
+            for i, result in enumerate(results):
+                metadata = result.chunk.metadata
+                verse_ref = metadata.get('verse_reference', 'غير محدد')
+                principle = metadata.get('legal_principle', 'غير محدد')
+                confidence = result.similarity_score
+                
+                logger.info(f"🔧 DEBUG: Result {i+1}: {verse_ref} - {principle[:50]}... (confidence: {confidence:.3f})")
+                
+                foundations.append({
+                    "verse_reference": verse_ref,
+                    "legal_principle": principle,
+                    "commentary": result.chunk.content,
+                    "confidence": confidence,
+                    "surah": metadata.get('surah', 'غير محدد'),
+                    "modern_applications": metadata.get('modern_applications', [])
+                })
+            
+            logger.info(f"🕌 Found {len(foundations)} Quranic foundations for query")
+            return foundations
+            
+        except Exception as e:
+            logger.error(f"Error retrieving Quranic foundations: {e}")
+            import traceback
+            logger.error(f"🔧 DEBUG: Full traceback: {traceback.format_exc()}")
+            return []
     
 
     async def structure_multi_article_chunks(self, documents: List[Chunk], query: str) -> List[Chunk]:
@@ -1272,6 +1375,94 @@ class IntelligentLegalRAG:
         """
             
             return context_header + full_context
+    
+    def _format_quranic_context(self, foundations: List[Dict[str, Any]]) -> str:
+        """Format Quranic foundations for AI integration"""
+        if not foundations:
+            return ""
+        
+        context_parts = []
+        context_parts.append("🕌 **الأسس القرآنية المتاحة للاستشهاد:**")
+        context_parts.append("")
+        context_parts.append("⚠️ **تعليمات مهمة للأسس الشرعية:**")
+        context_parts.append("- استخدم هذه الأسس القرآنية لتقوية الحجة القانونية")
+        context_parts.append("- اذكر المرجع القرآني بصيغة: \"قال تعالى في [المرجع]: [المبدأ القانوني]\"")
+        context_parts.append("- اربط الأساس الشرعي بالحكم القانوني مباشرة")
+        context_parts.append("- هذه الأسس من تفسير القرطبي المعتمد")
+        context_parts.append("")
+        
+        for i, foundation in enumerate(foundations, 1):
+            verse_ref = foundation.get('verse_reference', 'غير محدد')
+            principle = foundation.get('legal_principle', 'غير محدد')
+            commentary = foundation.get('commentary', '')
+            confidence = foundation.get('confidence', 0.0)
+            
+            context_parts.append(f"📖 **الأساس الشرعي {i}: {verse_ref}**")
+            context_parts.append(f"📍 **المبدأ القانوني**: {principle}")
+            
+            # Add relevant commentary excerpt
+            if commentary:
+                commentary_excerpt = commentary[:300] + "..." if len(commentary) > 300 else commentary
+                context_parts.append(f"📝 **من تفسير القرطبي**: {commentary_excerpt}")
+            
+            context_parts.append(f"🎯 **درجة الصلة**: {confidence:.2f}")
+            context_parts.append("")
+        
+        return "\n".join(context_parts)
+    
+    def _extract_basic_legal_concepts(self, query: str) -> List[Any]:
+        """
+        Simple fallback concept extraction for when semantic engine fails
+        Creates basic concepts from legal terms in the query
+        """
+        # Import here to avoid circular imports
+        from app.core.semantic_concepts import LegalConcept, ConceptType
+        
+        concepts = []
+        query_lower = query.lower()
+        
+        # Basic legal concept mapping
+        legal_terms = {
+            "فصل": ("فصل من العمل", ConceptType.SUBSTANTIVE_LAW),
+            "موظف": ("حقوق الموظف", ConceptType.SUBSTANTIVE_LAW),
+            "مستحقات": ("المستحقات المالية", ConceptType.ECONOMIC_PRINCIPLE),
+            "عمل": ("علاقة العمل", ConceptType.SOCIAL_RELATION),
+            "حقوق": ("الحقوق القانونية", ConceptType.SUBSTANTIVE_LAW),
+            "شركة": ("المسؤولية المؤسسية", ConceptType.AUTHORITY_STRUCTURE),
+            "عدالة": ("العدالة والإنصاف", ConceptType.JUSTICE_CONCEPT),
+            "ظلم": ("منع الظلم", ConceptType.JUSTICE_CONCEPT),
+            "أجر": ("حق الأجر", ConceptType.ECONOMIC_PRINCIPLE),
+        }
+        
+        # Extract concepts based on terms found in query
+        for term, (concept_name, concept_type) in legal_terms.items():
+            if term in query_lower:
+                concept = LegalConcept(
+                    concept_id=f"basic_{term}",
+                    primary_concept=concept_name,
+                    concept_type=concept_type,
+                    semantic_fields=[term, concept_name],
+                    confidence_score=0.8,
+                    context_indicators=[term],
+                    cultural_context="saudi_legal"
+                )
+                concepts.append(concept)
+        
+        # Add a general concept based on overall query theme
+        if "عمل" in query_lower and "فصل" in query_lower:
+            general_concept = LegalConcept(
+                concept_id="basic_employment_dispute",
+                primary_concept="نزاع العمل والعدالة",
+                concept_type=ConceptType.JUSTICE_CONCEPT,
+                semantic_fields=["عدالة", "إنصاف", "حقوق العمال"],
+                confidence_score=0.9,
+                context_indicators=["فصل", "موظف", "مستحقات"],
+                cultural_context="saudi_legal"
+            )
+            concepts.append(general_concept)
+        
+        logger.info(f"🔧 Basic extraction created {len(concepts)} concepts: {[c.primary_concept for c in concepts]}")
+        return concepts
 
 
     async def ask_question_with_context_streaming(
@@ -1302,6 +1493,24 @@ class IntelligentLegalRAG:
 
             relevant_docs = await self.retriever.get_relevant_documents(query, top_k=top_k, user_intent=category)
             
+            # 🕌 STAGE 2.5: GET QURANIC FOUNDATIONS (NEW INTEGRATION)
+            quranic_foundations = []
+            logger.info(f"🔧 DEBUG: quranic_integration_enabled = {self.quranic_integration_enabled}")
+            if self.quranic_integration_enabled:
+                try:
+                    await self.initialize_quranic_integration()  # Initialize if not already done
+                    logger.info("🔧 DEBUG: Starting Quranic foundation retrieval...")
+                    quranic_foundations = await self.get_quranic_foundations(query)
+                    logger.info(f"🔧 DEBUG: Retrieved {len(quranic_foundations)} Quranic foundations")
+                    if quranic_foundations:
+                        logger.info(f"🕌 Found {len(quranic_foundations)} Quranic foundations to strengthen the legal argument")
+                    else:
+                        logger.warning("🔧 DEBUG: No Quranic foundations returned from search")
+                except Exception as e:
+                    logger.warning(f"Quranic integration failed, continuing with civil law only: {e}")
+                    import traceback
+                    logger.error(f"🔧 DEBUG: Full traceback: {traceback.format_exc()}")
+            
             # Stage 3: Select appropriate prompt
             system_prompt = PROMPT_TEMPLATES[category]
             
@@ -1317,19 +1526,32 @@ class IntelligentLegalRAG:
                     "content": msg["content"]
                 })
             
-            # Stage 5: Add current question with legal context if available
-            # Stage 5: Add current question with legal context if available
+            # Stage 5: Add current question with legal context AND Quranic foundations
+            contextual_parts = []
+            
+            # Add civil law context
             if relevant_docs:
                 # PRIORITY 4 FIX: Structure multi-article chunks before formatting
                 structured_docs = await self.structure_multi_article_chunks(relevant_docs, query)
                 legal_context = self.format_legal_context_naturally(structured_docs)
-                contextual_prompt = f"""{legal_context}
+                contextual_parts.append(legal_context)
+                logger.info(f"Using {len(relevant_docs)} relevant legal documents with {category} approach (contextual)")
+            
+            # 🕌 Add Quranic foundations context (NEW)
+            if quranic_foundations:
+                quranic_context = self._format_quranic_context(quranic_foundations)
+                contextual_parts.append(quranic_context)
+                logger.info(f"🕌 Integrated {len(quranic_foundations)} Quranic foundations for automatic Islamic basis")
+            
+            # Combine all contexts
+            if contextual_parts:
+                full_context = "\n\n".join(contextual_parts)
+                contextual_prompt = f"""{full_context}
 
             السؤال: {query}"""
-                logger.info(f"Using {len(relevant_docs)} relevant legal documents with {category} approach (contextual)")
             else:
                 contextual_prompt = query
-                logger.info(f"No relevant documents found - using {category} approach with contextual general knowledge")
+                logger.info(f"No relevant documents found - using {category} approach with general knowledge")
             
             messages.append({
                 "role": "user", 

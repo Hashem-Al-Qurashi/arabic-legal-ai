@@ -14,6 +14,7 @@ from app.models import User, Consultation, Conversation, Message
 from app.api.simple_auth import router as auth_router
 from app.api.chat import router as chat_router
 from app.api.export import router as export_router
+from app.api.ocr import router as ocr_router
 
 # Initialize database tables
 from app.database import engine, Base
@@ -69,6 +70,7 @@ async def options_handler(request: Request):
 app.include_router(auth_router, prefix="/api/auth")
 app.include_router(chat_router, prefix="/api")
 app.include_router(export_router, prefix="/export")
+app.include_router(ocr_router, prefix="/api")
 
 # 🔥 LEGACY API REDIRECT - Graceful transition
 @app.post("/api/ask")
@@ -115,6 +117,7 @@ async def root():
         "endpoints": {
             "auth": "/api/auth/*",
             "chat": "/api/chat/*",
+            "ocr": "/api/ocr/*",
             "export": "/export/*",
             "status": "/api/chat/status",
             "guest_session": "/api/chat/guest/session"
