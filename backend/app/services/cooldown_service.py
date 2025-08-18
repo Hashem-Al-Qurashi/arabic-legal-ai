@@ -21,6 +21,17 @@ class CooldownService:
         now = datetime.utcnow()
         
         if user:
+            # Check for unlimited subscription tier
+            if user.subscription_tier == "unlimited":
+                return {
+                    "questions_available": 999999,  # Effectively unlimited
+                    "questions_used": user.questions_used_current_cycle,
+                    "max_questions": 999999,
+                    "is_in_cooldown": False,
+                    "reset_time": None,
+                    "can_ask_question": True
+                }
+            
             max_questions = CooldownService.SIGNED_IN_QUESTION_LIMIT
             
             # Check if user needs a reset
@@ -67,6 +78,14 @@ class CooldownService:
         
         if not can_ask:
             return False
+        
+        # For unlimited users, still track usage but don't apply limits
+        if user and user.subscription_tier == "unlimited":
+            user.questions_used_current_cycle += 1
+            user.last_question_time = datetime.utcnow()
+            # No cooldown for unlimited users
+            db.commit()
+            return True
         
         user.questions_used_current_cycle += 1
         user.last_question_time = datetime.utcnow()

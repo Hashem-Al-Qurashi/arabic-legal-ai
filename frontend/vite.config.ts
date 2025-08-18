@@ -11,6 +11,11 @@ export default defineConfig({
     strictPort: true,
     open: false,
     cors: true,
+    headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    },
     // Allow external connections including ngrok
     hmr: {
       port: 3001

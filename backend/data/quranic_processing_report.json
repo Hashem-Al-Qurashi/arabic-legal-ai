@@ -3,7 +3,7 @@
     "processor_version": "1.0.0",
     "dataset_source": "MohamedRashad/Quran-Tafseer",
     "target_tafsir": "* تفسير الجامع لاحكام القرآن/ القرطبي (ت 671 هـ)",
-    "processing_date": "2025-08-17T07:30:50.406233",
+    "processing_date": "2025-08-18T07:13:46.695474",
     "configuration": {
       "batch_size": 100,
       "min_content_length": 30,
@@ -16,37 +16,37 @@
       "total_entries": 3870,
       "processed_entries": 3870,
       "legal_entries": 3870,
-      "high_quality_entries": 3310,
+      "high_quality_entries": 3470,
       "processing_errors": 0,
       "success_rate": 100.0,
       "legal_relevance_rate": 100.0
     },
     "quality_metrics": {
-      "avg_scholarship_confidence": 0.794780361757106,
-      "avg_legal_relevance": 0.7700052996646979,
-      "avg_cultural_appropriateness": 0.7735555555555558
+      "avg_scholarship_confidence": 0.8508656330749353,
+      "avg_legal_relevance": 0.8411936517165007,
+      "avg_cultural_appropriateness": 0.8108217054263568
     },
     "performance_metrics": {
-      "processing_time_seconds": 23.042008,
-      "entries_per_second": 167.95411233257101
+      "processing_time_seconds": 31.168118,
+      "entries_per_second": 124.16534100647334
     },
     "content_analysis": {
       "unique_surahs": 113,
       "verse_coverage_percent": 34.24778761061947,
       "principle_categories": {
-        "moral_guidance": 3035,
-        "general_guidance": 63,
-        "social_order": 212,
-        "": 560
+        "moral_guidance": 2911,
+        "general_guidance": 385,
+        "social_order": 174,
+        "": 400
       },
       "legal_domains": {
-        "general_legal": 3258,
-        "family_relations": 52
+        "general_legal": 3377,
+        "family_relations": 93
       }
     }
   },
   "quality_analysis": {
-    "high_quality_rate": 85.52971576227391,
+    "high_quality_rate": 89.66408268733849,
     "error_rate": 0.0,
     "legal_relevance_rate": 100.0
   }
