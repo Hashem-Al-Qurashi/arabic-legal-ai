@@ -26,26 +26,26 @@
   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark Theme Variables */
+/* Dark Theme Variables - RESTORED TO ORIGINAL WORKING VALUES */
 [data-theme="dark"], 
 .dark-mode {
-  --text-primary: #ffffff; /* Pure white for dark mode */
-  --text-secondary: #e5e7eb; /* Lighter gray for dark mode */
-  --text-light: #d1d5db;
-  --background-light: #0f0f0f; /* Darker background for mobile */
-  --background-white: #1a1a1a; /* Darker container background */
-  --border-light: #2d2d2d;
-  --border-medium: #404040;
+  --text-primary: #f9fafb; /* Original working text color */
+  --text-secondary: #d1d5db; /* Original working secondary */
+  --text-light: #9ca3af; /* Original working light text */
+  --background-light: #1f2937; /* RESTORED: Original working background */
+  --background-white: #111827; /* RESTORED: Original working container */
+  --border-light: #374151; /* RESTORED: Original working border */
+  --border-medium: #4b5563; /* RESTORED: Original working border */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
 }
 
-/* Dark mode body background */
+/* Dark mode body background - RESTORED TO ORIGINAL */
 [data-theme="dark"] body,
 .dark-mode body {
-  background: #0f0f0f; /* Darker background for better contrast */
+  background: #111827; /* RESTORED: Original working body background */
 }
 
 /* Apply dark mode variables to body and all elements */
@@ -95,7 +95,15 @@ input::placeholder {
 .dark-mode .ai-response-container *,
 .dark-mode .ai-response-container .ai-response,
 .dark-mode .ai-response-container .ai-response * {
-  color: #f9fafb !important;
+  color: #ffffff !important;
+}
+
+/* Light mode AI response text styling */
+.ai-response-container,
+.ai-response-container *,
+.ai-response-container .ai-response,
+.ai-response-container .ai-response * {
+  color: #000000 !important;
 }
 
 /* Dark mode AI response headers */
@@ -105,13 +113,29 @@ input::placeholder {
 .dark-mode .ai-response-container h4,
 .dark-mode .ai-response-container h5,
 .dark-mode .ai-response-container h6 {
-  color: #f9fafb !important;
+  color: #ffffff !important;
+}
+
+/* Light mode AI response headers */
+.ai-response-container h1,
+.ai-response-container h2,
+.ai-response-container h3,
+.ai-response-container h4,
+.ai-response-container h5,
+.ai-response-container h6 {
+  color: #000000 !important;
 }
 
 /* Dark mode AI response strong/bold text */
 .dark-mode .ai-response-container strong,
 .dark-mode .ai-response-container b {
-  color: #f9fafb !important;
+  color: #ffffff !important;
+}
+
+/* Light mode AI response strong/bold text */
+.ai-response-container strong,
+.ai-response-container b {
+  color: #000000 !important;
 }
 
 /* Dark mode form elements */
@@ -515,6 +539,15 @@ button,
   transform-style: preserve-3d;
 }
 
+/* Legal badge - always white text on green background */
+.legal-badge {
+  color: #ffffff !important;
+}
+
+.legal-badge * {
+  color: #ffffff !important;
+}
+
 /* Responsive design adjustments */
 @media (max-width: 768px) {
   .chat-container {
@@ -688,12 +721,31 @@ div.ai-response-container div.ai-response b {
 .ai-response-container .ai-response h5,
 .ai-response-container .ai-response h6 {
   font-weight: 600 !important;
-  color: #1f1f1f !important;
   margin: 2.5rem 0 1rem 0 !important; /* Even more generous spacing between sections */
   text-align: right !important;
   line-height: 1.4 !important;
   display: block !important;
   background: none !important; /* Override mobile green backgrounds */
+}
+
+/* Dark mode headers */
+.dark-mode .ai-response-container .ai-response h1,
+.dark-mode .ai-response-container .ai-response h2,
+.dark-mode .ai-response-container .ai-response h3,
+.dark-mode .ai-response-container .ai-response h4,
+.dark-mode .ai-response-container .ai-response h5,
+.dark-mode .ai-response-container .ai-response h6 {
+  color: #ffffff !important;
+}
+
+/* Light mode headers */
+.ai-response-container .ai-response h1,
+.ai-response-container .ai-response h2,
+.ai-response-container .ai-response h3,
+.ai-response-container .ai-response h4,
+.ai-response-container .ai-response h5,
+.ai-response-container .ai-response h6 {
+  color: #000000 !important;
 }
 
 /* REMOVED - All font sizes handled by nuclear rule above */
@@ -704,8 +756,17 @@ div.ai-response-container div.ai-response b {
   line-height: 1.8 !important; /* Generous line spacing for Arabic */
   text-align: right !important;
   display: block !important;
-  color: #1f1f1f !important;
   padding: 0 !important; /* Override any padding */
+}
+
+/* Dark mode paragraphs */
+.dark-mode .ai-response-container .ai-response p {
+  color: #ffffff !important;
+}
+
+/* Light mode paragraphs */
+.ai-response-container .ai-response p {
+  color: #000000 !important;
 }
 
 /* After Headers - Comfortable Gap - MAXIMUM SPECIFICITY */
@@ -722,11 +783,22 @@ div.ai-response-container div.ai-response b {
 .ai-response-container .ai-response strong,
 .ai-response-container .ai-response b {
   font-weight: 700 !important;
-  color: #1f1f1f !important;
   display: inline !important;
   margin: 0.5rem 0 !important; /* Micro-hierarchy spacing */
   background: none !important; /* Remove mobile green backgrounds */
   padding: 0 !important; /* Remove mobile padding */
+}
+
+/* Dark mode bold text */
+.dark-mode .ai-response-container .ai-response strong,
+.dark-mode .ai-response-container .ai-response b {
+  color: #ffffff !important;
+}
+
+/* Light mode bold text */
+.ai-response-container .ai-response strong,
+.ai-response-container .ai-response b {
+  color: #000000 !important;
 }
 
 /* Bold phrases that act as sub-headers - MAXIMUM SPECIFICITY */
@@ -735,7 +807,18 @@ div.ai-response-container div.ai-response b {
   display: block !important;
   margin-bottom: 0.5rem !important;
   /* font-size removed - handled by nuclear rule */
-  color: #1f1f1f !important;
+}
+
+/* Dark mode bold sub-headers */
+.dark-mode .ai-response-container .ai-response p strong:first-child,
+.dark-mode .ai-response-container .ai-response p b:first-child {
+  color: #ffffff !important;
+}
+
+/* Light mode bold sub-headers */
+.ai-response-container .ai-response p strong:first-child,
+.ai-response-container .ai-response p b:first-child {
+  color: #000000 !important;
 }
 
 /* Lists - Hierarchical Structure - MAXIMUM SPECIFICITY */
@@ -754,10 +837,19 @@ div.ai-response-container div.ai-response b {
   line-height: 1.8 !important; /* Same generous line spacing */
   text-align: right !important;
   display: block !important;
-  color: #1f1f1f !important;
   list-style: none !important;
   position: relative !important;
   padding-right: 1.5rem !important; /* Secondary indentation for sub-points */
+}
+
+/* Dark mode list items */
+.dark-mode .ai-response-container .ai-response li {
+  color: #ffffff !important;
+}
+
+/* Light mode list items */
+.ai-response-container .ai-response li {
+  color: #000000 !important;
 }
 
 /* Numbered Lists - Visual Hierarchy - MAXIMUM SPECIFICITY */
@@ -918,19 +1010,15 @@ div.ai-response-container div.ai-response b {
 
 @media (max-width: 768px) {
   
-  /* Mobile-specific body styles */
+  /* Mobile-specific body styles - USE ORIGINAL CSS VARIABLES */
   body {
-    color: #000000 !important; /* Black text in light mode */
+    color: var(--text-primary) !important;
+    background: var(--background-light) !important;
   }
   
-  .dark-mode body {
-    color: #ffffff !important; /* White text in dark mode */
-    background: #0f0f0f !important; /* Match desktop: darkest background */
-  }
-  
-  /* Mobile container backgrounds - match desktop */
-  .dark-mode .chat-container {
-    background: #0f0f0f !important; /* Match desktop body background */
+  /* Mobile container backgrounds - USE ORIGINAL CSS VARIABLES */
+  .chat-container {
+    background: var(--background-light) !important;
   }
   
   /* 🚫 MOBILE: OLD container styling disabled - now using pure ChatGPT approach */
@@ -960,21 +1048,48 @@ div.ai-response-container div.ai-response b {
     color: inherit !important;
   }
   
-  /* Mobile: Force proper text colors */
-  .ai-response,
-  .ai-response * {
-    color: inherit !important;
-  }
-  
-  /* Dark mode text colors for mobile */
-  .dark-mode .ai-response,
-  .dark-mode .ai-response * {
+  /* ROOT FIX: Unified mobile color system - target the new wrapper class */
+  /* Dark mode text colors for mobile - UNIFIED APPROACH */
+  .dark-mode .mobile-ai-response-wrapper,
+  .dark-mode .mobile-ai-response-wrapper *,
+  .dark-mode .mobile-ai-response-wrapper .ai-response,
+  .dark-mode .mobile-ai-response-wrapper .ai-response *,
+  .dark-mode .mobile-ai-response-wrapper .ai-response p,
+  .dark-mode .mobile-ai-response-wrapper .ai-response div,
+  .dark-mode .mobile-ai-response-wrapper .ai-response span,
+  .dark-mode .mobile-ai-response-wrapper .ai-response strong,
+  .dark-mode .mobile-ai-response-wrapper .ai-response b,
+  .dark-mode .mobile-ai-response-wrapper .ai-response h1,
+  .dark-mode .mobile-ai-response-wrapper .ai-response h2,
+  .dark-mode .mobile-ai-response-wrapper .ai-response h3,
+  .dark-mode .mobile-ai-response-wrapper .ai-response h4,
+  .dark-mode .mobile-ai-response-wrapper .ai-response h5,
+  .dark-mode .mobile-ai-response-wrapper .ai-response h6,
+  .dark-mode .mobile-ai-response-wrapper .ai-response li,
+  .dark-mode .mobile-ai-response-wrapper .ai-response ul,
+  .dark-mode .mobile-ai-response-wrapper .ai-response ol {
     color: #ffffff !important;
   }
   
-  /* Light mode text colors for mobile */
-  body:not(.dark-mode) .ai-response,
-  body:not(.dark-mode) .ai-response * {
+  /* Light mode text colors for mobile - UNIFIED APPROACH */
+  body:not(.dark-mode) .mobile-ai-response-wrapper,
+  body:not(.dark-mode) .mobile-ai-response-wrapper *,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response *,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response p,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response div,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response span,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response strong,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response b,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response h1,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response h2,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response h3,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response h4,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response h5,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response h6,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response li,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response ul,
+  body:not(.dark-mode) .mobile-ai-response-wrapper .ai-response ol {
     color: #000000 !important;
   }
   
@@ -1024,19 +1139,18 @@ div.ai-response-container div.ai-response b {
     background: transparent !important;
   }
   
-  /* Mobile dark mode - messages area background */
-  .dark-mode .messages-area {
-    background: #1a1a1a !important; /* Match desktop main area */
+  /* Mobile backgrounds - USE ORIGINAL CSS VARIABLES */
+  .messages-area {
+    background: var(--background-white) !important;
   }
   
-  /* Mobile dark mode backgrounds - EXACT DESKTOP REPLICA */
-  .dark-mode .main-chat {
-    background: #1a1a1a !important; /* Match desktop var(--background-white) */
+  .main-chat {
+    background: var(--background-white) !important;
   }
   
-  .dark-mode .input-area {
-    background: #1a1a1a !important; /* Match desktop var(--background-white) */
-    border-top: 1px solid #2d2d2d !important;
+  .input-area {
+    background: var(--background-white) !important;
+    border-top: 1px solid var(--border-light) !important;
   }
   
   /* Mobile sidebar - match desktop exactly */

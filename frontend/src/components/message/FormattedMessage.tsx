@@ -30,10 +30,11 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
   // ✅ COMPLETE SEPARATION: Mobile ChatGPT vs Desktop Legal
   const isMobile = window.innerWidth <= 768;
   
-  // 🎯 MOBILE: Exact ChatGPT replica - NO containers, page background, same font as user
+  // 🎯 MOBILE: Use CSS classes for consistent color handling - NO inline color styles
   if (isMobile) {
     return (
       <div
+        className="mobile-ai-response-wrapper"
         style={{
           // ✅ NO CONTAINER: Use page background, no borders, no padding, no shadows
           background: 'transparent',
@@ -54,8 +55,7 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
           direction: 'rtl' as const,
           textAlign: 'right' as const,
           
-          // ✅ ChatGPT colors - responsive to theme
-          color: isDark ? '#ffffff' : '#000000', // Pure white in dark, pure black in light
+          // ✅ NO COLOR INLINE STYLES - Let CSS handle all colors
           
           // ✅ Full width, no containers
           width: '100%',
@@ -165,6 +165,7 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
       {/* Premium Legal Header Badge - GREEN THEME - Desktop Only */}
       {!isMobile && (
         <div
+          className="legal-badge"
           style={{
             content: '⚖️ الاستشارة القانونية',
             position: 'absolute',
