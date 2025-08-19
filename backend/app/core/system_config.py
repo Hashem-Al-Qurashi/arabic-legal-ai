@@ -96,6 +96,7 @@ class ConfigManager:
         
         # Database paths (environment-aware with defaults)
         civil_db_path = os.getenv("CIVIL_DB_PATH", os.path.join(data_dir, "vectors.db"))
+        # Use Al-Qurtubi database with 9,033 foundations
         quranic_db_path = os.getenv("QURANIC_DB_PATH", os.path.join(data_dir, "quranic_foundation.db"))
         islamic_db_path = os.getenv("ISLAMIC_DB_PATH", os.path.join(data_dir, "islamic_vectors.db"))
         

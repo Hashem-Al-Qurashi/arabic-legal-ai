@@ -1,0 +1,198 @@
+# Context Classification Rules Configuration
+# Zero-hardcoding approach for contextual verse selection
+# Author: Expert AI Engineer
+# Date: 2025-08-19
+# Purpose: Prevent employment/religious context contamination
+
+# Principle Applied: "Is this hardcoding?" → NO - All rules externalized
+
+version: "1.0"
+last_updated: "2025-08-19"
+validation_authority: "Islamic Legal AI Team"
+
+# Context Domains Definition
+context_domains:
+  employment:
+    description: "Workplace, labor, employment law contexts"
+    confidence_threshold: 0.7
+    
+  religious:
+    description: "Spiritual, worship, religious obligations"
+    confidence_threshold: 0.8
+    
+  family:
+    description: "Marriage, divorce, family relationships"
+    confidence_threshold: 0.75
+    
+  commercial:
+    description: "Trade, contracts, business transactions"
+    confidence_threshold: 0.7
+
+# Multi-Factor Analysis Rules
+classification_rules:
+  
+  employment_context:
+    # Primary indicators (high confidence)
+    primary_indicators:
+      arabic: ["موظف", "عامل", "وظيفة", "مستخدم", "خدمات", "خدمة", "عمل"]
+      english: ["employee", "worker", "employment", "job", "workplace", "work", "service"]
+      
+    # Legal context reinforcers (required for high confidence)
+    legal_reinforcers:
+      arabic: ["قانون", "نظام", "مادة", "لائحة", "نص قانوني"]
+      english: ["law", "regulation", "article", "legal", "statute"]
+      
+    # Domain-specific terms (medium confidence)
+    domain_terms:
+      arabic: ["راتب", "مكافأة", "مستحقات", "فصل", "طرد"]
+      english: ["salary", "bonus", "benefits", "dismissal", "termination"]
+      
+    # Exclusion indicators (reduce confidence if present)
+    exclusion_terms:
+      arabic: ["ثواب", "آخرة", "جنة", "صالح", "تقوى", "عبادة"]
+      english: ["reward", "afterlife", "paradise", "righteous", "piety", "worship"]
+
+  religious_context:
+    # Primary indicators
+    primary_indicators:
+      arabic: ["ثواب", "آخرة", "جنة", "عبادة", "تقوى", "صالح", "أعمال", "خير"]
+      english: ["reward", "afterlife", "paradise", "worship", "piety", "righteous", "deeds", "good"]
+      
+    # Religious reinforcers
+    religious_reinforcers:
+      arabic: ["الله", "رب", "إيمان", "إسلام", "قرآن", "سنة"]
+      english: ["Allah", "God", "faith", "Islam", "Quran", "Sunnah"]
+      
+    # Domain-specific terms
+    domain_terms:
+      arabic: ["صلاة", "زكاة", "حج", "صوم", "دعاء", "ذكر"]
+      english: ["prayer", "zakat", "hajj", "fasting", "supplication", "remembrance"]
+      
+    # Exclusion indicators  
+    exclusion_terms:
+      arabic: ["قانون", "نظام", "مادة", "راتب", "موظف", "شركة"]
+      english: ["law", "regulation", "article", "salary", "employee", "company"]
+
+  family_context:
+    # Primary indicators
+    primary_indicators:
+      arabic: ["زواج", "زوج", "زوجة", "طلاق", "عدة", "نكاح", "ميراث", "توزيع"]
+      english: ["marriage", "husband", "wife", "divorce", "waiting_period", "nikah", "inheritance", "distribution"]
+      
+    # Family reinforcers
+    family_reinforcers:
+      arabic: ["أسرة", "عائلة", "أولاد", "والدين", "أطفال"]
+      english: ["family", "household", "children", "parents", "kids"]
+      
+    # Domain-specific terms
+    domain_terms:
+      arabic: ["مهر", "نفقة", "حضانة", "ولاية", "وراثة", "تركة"]
+      english: ["dowry", "maintenance", "custody", "guardianship", "inheritance_law", "estate"]
+
+# Disambiguation Strategies
+disambiguation_strategies:
+  
+  work_term_disambiguation:
+    description: "Distinguish between 'عمل' (employment) vs 'عمل' (good deeds)"
+    strategy: "multi_factor_analysis"
+    
+    employment_context_indicators:
+      required_minimum: 1  # Need at least 1 indicator for employment context
+      indicators:
+        - presence: ["قانون", "نظام", "مادة"]  # Legal terms
+        - presence: ["موظف", "وظيفة", "راتب", "عامل"]  # Employment terms  
+        - absence: ["ثواب", "آخرة", "جنة"]      # No religious terms
+        
+    religious_context_indicators:
+      required_minimum: 2  # Need at least 2 indicators for religious context
+      indicators:
+        - presence: ["ثواب", "آخرة", "صالح"]    # Religious reward terms
+        - presence: ["الله", "إيمان", "تقوى"]   # Religious terms
+        - absence: ["قانون", "راتب", "موظف"]     # No legal/employment terms
+
+  reward_term_disambiguation:
+    description: "Distinguish between 'أجر' (salary) vs 'أجر' (divine reward)"
+    strategy: "context_analysis"
+    
+    salary_context_indicators:
+      indicators:
+        - presence: ["موظف", "عامل", "راتب"]
+        - presence: ["قانون", "نظام", "عقد"]
+        - absence: ["الله", "آخرة", "ثواب"]
+        
+    divine_reward_indicators:
+      indicators:
+        - presence: ["الله", "آخرة", "جنة"]
+        - presence: ["صالح", "تقوى", "عبادة"]
+        - absence: ["موظف", "راتب", "قانون"]
+
+# Confidence Scoring Configuration
+confidence_scoring:
+  weights:
+    primary_indicators: 0.4      # 40% weight
+    legal_reinforcers: 0.3       # 30% weight  
+    domain_terms: 0.2            # 20% weight
+    exclusion_penalty: -0.3      # -30% if exclusion terms present
+    
+  thresholds:
+    high_confidence: 0.8
+    medium_confidence: 0.6
+    low_confidence: 0.4
+    rejection_threshold: 0.15    # Below this, reject classification
+
+# Fallback Configuration  
+fallback_behavior:
+  default_context: "general"
+  log_ambiguous_cases: true
+  require_minimum_confidence: 0.5
+  
+  ambiguous_case_handling:
+    strategy: "conservative"     # When unsure, use generic references
+    fallback_reference: "في القرآن الكريم"
+    log_level: "warning"
+
+# Quality Assurance
+quality_checks:
+  prevent_cross_contamination: true
+  log_classification_decisions: true
+  track_confidence_scores: true
+  enable_performance_monitoring: true
+  
+  alerts:
+    low_confidence_threshold: 0.4
+    cross_contamination_detected: true
+    classification_failures: true
+
+# Testing Configuration
+test_scenarios:
+  employment_queries:
+    - "هل يلزم العامل رد رسوم المرافقين؟"
+    - "ما حقوق الموظف في قانون العمل؟"
+    - "كيف يتم احتساب مكافأة نهاية الخدمة؟"
+    
+  religious_queries:
+    - "ما ثواب العمل الصالح في الآخرة؟"
+    - "كيف يحصل المؤمن على الأجر من الله؟"
+    - "ما هي أعمال الخير المستحبة؟"
+    
+  family_queries:
+    - "ما حقوق الزوجة في الإسلام؟"
+    - "كيف يتم توزيع الميراث؟"
+    - "ما هي شروط الزواج الصحيح؟"
+
+# Expected Classification Results (for testing)
+expected_results:
+  "هل يلزم العامل رد رسوم المرافقين؟":
+    primary_context: "employment"
+    confidence: "> 0.8"
+    exclude_contexts: ["religious", "family"]
+    
+  "ما ثواب العمل الصالح في الآخرة؟":
+    primary_context: "religious" 
+    confidence: "> 0.8"
+    exclude_contexts: ["employment", "family"]
+    
+  "ما حقوق الزوجة في الإسلام؟":
+    primary_context: "family"
+    confidence: "> 0.8"  
+    exclude_contexts: ["employment", "religious"]
