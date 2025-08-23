@@ -824,18 +824,87 @@ class DocumentRetriever:
    
     async def _ai_filter_results(self, query: str, search_results: List, top_k: int) -> List[Chunk]:
         """
-        Trust vector similarity ranking - no AI filtering needed
+        AI-powered filtering that chooses the most relevant documents from top 20 results
         """
-        logger.info("🎯 SKIPPING AI FILTERING: Using vector similarity ranking")
+        logger.info("🎯 AI FILTERING: Analyzing top 20 documents for intelligent selection")
         
-        # Return top result based on vector similarity
-        # Return top 10 results for broader context
-        chunks = []
-        for i in range(min(10, len(search_results))):
-            chunk = search_results[i].chunk if hasattr(search_results[i], 'chunk') else search_results[i]
-            chunks.append(chunk)
+        # Get top 20 results for AI analysis
+        top_20_results = search_results[:20] if len(search_results) >= 20 else search_results
+        
+        if not top_20_results:
+            return []
+            
+        # Extract chunks from results
+        candidates = []
+        for i, result in enumerate(top_20_results):
+            chunk = result.chunk if hasattr(result, 'chunk') else result
+            candidates.append({
+                'index': i,
+                'title': chunk.title,
+                'content': chunk.content[:500],  # First 500 chars for analysis
+                'full_chunk': chunk
+            })
+        
+        # Build AI filtering prompt
+        candidate_descriptions = []
+        for i, candidate in enumerate(candidates):
+            candidate_descriptions.append(f"{i+1}. {candidate['title']}: {candidate['content'][:200]}...")
+        
+        ai_prompt = f"""
+أنت نظام ذكي لاختيار الوثائق القانونية الأكثر صلة. 
 
-        return chunks
+الاستعلام: {query}
+
+الوثائق المتاحة (أفضل 20 وثيقة):
+{chr(10).join(candidate_descriptions)}
+
+مهمتك: اختر أفضل {top_k} وثائق تجيب على الاستعلام بدقة.
+
+القواعد:
+1. ركز على الوثائق التي تحتوي على إجابة مباشرة للسؤال
+2. اعطي الأولوية للقوانين والأنظمة الرسمية
+3. تجنب المذكرات والحالات الخاصة إلا إذا كانت ضرورية
+4. اختر الوثائق التي تكمل بعضها البعض
+
+أرجع فقط أرقام الوثائق المختارة مفصولة بفواصل (مثال: 1,3,7)
+"""
+
+        try:
+            response = await self.ai_client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": ai_prompt}],
+                temperature=0.1,
+                max_tokens=100
+            )
+            
+            ai_selection = response.choices[0].message.content.strip()
+            logger.info(f"AI selected documents: {ai_selection}")
+            
+            # Parse AI selection
+            selected_indices = []
+            for num_str in ai_selection.split(','):
+                try:
+                    index = int(num_str.strip()) - 1  # Convert to 0-based index
+                    if 0 <= index < len(candidates):
+                        selected_indices.append(index)
+                except ValueError:
+                    continue
+            
+            # Return selected chunks
+            selected_chunks = []
+            for idx in selected_indices[:top_k]:  # Limit to requested top_k
+                selected_chunks.append(candidates[idx]['full_chunk'])
+            
+            logger.info(f"✅ AI FILTERING: Selected {len(selected_chunks)} documents from top 20")
+            return selected_chunks
+            
+        except Exception as e:
+            logger.error(f"AI filtering failed: {e}")
+            # Fallback to top results
+            fallback_chunks = []
+            for i in range(min(top_k, len(candidates))):
+                fallback_chunks.append(candidates[i]['full_chunk'])
+            return fallback_chunks
 
     async def get_relevant_documents(self, query: str, top_k: int = 3, user_intent: str = None) -> List[Chunk]:
         """
