@@ -1,0 +1,19 @@
+{
+  "session": {
+    "session_id": "quran_20250817_131340",
+    "start_time": "2025-08-17 13:13:40.112197",
+    "total_verses": 3870,
+    "processed_verses": 0,
+    "failed_verses": 250,
+    "total_cost": 0.0,
+    "total_tokens": 0,
+    "current_batch": 10,
+    "last_checkpoint": "2025-08-17 13:13:49.661653",
+    "estimated_completion": null,
+    "successful_embeddings": 0,
+    "total_chunks_created": 0
+  },
+  "processed_verses": [],
+  "timestamp": "2025-08-17T13:13:49.661773",
+  "version": "1.0"
+}
