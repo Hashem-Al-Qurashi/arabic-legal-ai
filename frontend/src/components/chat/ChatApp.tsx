@@ -1517,14 +1517,14 @@ const handleDeleteCancel = () => {
                 <h2 style={{
                   fontSize: 'clamp(50px, 4vw, 26px)',
                   fontWeight: '600',
-                  color: 'white',
+                  color: isDark ? 'white' : 'black',
                   marginBottom: '16px'
                 }}>
                   اهلا بك في حكم
                 </h2>
                 <p style={{
                   fontSize: 'clamp(24px, 2vw, 16px)',
-                  color: 'white',
+                  color: isDark ? 'white' : 'black',
                   marginBottom: '32px',
                   maxWidth: '600px',
                   lineHeight: '1.6'
