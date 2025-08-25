@@ -273,9 +273,22 @@ async def extract_text(
         # Check if extraction was successful
         if result.get("error"):
             logger.error(f"OCR extraction error: {result['error']}")
-            raise HTTPException(
-                status_code=500,
-                detail=result["error"]
+            # Instead of raising an exception, return a graceful error response
+            return JSONResponse(
+                status_code=200,
+                content={
+                    "success": False,
+                    "error": f"تعذر استخراج النص من الملف: {result['error']}",
+                    "ocr_result": result,
+                    "metadata": {
+                        "filename": file.filename,
+                        "content_type": content_type,
+                        "file_size": len(contents),
+                        "timestamp": datetime.now().isoformat(),
+                        "user_id": current_user.id if current_user else None,
+                        "session_id": session_id if not current_user else None
+                    }
+                }
             )
         
         if not result.get("text"):
@@ -284,7 +297,15 @@ async def extract_text(
                 content={
                     "success": False,
                     "error": "لم يتم العثور على نص في الملف",
-                    "ocr_result": result
+                    "ocr_result": result,
+                    "metadata": {
+                        "filename": file.filename,
+                        "content_type": content_type,
+                        "file_size": len(contents),
+                        "timestamp": datetime.now().isoformat(),
+                        "user_id": current_user.id if current_user else None,
+                        "session_id": session_id if not current_user else None
+                    }
                 }
             )
         

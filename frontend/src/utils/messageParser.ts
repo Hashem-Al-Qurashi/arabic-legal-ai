@@ -34,10 +34,18 @@ export const detectMultiAgentResponse = (content: string): boolean => {
  */
 export const formatAIResponse = (content: string): string => {
   console.log('---- RAW INPUT ----');
-  console.log(content);
+  console.log('Content type:', typeof content);
+  console.log('Content value:', content);
+  
+  // ✅ FIX: Ensure content is always a string
+  const safeContent = typeof content === 'string' ? content : 
+                     (typeof content === 'object' ? JSON.stringify(content) : String(content));
+  
+  console.log('---- SAFE CONTENT ----');
+  console.log(safeContent);
 
-  // Step 1: Clean the input
-  let cleaned = content
+  // Step 1: Clean the input - use safeContent instead of content
+  let cleaned = safeContent
     // Remove any existing HTML tags first
     .replace(/<\/?bold>/gi, '')
     .replace(/<\/?b>/gi, '')

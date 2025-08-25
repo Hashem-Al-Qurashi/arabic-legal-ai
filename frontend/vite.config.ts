@@ -13,7 +13,7 @@ export default defineConfig({
     cors: true,
     // Allow external connections including ngrok
     hmr: {
-      clientPort: 443
+      port: 24678
     },
     // Add proxy for API calls
     proxy: {

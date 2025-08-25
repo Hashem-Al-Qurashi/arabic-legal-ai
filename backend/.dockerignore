@@ -12,3 +12,8 @@ venv
 node_modules
 .pytest_cache
 data/logs/*
+# Exclude all database files to prevent overwriting production data
+data/*.db
+*.db
+backups/
+**/*.sqlite*

@@ -100,7 +100,7 @@ export const FileUploadButton: React.FC<FileUploadButtonProps> = ({
         processingStatus: 'processing'
       });
 
-      const response = await fetch('/api/chat/message', {
+      const response = await fetch('/api/ocr/extract', {
         method: 'POST',
         headers: {
           ...(user && { 'Authorization': `Bearer ${localStorage.getItem('token')}` })
@@ -126,20 +126,24 @@ export const FileUploadButton: React.FC<FileUploadButtonProps> = ({
       }
 
       const result = await response.json();
+      console.log('🔍 OCR: Full backend response:', result);
       
-      // The chat endpoint returns the full AI response, we need to extract OCR text
-      // from the user_message content (which contains the OCR result)
-      const userMessage = result.user_message?.content || '';
-      const ocrTextMatch = userMessage.match(/\[محتوى الملف المرفق[^\]]+\]:\s*(.+?)(?:\n\n|$)/s);
-      const extractedText = ocrTextMatch ? ocrTextMatch[1].trim() : '';
+      // OCR endpoint returns: { success: true, ocr_result: { text: "...", confidence: 0.95, engine: "..." } }
+      const extractedText = result.success && result.ocr_result ? result.ocr_result.text : '';
+      const confidence = result.ocr_result?.confidence || 0;
+      const engine = result.ocr_result?.engine || 'Unknown';
+      
+      console.log('🔍 OCR: Extracted text:', extractedText);
+      console.log('🔍 OCR: Confidence:', confidence);
+      console.log('🔍 OCR: Engine:', engine);
       
       if (extractedText && !extractedText.includes('تعذر معالجة الملف')) {
         // Update attachment with completed OCR results
         const completedAttachment: AttachmentInfo = {
           ...initialAttachment,
           extractedText: extractedText,
-          confidence: 0.95, // Default confidence since we don't get it from unified endpoint
-          engine: 'Google Vision',
+          confidence: confidence,
+          engine: engine,
           processingStatus: 'completed'
         };
 

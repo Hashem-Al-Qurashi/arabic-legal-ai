@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Theme</title>
+</head>
+<body>
+    <h1>Theme Cleaner</h1>
+    <button onclick="clearTheme()">Clear Theme Storage</button>
+    <p id="status"></p>
+    
+    <script>
+        function clearTheme() {
+            // Remove theme preference
+            localStorage.removeItem('theme-preference');
+            localStorage.removeItem('theme');
+            localStorage.removeItem('dark-mode');
+            
+            // Show status
+            document.getElementById('status').textContent = 'Theme cleared! Refresh the app to see light mode.';
+            
+            // Log current localStorage
+            console.log('Current localStorage:', {...localStorage});
+        }
+        
+        // Show current theme on load
+        window.onload = function() {
+            const theme = localStorage.getItem('theme-preference') || localStorage.getItem('theme');
+            document.getElementById('status').textContent = 'Current theme: ' + (theme || 'not set');
+        }
+    </script>
+</body>
+</html>

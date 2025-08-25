@@ -39,7 +39,8 @@ EXPOSE 8000
 # Set production environment variables
 ENV DEBUG=False
 ENV ENVIRONMENT=production
-ENV DATABASE_URL=sqlite:///./data/arabic_legal.db
+# Database URL will be configured via environment variables from AWS Secrets Manager
+# ENV DATABASE_URL will be set by ECS task definition
 ENV AI_PROVIDER=openai
 ENV ALGORITHM=HS256
 ENV ACCESS_TOKEN_EXPIRE_MINUTES=30

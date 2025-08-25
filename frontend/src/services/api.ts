@@ -357,18 +357,24 @@ async sendMessageStreaming(
 
           try {
             const parsed = JSON.parse(data);
+            console.log('🔵 API: Parsed SSE data:', parsed);
             
             if (parsed.type === 'chunk' && parsed.content && onChunk) {
+              console.log('🔵 API: Processing chunk:', parsed.content);
               fullResponse += parsed.content;
               onChunk(parsed.content);
             } else if (parsed.type === 'complete' && onComplete) {
+              console.log('🔵 API: Processing complete:', parsed);
+              console.log('🔵 API: ai_message content:', parsed.ai_message?.content);
+              console.log('🔵 API: fullResponse:', fullResponse);
               onComplete({ ...parsed, fullResponse });
             } else if (parsed.type === 'error' && onError) {
+              console.log('🔵 API: Processing error:', parsed.error);
               onError(parsed.error);
               return;
             }
           } catch (e) {
-            // Skip invalid JSON
+            console.log('🔵 API: Failed to parse JSON:', data);
           }
         }
       }

@@ -358,8 +358,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
         }
 
         /* Dark mode */
-        [data-theme="dark"] .attachment-compact,
-        .dark .attachment-compact {
+        :root.dark-mode .attachment-compact {
           background: linear-gradient(135deg, 
             rgba(59, 130, 246, 0.1) 0%, 
             rgba(16, 185, 129, 0.05) 100%
@@ -367,25 +366,21 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
           border-color: rgba(59, 130, 246, 0.3);
         }
 
-        [data-theme="dark"] .filename,
-        .dark .filename {
+        :root.dark-mode .filename {
           color: white !important;
         }
 
-        [data-theme="dark"] .file-meta,
-        .dark .file-meta {
+        :root.dark-mode .file-meta {
           color: #9ca3af;
         }
 
-        [data-theme="dark"] .preview-content,
-        .dark .preview-content {
+        :root.dark-mode .preview-content {
           background: rgba(31, 41, 55, 0.8);
           border-color: rgba(75, 85, 99, 0.3);
           color: #e5e7eb;
         }
 
-        [data-theme="dark"] .action-btn,
-        .dark .action-btn {
+        :root.dark-mode .action-btn {
           background: rgba(31, 41, 55, 0.8);
           border-color: rgba(75, 85, 99, 0.3);
           color: #e5e7eb;

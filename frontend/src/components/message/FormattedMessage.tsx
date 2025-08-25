@@ -13,18 +13,17 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
   selectedConversation = null,
   isDark = false
 }) => {
+  // ✅ DEBUG: Log what's being passed in
+  console.log('🔍 FormattedMessage received:', { 
+    contentType: typeof content, 
+    contentValue: content,
+    role 
+  });
   // AI messages: Mobile ChatGPT-style vs Desktop Legal theme
   const isMobile = window.innerWidth <= 768;
   
-  // Check actual dark mode state
+  // Check actual dark mode state from DOM
   const actualIsDark = document.documentElement.classList.contains('dark-mode');
-  
-  console.log('🎨 Dark Mode Debug:', { 
-    isDarkProp: isDark,
-    actualIsDark,
-    isMobile,
-    role 
-  });
 
   if (role === 'user') {
     return (
@@ -42,7 +41,7 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
 
   return (
     <div
-      className={`ai-response-container ${actualIsDark ? 'dark-mode' : ''}`}
+      className="ai-response-container"
       style={{
         // Background - Mobile: clean white, Desktop: premium legal theme
         background: isMobile 
@@ -173,7 +172,11 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
           lineHeight: isMobile ? '1.7' : undefined,
           color: isMobile ? '#374151' : isDark ? '#ffffff' : '#000000',
         }}
-        dangerouslySetInnerHTML={{ __html: formatAIResponse(content) }}
+        dangerouslySetInnerHTML={{ __html: formatAIResponse(
+          typeof content === 'string' ? content : 
+          typeof content === 'object' ? JSON.stringify(content) : 
+          String(content)
+        ) }}
       />
       
       {/* Add ActionsBar for AI messages */}

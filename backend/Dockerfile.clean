@@ -1,0 +1,59 @@
+# Clean Production Dockerfile - Optimized for deployment
+FROM python:3.11-slim as builder
+
+# Build stage - install dependencies
+WORKDIR /build
+COPY requirements.txt .
+RUN pip install --no-cache-dir --user -r requirements.txt
+
+# Production stage
+FROM python:3.11-slim
+
+# Install minimal system dependencies including PostgreSQL support
+RUN apt-get update && apt-get install -y \
+    curl \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Copy Python packages from builder
+COPY --from=builder /root/.local /root/.local
+
+# Create app user
+RUN useradd --create-home --shell /bin/bash app
+
+# Set up application
+WORKDIR /app
+# Copy only application code, not database files
+COPY app/ ./app/
+COPY alembic/ ./alembic/
+COPY alembic.ini requirements.txt ./
+COPY *.py ./
+
+# Set permissions
+RUN chown -R app:app /app && \
+    mkdir -p /app/data && \
+    chown -R app:app /app/data
+
+# Switch to app user
+USER app
+
+# Add user packages to PATH
+ENV PATH=/root/.local/bin:$PATH
+ENV PYTHONPATH=/app
+
+# Production environment variables
+ENV PYTHONUNBUFFERED=1
+ENV ENVIRONMENT=production
+ENV DEBUG=False
+
+# Expose port
+EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=60s --timeout=30s --start-period=180s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Start the application
+CMD ["gunicorn", "app.main:app", "--worker-class", "uvicorn.workers.UvicornWorker", "--workers", "1", "--timeout", "600", "--bind", "0.0.0.0:8000"]

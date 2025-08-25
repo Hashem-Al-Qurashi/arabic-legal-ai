@@ -445,40 +445,64 @@ const handleDeleteCancel = () => {
       currentMessage,
       selectedConversation || undefined,
       sessionId,
-      undefined, // file parameter (no file for regular chat)
-      
-            // 📡 Real-time streaming callback
+      // ✅ FIX: Correct parameter order - onChunk is 4th parameter
       (chunk: string) => {
-        streamingContent += chunk;
+        console.log('🟡 CHATAPP: Received chunk:', { type: typeof chunk, value: chunk });
+        // ✅ FIX: Ensure chunk is always a string
+        const safeChunk = typeof chunk === 'string' ? chunk : String(chunk);
+        streamingContent += safeChunk;
+        console.log('🟡 CHATAPP: Updated streamingContent:', streamingContent.substring(0, 100) + '...');
         
         // Update the assistant message in real-time with RAW content
-        setMessages(prev => prev.map(msg => 
-          msg.id === assistantMessageId 
-            ? { ...msg, content: streamingContent }  // ← FIX: No formatting during streaming
-            : msg
-        ));
+        setMessages(prev => {
+          const updated = prev.map(msg => 
+            msg.id === assistantMessageId 
+              ? { ...msg, content: streamingContent }  // ← FIX: No formatting during streaming
+              : msg
+          );
+          console.log('🟡 CHATAPP: Updated messages during streaming:', updated[updated.length - 1]);
+          return updated;
+        });
       },
 
-      // ✅ Completion handler
+      // ✅ Completion handler - 5th parameter
       (response: any) => {
-        console.log('📥 Received response:', { contentLength: response.fullResponse?.length || 0 });
+        console.log('🟢 CHATAPP: Received completion response:', response);
+        console.log('🟢 CHATAPP: Response type:', typeof response);
+        console.log('🟢 CHATAPP: Response keys:', Object.keys(response || {}));
         
-        // Update final message with complete data and SINGLE formatting pass
-        const finalContent = response.ai_message?.content || streamingContent;
-        console.log('🚨 DEBUGGING ChatApp: finalContent received:', finalContent);
-        console.log('🚨 DEBUGGING ChatApp: finalContent type:', typeof finalContent);
-        console.log('🚨 DEBUGGING ChatApp: finalContent length:', finalContent?.length);
+        // ✅ FIX: Extract content from the correct path based on backend response
+        const finalContent = response.ai_message?.content || response.fullResponse || streamingContent || '';
         
-        setMessages(prev => prev.map(msg =>
-          msg.id === assistantMessageId
-          ? {
-              ...msg,
-              id: response.ai_message?.id || assistantMessageId,
-              content: finalContent, // ← Raw content - FormattedMessage will handle formatting
-              timestamp: response.ai_message?.timestamp || new Date().toISOString()
-            }
-          : msg
-        ));
+        console.log('🟢 CHATAPP: Extracted finalContent:', finalContent);
+        console.log('🟢 CHATAPP: finalContent type:', typeof finalContent);
+        
+        // ✅ FIX: Ensure content is always a string, never an object
+        const safeContent = typeof finalContent === 'string' ? finalContent : 
+                           (typeof finalContent === 'object' ? JSON.stringify(finalContent) : String(finalContent));
+        
+        console.log('🟢 CHATAPP: Safe content:', safeContent);
+        console.log('🟢 CHATAPP: Safe content type:', typeof safeContent);
+        
+        setMessages(prev => {
+          const updated = prev.map(msg =>
+            msg.id === assistantMessageId
+            ? {
+                ...msg,
+                id: response.ai_message?.id || assistantMessageId,
+                content: safeContent, // ← Safe string content - FormattedMessage will handle formatting
+                timestamp: response.ai_message?.timestamp || new Date().toISOString()
+              }
+            : msg
+          );
+          
+          const finalMessage = updated.find(msg => msg.id === (response.ai_message?.id || assistantMessageId));
+          console.log('🟣 CHATAPP: Final message stored in state:', finalMessage);
+          console.log('🟣 CHATAPP: Final message content type:', typeof finalMessage?.content);
+          console.log('🟣 CHATAPP: Final message content value:', finalMessage?.content);
+          
+          return updated;
+        });
 
         // 🔄 Handle conversation and user data updates with URL synchronization
         if (response.conversation_id && !selectedConversation) {
@@ -509,7 +533,7 @@ const handleDeleteCancel = () => {
         console.log('✅ Message processed successfully');
       },
       
-      // ❌ Error handler
+      // ❌ Error handler - 6th parameter
       (error: string) => {
         console.error('❌ Streaming failed:', error);
         
@@ -1739,7 +1763,17 @@ const handleDeleteCancel = () => {
     padding: isMobile ? '0 1rem' : '0 2rem'
   }}
 >
-                {messages.map((message, index) => (
+                {messages.map((message, index) => {
+                  console.log('🔴 RENDER: Message being rendered:', { 
+                    id: message.id, 
+                    role: message.role, 
+                    contentType: typeof message.content, 
+                    content: message.content,
+                    isObject: typeof message.content === 'object',
+                    objectKeys: typeof message.content === 'object' ? Object.keys(message.content || {}) : 'N/A',
+                    stringified: typeof message.content === 'object' ? JSON.stringify(message.content) : 'N/A'
+                  });
+                  return (
                  <div
   key={message.id}
   className="message-enter"
@@ -1815,7 +1849,8 @@ const handleDeleteCancel = () => {
                       </div>
                     </div>
                   </div>
-                ))}
+                );
+                })}
                 
                 {/* Dynamic Legal Analysis Loading indicator */}
 {isLoading && (
