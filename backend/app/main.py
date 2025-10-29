@@ -4,6 +4,11 @@
 Ultimate Arabic Legal Assistant - Unified Chat System
 Single chat API for all users (guests + authenticated)
 """
+
+# Load environment variables first
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -12,6 +17,7 @@ import os
 from app.models import User, Consultation, Conversation, Message
 # Import routers
 from app.api.simple_auth import router as auth_router
+from app.api.google_auth_fixed import router as google_auth_router
 from app.api.chat import router as chat_router
 from app.api.export import router as export_router
 from app.api.ocr import router as ocr_router
@@ -68,6 +74,7 @@ async def options_handler(request: Request):
 
 # 🔥 Include routers - ONLY MODERN APIS
 app.include_router(auth_router, prefix="/api/auth")
+app.include_router(google_auth_router, prefix="/api/auth")
 app.include_router(chat_router, prefix="/api")
 app.include_router(export_router, prefix="/export")
 app.include_router(ocr_router, prefix="/api")
