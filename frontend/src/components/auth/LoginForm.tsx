@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import GoogleSignInButton from './GoogleSignInButton';
 
 interface LoginFormProps {
   onSwitchToRegister: () => void;
@@ -221,6 +222,40 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister, onSuccess }) 
           )}
         </button>
       </form>
+
+      {/* Google Sign-In Option */}
+      <div style={{ marginBottom: '24px' }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          marginBottom: '16px',
+          textAlign: 'center'
+        }}>
+          <div style={{
+            flex: 1,
+            height: '1px',
+            background: 'rgba(255, 255, 255, 0.3)'
+          }} />
+          <span style={{
+            padding: '0 16px',
+            fontSize: '14px',
+            color: 'rgba(255, 255, 255, 0.7)',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif'
+          }}>
+            أو
+          </span>
+          <div style={{
+            flex: 1,
+            height: '1px',
+            background: 'rgba(255, 255, 255, 0.3)'
+          }} />
+        </div>
+        
+        <GoogleSignInButton 
+          onSuccess={onSuccess}
+          disabled={loading}
+        />
+      </div>
       
       {/* Forgot Password Link */}
       <div style={{

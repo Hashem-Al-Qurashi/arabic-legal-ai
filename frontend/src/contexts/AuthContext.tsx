@@ -21,6 +21,7 @@ interface AuthContextType {
   isGuest: boolean;
   cooldownInfo: CooldownInfo;
   login: (email: string, password: string) => Promise<void>;
+  loginWithGoogle: (idToken: string) => Promise<void>;
   register: (email: string, password: string, fullName: string) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
@@ -169,6 +170,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     await new Promise(resolve => setTimeout(resolve, 100));
   }, []);
 
+  const loginWithGoogle = useCallback(async (idToken: string) => {
+    console.log('🔑 Starting Google login process...');
+    
+    // The Google Sign-In button handles the API call and token storage
+    // We just need to refresh the user data
+    const currentUser = await authAPI.getCurrentUser();
+    console.log('👤 Google user data received:', currentUser.email);
+    
+    setUser(currentUser);
+    setIsGuest(false);
+    
+    console.log('🎯 Auth state updated, Google login complete');
+    await new Promise(resolve => setTimeout(resolve, 100));
+  }, []);
+
   const register = useCallback(async (email: string, password: string, fullName: string) => {
     console.log('📝 Starting registration process...');
     await authAPI.register({ email, password, full_name: fullName });
@@ -293,6 +309,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     isGuest,
     cooldownInfo,
     login,
+    loginWithGoogle,
     register,
     logout,
     isAuthenticated: !!user,
@@ -307,6 +324,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     isGuest,
     cooldownInfo,
     login,
+    loginWithGoogle,
     register,
     updateUserData,
     refreshUserData,

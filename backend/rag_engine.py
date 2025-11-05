@@ -223,18 +223,42 @@ DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Initialize AI client - prioritize OpenAI, fallback to DeepSeek
-if OPENAI_API_KEY:
-    ai_client = AsyncOpenAI(api_key=OPENAI_API_KEY)
-    ai_model = "gpt-4o"
-    classification_model = "gpt-4o-mini"  # Small model for classification
-    print("✅ Using OpenAI for intelligent legal AI with classification")
-elif DEEPSEEK_API_KEY:
-    ai_client = AsyncOpenAI(api_key=DEEPSEEK_API_KEY, base_url="https://api.deepseek.com/v1")
-    ai_model = "deepseek-chat"
-    classification_model = "deepseek-chat"
-    print("✅ Using DeepSeek for intelligent legal AI with classification")
-else:
-    raise ValueError("❌ Either OPENAI_API_KEY or DEEPSEEK_API_KEY must be provided")
+# Fix for httpx compatibility issue
+try:
+    if OPENAI_API_KEY:
+        ai_client = AsyncOpenAI(api_key=OPENAI_API_KEY)
+        ai_model = "gpt-4o"
+        classification_model = "gpt-4o-mini"  # Small model for classification
+        print("✅ Using OpenAI for intelligent legal AI with classification")
+    elif DEEPSEEK_API_KEY:
+        ai_client = AsyncOpenAI(api_key=DEEPSEEK_API_KEY, base_url="https://api.deepseek.com/v1")
+        ai_model = "deepseek-chat"
+        classification_model = "deepseek-chat"
+        print("✅ Using DeepSeek for intelligent legal AI with classification")
+    else:
+        raise ValueError("❌ Either OPENAI_API_KEY or DEEPSEEK_API_KEY must be provided")
+except TypeError as e:
+    # Fallback for httpx compatibility issues
+    import httpx
+    if OPENAI_API_KEY:
+        ai_client = AsyncOpenAI(
+            api_key=OPENAI_API_KEY,
+            http_client=httpx.AsyncClient()
+        )
+        ai_model = "gpt-4o"
+        classification_model = "gpt-4o-mini"
+        print("✅ Using OpenAI with custom http client")
+    elif DEEPSEEK_API_KEY:
+        ai_client = AsyncOpenAI(
+            api_key=DEEPSEEK_API_KEY, 
+            base_url="https://api.deepseek.com/v1",
+            http_client=httpx.AsyncClient()
+        )
+        ai_model = "deepseek-chat"
+        classification_model = "deepseek-chat"
+        print("✅ Using DeepSeek with custom http client")
+    else:
+        raise ValueError("❌ Either OPENAI_API_KEY or DEEPSEEK_API_KEY must be provided")
 
 
 # DYNAMIC PROMPTS - NO HARD-CODING OF CATEGORIES

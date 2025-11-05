@@ -1,12 +1,14 @@
 """
-Simple auth dependency that works with fake tokens from simple_auth.py
+Simple auth dependency that works with both fake tokens and JWT tokens
 """
 from typing import Optional
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer
 from sqlalchemy.orm import Session
+from jose import jwt
 from app.database import get_database
 from app.models.user import User
+from app.core.config import settings
 
 security = HTTPBearer()
 
@@ -14,10 +16,27 @@ def get_current_user_simple(
     credentials = Depends(security),
     db: Session = Depends(get_database)
 ) -> User:
-    """Get current user from simple auth fake token"""
+    """Get current user from either fake token or JWT token"""
     token = credentials.credentials
     
-    # Extract user email from fake token format: user_{id}_{email}
+    # Try JWT token first
+    try:
+        payload = jwt.decode(
+            token,
+            settings.secret_key,
+            algorithms=[settings.algorithm]
+        )
+        user_id = payload.get("sub")
+        token_type = payload.get("type")
+        
+        if user_id and token_type == "access":
+            user = db.query(User).filter(User.id == user_id).first()
+            if user:
+                return user
+    except:
+        pass  # Fall back to fake token parsing
+    
+    # Fallback: Extract user email from fake token format: user_{id}_{email}
     if token.startswith("user_"):
         parts = token.split("_")
         if len(parts) >= 3:

@@ -1,0 +1,85 @@
+{
+  "family": "hokm-ai-backend",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::683342011909:role/hokm-ai-ecs-task-execution-role",
+  "taskRoleArn": "arn:aws:iam::683342011909:role/hokm-ai-ecs-task-role",
+  "containerDefinitions": [
+    {
+      "name": "backend-container",
+      "image": "683342011909.dkr.ecr.eu-central-1.amazonaws.com/hokm-ai/backend:ocr-fix-20250825-122402",
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "ENVIRONMENT",
+          "value": "production"
+        },
+        {
+          "name": "DEBUG",
+          "value": "False"
+        },
+        {
+          "name": "DATABASE_HOST",
+          "value": "hokm-ai-database.cxekmye88ls1.eu-central-1.rds.amazonaws.com"
+        },
+        {
+          "name": "DATABASE_NAME",
+          "value": "arabic_legal_db"
+        },
+        {
+          "name": "DATABASE_USER",
+          "value": "postgres"
+        },
+        {
+          "name": "DATABASE_PORT",
+          "value": "5432"
+        },
+        {
+          "name": "AI_PROVIDER",
+          "value": "openai"
+        },
+        {
+          "name": "CORS_ORIGINS",
+          "value": "https://d10drat4g0606g.cloudfront.net,https://d2c979d13bkvf4.cloudfront.net,https://hokm-ai-alb-1845047249.eu-central-1.elb.amazonaws.com,http://hokm-ai-alb-1845047249.eu-central-1.elb.amazonaws.com,https://hokm.ai,http://localhost:3000"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "SECRET_KEY",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:683342011909:secret:hokm-ai/app-Bak5g5:secret_key::"
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:683342011909:secret:hokm-ai/app-Bak5g5:openai_api_key::"
+        },
+        {
+          "name": "DATABASE_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:683342011909:secret:hokm-ai/database-qetP2B:password::"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/hokm-ai-backend",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "healthCheck": {
+        "command": ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"],
+        "interval": 60,
+        "timeout": 30,
+        "retries": 3,
+        "startPeriod": 180
+      },
+      "essential": true
+    }
+  ]
+}

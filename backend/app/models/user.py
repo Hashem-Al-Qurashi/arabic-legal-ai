@@ -28,6 +28,10 @@ class User(Base):
     subscription_tier = Column(String(50), default="free", nullable=False)
     questions_used_this_month = Column(Integer, default=0, nullable=False)
     
+    # Google OAuth integration (optional fields)
+    google_id = Column(String(255), nullable=True, unique=True, index=True)
+    auth_provider = Column(String(50), default="email", nullable=False)
+    
     # Cooldown system
     questions_used_current_cycle = Column(Integer, default=0, nullable=False)
     cycle_reset_time = Column(DateTime(timezone=True), nullable=True)

@@ -21,6 +21,18 @@ class CooldownService:
         now = datetime.utcnow()
         
         if user:
+            # Admin/testing accounts have unlimited access
+            if user.subscription_tier in ["admin", "testing", "unlimited"]:
+                return {
+                    "questions_available": 999999,
+                    "questions_used": user.questions_used_current_cycle,
+                    "max_questions": 999999,
+                    "is_in_cooldown": False,
+                    "reset_time": None,
+                    "can_ask_question": True,
+                    "tier": user.subscription_tier
+                }
+            
             max_questions = CooldownService.SIGNED_IN_QUESTION_LIMIT
             
             # Check if user needs a reset
@@ -63,6 +75,14 @@ class CooldownService:
     @staticmethod
     def use_question(db: Session, user) -> bool:
         """Use one question and update cooldown if needed."""
+        # Admin/testing accounts bypass all limits
+        if user and user.subscription_tier in ["admin", "testing", "unlimited"]:
+            # Still track usage for analytics but don't enforce limits
+            user.questions_used_current_cycle += 1
+            user.last_question_time = datetime.utcnow()
+            db.commit()
+            return True
+            
         can_ask, message, reset_time = CooldownService.can_ask_question(db, user)
         
         if not can_ask:

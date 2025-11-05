@@ -1,0 +1,62 @@
+{
+  "family": "moaen-ai-backend",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::205979660707:role/moaen-ai-ecs-task-execution-role",
+  "taskRoleArn": "arn:aws:iam::205979660707:role/moaen-ai-ecs-task-role",
+  "containerDefinitions": [
+    {
+      "name": "backend-container",
+      "image": "683342011909.dkr.ecr.eu-central-1.amazonaws.com/moaen-ai/backend:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "ENVIRONMENT",
+          "value": "production"
+        },
+        {
+          "name": "AI_PROVIDER", 
+          "value": "openai"
+        },
+        {
+          "name": "DATABASE_URL",
+          "value": "postgresql://postgres:${DB_PASSWORD}@moaen-ai-database.cpuaygic6stn.eu-central-1.rds.amazonaws.com:5432/arabic_legal_db"
+        },
+        {
+          "name": "CORS_ORIGINS",
+          "value": "https://hokm.ai,https://www.hokm.ai,https://d10drat4g0606g.cloudfront.net,https://d2c979d13bkvf4.cloudfront.net"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "DB_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:205979660707:secret:moaen-ai/database-??????:password::"
+        },
+        {
+          "name": "SECRET_KEY",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:205979660707:secret:moaen-ai/app-??????:secret_key::"
+        },
+        {
+          "name": "OPENAI_API_KEY", 
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:205979660707:secret:moaen-ai/app-??????:openai_api_key::"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/moaen-ai/backend",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "backend"
+        }
+      }
+    }
+  ]
+}

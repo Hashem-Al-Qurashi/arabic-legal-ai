@@ -12,10 +12,24 @@ import { useConversationRouting } from '../../hooks/useConversationRouting';
 import { RenamePopup, DeletePopup } from '../ui';
 import { PremiumProgress, FeatureTease } from '../premium';
 import { FormattedMessage } from '../message';
+import { FileUploadButton } from './FileUploadButton';
+import { AttachmentPreview } from './AttachmentPreview';
 import { showToast, formatDate, cleanHtmlContent, containsCitations, stripCitations } from '../../utils/helpers';
 import { formatAIResponse } from '../../utils/messageParser';
 import { sanitizeHTML, isValidConversationIdFormat, sanitizeConversationId } from '../../utils/security';
 import type { Message, Conversation } from '../../types';
+
+interface AttachmentInfo {
+  id: string;
+  fileType: string;
+  extractedText: string;
+  filename: string;
+  confidence: number;
+  engine: string;
+  fileSize: number;
+  processingStatus: 'uploading' | 'processing' | 'completed' | 'error';
+  error?: string;
+}
 
 export const ChatApp: React.FC = () => {
   const { 
@@ -43,6 +57,38 @@ export const ChatApp: React.FC = () => {
   const [selectedConversation, setSelectedConversation] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [exchangeCount, setExchangeCount] = useState(0);
+  
+  // 🧠 PERSISTENT GUEST SESSION - Just like authenticated users!
+  const [guestSessionId] = useState<string>(() => {
+    // Check if we have an existing session in localStorage
+    const existingSession = localStorage.getItem('guestSessionId');
+    if (existingSession) {
+      console.log('🔄 Resuming guest session:', existingSession);
+      return existingSession;
+    }
+    // Create new session and save it
+    const newSession = `guest_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    localStorage.setItem('guestSessionId', newSession);
+    console.log('🆕 Created new guest session:', newSession);
+    return newSession;
+  });
+  
+  // 🔄 ENTERPRISE GUEST MEMORY - Pure React state (clears on refresh)
+  useEffect(() => {
+    if (isGuest && guestSessionId) {
+      // Guest sessions use pure React state - no storage, clears on refresh
+      setMessages([]);
+      console.log('🔄 Guest session started fresh (enterprise approach)');
+    }
+  }, [isGuest, guestSessionId]);
+  
+  // Guest messages live only in React state - automatic refresh clearing
+  useEffect(() => {
+    if (isGuest && messages.length > 0) {
+      console.log('💭 Guest messages in React state only:', messages.length, 'messages (clears on refresh)');
+    }
+  }, [isGuest, messages]);
+  
   const [showUpgradePrompt, setShowUpgradePrompt] = useState(false);
   const [upgradePromptType, setUpgradePromptType] = useState<'messages' | 'exchanges' | 'exports' | 'citations'>('messages');
   const [renamePopup, setRenamePopup] = useState<{
@@ -66,6 +112,7 @@ export const ChatApp: React.FC = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [loadingConversations, setLoadingConversations] = useState(false);
+  const [attachedFiles, setAttachedFiles] = useState<AttachmentInfo[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -315,7 +362,7 @@ const handleDeleteCancel = () => {
 };
 
   const handleSendMessage = async () => {
-  if (!inputMessage.trim()) return;
+  if (!inputMessage.trim() && attachedFiles.length === 0) return;
 
   // ✅ UNIFIED: Check cooldown for both user types
   if (!canSendMessage()) {
@@ -332,29 +379,51 @@ const handleDeleteCancel = () => {
     return;
   }
 
-  // ✅ PREPARE: User message for immediate display
-  const currentMessage = inputMessage;
+  // ✅ PREPARE: Build message content with attachments
+  let messageContent = inputMessage;
+  
+  // Add attached files context to the message for AI processing
+  if (attachedFiles.length > 0) {
+    const completedFiles = attachedFiles.filter(file => 
+      file.processingStatus === 'completed' && file.extractedText.trim()
+    );
+    
+    if (completedFiles.length > 0) {
+      const fileContexts = completedFiles.map(file => 
+        `📎 ${file.filename}:\n${file.extractedText}`
+      );
+      
+      if (messageContent.trim()) {
+        messageContent = `${messageContent}\n\n--- المرفقات ---\n${fileContexts.join('\n\n---\n\n')}`;
+      } else {
+        messageContent = `أرجو تحليل هذه المستندات:\n\n${fileContexts.join('\n\n---\n\n')}`;
+      }
+    }
+  }
+
+  const currentMessage = messageContent;
   const userMessage: Message = {
     id: Date.now().toString(),
     role: 'user',
-    content: inputMessage,
+    content: inputMessage, // Keep original message for display (without attachment context)
     timestamp: new Date().toISOString()
   };
 
   setMessages(prev => [...prev, userMessage]);
   setInputMessage('');
+  setAttachedFiles([]); // Clear attachments after sending
   setIsLoading(true);
   incrementQuestionUsage();
 
   // ✅ UNIFIED: Use chatAPI for both guests and auth users
-  const guestSessionId = isGuest ?
-    `guest_${Date.now()}_${Math.random().toString(36).substr(2, 9)}` :
-    undefined;
+  // 🧠 FIX: Use persistent session ID for guests (just like users have conversation_id)
+  const sessionId = isGuest ? guestSessionId : undefined;
 
   console.log('📤 Sending message:', {
     isGuest,
     conversationId: selectedConversation,
-    sessionId: guestSessionId
+    sessionId: sessionId,
+    guestSessionPersistent: isGuest ? guestSessionId : 'N/A'
   });
 
   try {
@@ -371,43 +440,69 @@ const handleDeleteCancel = () => {
     }]);
 
     // 🚀 REAL STREAMING with conversation memory
+    // 🧠 FIX: Pass persistent sessionId for guests (maintains conversation memory)
     await chatAPI.sendMessageStreaming(
       currentMessage,
       selectedConversation || undefined,
-      guestSessionId,
-      
-            // 📡 Real-time streaming callback
+      sessionId,
+      // ✅ FIX: Correct parameter order - onChunk is 4th parameter
       (chunk: string) => {
-        streamingContent += chunk;
+        console.log('🟡 CHATAPP: Received chunk:', { type: typeof chunk, value: chunk });
+        // ✅ FIX: Ensure chunk is always a string
+        const safeChunk = typeof chunk === 'string' ? chunk : String(chunk);
+        streamingContent += safeChunk;
+        console.log('🟡 CHATAPP: Updated streamingContent:', streamingContent.substring(0, 100) + '...');
         
         // Update the assistant message in real-time with RAW content
-        setMessages(prev => prev.map(msg => 
-          msg.id === assistantMessageId 
-            ? { ...msg, content: streamingContent }  // ← FIX: No formatting during streaming
-            : msg
-        ));
+        setMessages(prev => {
+          const updated = prev.map(msg => 
+            msg.id === assistantMessageId 
+              ? { ...msg, content: streamingContent }  // ← FIX: No formatting during streaming
+              : msg
+          );
+          console.log('🟡 CHATAPP: Updated messages during streaming:', updated[updated.length - 1]);
+          return updated;
+        });
       },
 
-      // ✅ Completion handler
+      // ✅ Completion handler - 5th parameter
       (response: any) => {
-        console.log('📥 Received response:', { contentLength: response.fullResponse?.length || 0 });
+        console.log('🟢 CHATAPP: Received completion response:', response);
+        console.log('🟢 CHATAPP: Response type:', typeof response);
+        console.log('🟢 CHATAPP: Response keys:', Object.keys(response || {}));
         
-        // Update final message with complete data and SINGLE formatting pass
-        const finalContent = response.ai_message?.content || streamingContent;
-        console.log('🚨 DEBUGGING ChatApp: finalContent received:', finalContent);
-        console.log('🚨 DEBUGGING ChatApp: finalContent type:', typeof finalContent);
-        console.log('🚨 DEBUGGING ChatApp: finalContent length:', finalContent?.length);
+        // ✅ FIX: Extract content from the correct path based on backend response
+        const finalContent = response.ai_message?.content || response.fullResponse || streamingContent || '';
         
-        setMessages(prev => prev.map(msg =>
-          msg.id === assistantMessageId
-          ? {
-              ...msg,
-              id: response.ai_message?.id || assistantMessageId,
-              content: finalContent, // ← Raw content - FormattedMessage will handle formatting
-              timestamp: response.ai_message?.timestamp || new Date().toISOString()
-            }
-          : msg
-        ));
+        console.log('🟢 CHATAPP: Extracted finalContent:', finalContent);
+        console.log('🟢 CHATAPP: finalContent type:', typeof finalContent);
+        
+        // ✅ FIX: Ensure content is always a string, never an object
+        const safeContent = typeof finalContent === 'string' ? finalContent : 
+                           (typeof finalContent === 'object' ? JSON.stringify(finalContent) : String(finalContent));
+        
+        console.log('🟢 CHATAPP: Safe content:', safeContent);
+        console.log('🟢 CHATAPP: Safe content type:', typeof safeContent);
+        
+        setMessages(prev => {
+          const updated = prev.map(msg =>
+            msg.id === assistantMessageId
+            ? {
+                ...msg,
+                id: response.ai_message?.id || assistantMessageId,
+                content: safeContent, // ← Safe string content - FormattedMessage will handle formatting
+                timestamp: response.ai_message?.timestamp || new Date().toISOString()
+              }
+            : msg
+          );
+          
+          const finalMessage = updated.find(msg => msg.id === (response.ai_message?.id || assistantMessageId));
+          console.log('🟣 CHATAPP: Final message stored in state:', finalMessage);
+          console.log('🟣 CHATAPP: Final message content type:', typeof finalMessage?.content);
+          console.log('🟣 CHATAPP: Final message content value:', finalMessage?.content);
+          
+          return updated;
+        });
 
         // 🔄 Handle conversation and user data updates with URL synchronization
         if (response.conversation_id && !selectedConversation) {
@@ -438,7 +533,7 @@ const handleDeleteCancel = () => {
         console.log('✅ Message processed successfully');
       },
       
-      // ❌ Error handler
+      // ❌ Error handler - 6th parameter
       (error: string) => {
         console.error('❌ Streaming failed:', error);
         
@@ -475,6 +570,39 @@ const handleDeleteCancel = () => {
     setTimeout(() => {
       inputRef.current?.focus();
     }, 100);
+  };
+
+  // ✅ ATTACHMENT HANDLERS - ChatGPT-style workflow
+  const handleFileAttached = (fileInfo: AttachmentInfo) => {
+    setAttachedFiles(prev => {
+      // Update existing file or add new one
+      const existingIndex = prev.findIndex(f => f.id === fileInfo.id);
+      if (existingIndex >= 0) {
+        const updated = [...prev];
+        updated[existingIndex] = fileInfo;
+        return updated;
+      } else {
+        return [...prev, fileInfo];
+      }
+    });
+  };
+
+  const handleFileUploadStart = (filename: string) => {
+    console.log('🚀 Starting upload for:', filename);
+  };
+
+  const removeAttachedFile = (fileId: string) => {
+    setAttachedFiles(prev => prev.filter(file => file.id !== fileId));
+  };
+
+  const retryAttachedFile = (fileId: string) => {
+    // Find the file and retry processing
+    const file = attachedFiles.find(f => f.id === fileId);
+    if (file) {
+      // For now, just remove it - user can re-upload
+      removeAttachedFile(fileId);
+      showToast('يرجى إعادة رفع الملف', 'info');
+    }
   };
 
  const suggestedQuestions = [
@@ -1468,6 +1596,21 @@ const handleDeleteCancel = () => {
       </button>
     </div>
   )}
+  
+  {/* Simple Version Indicator */}
+  <div style={{
+    padding: '8px 16px',
+    borderTop: '1px solid rgba(255, 255, 255, 0.1)'
+  }}>
+    <div style={{
+      fontSize: '11px',
+      color: 'rgba(255, 255, 255, 0.4)',
+      textAlign: 'center',
+      fontFamily: 'monospace'
+    }}>
+      v2.7.1
+    </div>
+  </div>
 </div> 
         </div>
 
@@ -1517,14 +1660,14 @@ const handleDeleteCancel = () => {
                 <h2 style={{
                   fontSize: 'clamp(50px, 4vw, 26px)',
                   fontWeight: '600',
-                  color: 'white',
+                  color: isDark ? 'white' : 'black',
                   marginBottom: '16px'
                 }}>
                   اهلا بك في حكم
                 </h2>
                 <p style={{
                   fontSize: 'clamp(24px, 2vw, 16px)',
-                  color: 'white',
+                  color: isDark ? 'white' : 'black',
                   marginBottom: '32px',
                   maxWidth: '600px',
                   lineHeight: '1.6'
@@ -1620,7 +1763,17 @@ const handleDeleteCancel = () => {
     padding: isMobile ? '0 1rem' : '0 2rem'
   }}
 >
-                {messages.map((message, index) => (
+                {messages.map((message, index) => {
+                  console.log('🔴 RENDER: Message being rendered:', { 
+                    id: message.id, 
+                    role: message.role, 
+                    contentType: typeof message.content, 
+                    content: message.content,
+                    isObject: typeof message.content === 'object',
+                    objectKeys: typeof message.content === 'object' ? Object.keys(message.content || {}) : 'N/A',
+                    stringified: typeof message.content === 'object' ? JSON.stringify(message.content) : 'N/A'
+                  });
+                  return (
                  <div
   key={message.id}
   className="message-enter"
@@ -1696,7 +1849,8 @@ const handleDeleteCancel = () => {
                       </div>
                     </div>
                   </div>
-                ))}
+                );
+                })}
                 
                 {/* Dynamic Legal Analysis Loading indicator */}
 {isLoading && (
@@ -1714,6 +1868,42 @@ const handleDeleteCancel = () => {
               </div>
             )}
           </div>
+
+          {/* Attachment Previews */}
+          {attachedFiles.length > 0 && (
+            <div style={{
+              padding: '16px 24px 0 24px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '8px',
+              maxHeight: '200px',
+              overflowY: 'auto'
+            }}>
+              <div style={{
+                fontSize: '14px',
+                fontWeight: '600',
+                color: isDark ? '#e5e7eb' : '#374151',
+                marginBottom: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}>
+                <span>📎</span>
+                المرفقات ({attachedFiles.length})
+              </div>
+              {attachedFiles.map((attachment) => (
+                <AttachmentPreview
+                  key={attachment.id}
+                  attachment={attachment}
+                  onRemove={removeAttachedFile}
+                  onRetry={retryAttachedFile}
+                  compact={true}
+                  isDark={isDark}
+                  showPreview={false}
+                />
+              ))}
+            </div>
+          )}
 
           {/* Input Area */}
 <div style={{
@@ -1743,6 +1933,7 @@ const handleDeleteCancel = () => {
         position: 'relative',
         display: 'flex',
         alignItems: 'flex-end',
+        justifyContent: 'space-between',
         gap: '16px',
         background: isDark
           ? 'linear-gradient(135deg, rgba(55, 65, 81, 0.8) 0%, rgba(31, 41, 55, 0.6) 100%)'
@@ -1794,6 +1985,13 @@ const handleDeleteCancel = () => {
              inset 0 1px 0 rgba(255, 255, 255, 0.2)`;
       }}
     >
+      {/* Left side: Textarea and Send Button */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'flex-end',
+        gap: '16px',
+        flex: 1
+      }}>
                  <textarea
         ref={inputRef}
         value={inputMessage}
@@ -1842,37 +2040,37 @@ const handleDeleteCancel = () => {
                 
                 <button
         onClick={handleSendMessage}
-        disabled={!inputMessage.trim() || isLoading}
+        disabled={(!inputMessage.trim() && attachedFiles.length === 0) || isLoading}
         style={{
-          background: (!inputMessage.trim() || isLoading) 
+          background: ((!inputMessage.trim() && attachedFiles.length === 0) || isLoading) 
             ? 'rgba(189, 189, 189, 0.3)' 
             : 'linear-gradient(135deg, #006C35 0%, #004A24 100%)',
-          color: (!inputMessage.trim() || isLoading) ? '#9ca3af' : 'white',
+          color: ((!inputMessage.trim() && attachedFiles.length === 0) || isLoading) ? '#9ca3af' : 'white',
           border: 'none',
           borderRadius: '16px',
           width: '56px',
           height: '56px',
-          cursor: (!inputMessage.trim() || isLoading) ? 'not-allowed' : 'pointer',
+          cursor: ((!inputMessage.trim() && attachedFiles.length === 0) || isLoading) ? 'not-allowed' : 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           flexShrink: 0,
-          boxShadow: (!inputMessage.trim() || isLoading) 
+          boxShadow: ((!inputMessage.trim() && attachedFiles.length === 0) || isLoading) 
             ? 'none' 
             : '0 8px 32px rgba(0, 108, 53, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
           position: 'relative',
           overflow: 'hidden'
         }}
         onMouseOver={(e) => {
-          if (!(!inputMessage.trim() || isLoading)) {
+          if (!((!inputMessage.trim() && attachedFiles.length === 0) || isLoading)) {
             e.currentTarget.style.background = 'linear-gradient(135deg, #00A852 0%, #006C35 100%)';
             e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
             e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 108, 53, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
           }
         }}
         onMouseOut={(e) => {
-          if (!(!inputMessage.trim() || isLoading)) {
+          if (!((!inputMessage.trim() && attachedFiles.length === 0) || isLoading)) {
             e.currentTarget.style.background = 'linear-gradient(135deg, #006C35 0%, #004A24 100%)';
             e.currentTarget.style.transform = 'translateY(0) scale(1)';
             e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 108, 53, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
@@ -1896,6 +2094,22 @@ const handleDeleteCancel = () => {
           </svg>
         )}
       </button>
+      </div>
+
+      {/* Right side: Attachment Button - Positioned at far right */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'flex-end'
+      }}>
+        <FileUploadButton
+          onFileAttached={handleFileAttached}
+          onUploadStart={handleFileUploadStart}
+          isLoading={isLoading}
+          sessionId={isGuest ? guestSessionId : undefined}
+          maxFiles={5}
+          currentFileCount={attachedFiles.length}
+        />
+      </div>
     </div>
               
  {/* Character count and tips */}
