@@ -42,7 +42,7 @@ def get_current_user_optional(
         )
         
         user_id: str = payload.get("sub")
-        if user_id is None or not user_id.isdigit():
+        if user_id is None:
             return None
             
         # Additional token type validation
@@ -55,8 +55,8 @@ def get_current_user_optional(
         print(f"🚨 JWT validation failed: {type(e).__name__}")
         return None
     
-    # Get user from database
-    user = db.query(User).filter(User.id == int(user_id)).first()
+    # Get user from database - handle both UUID strings and numeric IDs
+    user = db.query(User).filter(User.id == user_id).first()
     return user
 
 def get_current_user(
@@ -106,8 +106,8 @@ def get_current_user(
             headers={"WWW-Authenticate": "Bearer"},
         )
     
-    # Get user from database
-    user = db.query(User).filter(User.id == int(user_id)).first()
+    # Get user from database - handle both UUID strings and numeric IDs
+    user = db.query(User).filter(User.id == user_id).first()
     if user is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

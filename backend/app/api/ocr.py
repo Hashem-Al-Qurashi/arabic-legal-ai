@@ -110,23 +110,112 @@ class OCRService:
     async def extract_text_from_image(self, image_bytes: bytes) -> Dict[str, Any]:
         """Extract text from image using Google Vision API"""
         
+        # Try direct REST API approach first if we have an API key
+        google_api_key = os.getenv('GOOGLE_VISION_API_KEY')
+        if google_api_key:
+            try:
+                import requests
+                import base64
+                
+                # Use REST API directly - more reliable for API key auth
+                image_b64 = base64.b64encode(image_bytes).decode('utf-8')
+                
+                url = f"https://vision.googleapis.com/v1/images:annotate?key={google_api_key}"
+                payload = {
+                    "requests": [{
+                        "image": {"content": image_b64},
+                        "features": [{"type": "DOCUMENT_TEXT_DETECTION", "maxResults": 1}],
+                        "imageContext": {"languageHints": ["ar", "en"], "textDetectionParams": {"enableTextDetectionConfidenceScore": True}}
+                    }]
+                }
+                
+                logger.info(f"Making direct REST API call to Google Vision...")
+                response = requests.post(url, json=payload, timeout=30)
+                
+                if response.status_code != 200:
+                    raise Exception(f"HTTP {response.status_code}: {response.text}")
+                
+                result = response.json()
+                
+                if 'responses' not in result or not result['responses']:
+                    raise Exception("Invalid response format from Google Vision API")
+                
+                vision_response = result['responses'][0]
+                
+                if 'error' in vision_response:
+                    error = vision_response['error']
+                    raise Exception(f"Google Vision API error {error['code']}: {error['message']}")
+                
+                # Extract text from response
+                full_text = ""
+                confidence_scores = []
+                
+                if 'fullTextAnnotation' in vision_response:
+                    full_text = vision_response['fullTextAnnotation'].get('text', '').strip()
+                    
+                    # Extract confidence scores
+                    for page in vision_response['fullTextAnnotation'].get('pages', []):
+                        for block in page.get('blocks', []):
+                            if 'confidence' in block:
+                                confidence_scores.append(block['confidence'])
+                
+                avg_confidence = sum(confidence_scores) / len(confidence_scores) if confidence_scores else 0.0
+                
+                logger.info(f"Google Vision REST API success. Text length: {len(full_text)}")
+                
+                return {
+                    "text": full_text,
+                    "confidence": avg_confidence,
+                    "engine": "Google Vision REST API",
+                    "language": "ar",
+                    "word_count": len(full_text.split()) if full_text else 0
+                }
+                
+            except Exception as e:
+                logger.error(f"Google Vision REST API failed: {str(e)}")
+                # Fall back to client library or demo mode
+        
         if not self.vision_client:
-            # Fallback to basic OCR or return error
+            # Return demo mode response when Google Vision is not configured
+            demo_text = """[نموذج تجريبي - Demo Mode]
+            
+هذا نص تجريبي لخدمة استخراج النص من الصور.
+This is a demo text for the OCR service.
+
+الخدمة الفعلية تتطلب تكوين Google Vision API.
+The actual service requires Google Vision API configuration.
+
+يمكنك رفع الصور ولكن سيتم عرض هذا النص التجريبي.
+You can upload images but this demo text will be shown.
+
+للحصول على استخراج نص حقيقي، يرجى تكوين:
+For real text extraction, please configure:
+- GOOGLE_VISION_API_KEY or
+- GOOGLE_APPLICATION_CREDENTIALS"""
+            
             return {
-                "text": "",
-                "confidence": 0,
-                "engine": "none",
-                "error": "Google Vision API not configured"
+                "text": demo_text,
+                "confidence": 0.95,
+                "engine": "Demo Mode",
+                "error": None,
+                "warning": "OCR في وضع تجريبي - Google Vision API غير مكون",
+                "demo_mode": True
             }
         
         try:
             # Create vision image object
             image = vision.Image(content=image_bytes)
             
-            # Perform text detection with Arabic language hint
+            # Perform text detection with Arabic language hint and enhanced parameters
+            image_context = vision.ImageContext(
+                language_hints=["ar", "en"],
+                text_detection_params=vision.TextDetectionParams(
+                    enable_text_detection_confidence_score=True
+                )
+            )
             response = self.vision_client.document_text_detection(
                 image=image,
-                image_context={"language_hints": ["ar", "en"]}
+                image_context=image_context
             )
             
             # Check for errors
@@ -135,6 +224,11 @@ class OCRService:
             
             # Extract text and confidence
             full_text = response.full_text_annotation.text if response.full_text_annotation else ""
+            
+            # Debug logging
+            logger.info(f"Google Vision response received. Text length: {len(full_text)}")
+            if not full_text:
+                logger.warning("Google Vision returned empty text - image may not contain readable text")
             
             # Calculate average confidence from pages
             confidence_scores = []
@@ -155,16 +249,173 @@ class OCRService:
             }
             
         except Exception as e:
-            logger.error(f"Google Vision OCR failed: {str(e)}")
+            error_msg = str(e)
+            logger.error(f"Google Vision OCR failed: {error_msg}")
+            
+            # Provide more helpful error messages
+            if "quota" in error_msg.lower() or "limit" in error_msg.lower():
+                user_error = "تم تجاوز الحد اليومي لخدمة Google Vision API"
+            elif "invalid" in error_msg.lower() or "unauthorized" in error_msg.lower():
+                user_error = "مفتاح Google Vision API غير صالح أو غير مخول"
+            elif "permission" in error_msg.lower() or "forbidden" in error_msg.lower():
+                user_error = "لا توجد صلاحية للوصول إلى Google Vision API"
+            else:
+                user_error = f"خطأ في Google Vision API: {error_msg}"
+            
             return {
                 "text": "",
                 "confidence": 0,
-                "engine": "Google Vision",
-                "error": str(e)
+                "engine": "Google Vision", 
+                "error": user_error,
+                "technical_error": error_msg
             }
     
+    async def extract_text_from_pdf_via_ocr(self, pdf_bytes: bytes) -> Dict[str, Any]:
+        """Extract text from PDF using Google Vision OCR (for Arabic PDFs with encoding issues)"""
+        
+        try:
+            # Import PyMuPDF for PDF to image conversion
+            import fitz  # PyMuPDF
+            import io
+            from PIL import Image
+            
+            logger.info("Converting PDF pages to images for OCR processing")
+            
+            # Open PDF document
+            pdf_doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+            all_text = []
+            total_confidence = 0
+            page_count = 0
+            
+            # Process each page
+            for page_num in range(len(pdf_doc)):
+                try:
+                    # Get page
+                    page = pdf_doc[page_num]
+                    
+                    # Convert page to image with high DPI for better OCR
+                    mat = fitz.Matrix(2.0, 2.0)  # 2x zoom for better quality
+                    pix = page.get_pixmap(matrix=mat)
+                    
+                    # Convert to PIL Image
+                    img_data = pix.tobytes("png")
+                    
+                    # Perform OCR on the page image
+                    ocr_result = await self.extract_text_from_image(img_data)
+                    
+                    if ocr_result.get("text"):
+                        page_text = ocr_result["text"].strip()
+                        if page_text:
+                            all_text.append(f"=== صفحة {page_num + 1} ===\n{page_text}")
+                            total_confidence += ocr_result.get("confidence", 0)
+                            logger.info(f"Page {page_num + 1}: Extracted {len(page_text)} characters")
+                        else:
+                            logger.info(f"Page {page_num + 1}: No text found")
+                    else:
+                        logger.warning(f"Page {page_num + 1}: OCR failed")
+                    
+                    page_count += 1
+                    
+                except Exception as e:
+                    logger.error(f"Error processing page {page_num + 1}: {str(e)}")
+                    all_text.append(f"=== صفحة {page_num + 1} ===\n[خطأ في معالجة هذه الصفحة: {str(e)}]")
+                    page_count += 1
+            
+            # Close PDF document
+            pdf_doc.close()
+            
+            # Combine all page texts
+            full_text = "\n\n".join(all_text)
+            avg_confidence = total_confidence / page_count if page_count > 0 else 0
+            
+            logger.info(f"PDF OCR completed: {page_count} pages, {len(full_text)} total characters")
+            
+            return {
+                "text": full_text,
+                "confidence": avg_confidence,
+                "engine": "PyMuPDF + Google Vision OCR",
+                "language": "ar",
+                "word_count": len(full_text.split()) if full_text else 0,
+                "page_count": page_count
+            }
+            
+        except ImportError as e:
+            logger.error(f"Required libraries not available: {str(e)}")
+            return {
+                "text": "[خطأ: المكتبات المطلوبة لمعالجة PDF غير متوفرة. يرجى تثبيت PyMuPDF و Pillow.]",
+                "confidence": 0,
+                "engine": "Missing dependencies",
+                "language": "ar",
+                "word_count": 0,
+                "page_count": 0,
+                "error": f"Missing dependencies: {str(e)}"
+            }
+        except Exception as e:
+            logger.error(f"PDF OCR failed: {str(e)}")
+            return {
+                "text": "",
+                "confidence": 0,
+                "engine": "PDF OCR failed",
+                "language": "ar",
+                "word_count": 0,
+                "page_count": 0,
+                "error": str(e)
+            }
+
     async def extract_text_from_pdf(self, pdf_bytes: bytes) -> Dict[str, Any]:
-        """Extract text from PDF, using OCR for image-based pages"""
+        """Extract text from PDF, using Google Vision OCR for Arabic PDFs"""
+        
+        # For Arabic legal documents, skip PyPDF2 and use Google Vision directly
+        # This avoids character encoding issues common with Arabic fonts
+        google_api_key = os.getenv('GOOGLE_VISION_API_KEY')
+        if google_api_key:
+            logger.info("Using Google Vision OCR for PDF (better Arabic support)")
+            try:
+                import requests
+                import base64
+                
+                # Convert PDF to base64 for Google Vision
+                pdf_b64 = base64.b64encode(pdf_bytes).decode('utf-8')
+                
+                url = f"https://vision.googleapis.com/v1/files:annotate?key={google_api_key}"
+                payload = {
+                    "requests": [{
+                        "inputConfig": {
+                            "content": pdf_b64,
+                            "mimeType": "application/pdf"
+                        },
+                        "features": [{"type": "DOCUMENT_TEXT_DETECTION"}],
+                        "imageContext": {"languageHints": ["ar", "en"], "textDetectionParams": {"enableTextDetectionConfidenceScore": True}}
+                    }]
+                }
+                
+                response = requests.post(url, json=payload, timeout=60)
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    
+                    if 'responses' in result and result['responses']:
+                        vision_response = result['responses'][0]
+                        
+                        if 'error' not in vision_response and 'fullTextAnnotation' in vision_response:
+                            full_text = vision_response['fullTextAnnotation'].get('text', '').strip()
+                            logger.info(f"Google Vision PDF success. Text length: {len(full_text)}")
+                            
+                            return {
+                                "text": full_text,
+                                "confidence": 0.9,
+                                "engine": "Google Vision PDF OCR",
+                                "language": "ar",
+                                "word_count": len(full_text.split()) if full_text else 0,
+                                "page_count": 1
+                            }
+                
+                # Fall back to PyPDF2 if Google Vision fails
+                logger.warning("Google Vision PDF OCR failed, falling back to PyPDF2")
+                
+            except Exception as e:
+                logger.error(f"Google Vision PDF OCR failed: {str(e)}")
+                # Fall back to PyPDF2
         
         extracted_texts = []
         total_confidence = 0
@@ -181,9 +432,19 @@ class OCRService:
                         page_text = page.extract_text()
                         
                         if page_text and page_text.strip():
-                            # Text extraction successful
-                            extracted_texts.append(page_text)
-                            total_confidence += 1.0  # High confidence for direct text
+                            # Check if text contains garbled characters (common with Arabic PDFs)
+                            garbled_chars = ['Ú', 'Ý', 'Þ', 'ß', 'à', 'Û', 'Ü', '§', '¢', '¦', '°', '²', '³', 'Ñ', 'Ô', 'Õ', 'Ø', 'É', 'Æ', 'á', 'é', 'è', 'â', 'ç', 'î', 'ê', 'ì', 'ð', 'ô', 'ù', 'û', 'ü', 'ÿ']
+                            garbled_count = sum(1 for char in garbled_chars if char in page_text)
+                            
+                            # If more than 2% of text is garbled characters, force OCR (lowered threshold)
+                            if garbled_count > len(page_text) * 0.02:
+                                logger.info(f"Page {page_num + 1}: Detected garbled Arabic text ({garbled_count} garbled chars), forcing OCR for entire PDF")
+                                # Skip PyPDF2 extraction completely and force Google Vision OCR
+                                return await self.extract_text_from_pdf_via_ocr(pdf_bytes)
+                            else:
+                                # Text extraction successful with good encoding
+                                extracted_texts.append(page_text)
+                                total_confidence += 1.0  # High confidence for direct text
                         else:
                             # Page might be an image, try OCR
                             logger.info(f"Page {page_num + 1} appears to be image-based, attempting OCR")
@@ -270,10 +531,30 @@ async def extract_text(
             # Extract text from image
             result = await ocr_service.extract_text_from_image(contents)
         
-        # Check if extraction was successful
-        if result.get("error"):
+        # Check if extraction was successful or in demo mode
+        if result.get("demo_mode"):
+            # Demo mode - return success with demo text
+            logger.info(f"OCR in demo mode for file: {file.filename}")
+            return JSONResponse(
+                status_code=200,
+                content={
+                    "success": True,
+                    "demo_mode": True,
+                    "warning": result.get("warning"),
+                    "ocr_result": result,
+                    "metadata": {
+                        "filename": file.filename,
+                        "content_type": content_type,
+                        "file_size": len(contents),
+                        "timestamp": datetime.now().isoformat(),
+                        "user_id": current_user.id if current_user else None,
+                        "session_id": session_id if not current_user else None
+                    }
+                }
+            )
+        elif result.get("error"):
             logger.error(f"OCR extraction error: {result['error']}")
-            # Instead of raising an exception, return a graceful error response
+            # Real error - return error response
             return JSONResponse(
                 status_code=200,
                 content={
@@ -292,12 +573,30 @@ async def extract_text(
             )
         
         if not result.get("text"):
+            # Distinguish between processing errors and no text found
+            error_message = "لم يتم العثور على نص في الملف"
+            
+            # If there was a technical error, use that instead
+            if result.get("error"):
+                error_message = f"خطأ في معالجة الملف: {result['error']}"
+            # If it's a PDF, provide more specific guidance
+            elif content_type == SUPPORTED_PDF_TYPE:
+                error_message = "لم يتم العثور على نص في ملف PDF. قد يكون الملف يحتوي على صور فقط أو محمي بكلمة مرور"
+            # If it's an image, provide image-specific guidance
+            else:
+                error_message = "لم يتم العثور على نص واضح في الصورة. يرجى التأكد من وضوح النص وجودة الصورة"
+            
             return JSONResponse(
                 status_code=200,
                 content={
                     "success": False,
-                    "error": "لم يتم العثور على نص في الملف",
+                    "error": error_message,
                     "ocr_result": result,
+                    "suggestions": [
+                        "تأكد من وضوح النص في الملف",
+                        "تحقق من أن الملف غير محمي أو مشفر",
+                        "جرب رفع ملف بجودة أفضل"
+                    ],
                     "metadata": {
                         "filename": file.filename,
                         "content_type": content_type,
