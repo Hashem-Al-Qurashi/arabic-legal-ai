@@ -24,13 +24,13 @@ except ImportError:
     GOOGLE_VISION_AVAILABLE = False
     logging.warning("Google Cloud Vision not installed. OCR features will be limited.")
 
-# PDF processing
+# PDF processing - Using PyMuPDF for PDF to image conversion
 try:
-    import PyPDF2
-    PYPDF_AVAILABLE = True
+    import fitz  # PyMuPDF
+    PYMUPDF_AVAILABLE = True
 except ImportError:
-    PYPDF_AVAILABLE = False
-    logging.warning("PyPDF2 not installed. PDF OCR will be limited.")
+    PYMUPDF_AVAILABLE = False
+    logging.warning("PyMuPDF not installed. PDF OCR will be limited.")
 
 # Image processing
 try:
@@ -274,10 +274,20 @@ For real text extraction, please configure:
         """Extract text from PDF using Google Vision OCR (for Arabic PDFs with encoding issues)"""
         
         try:
-            # Import PyMuPDF for PDF to image conversion
+            if not PYMUPDF_AVAILABLE:
+                return {
+                    "text": "",
+                    "confidence": 0,
+                    "engine": "Missing PyMuPDF",
+                    "language": "ar",
+                    "word_count": 0,
+                    "page_count": 0,
+                    "error": "PyMuPDF library not available for PDF processing"
+                }
+            
+            # Import required libraries
             import fitz  # PyMuPDF
             import io
-            from PIL import Image
             
             logger.info("Converting PDF pages to images for OCR processing")
             
@@ -363,130 +373,10 @@ For real text extraction, please configure:
             }
 
     async def extract_text_from_pdf(self, pdf_bytes: bytes) -> Dict[str, Any]:
-        """Extract text from PDF, using Google Vision OCR for Arabic PDFs"""
+        """Extract text from PDF using Google Vision OCR - Direct and Simple"""
         
-        # For Arabic legal documents, skip PyPDF2 and use Google Vision directly
-        # This avoids character encoding issues common with Arabic fonts
-        google_api_key = os.getenv('GOOGLE_VISION_API_KEY')
-        if google_api_key:
-            logger.info("Using Google Vision OCR for PDF (better Arabic support)")
-            try:
-                import requests
-                import base64
-                
-                # Convert PDF to base64 for Google Vision
-                pdf_b64 = base64.b64encode(pdf_bytes).decode('utf-8')
-                
-                url = f"https://vision.googleapis.com/v1/files:annotate?key={google_api_key}"
-                payload = {
-                    "requests": [{
-                        "inputConfig": {
-                            "content": pdf_b64,
-                            "mimeType": "application/pdf"
-                        },
-                        "features": [{"type": "DOCUMENT_TEXT_DETECTION"}],
-                        "imageContext": {"languageHints": ["ar", "en"], "textDetectionParams": {"enableTextDetectionConfidenceScore": True}}
-                    }]
-                }
-                
-                response = requests.post(url, json=payload, timeout=60)
-                
-                if response.status_code == 200:
-                    result = response.json()
-                    
-                    if 'responses' in result and result['responses']:
-                        vision_response = result['responses'][0]
-                        
-                        if 'error' not in vision_response and 'fullTextAnnotation' in vision_response:
-                            full_text = vision_response['fullTextAnnotation'].get('text', '').strip()
-                            logger.info(f"Google Vision PDF success. Text length: {len(full_text)}")
-                            
-                            return {
-                                "text": full_text,
-                                "confidence": 0.9,
-                                "engine": "Google Vision PDF OCR",
-                                "language": "ar",
-                                "word_count": len(full_text.split()) if full_text else 0,
-                                "page_count": 1
-                            }
-                
-                # Fall back to PyPDF2 if Google Vision fails
-                logger.warning("Google Vision PDF OCR failed, falling back to PyPDF2")
-                
-            except Exception as e:
-                logger.error(f"Google Vision PDF OCR failed: {str(e)}")
-                # Fall back to PyPDF2
-        
-        extracted_texts = []
-        total_confidence = 0
-        page_count = 0
-        
-        try:
-            if PYPDF_AVAILABLE:
-                # Try to extract text directly from PDF
-                pdf_reader = PyPDF2.PdfReader(io.BytesIO(pdf_bytes))
-                
-                for page_num, page in enumerate(pdf_reader.pages):
-                    try:
-                        # Extract text from page
-                        page_text = page.extract_text()
-                        
-                        if page_text and page_text.strip():
-                            # Check if text contains garbled characters (common with Arabic PDFs)
-                            garbled_chars = ['Ú', 'Ý', 'Þ', 'ß', 'à', 'Û', 'Ü', '§', '¢', '¦', '°', '²', '³', 'Ñ', 'Ô', 'Õ', 'Ø', 'É', 'Æ', 'á', 'é', 'è', 'â', 'ç', 'î', 'ê', 'ì', 'ð', 'ô', 'ù', 'û', 'ü', 'ÿ']
-                            garbled_count = sum(1 for char in garbled_chars if char in page_text)
-                            
-                            # If more than 2% of text is garbled characters, force OCR (lowered threshold)
-                            if garbled_count > len(page_text) * 0.02:
-                                logger.info(f"Page {page_num + 1}: Detected garbled Arabic text ({garbled_count} garbled chars), forcing OCR for entire PDF")
-                                # Skip PyPDF2 extraction completely and force Google Vision OCR
-                                return await self.extract_text_from_pdf_via_ocr(pdf_bytes)
-                            else:
-                                # Text extraction successful with good encoding
-                                extracted_texts.append(page_text)
-                                total_confidence += 1.0  # High confidence for direct text
-                        else:
-                            # Page might be an image, try OCR
-                            logger.info(f"Page {page_num + 1} appears to be image-based, attempting OCR")
-                            # Note: Full PDF to image conversion would require additional libraries
-                            # For now, we'll mark it as needing OCR
-                            extracted_texts.append(f"[Page {page_num + 1}: Image-based content requires OCR]")
-                            total_confidence += 0.5
-                        
-                        page_count += 1
-                        
-                    except Exception as e:
-                        logger.error(f"Error processing page {page_num + 1}: {str(e)}")
-                        extracted_texts.append(f"[Page {page_num + 1}: Error extracting text]")
-                        page_count += 1
-                
-                # Combine all extracted texts
-                full_text = "\n\n".join(extracted_texts)
-                avg_confidence = total_confidence / page_count if page_count > 0 else 0
-                
-                return {
-                    "text": full_text.strip(),
-                    "confidence": avg_confidence,
-                    "engine": "PyPDF2 + Google Vision",
-                    "page_count": page_count,
-                    "language": "ar"
-                }
-            else:
-                return {
-                    "text": "",
-                    "confidence": 0,
-                    "engine": "none",
-                    "error": "PDF processing library not installed"
-                }
-                
-        except Exception as e:
-            logger.error(f"PDF extraction failed: {str(e)}")
-            return {
-                "text": "",
-                "confidence": 0,
-                "engine": "PyPDF2",
-                "error": str(e)
-            }
+        logger.info("Using Google Vision OCR for PDF processing")
+        return await self.extract_text_from_pdf_via_ocr(pdf_bytes)
 
 # Initialize OCR service
 ocr_service = OCRService()
@@ -663,8 +553,8 @@ async def ocr_status():
                 "name": "Google Cloud Vision API"
             },
             "pdf_support": {
-                "available": PYPDF_AVAILABLE,
-                "name": "PyPDF2"
+                "available": PYMUPDF_AVAILABLE,
+                "name": "PyMuPDF (PDF to Image conversion)"
             },
             "image_support": {
                 "available": PIL_AVAILABLE,
@@ -673,7 +563,7 @@ async def ocr_status():
         },
         "supported_formats": {
             "images": list(SUPPORTED_IMAGE_TYPES),
-            "documents": ["application/pdf"] if PYPDF_AVAILABLE else []
+            "documents": ["application/pdf"] if PYMUPDF_AVAILABLE else []
         },
         "limits": {
             "max_file_size_mb": MAX_FILE_SIZE // (1024 * 1024)
