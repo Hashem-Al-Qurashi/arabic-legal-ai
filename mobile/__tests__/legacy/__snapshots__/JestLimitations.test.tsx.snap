@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Jest Configuration Limitations 📊 WHAT WE CAN ACTUALLY TEST (Very Limited) Static prop passing 1`] = `
+<div>
+  Test
+</div>
+`;

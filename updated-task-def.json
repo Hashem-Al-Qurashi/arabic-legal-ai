@@ -1,0 +1,133 @@
+{
+    "taskDefinition": {
+        "taskDefinitionArn": "arn:aws:ecs:eu-central-1:940053359036:task-definition/new-moaen-ai-backend:11",
+        "containerDefinitions": [
+            {
+                "name": "backend-container",
+                "image": "940053359036.dkr.ecr.eu-central-1.amazonaws.com/new-moaen-ai/backend:simplified-ocr-fix",
+                "cpu": 0,
+                "portMappings": [
+                    {
+                        "containerPort": 8000,
+                        "hostPort": 8000,
+                        "protocol": "tcp"
+                    }
+                ],
+                "essential": true,
+                "environment": [
+                    {
+                        "name": "AI_PROVIDER",
+                        "value": "openai"
+                    },
+                    {
+                        "name": "CORS_ORIGINS",
+                        "value": "https://hokm.ai,https://www.hokm.ai"
+                    },
+                    {
+                        "name": "GOOGLE_CLIENT_ID",
+                        "value": "1076021198125-6ttfqhm2g42o72v95v29berorj9a85de.apps.googleusercontent.com"
+                    },
+                    {
+                        "name": "ENVIRONMENT",
+                        "value": "production"
+                    }
+                ],
+                "mountPoints": [],
+                "volumesFrom": [],
+                "secrets": [
+                    {
+                        "name": "DB_PASSWORD",
+                        "valueFrom": "arn:aws:secretsmanager:eu-central-1:940053359036:secret:new-moaen-ai/database-6H0xXW:password::"
+                    },
+                    {
+                        "name": "SECRET_KEY",
+                        "valueFrom": "arn:aws:secretsmanager:eu-central-1:940053359036:secret:new-moaen-ai/app-YJnbEX:secret_key::"
+                    },
+                    {
+                        "name": "OPENAI_API_KEY",
+                        "valueFrom": "arn:aws:secretsmanager:eu-central-1:940053359036:secret:new-moaen-ai/app-YJnbEX:openai_api_key::"
+                    },
+                    {
+                        "name": "GOOGLE_VISION_API_KEY",
+                        "valueFrom": "arn:aws:secretsmanager:eu-central-1:940053359036:secret:new-moaen-ai/app-YJnbEX:google_vision_api_key::"
+                    }
+                ],
+                "logConfiguration": {
+                    "logDriver": "awslogs",
+                    "options": {
+                        "awslogs-group": "/ecs/new-moaen-ai/backend",
+                        "awslogs-region": "eu-central-1",
+                        "awslogs-stream-prefix": "ecs"
+                    }
+                },
+                "healthCheck": {
+                    "command": [
+                        "CMD-SHELL",
+                        "curl -f http://localhost:8000/health || exit 1"
+                    ],
+                    "interval": 30,
+                    "timeout": 5,
+                    "retries": 3,
+                    "startPeriod": 60
+                },
+                "systemControls": []
+            }
+        ],
+        "family": "new-moaen-ai-backend",
+        "taskRoleArn": "arn:aws:iam::940053359036:role/new-moaen-ai-ecs-task-role",
+        "executionRoleArn": "arn:aws:iam::940053359036:role/new-moaen-ai-ecs-task-execution-role",
+        "networkMode": "awsvpc",
+        "revision": 11,
+        "volumes": [],
+        "status": "ACTIVE",
+        "requiresAttributes": [
+            {
+                "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+            },
+            {
+                "name": "ecs.capability.execution-role-awslogs"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.ecr-auth"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+            },
+            {
+                "name": "ecs.capability.secrets.asm.environment-variables"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.task-iam-role"
+            },
+            {
+                "name": "ecs.capability.container-health-check"
+            },
+            {
+                "name": "ecs.capability.execution-role-ecr-pull"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+            },
+            {
+                "name": "ecs.capability.task-eni"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+            }
+        ],
+        "placementConstraints": [],
+        "compatibilities": [
+            "EC2",
+            "FARGATE",
+            "MANAGED_INSTANCES"
+        ],
+        "requiresCompatibilities": [
+            "FARGATE"
+        ],
+        "cpu": "512",
+        "memory": "1024",
+        "registeredAt": "2025-11-05T21:52:00.434000+02:00",
+        "registeredBy": "arn:aws:iam::940053359036:root"
+    },
+    "tags": []
+}

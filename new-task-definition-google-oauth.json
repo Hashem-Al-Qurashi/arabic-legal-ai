@@ -1,0 +1,76 @@
+{
+  "family": "new-moaen-ai-backend",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::940053359036:role/new-moaen-ai-ecs-task-execution-role",
+  "taskRoleArn": "arn:aws:iam::940053359036:role/new-moaen-ai-ecs-task-role", 
+  "containerDefinitions": [
+    {
+      "name": "backend-container",
+      "image": "940053359036.dkr.ecr.eu-central-1.amazonaws.com/new-moaen-ai/backend:latest",
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "ENVIRONMENT",
+          "value": "production"
+        },
+        {
+          "name": "DEBUG",
+          "value": "False"
+        },
+        {
+          "name": "GOOGLE_CLIENT_ID",
+          "value": "1076021198125-6ttfqhm2g42o72v95v29berorj9a85de.apps.googleusercontent.com"
+        },
+        {
+          "name": "GOOGLE_CLIENT_SECRET", 
+          "value": "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"
+        },
+        {
+          "name": "CORS_ORIGINS",
+          "value": "https://hokm.ai,https://app.hokm.ai,https://daanou7but4g6.cloudfront.net,https://d3g03g0d3w0nv2.cloudfront.net,https://d2a614vyz9m2g5.cloudfront.net,https://dw9g4qpwv2fx5.cloudfront.net"
+        },
+        {
+          "name": "APP_NAME",
+          "value": "Arabic Legal Assistant"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "OPENAI_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:940053359036:secret:new-moaen-ai/openai-api-key"
+        },
+        {
+          "name": "DATABASE_URL", 
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:940053359036:secret:new-moaen-ai/database-url"
+        },
+        {
+          "name": "SECRET_KEY",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:940053359036:secret:new-moaen-ai/secret-key"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/new-moaen-ai-backend",
+          "awslogs-region": "eu-central-1", 
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "healthCheck": {
+        "command": ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    }
+  ]
+}

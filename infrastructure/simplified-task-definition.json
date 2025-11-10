@@ -1,0 +1,43 @@
+{
+  "family": "new-moaen-ai-backend-simple",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::743676310436:role/new-moaen-ai-ecs-task-execution-role",
+  "containerDefinitions": [
+    {
+      "name": "backend-container",
+      "image": "940053359036.dkr.ecr.eu-central-1.amazonaws.com/new-moaen-ai/backend:arabic-pdf-fix",
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "AI_PROVIDER",
+          "value": "openai"
+        },
+        {
+          "name": "ENVIRONMENT",
+          "value": "production"
+        },
+        {
+          "name": "DB_TYPE",
+          "value": "sqlite"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/new-moaen-ai-backend",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

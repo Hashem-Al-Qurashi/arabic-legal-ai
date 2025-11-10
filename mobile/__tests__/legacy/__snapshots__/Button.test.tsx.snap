@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component renders basic button correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#007bff",
+      "borderColor": "transparent",
+      "borderRadius": 8,
+      "borderWidth": 0,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 44,
+      "opacity": 1,
+      "paddingHorizontal": 16,
+      "paddingVertical": 12,
+    }
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "fontWeight": "600",
+          "textAlign": "center",
+        },
+        {
+          "fontSize": 16,
+        },
+        {
+          "color": "#ffffff",
+        },
+        undefined,
+      ]
+    }
+  >
+    Test Button
+  </Text>
+</View>
+`;

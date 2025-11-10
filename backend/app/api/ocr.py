@@ -274,17 +274,6 @@ For real text extraction, please configure:
         """Extract text from PDF using Google Vision OCR (for Arabic PDFs with encoding issues)"""
         
         try:
-            if not PYMUPDF_AVAILABLE:
-                return {
-                    "text": "",
-                    "confidence": 0,
-                    "engine": "Missing PyMuPDF",
-                    "language": "ar",
-                    "word_count": 0,
-                    "page_count": 0,
-                    "error": "PyMuPDF library not available for PDF processing"
-                }
-            
             # Import required libraries
             import fitz  # PyMuPDF
             import io

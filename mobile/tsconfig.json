@@ -1,0 +1,88 @@
+{
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    /* React Native uses esnext target and bundler resolution */
+    "target": "esnext",
+    "module": "es2015",
+    "moduleResolution": "bundler",
+    "jsx": "react-native",
+    
+    /* React Native specific libs - NO DOM! */
+    "lib": [
+      "es2019",
+      "es2020.bigint",
+      "es2020.date", 
+      "es2020.number",
+      "es2020.promise",
+      "es2020.string",
+      "es2020.symbol.wellknown",
+      "es2021.promise",
+      "es2021.string",
+      "es2021.weakref",
+      "es2022.array",
+      "es2022.object",
+      "es2022.string"
+    ],
+    "types": ["react-native", "jest", "node"],
+    
+    /* Essential React Native options */
+    "allowJs": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "allowArbitraryExtensions": true,
+    "customConditions": ["react-native"],
+    "resolvePackageJsonImports": false,
+    "forceConsistentCasingInFileNames": false,
+    
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    
+    /* Module resolution for mobile development */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/components": ["src/components"],
+      "@/components/*": ["src/components/*"],
+      "@/services": ["src/services"],
+      "@/services/*": ["src/services/*"],
+      "@/types": ["src/types"],
+      "@/types/*": ["src/types/*"],
+      "@/utils": ["src/utils"],
+      "@/utils/*": ["src/utils/*"],
+      "@/contexts": ["src/contexts"],
+      "@/contexts/*": ["src/contexts/*"],
+      "@/hooks": ["src/hooks"],
+      "@/hooks/*": ["src/hooks/*"],
+      "@/styles": ["src/styles"],
+      "@/styles/*": ["src/styles/*"],
+      "@/screens": ["src/screens"],
+      "@/screens/*": ["src/screens/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx", 
+    "index.js",
+    "__tests__/*.ts",
+    "__tests__/*.tsx"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/Pods",
+    "android",
+    "ios",
+    "__tests__/mocks",
+    "__tests__/legacy"
+  ]
+}

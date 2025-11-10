@@ -1,0 +1,118 @@
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
+
+/**
+ * This is the configuration block to customize your React Native Android app.
+ * By default you don't need to apply any configuration, just uncomment the lines you need.
+ */
+react {
+    /* Production optimizations */
+    // Use RAM bundles for faster startup on Android
+    bundleCommand = "ram-bundle"
+    
+    // Extra packager args for optimization
+    extraPackagerArgs = ["--minify"]
+
+    /* Hermes optimization flags */
+    hermesFlags = ["-O", "-output-source-map", "-max-diagnostic-width=80"]
+
+    /* Autolinking */
+    autolinkLibrariesWithApp()
+}
+
+/**
+ * Set this to true to Run Proguard on Release builds to minify the Java bytecode.
+ */
+def enableProguardInReleaseBuilds = true
+
+/**
+ * Enable Hermes JS Engine for better performance
+ */
+def enableHermes = true
+
+/**
+ * The preferred build flavor of JavaScriptCore (JSC)
+ *
+ * For example, to use the international variant, you can use:
+ * `def jscFlavor = io.github.react-native-community:jsc-android-intl:2026004.+`
+ *
+ * The international variant includes ICU i18n library and necessary data
+ * allowing to use e.g. `Date.toLocaleString` and `String.localeCompare` that
+ * give correct results when using with locales other than en-US. Note that
+ * this variant is about 6MiB larger per architecture than default.
+ */
+def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
+
+android {
+    // ndkVersion rootProject.ext.ndkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdk rootProject.ext.compileSdkVersion
+
+    namespace "com.arabiclegalaimobile"
+    defaultConfig {
+        applicationId "com.arabiclegalaimobile"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        
+        // Production optimizations
+        resConfigs "en", "ar"  // Only include English and Arabic resources
+        
+        // Optimize native library loading
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            // Caution! In production, you need to generate your own keystore file.
+            // see https://reactnative.dev/docs/signed-apk-android.
+            signingConfig signingConfigs.debug
+            minifyEnabled enableProguardInReleaseBuilds
+            shrinkResources enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            
+            // Enable zipAlign for APK optimization
+            zipAlignEnabled true
+            
+            // Optimize for production
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+        }
+    }
+}
+
+dependencies {
+    // The version of react-native is set by the React Native Gradle Plugin
+    implementation("com.facebook.react:react-android")
+
+    if (hermesEnabled.toBoolean()) {
+        implementation("com.facebook.react:hermes-android")
+    } else {
+        implementation jscFlavor
+    }
+}
