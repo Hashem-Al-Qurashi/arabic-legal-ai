@@ -1324,7 +1324,9 @@ class IntelligentLegalRAG:
             else:
                 top_k = 15  # General questions need fewer documents
 
+            logger.info(f"🔍 RAG Engine requesting top_k={top_k} chunks for category {category}")
             relevant_docs = await self.retriever.get_relevant_documents(query, top_k=top_k, user_intent=category)
+            logger.info(f"📄 RAG Engine received {len(relevant_docs)} chunks from retriever")
             
             # Stage 3: Select appropriate prompt
             system_prompt = PROMPT_TEMPLATES[category]
@@ -1374,7 +1376,7 @@ class IntelligentLegalRAG:
             stream = await self.ai_client.chat.completions.create(
                 model=self.ai_model,
                 messages=messages,
-                temperature=0.05 if category == "ACTIVE_DISPUTE" else 0.15,
+                temperature=0.3 if category == "ACTIVE_DISPUTE" else 0.7,
                 max_tokens=15000 if category == "ACTIVE_DISPUTE" else 15000,  # ← GIVE DISPUTES MORE SPACE!
                 stream=True
             )
