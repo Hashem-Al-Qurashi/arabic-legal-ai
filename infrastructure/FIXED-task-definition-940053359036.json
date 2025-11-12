@@ -1,0 +1,68 @@
+{
+  "family": "new-moaen-ai-backend",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::940053359036:role/new-moaen-ai-ecs-task-execution-role",
+  "taskRoleArn": "arn:aws:iam::940053359036:role/new-moaen-ai-ecs-task-role",
+  "containerDefinitions": [
+    {
+      "name": "backend-container",
+      "image": "940053359036.dkr.ecr.eu-central-1.amazonaws.com/new-moaen-ai/backend:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/new-moaen-ai/backend",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "backend"
+        }
+      },
+      "environment": [
+        {
+          "name": "ENVIRONMENT",
+          "value": "production"
+        },
+        {
+          "name": "AI_PROVIDER",
+          "value": "openai"
+        },
+        {
+          "name": "CORS_ORIGINS",
+          "value": "https://hokm.ai,https://www.hokm.ai,https://app.hokm.ai,https://d14ao1bx3dkdxo.cloudfront.net,https://d19s2p97xyms4l.cloudfront.net,https://d10drat4g0606g.cloudfront.net,https://d2c979d13bkvf4.cloudfront.net,http://localhost:3000"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "DB_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:940053359036:secret:new-moaen-ai/database-6H0xXW:password::"
+        },
+        {
+          "name": "SECRET_KEY",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:940053359036:secret:new-moaen-ai/app-YJnbEX:secret_key::"
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:940053359036:secret:new-moaen-ai/app-YJnbEX:openai_api_key::"
+        }
+      ],
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -f http://localhost:8000/health || exit 1"
+        ],
+        "interval": 60,
+        "timeout": 30,
+        "retries": 3,
+        "startPeriod": 180
+      }
+    }
+  ]
+}

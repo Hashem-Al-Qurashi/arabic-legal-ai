@@ -58,29 +58,33 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onSuccess 
 
   return (
     <div style={{
-      maxWidth: '440px',
+      maxWidth: 'min(90vw, 28rem)',
+      width: '100%',
       margin: '0 auto',
-      padding: '48px 32px',
-      textAlign: 'center'
+      padding: 'clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2rem)',
+      textAlign: 'center',
+      boxSizing: 'border-box'
     }}>
 
       {error && (
         <div style={{
           background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.08) 100%)',
           color: '#dc2626',
-          padding: '16px 20px',
-          borderRadius: '12px',
-          marginBottom: '24px',
+          padding: 'clamp(0.8rem, 3vw, 1.2rem) clamp(1rem, 4vw, 1.5rem)',
+          borderRadius: 'clamp(8px, 2vw, 12px)',
+          marginBottom: 'clamp(1rem, 4vw, 1.5rem)',
           border: '1px solid rgba(220, 38, 38, 0.2)',
-          fontSize: '15px',
+          fontSize: 'clamp(0.9rem, 3vw, 1rem)',
           fontWeight: '500',
           textAlign: 'center',
           fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif',
-          position: 'relative'
+          position: 'relative',
+          width: '100%',
+          boxSizing: 'border-box'
         }}>
           <div style={{
             position: 'absolute',
-            left: '16px',
+            left: 'clamp(0.8rem, 3vw, 1rem)',
             top: '50%',
             transform: 'translateY(-50%)'
           }}>
@@ -90,7 +94,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin, onSuccess 
               <line x1="9" y1="9" x2="15" y2="15"/>
             </svg>
           </div>
-          <div style={{ paddingLeft: '32px' }}>
+          <div style={{ paddingLeft: 'clamp(1.8rem, 5vw, 2rem)' }}>
             {error}
           </div>
         </div>

@@ -32,7 +32,7 @@
         },
         {
           "name": "CORS_ORIGINS",
-          "value": "https://d10drat4g0606g.cloudfront.net,https://d2c979d13bkvf4.cloudfront.net,http://localhost:3000"
+          "value": "https://d19s2p97xyms4l.cloudfront.net,https://d10drat4g0606g.cloudfront.net,https://d2c979d13bkvf4.cloudfront.net,https://d14ao1bx3dkdxo.cloudfront.net,https://hokm.ai,https://www.hokm.ai,http://localhost:3000"
         }
       ],
       "secrets": [

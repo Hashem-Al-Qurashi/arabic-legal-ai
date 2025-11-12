@@ -251,6 +251,7 @@ class Settings(BaseSettings):
                 "https://d19s2p97xyms4l.cloudfront.net",  # Current frontend CloudFront
                 "https://d10drat4g0606g.cloudfront.net",  # Backend CloudFront  
                 "https://d2c979d13bkvf4.cloudfront.net",  # Legacy CloudFront
+                "https://d14ao1bx3dkdxo.cloudfront.net",  # Backend API CloudFront (FIXED)
                 
                 # Keep localhost for production testing (remove if not needed)
                 "http://localhost:3000"

@@ -33,9 +33,9 @@ export const AuthScreen: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '2rem',
+        padding: 'clamp(1rem, 4vw, 3rem)',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'auto'
       }}>
         
         {/* Animated background elements */}
@@ -43,8 +43,8 @@ export const AuthScreen: React.FC = () => {
           position: 'absolute',
           top: '10%',
           right: '10%',
-          width: '300px',
-          height: '300px',
+          width: 'clamp(200px, 20vw, 300px)',
+          height: 'clamp(200px, 20vw, 300px)',
           background: 'radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%)',
           borderRadius: '50%',
           animation: 'float 6s ease-in-out infinite'
@@ -54,8 +54,8 @@ export const AuthScreen: React.FC = () => {
           position: 'absolute',
           bottom: '10%',
           left: '10%',
-          width: '200px',
-          height: '200px',
+          width: 'clamp(150px, 15vw, 200px)',
+          height: 'clamp(150px, 15vw, 200px)',
           background: 'radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%)',
           borderRadius: '50%',
           animation: 'float 8s ease-in-out infinite reverse'
@@ -73,7 +73,7 @@ export const AuthScreen: React.FC = () => {
             )
           `,
           borderRadius: '32px',
-          padding: '48px',
+          padding: 'clamp(2rem, 6vw, 3rem)',
           maxWidth: '480px',
           width: '100%',
           boxShadow: `
@@ -106,17 +106,17 @@ export const AuthScreen: React.FC = () => {
           {/* Header Section */}
           <div style={{
             textAlign: 'center',
-            marginBottom: '40px',
+            marginBottom: 'clamp(2rem, 5vw, 2.5rem)',
             position: 'relative',
             zIndex: 1
           }}>
             {/* Premium Logo */}
             <div style={{
-              width: '80px',
-              height: '80px',
+              width: 'clamp(4rem, 8vw, 5rem)',
+              height: 'clamp(4rem, 8vw, 5rem)',
               background: 'linear-gradient(135deg, #006C35 0%, #004A24 100%)',
               borderRadius: '24px',
-              margin: '0 auto 24px',
+              margin: '0 auto clamp(1.2rem, 4vw, 1.5rem)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -150,7 +150,7 @@ export const AuthScreen: React.FC = () => {
               color: 'rgba(255, 255, 255, 0.95)',
               fontSize: '32px',
               fontWeight: '700',
-              marginBottom: '8px',
+              marginBottom: 'clamp(0.4rem, 1vw, 0.5rem)',
               fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif',
               letterSpacing: '-0.02em',
               textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'

@@ -44,9 +44,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister, onSuccess }) 
 
   return (
     <div style={{
-      maxWidth: '440px',
+      maxWidth: 'min(90vw, 28rem)',
+      width: '100%',
       margin: '0 auto',
-      padding: '48px 32px',
+      padding: 'clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2rem)',
+      boxSizing: 'border-box',
       textAlign: 'center'
     }}>
 
@@ -54,7 +56,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister, onSuccess }) 
         <div style={{
           background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.08) 100%)',
           color: '#dc2626',
-          padding: '16px 20px',
+          padding: 'clamp(0.8rem, 3vw, 1.2rem) clamp(1rem, 4vw, 1.5rem)',
           borderRadius: '12px',
           marginBottom: '24px',
           border: '1px solid rgba(220, 38, 38, 0.2)',
@@ -76,7 +78,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister, onSuccess }) 
               <line x1="9" y1="9" x2="15" y2="15"/>
             </svg>
           </div>
-          <div style={{ paddingLeft: '32px' }}>
+          <div style={{ paddingLeft: 'clamp(1.8rem, 5vw, 2rem)' }}>
             {error}
           </div>
         </div>
@@ -102,7 +104,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister, onSuccess }) 
             required
             style={{
               width: '100%',
-              padding: '16px 20px',
+              padding: 'clamp(0.8rem, 3vw, 1.2rem) clamp(1rem, 4vw, 1.5rem)',
               fontSize: '16px',
               border: '1px solid rgba(209, 213, 219, 0.8)',
               borderRadius: '12px',
@@ -145,7 +147,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister, onSuccess }) 
             required
             style={{
               width: '100%',
-              padding: '16px 20px',
+              padding: 'clamp(0.8rem, 3vw, 1.2rem) clamp(1rem, 4vw, 1.5rem)',
               fontSize: '16px',
               border: '1px solid rgba(209, 213, 219, 0.8)',
               borderRadius: '12px',
@@ -174,7 +176,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister, onSuccess }) 
           disabled={loading || !email || !password}
           style={{
             width: '100%',
-            padding: '16px 24px',
+            padding: 'clamp(0.8rem, 3vw, 1rem) clamp(1.2rem, 4vw, 1.5rem)',
             fontSize: '16px',
             fontWeight: '600',
             color: 'white',
@@ -237,7 +239,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister, onSuccess }) 
             background: 'rgba(255, 255, 255, 0.3)'
           }} />
           <span style={{
-            padding: '0 16px',
+            padding: '0 clamp(0.8rem, 3vw, 1rem)',
             fontSize: '14px',
             color: 'rgba(255, 255, 255, 0.7)',
             fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif'

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { api } from '../../services/api';
+import axios from 'axios';
 import toast from 'react-hot-toast';
 
 // Google Identity Services types
@@ -82,7 +82,7 @@ const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({
       console.log('🔑 Google Sign-In: Sending token to backend...');
       
       // Call our backend Google auth endpoint
-      const result = await api.post('/api/auth/google', {
+      const result = await axios.post('/api/auth/google', {
         id_token: response.credential
       });
 

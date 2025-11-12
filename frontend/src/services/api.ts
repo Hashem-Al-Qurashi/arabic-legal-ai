@@ -26,10 +26,10 @@ const getApiBaseUrl = () => {
     return 'http://localhost:8000';
   }
   
-  // For hokm.ai production domains, use the correct backend CloudFront domain
+  // For hokm.ai production domains, use the actual backend CloudFront HTTPS
   if (hostname.includes('hokm.ai') || hostname.includes('cloudfront.net')) {
-    // Use the actual backend CloudFront distribution
-    return 'https://d14ao1bx3dkdxo.cloudfront.net';
+    // Use the actual backend CloudFront distribution (HTTPS)
+    return 'https://dw9g4qpwv2fx5.cloudfront.net';
   }
   
   // Fallback for other domains
