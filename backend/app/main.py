@@ -17,7 +17,7 @@ import os
 from app.models import User, Consultation, Conversation, Message
 # Import routers
 from app.api.simple_auth import router as auth_router
-from app.api.google_auth_fixed import router as google_auth_router
+from app.api.google_auth import router as google_auth_router
 from app.api.chat import router as chat_router
 from app.api.export import router as export_router
 from app.api.ocr import router as ocr_router
