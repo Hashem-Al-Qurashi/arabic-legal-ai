@@ -860,13 +860,16 @@ class DocumentRetriever:
         """
         logger.info("🎯 SKIPPING AI FILTERING: Using vector similarity ranking")
         
-        # Return top result based on vector similarity
-        # Return top 10 results for broader context
+        # Return top results based on requested top_k (no hardcoded limit!)
         chunks = []
-        for i in range(min(10, len(search_results))):
+        actual_return_count = min(top_k, len(search_results))
+        logger.info(f"🔧 AI Filter: Requested {top_k}, Available {len(search_results)}, Returning {actual_return_count}")
+        
+        for i in range(actual_return_count):
             chunk = search_results[i].chunk if hasattr(search_results[i], 'chunk') else search_results[i]
             chunks.append(chunk)
 
+        logger.info(f"✅ AI Filter: Successfully returning {len(chunks)} chunks to RAG engine")
         return chunks
 
     async def get_relevant_documents(self, query: str, top_k: int = 3, user_intent: str = None) -> List[Chunk]:

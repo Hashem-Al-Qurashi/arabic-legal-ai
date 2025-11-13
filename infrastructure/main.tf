@@ -158,7 +158,7 @@ resource "aws_db_instance" "main" {
   identifier = "${var.project_name}-database"
   
   engine         = "postgres"
-  engine_version = "15.8"
+  engine_version = "15.14"
   instance_class = "db.t3.micro"
   
   db_name  = "arabic_legal_db"
