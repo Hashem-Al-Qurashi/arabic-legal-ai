@@ -11,7 +11,8 @@ load_dotenv()
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from datetime import datetime
 import os
 from app.models import User, Consultation, Conversation, Message
@@ -167,3 +168,27 @@ print("✅ Features: Unified Chat + Guest Sessions + Context Memory + Zero Tech 
 print(f"🌐 CORS configured for: {settings.allowed_origins}")
 print("🔥 Legacy APIs removed - Single chat system for all users!")
 print("📊 Architecture: Zero tech debt, maximum maintainability")
+
+# ===== VANILLA TEST PAGE =====
+
+@app.get("/vanilatest")
+async def vanilla_test_page():
+    """Serve vanilla ensemble test page"""
+    import os
+    frontend_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "frontend")
+    vanilla_test_path = os.path.join(frontend_path, "vanilla-test.html")
+    
+    if os.path.exists(vanilla_test_path):
+        return FileResponse(vanilla_test_path)
+    else:
+        return JSONResponse({
+            "error": "Vanilla test page not found",
+            "path": vanilla_test_path,
+            "available_endpoints": {
+                "vanilla_ensemble_api": "/api/chat/message/vanilla-ensemble",
+                "vanilla_ensemble_stats": "/api/chat/vanilla-ensemble/stats"
+            },
+            "instructions": "Use the API endpoints directly or check the file path"
+        })
+
+print("🍦 Vanilla ensemble test page available at: /vanilatest")
