@@ -9,7 +9,7 @@
   "containerDefinitions": [
     {
       "name": "backend-container",
-      "image": "940053359036.dkr.ecr.eu-central-1.amazonaws.com/new-moaen-ai/backend:latest",
+      "image": "940053359036.dkr.ecr.eu-central-1.amazonaws.com/new-moaen-ai/backend:breakthrough",
       "essential": true,
       "portMappings": [
         {
