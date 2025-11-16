@@ -731,3 +731,147 @@ async def get_ensemble_stats():
             "error": str(e),
             "message": "Ensemble system not available"
         }
+
+@router.post("/message/vanilla-ensemble")
+async def send_vanilla_ensemble_message(
+    message: str = Form(..., description="User message"),
+    enable_streaming: bool = Form(False, description="Enable streaming responses"),
+    db: Session = Depends(get_database),
+    current_user: Optional[User] = Depends(get_optional_current_user)
+):
+    """
+    VANILLA ENSEMBLE ENDPOINT - Pure Model Comparison
+    
+    Process query using pure vanilla ensemble:
+    1. Send SAME question to 4 models (no RAG context)
+    2. 3 judges extract best components from each response
+    3. Assemble best parts into superior final response
+    
+    🍦 VANILLA: No RAG, no context - just pure model comparison!
+    💰 COST: ~$0.21 per query (with 2 models available)
+    """
+    try:
+        # Import vanilla ensemble system
+        from vanilla_ensemble import process_vanilla_ensemble_query, process_vanilla_ensemble_streaming
+        
+        # Basic validation
+        if not message or not isinstance(message, str):
+            raise HTTPException(status_code=400, detail="Message is required and must be a string")
+        
+        message = message.strip()
+        if len(message) == 0:
+            raise HTTPException(status_code=400, detail="Message cannot be empty")
+        if len(message) > 5000:
+            raise HTTPException(status_code=400, detail="Message too long for vanilla ensemble (max 5,000 characters)")
+        
+        print(f"🍦 VANILLA ENSEMBLE: Processing query: {message[:50]}...")
+        
+        if enable_streaming:
+            # Streaming response
+            async def vanilla_ensemble_stream():
+                try:
+                    async for update in process_vanilla_ensemble_streaming(message):
+                        yield f"data: {json.dumps(update, ensure_ascii=False)}\n\n"
+                    yield "data: [DONE]\n\n"
+                    
+                except Exception as e:
+                    error_data = {
+                        "type": "error",
+                        "error": str(e),
+                        "message": "Vanilla ensemble processing failed"
+                    }
+                    yield f"data: {json.dumps(error_data, ensure_ascii=False)}\n\n"
+                    yield "data: [DONE]\n\n"
+            
+            return StreamingResponse(
+                vanilla_ensemble_stream(),
+                media_type="text/event-stream",
+                headers={
+                    "Cache-Control": "no-cache",
+                    "Connection": "keep-alive",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers": "Cache-Control"
+                }
+            )
+        else:
+            # Complete response
+            result = await process_vanilla_ensemble_query(message)
+            
+            # Format for client compatibility
+            response_data = {
+                "conversation_id": result.get("request_id"),
+                "user_message": {
+                    "content": message,
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "role": "user"
+                },
+                "ai_message": {
+                    "content": result["final_response"],
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "role": "assistant",
+                    "processing_time_ms": result["processing_time_ms"]
+                },
+                "processing_time_ms": result["processing_time_ms"],
+                "cost_estimate": result["cost_estimate"],
+                "vanilla_ensemble_data": result["vanilla_data"],
+                "updated_user": _serialize_user_data(current_user),
+                "user_questions_remaining": 999,
+                
+                # Vanilla ensemble metadata
+                "processing_mode": "vanilla_ensemble",
+                "system_type": "Pure vanilla 4-model + 3-judge ensemble",
+                "rag_used": False,
+                "context_provided": False,
+                "models_used": result["vanilla_data"].get("generator_responses", 0),
+                "judges_used": result["vanilla_data"].get("judge_evaluations", 0),
+                "components_extracted": result["vanilla_data"].get("consensus_components", 0)
+            }
+            
+            return JSONResponse(content=response_data)
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"❌ VANILLA ENSEMBLE ERROR: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "message": f"Vanilla ensemble processing failed: {str(e)}",
+                "system_type": "vanilla_ensemble",
+                "error_type": "processing_error"
+            }
+        )
+
+@router.get("/vanilla-ensemble/stats")
+async def get_vanilla_ensemble_stats():
+    """Get vanilla ensemble system statistics and health"""
+    try:
+        from vanilla_ensemble import get_vanilla_ensemble_stats
+        stats = get_vanilla_ensemble_stats()
+        
+        return {
+            "vanilla_ensemble_status": "active",
+            "stats": stats,
+            "endpoints": {
+                "vanilla_ensemble_query": "/api/chat/message/vanilla-ensemble",
+                "vanilla_ensemble_streaming": "/api/chat/message/vanilla-ensemble?enable_streaming=true"
+            },
+            "description": "🍦 Pure vanilla ensemble - no RAG, just 4 models + 3 judges + component extraction",
+            "cost_info": "💰 ~$0.21 per query (with current models available)",
+            "features": {
+                "vanilla_models": "4 AI models respond to same question (no context)",
+                "judges": "3 judge models extract best components", 
+                "components": "7 component types extracted and assembled",
+                "assembly": "AI-powered smooth response assembly",
+                "no_rag": "Pure model comparison without document retrieval"
+            }
+        }
+        
+    except Exception as e:
+        return {
+            "vanilla_ensemble_status": "error", 
+            "error": str(e),
+            "message": "Vanilla ensemble system not available"
+        }
