@@ -89,8 +89,12 @@ class VanillaModelClients:
             http_client=httpx.AsyncClient()
         ) if config.grok_api_key else None
         
-        # Note: Will add Gemini when we get proper API setup
-        self.gemini = None
+        # Gemini using direct Google AI API (not OpenAI wrapper)
+        self.gemini = AsyncOpenAI(
+            api_key=config.gemini_api_key,
+            base_url="https://generativelanguage.googleapis.com/v1beta",
+            http_client=httpx.AsyncClient()
+        ) if config.gemini_api_key else None
         
         # Judge models (3)
         self.judge_claude = AsyncOpenAI(
@@ -100,7 +104,7 @@ class VanillaModelClients:
         ) if config.claude_api_key else None
         
         self.judge_gpt = self.chatgpt
-        self.judge_gemini = None  # Will add when Gemini is working
+        self.judge_gemini = self.gemini  # Same Gemini client for judging
         
         logger.info(f"🍦 Vanilla model clients initialized:")
         logger.info(f"  Generators: ChatGPT={bool(self.chatgpt)}, DeepSeek={bool(self.deepseek)}")
@@ -158,7 +162,7 @@ class VanillaMultiModelGenerator:
                 "system_prompt": "أنت محامي سعودي متمرس. قدم استشارة عملية مع نصائح قانونية واقعية."
             },
             "gemini": {
-                "model": "gemini-1.5-pro", 
+                "model": "gemini-1.5-pro-latest", 
                 "description": "Comprehensive responses",
                 "system_prompt": "أنت استشاري قانوني متخصص في القانون السعودي. قدم إجابة شاملة تغطي جميع الجوانب."
             }
