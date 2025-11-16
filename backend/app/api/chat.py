@@ -586,3 +586,148 @@ async def get_chat_status(
         }
     else:
         raise HTTPException(status_code=400, detail="Session ID required for guest users")
+
+# ===== ENSEMBLE TESTING ENDPOINTS =====
+
+@router.post("/message/ensemble")
+async def send_ensemble_chat_message(
+    message: str = Form(..., description="User message"),
+    enable_streaming: bool = Form(False, description="Enable streaming responses"),
+    db: Session = Depends(get_database),
+    current_user: Optional[User] = Depends(get_optional_current_user)
+):
+    """
+    ENSEMBLE SYSTEM ENDPOINT - For Testing & Validation
+    
+    Process query using the complete ensemble pipeline:
+    1. Context retrieval (existing RAG)
+    2. 4-model parallel generation 
+    3. 3-judge component extraction
+    4. Consensus building & response assembly
+    5. Quality verification & data collection
+    
+    ⚠️ EXPENSIVE: ~$0.29 per query - use for testing only!
+    """
+    try:
+        # Import ensemble system
+        from ensemble_engine import process_ensemble_query, process_ensemble_streaming
+        
+        # Basic validation
+        if not message or not isinstance(message, str):
+            raise HTTPException(status_code=400, detail="Message is required and must be a string")
+        
+        message = message.strip()
+        if len(message) == 0:
+            raise HTTPException(status_code=400, detail="Message cannot be empty")
+        if len(message) > 5000:
+            raise HTTPException(status_code=400, detail="Message too long for ensemble processing (max 5,000 characters)")
+        
+        print(f"🚀 ENSEMBLE: Processing query: {message[:50]}...")
+        
+        if enable_streaming:
+            # Streaming response
+            async def ensemble_stream():
+                try:
+                    async for update in process_ensemble_streaming(message):
+                        yield f"data: {json.dumps(update, ensure_ascii=False)}\n\n"
+                    yield "data: [DONE]\n\n"
+                    
+                except Exception as e:
+                    error_data = {
+                        "type": "error",
+                        "error": str(e),
+                        "message": "Ensemble processing failed"
+                    }
+                    yield f"data: {json.dumps(error_data, ensure_ascii=False)}\n\n"
+                    yield "data: [DONE]\n\n"
+            
+            return StreamingResponse(
+                ensemble_stream(),
+                media_type="text/event-stream",
+                headers={
+                    "Cache-Control": "no-cache",
+                    "Connection": "keep-alive",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers": "Cache-Control"
+                }
+            )
+        else:
+            # Complete response
+            result = await process_ensemble_query(message)
+            
+            # Format for client compatibility
+            response_data = {
+                "conversation_id": result.get("request_id"),
+                "user_message": {
+                    "content": message,
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "role": "user"
+                },
+                "ai_message": {
+                    "content": result["final_response"],
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "role": "assistant",
+                    "processing_time_ms": result["processing_time_ms"]
+                },
+                "processing_time_ms": result["processing_time_ms"],
+                "cost_estimate": result["cost_estimate"],
+                "quality_report": result["quality_report"],
+                "ensemble_data": result["ensemble_data"],
+                "updated_user": _serialize_user_data(current_user),
+                "user_questions_remaining": 999,  # Ensemble testing - no limits
+                
+                # Ensemble-specific metadata
+                "processing_mode": "ensemble",
+                "system_type": "4-model + 3-judge ensemble",
+                "components_used": result["ensemble_data"].get("consensus_components", 0),
+                "models_used": result["ensemble_data"].get("generator_responses", 0)
+            }
+            
+            return JSONResponse(content=response_data)
+            
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"❌ ENSEMBLE ERROR: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "message": f"Ensemble processing failed: {str(e)}",
+                "system_type": "ensemble",
+                "error_type": "processing_error"
+            }
+        )
+
+@router.get("/ensemble/stats")
+async def get_ensemble_stats():
+    """Get ensemble system statistics and health"""
+    try:
+        from ensemble_engine import get_ensemble_stats
+        stats = get_ensemble_stats()
+        
+        return {
+            "ensemble_status": "active",
+            "stats": stats,
+            "endpoints": {
+                "ensemble_query": "/api/chat/message/ensemble",
+                "ensemble_streaming": "/api/chat/message/ensemble?enable_streaming=true"
+            },
+            "cost_warning": "⚠️ Ensemble costs ~$0.29 per query - use for testing only",
+            "features": {
+                "multi_model": "4 AI models (ChatGPT, DeepSeek, Grok, Gemini)",
+                "judges": "3 judge models (Claude, GPT-4o, Gemini)", 
+                "components": "7 component extraction types",
+                "assembly": "AI-powered response assembly",
+                "quality_verification": "Automated quality checks",
+                "data_collection": "Training data pipeline for fine-tuning"
+            }
+        }
+        
+    except Exception as e:
+        return {
+            "ensemble_status": "error", 
+            "error": str(e),
+            "message": "Ensemble system not available"
+        }
