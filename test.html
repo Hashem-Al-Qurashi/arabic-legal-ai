@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal AI Vanilla Ensemble - Saudi Law</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #28a745;
+        }
+
+        .status-dot.loading {
+            background: #ffc107;
+            animation: pulse 1s infinite;
+        }
+
+        .status-dot.error {
+            background: #dc3545;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            margin-bottom: 15px;
+            color: #1e3c72;
+            font-size: 1.3rem;
+        }
+
+        .question-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 16px;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        .question-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .quick-questions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .quick-question {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .quick-question:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .response-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .response-section.visible {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .response-text {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            border-right: 4px solid #667eea;
+            white-space: pre-wrap;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .metric {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #f5c6cb;
+            margin-top: 20px;
+        }
+
+        .logs-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .logs-container {
+            background: #000;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .nav-btn:hover {
+            background: #545b62;
+        }
+
+        .nav-btn.active {
+            background: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .status-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏛️ نظام القانون السعودي الذكي</h1>
+            <p>Vanilla Ensemble System - 4 Models + 3 Judges</p>
+        </div>
+
+        <div class="main-content">
+            <div class="status-bar">
+                <div class="status-item">
+                    <div class="status-dot" id="status-dot"></div>
+                    <span id="status-text">Ready</span>
+                </div>
+                <div class="status-item">
+                    <span>🤖 Models: GPT-4o, DeepSeek, Grok, Gemini</span>
+                </div>
+                <div class="status-item">
+                    <span>⚖️ Judges: Claude, GPT-4o, Gemini</span>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showSection('main')">Main</button>
+                <button class="nav-btn" onclick="showSection('health')">Health</button>
+                <button class="nav-btn" onclick="showSection('logs')">Logs</button>
+                <button class="nav-btn" onclick="showSection('stats')">Stats</button>
+            </div>
+
+            <div id="main-section">
+                <div class="form-section">
+                    <h3>اسأل سؤالك القانوني</h3>
+                    <textarea 
+                        class="question-input" 
+                        id="question-input"
+                        placeholder="مثال: ما هي مدة الإجازة السنوية حسب نظام العمل السعودي؟"
+                    ></textarea>
+                    
+                    <div class="quick-questions">
+                        <div class="quick-question" onclick="setQuestion('ما هي مدة الإجازة السنوية؟')">
+                            ما هي مدة الإجازة السنوية؟
+                        </div>
+                        <div class="quick-question" onclick="setQuestion('كيف أحسب مكافأة نهاية الخدمة؟')">
+                            كيف أحسب مكافأة نهاية الخدمة؟
+                        </div>
+                        <div class="quick-question" onclick="setQuestion('ما عقوبات التأخير عن العمل؟')">
+                            ما عقوبات التأخير عن العمل؟
+                        </div>
+                    </div>
+                    
+                    <button class="submit-btn" id="submit-btn" onclick="askQuestion()">
+                        🚀 تشغيل نظام الذكاء الاصطناعي
+                    </button>
+                </div>
+
+                <div class="response-section" id="response-section">
+                    <h3>الإجابة من النظام المتكامل</h3>
+                    <div class="response-text" id="response-text"></div>
+                    
+                    <div class="metrics" id="metrics"></div>
+                </div>
+            </div>
+
+            <div id="health-section" class="logs-section" style="display: none;">
+                <h3>System Health</h3>
+                <div class="logs-container" id="health-container">Loading health status...</div>
+            </div>
+
+            <div id="logs-section" class="logs-section" style="display: none;">
+                <h3>System Logs</h3>
+                <div class="logs-container" id="logs-container">Loading logs...</div>
+            </div>
+
+            <div id="stats-section" class="logs-section" style="display: none;">
+                <h3>System Statistics</h3>
+                <div class="logs-container" id="stats-container">Loading stats...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setQuestion(question) {
+            document.getElementById('question-input').value = question;
+        }
+
+        function updateStatus(text, isLoading = false, isError = false) {
+            const statusDot = document.getElementById('status-dot');
+            const statusText = document.getElementById('status-text');
+            
+            statusText.textContent = text;
+            
+            statusDot.className = 'status-dot';
+            if (isLoading) statusDot.classList.add('loading');
+            if (isError) statusDot.classList.add('error');
+        }
+
+        async function askQuestion() {
+            const question = document.getElementById('question-input').value.trim();
+            
+            if (!question) {
+                alert('الرجاء إدخال سؤال');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submit-btn');
+            const responseSection = document.getElementById('response-section');
+            const responseText = document.getElementById('response-text');
+            const metricsDiv = document.getElementById('metrics');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = '🔄 جاري المعالجة...';
+            updateStatus('Processing...', true);
+            
+            responseSection.style.display = 'block';
+            responseSection.classList.add('visible');
+            responseText.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <h3>جاري تشغيل النظام المتكامل...</h3>
+                    <p>Step 1: Calling 4 AI models...</p>
+                    <p>Step 2: 3 judges analyzing responses...</p>
+                    <p>Step 3: Consensus voting...</p>
+                    <p>Step 4: Assembling final response...</p>
+                </div>
+            `;
+            
+            try {
+                console.log('📤 Sending question:', question);
+                
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ question: question })
+                });
+
+                console.log('📥 Response status:', response.status);
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || `HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('📊 Response data:', data);
+                
+                responseText.textContent = data.final_response;
+                
+                metricsDiv.innerHTML = `
+                    <div class="metric">
+                        <div class="metric-value">${data.processing_time_ms}ms</div>
+                        <div class="metric-label">Processing Time</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$${data.cost_estimate}</div>
+                        <div class="metric-label">Cost Estimate</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">${data.models_used}</div>
+                        <div class="metric-label">Models Used</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">${data.judges_used}</div>
+                        <div class="metric-label">Judges Used</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">${data.components_extracted}</div>
+                        <div class="metric-label">Components</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">${data.consensus_score || 'N/A'}</div>
+                        <div class="metric-label">Consensus Score</div>
+                    </div>
+                `;
+                
+                updateStatus('Complete ✅');
+                
+            } catch (error) {
+                console.error('❌ Error:', error);
+                updateStatus('Error', false, true);
+                
+                responseText.innerHTML = `
+                    <div class="error">
+                        <h4>❌ خطأ في النظام</h4>
+                        <p>${error.message}</p>
+                        <p>الرجاء المحاولة مرة أخرى أو التحقق من حالة النظام.</p>
+                    </div>
+                `;
+                
+                metricsDiv.innerHTML = '';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = '🚀 تشغيل نظام الذكاء الاصطناعي';
+            }
+        }
+
+        async function showSection(section) {
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('main-section').style.display = section === 'main' ? 'block' : 'none';
+            document.getElementById('health-section').style.display = section === 'health' ? 'block' : 'none';
+            document.getElementById('logs-section').style.display = section === 'logs' ? 'block' : 'none';
+            document.getElementById('stats-section').style.display = section === 'stats' ? 'block' : 'none';
+            
+            if (section === 'health') {
+                await loadHealth();
+            } else if (section === 'logs') {
+                await loadLogs();
+            } else if (section === 'stats') {
+                await loadStats();
+            }
+        }
+
+        async function loadHealth() {
+            const container = document.getElementById('health-container');
+            container.textContent = 'Loading health status...';
+            
+            try {
+                const response = await fetch('/health');
+                const data = await response.json();
+                container.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                container.textContent = `Error loading health: ${error.message}`;
+            }
+        }
+
+        async function loadLogs() {
+            const container = document.getElementById('logs-container');
+            container.textContent = 'Loading logs...';
+            
+            try {
+                const response = await fetch('/logs');
+                const data = await response.json();
+                container.textContent = data.recent_lines ? data.recent_lines.join('') : JSON.stringify(data, null, 2);
+            } catch (error) {
+                container.textContent = `Error loading logs: ${error.message}`;
+            }
+        }
+
+        async function loadStats() {
+            const container = document.getElementById('stats-container');
+            container.textContent = 'Loading stats...';
+            
+            try {
+                const response = await fetch('/stats');
+                const data = await response.json();
+                container.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                container.textContent = `Error loading stats: ${error.message}`;
+            }
+        }
+
+        document.getElementById('question-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                askQuestion();
+            }
+        });
+
+        window.addEventListener('load', () => {
+            updateStatus('Ready');
+            console.log('🌟 Legal AI Ensemble System Ready');
+        });
+    </script>
+</body>
+</html>

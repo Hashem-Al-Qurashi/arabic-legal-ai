@@ -1,0 +1,30 @@
+# Legal AI Vanilla Ensemble System Dependencies
+
+# Web Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# AI/ML Models
+openai==1.3.5
+google-generativeai==0.3.1
+
+# HTTP & Async
+httpx==0.25.2
+requests==2.31.0
+aiohttp==3.9.1
+
+# Environment & Configuration
+python-dotenv==1.0.0
+
+# Data Processing
+pydantic==2.5.0
+
+# CORS Support
+python-multipart==0.0.6
+
+# Logging (built-in logging is used, but these are helpful)
+structlog==23.2.0
+
+# Optional: Development & Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
