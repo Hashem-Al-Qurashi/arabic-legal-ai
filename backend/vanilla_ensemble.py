@@ -96,20 +96,15 @@ class VanillaModelClients:
             http_client=httpx.AsyncClient()
         ) if config.gemini_api_key else None
         
-        # Judge models (3)
-        self.judge_claude = AsyncOpenAI(
-            api_key=config.claude_api_key,
-            base_url="https://api.anthropic.com/v1",
-            http_client=httpx.AsyncClient()
-        ) if config.claude_api_key else None
-        
-        self.judge_gpt = self.chatgpt
-        self.judge_gemini = self.gemini  # Same Gemini client for judging
+        # Judge models (3) - Use available models as judges
+        self.judge_gpt = self.chatgpt      # GPT-4o as judge
+        self.judge_deepseek = self.deepseek  # DeepSeek as judge  
+        self.judge_gemini = self.gemini    # Gemini as judge
         
         logger.info(f"🍦 Vanilla model clients initialized:")
         logger.info(f"  Generators: ChatGPT={bool(self.chatgpt)}, DeepSeek={bool(self.deepseek)}")
         logger.info(f"              Grok={bool(self.grok)}, Gemini={bool(self.gemini)}")
-        logger.info(f"  Judges: Claude={bool(self.judge_claude)}, GPT={bool(self.judge_gpt)}, Gemini={bool(self.judge_gemini)}")
+        logger.info(f"  Judges: GPT={bool(self.judge_gpt)}, DeepSeek={bool(self.judge_deepseek)}, Gemini={bool(self.judge_gemini)}")
     
     def get_available_generators(self) -> Dict[str, AsyncOpenAI]:
         """Get available generator models"""
@@ -127,10 +122,10 @@ class VanillaModelClients:
     def get_available_judges(self) -> Dict[str, AsyncOpenAI]:
         """Get available judge models"""
         judges = {}
-        if self.judge_claude:
-            judges["claude"] = self.judge_claude
         if self.judge_gpt:
             judges["gpt4o"] = self.judge_gpt
+        if self.judge_deepseek:
+            judges["deepseek"] = self.judge_deepseek
         if self.judge_gemini:
             judges["gemini"] = self.judge_gemini
         return judges

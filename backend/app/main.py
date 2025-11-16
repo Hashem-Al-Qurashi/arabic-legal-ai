@@ -171,24 +171,24 @@ print("📊 Architecture: Zero tech debt, maximum maintainability")
 
 # ===== VANILLA TEST PAGE =====
 
-@app.get("/vanilatest")
+@app.get("/vanilatest") 
 async def vanilla_test_page():
-    """Serve vanilla ensemble test page"""
+    """Serve simple vanilla ensemble test page"""
     import os
     frontend_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "frontend")
-    vanilla_test_path = os.path.join(frontend_path, "vanilla-test.html")
+    vanilla_test_path = os.path.join(frontend_path, "simple-vanilla.html")
     
     if os.path.exists(vanilla_test_path):
         return FileResponse(vanilla_test_path)
     else:
         return JSONResponse({
-            "error": "Vanilla test page not found",
+            "error": "Simple vanilla test page not found",
             "path": vanilla_test_path,
+            "description": "4 models answer → 3 judges extract best components → assemble best parts",
             "available_endpoints": {
                 "vanilla_ensemble_api": "/api/chat/message/vanilla-ensemble",
                 "vanilla_ensemble_stats": "/api/chat/vanilla-ensemble/stats"
-            },
-            "instructions": "Use the API endpoints directly or check the file path"
+            }
         })
 
 print("🍦 Vanilla ensemble test page available at: /vanilatest")
