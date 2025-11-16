@@ -13,7 +13,7 @@ const getApiBaseUrl = () => {
   
   // Local development (localhost or 127.0.0.1)
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    return 'http://localhost:8888';
+    return 'http://localhost:8890';
   }
   
   // Local network IP (like 172.20.10.2, 192.168.x.x, 10.x.x.x)

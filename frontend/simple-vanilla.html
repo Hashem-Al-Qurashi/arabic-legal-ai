@@ -308,7 +308,7 @@
                 const formData = new FormData();
                 formData.append('message', question);
                 
-                const res = await fetch('http://localhost:8000/api/chat/message/vanilla-ensemble', {
+                const res = await fetch('http://localhost:8888/api/chat/message/vanilla-ensemble', {
                     method: 'POST',
                     body: formData
                 });
@@ -367,7 +367,7 @@
                 formData.append('message', question);
                 formData.append('enable_streaming', 'true');
                 
-                const res = await fetch('http://localhost:8000/api/chat/message/vanilla-ensemble', {
+                const res = await fetch('http://localhost:8888/api/chat/message/vanilla-ensemble', {
                     method: 'POST',
                     body: formData
                 });

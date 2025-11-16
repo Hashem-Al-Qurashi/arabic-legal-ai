@@ -2,6 +2,16 @@ import React, { useRef, useState, useCallback } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { showToast } from '../../utils/helpers';
 
+// Get API base URL - same logic as api.ts
+const getApiBaseUrl = () => {
+  const hostname = window.location.hostname;
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'http://localhost:8890';
+  }
+  return `https://api.${hostname}`;
+};
+const API_BASE_URL = getApiBaseUrl();
+
 interface AttachmentInfo {
   id: string;
   fileType: string;
@@ -100,7 +110,7 @@ export const FileUploadButton: React.FC<FileUploadButtonProps> = ({
         processingStatus: 'processing'
       });
 
-      const response = await fetch('/api/ocr/extract', {
+      const response = await fetch(`${API_BASE_URL}/api/ocr/extract`, {
         method: 'POST',
         headers: {
           ...(user && { 'Authorization': `Bearer ${localStorage.getItem('token')}` })
