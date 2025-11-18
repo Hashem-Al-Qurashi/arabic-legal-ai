@@ -1,11 +1,13 @@
 import React from 'react';
-import type { MessageElement } from '../../types';
+import type { MessageElement, Message } from '../../types';
+import { ThinkingBubble } from './ThinkingBubble';
 
 interface MessageRendererProps {
   elements: MessageElement[];
+  message?: Message;  // Optional full message for thinking support
 }
 
-export const MessageRenderer: React.FC<MessageRendererProps> = ({ elements }) => {
+export const MessageRenderer: React.FC<MessageRendererProps> = ({ elements, message }) => {
   const renderElement = (element: MessageElement, index: number): React.ReactNode => {
     const baseStyle = {
       margin: 0,
@@ -122,5 +124,19 @@ export const MessageRenderer: React.FC<MessageRendererProps> = ({ elements }) =>
     );
   }
   
-  return <div style={{ direction: 'rtl', textAlign: 'right' }}>{groupedElements}</div>;
+  return (
+    <div style={{ direction: 'rtl', textAlign: 'right' }}>
+      {/* DeepSeek-style thinking bubble for assistant messages */}
+      {message?.role === 'assistant' && (message.thinking || message.thinkingActive) && (
+        <ThinkingBubble 
+          thinking={message.thinking || []}
+          isActive={message.thinkingActive || false}
+          startTime={message.thinkingStartTime}
+        />
+      )}
+      
+      {/* Regular message content */}
+      {groupedElements}
+    </div>
+  );
 };

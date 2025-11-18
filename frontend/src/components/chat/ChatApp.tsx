@@ -430,13 +430,19 @@ const handleDeleteCancel = () => {
     // 🔥 Create assistant message for real-time streaming updates
     const assistantMessageId = (Date.now() + 1).toString();
     let streamingContent = '';
+    
+    // Create AbortController for cancellation
+    const abortController = new AbortController();
 
-    // Add empty assistant message that will be updated in real-time
+    // Add empty assistant message with thinking support
     setMessages(prev => [...prev, {
       id: assistantMessageId,
       role: 'assistant',
       content: '',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      thinking: [],
+      thinkingActive: true,
+      thinkingStartTime: Date.now()
     }]);
 
     // 🚀 REAL STREAMING with conversation memory
@@ -457,7 +463,7 @@ const handleDeleteCancel = () => {
         setMessages(prev => {
           const updated = prev.map(msg => 
             msg.id === assistantMessageId 
-              ? { ...msg, content: streamingContent }  // ← FIX: No formatting during streaming
+              ? { ...msg, content: streamingContent, thinkingActive: false }  // ← Stop thinking when content starts
               : msg
           );
           console.log('🟡 CHATAPP: Updated messages during streaming:', updated[updated.length - 1]);
@@ -540,7 +546,35 @@ const handleDeleteCancel = () => {
         // Remove the assistant message on streaming error
         setMessages(prev => prev.filter(msg => msg.id !== assistantMessageId));
         showToast('حدث خطأ في الإرسال. حاول مرة أخرى.', 'error');
-      }
+      },
+      
+      // 🧠 Thinking handler - 7th parameter (DeepSeek-style)
+      (thinking: string) => {
+        console.log('🧠 CHATAPP: Received thinking:', thinking);
+        
+        // Update assistant message with thinking step and cancel function
+        setMessages(prev => {
+          const updated = prev.map(msg => 
+            msg.id === assistantMessageId 
+              ? { 
+                  ...msg, 
+                  thinking: [...(msg.thinking || []), thinking],
+                  thinkingActive: true,
+                  onCancel: () => {
+                    console.log('🛑 User cancelled processing');
+                    abortController.abort();
+                    // Remove the incomplete message
+                    setMessages(prev => prev.filter(m => m.id !== assistantMessageId));
+                  }
+                }
+              : msg
+          );
+          return updated;
+        });
+      },
+      
+      // Pass AbortController
+      abortController
     );
 
   } catch (error: any) {
@@ -844,25 +878,20 @@ const handleDeleteCancel = () => {
       
 <div style={{
   display: 'grid',
-  gridTemplateColumns: isMobile 
-    ? (sidebarOpen ? '320px 1fr' : '1fr')
-    : sidebarOpen 
-      ? '320px 1fr' 
-      : '1fr',
-  gridTemplateAreas: isMobile 
-    ? (sidebarOpen ? '"sidebar main"' : '"main"')
-    : sidebarOpen 
-      ? '"sidebar main"'
-      : '"main"',
+  gridTemplateColumns: sidebarOpen ? '1fr 320px' : '1fr',  // Main first, sidebar on RIGHT
+  gridTemplateAreas: sidebarOpen ? '"main sidebar"' : '"main"',  // Main content, then sidebar
   // 🔧 MOBILE FIX: Dynamic height
   height: isMobile ? 'auto' : '100vh',
   minHeight: isMobile ? '100vh' : 'auto',
   fontFamily: "'Noto Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
   background: 'var(--background-light)',
-  direction: 'rtl',
+  direction: 'ltr',  // Use LTR for grid layout, then apply RTL to content
   contain: 'layout style paint',
   // 🔧 MOBILE FIX: Allow scrolling
-  overflow: isMobile ? 'visible' : 'hidden'
+  overflow: isMobile ? 'visible' : 'hidden',
+  // ✨ SILKY SMOOTH GRID TRANSITIONS  
+  transition: 'grid-template-columns 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+  willChange: 'grid-template-columns'
 }}>
         
         {/* Mobile Backdrop */}
@@ -875,9 +904,9 @@ const handleDeleteCancel = () => {
       background: 'rgba(0, 0, 0, 0.5)',
       zIndex: 40,
       opacity: 1,
-      transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-      backdropFilter: 'blur(4px)',
-      willChange: 'opacity'
+      transition: 'opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), backdrop-filter 0.3s ease',
+      backdropFilter: 'blur(8px)',  // Increased blur for premium feel
+      willChange: 'opacity, backdrop-filter'
     }}
     onClick={(e) => {
       // Only close if clicking the backdrop itself, not scrolling
@@ -907,7 +936,7 @@ const handleDeleteCancel = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.2s ease',
       boxShadow: '0 8px 32px rgba(0, 108, 53, 0.25), 0 4px 16px rgba(0, 108, 53, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
       backdropFilter: 'blur(20px)',
       width: '48px',
@@ -936,18 +965,23 @@ const handleDeleteCancel = () => {
 <div 
   style={{
     gridArea: 'sidebar',
-    position: isMobile ? 'fixed' : 'relative',
-    inset: isMobile ? '0 0 0 auto' : 'auto',  // ← This positions it on the RIGHT
-    width: isMobile ? '320px' : '100%',
-    // 🔧 MOBILE FIX: Dynamic height
-    height: isMobile ? '100vh' : '100vh', // Keep 100vh for sidebar
+    position: sidebarOpen && !isMobile ? 'relative' : 'fixed',  // Grid when open on desktop, overlay otherwise
+    inset: sidebarOpen && !isMobile ? 'auto' : '0 0 0 auto',    // Position from right when overlay
+    right: sidebarOpen && !isMobile ? 'auto' : 0,
+    width: '320px',
+    height: '100vh',
     background: '#171717',
-    display: sidebarOpen ? 'flex' : 'none',
+    display: 'flex',
     flexDirection: 'column',
     borderLeft: '1px solid #363739',
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-    zIndex: isMobile ? 50 : 'auto',
-    boxShadow: isMobile ? '0 10px 25px rgba(0, 0, 0, 0.15)' : 'none'
+    // 🎯 SMOOTH SLIDE ANIMATION FOR ALL STATES (RTL: slide from RIGHT)
+    transform: sidebarOpen ? 'translateX(0)' : 'translateX(100%)',  // Slide to RIGHT to hide
+    transition: 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease',
+    opacity: sidebarOpen ? 1 : 0,
+    zIndex: (isMobile || !sidebarOpen) ? 50 : 'auto',
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)',
+    willChange: 'transform, opacity',
+    pointerEvents: sidebarOpen ? 'auto' : 'none'
   }}
 >
           {/* Sidebar Header - Clean & Spaced */}
@@ -1625,7 +1659,12 @@ const handleDeleteCancel = () => {
   minHeight: isMobile ? '100vh' : 'auto',
   position: 'relative',
   // 🔧 MOBILE FIX: Allow overflow on mobile
-  overflow: isMobile ? 'visible' : 'hidden'
+  overflow: isMobile ? 'visible' : 'hidden',
+  // ✨ SMOOTH ADAPTATION: Content adapts smoothly to sidebar
+  transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+  transform: 'translateZ(0)', // Hardware acceleration
+  willChange: 'transform',
+  direction: 'rtl'  // RTL for chat content
 }}>
 
           {/* Messages Area */}
@@ -1832,6 +1871,7 @@ const handleDeleteCancel = () => {
   sidebarOpen={sidebarOpen}
   isLastMessage={index === messages.length - 1}
   messages={messages}
+  message={message}
   conversations={conversations}
   selectedConversation={selectedConversation}
   isDark={isDark}

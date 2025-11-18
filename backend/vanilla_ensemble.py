@@ -593,6 +593,28 @@ Create a comprehensive, well-structured legal response in Arabic."""
 
 ملاحظة: تم استخدام الإجابة الأفضل من النماذج المتاحة."""
 
+    def extract_reasoning_flash(self, response_text: str) -> str:
+        """Extract a real reasoning flash from model response to show as thinking"""
+        
+        # Extract meaningful first sentence/thought from the response
+        lines = response_text.split('\n')
+        for line in lines:
+            line = line.strip()
+            if len(line) > 20 and len(line) < 150:  # Good reasoning length
+                # Remove formatting and get clean reasoning
+                clean_line = line.replace('**', '').replace('#', '').replace('*', '').strip()
+                if any(keyword in clean_line for keyword in ['وفقاً', 'تنص', 'يحق', 'المادة', 'النظام', 'بناءً']):
+                    return clean_line
+        
+        # Fallback: extract first meaningful sentence
+        sentences = response_text.split('.')
+        for sentence in sentences[:3]:
+            sentence = sentence.strip()
+            if len(sentence) > 30 and len(sentence) < 120:
+                return sentence.replace('**', '').replace('#', '').strip()
+        
+        return ""
+
     async def direct_synthesis_streaming(self, responses: List[ModelResponse]):
         """Stream the direct synthesis process in real-time"""
         logger.info("🎯 Starting Direct Synthesis - Real-time Streaming")
@@ -603,19 +625,13 @@ Create a comprehensive, well-structured legal response in Arabic."""
             yield {"type": "error", "content": "لم يتم الحصول على إجابات صالحة من النماذج."}
             return
         
-        # Stream status updates
-        yield {"type": "status", "content": f"🔄 دمج إجابات من {len(successful_responses)} نماذج..."}
-        
-        # Log original response lengths  
+        # Log original response lengths (no fake thinking steps)
         for i, response in enumerate(successful_responses, 1):
             logger.info(f"📝 Model {i} ({response.model_name}): {len(response.response)} characters")
         
         total_chars = sum(len(r.response) for r in successful_responses)
-        logger.info(f"📊 Total input content: {total_chars} characters")
         
-        yield {"type": "status", "content": f"📊 معالجة {total_chars} حرف من المحتوى..."}
-        
-        # Combine all responses
+        # Combine all responses (hidden from user)
         combined_responses = "\n\n" + "="*80 + "\n\n".join([
             f"إجابة النموذج {i+1} ({r.model_name}):\n{r.response}" 
             for i, r in enumerate(successful_responses)
@@ -635,7 +651,6 @@ Create a comprehensive, well-structured legal response in Arabic."""
 اكتب إجابة قانونية شاملة ومفصلة باللغة العربية تجمع كل المعلومات القيمة من النماذج الثلاثة."""
 
         try:
-            yield {"type": "status", "content": "🤖 بدء التحليل النهائي..."}
             logger.info("🤖 Running streaming synthesis with GPT-4o")
             start_time = time.time()
             
@@ -672,22 +687,39 @@ Create a comprehensive, well-structured legal response in Arabic."""
             logger.error(f"❌ Streaming synthesis failed: {e}")
             yield {"type": "error", "content": f"خطأ في المعالجة: {str(e)}"}
 
-    async def process_question_streaming(self, question: str):
-        """Process question with real-time streaming updates"""
+    async def process_question_streaming(self, question: str, context: str = "", cancel_event=None):
+        """Process question with real-time streaming updates and conversation context"""
         logger.info("="*80)
         logger.info(f"🎯 STARTING VANILLA ENSEMBLE STREAMING PROCESSING")
         logger.info(f"Question: {question}")
+        if context:
+            logger.info(f"📚 Context provided: {len(context)} characters")
         logger.info("="*80)
         
-        yield {"type": "status", "content": "🚀 بدء معالجة السؤال بنظام النماذج المتعددة..."}
+        # Check for early cancellation
+        if cancel_event and cancel_event.is_set():
+            logger.info("🛑 Processing cancelled before start")
+            yield {"type": "cancelled", "content": "تم إيقاف المعالجة"}
+            return
         
         total_start_time = time.time()
         total_cost = 0.0
         
-        # Step 1: Stream model generation updates
-        yield {"type": "status", "content": "📝 إرسال السؤال إلى 3 نماذج ذكية..."}
+        # Start processing without fake initial thinking steps
         
-        saudi_prompt = f"""Answer this question based on Saudi law and regulations. Provide a comprehensive legal response:
+        # Build context-aware prompt
+        if context:
+            saudi_prompt = f"""You are a legal expert specializing in Saudi law. Based on the conversation context and current question, provide a comprehensive legal response.
+
+Context from previous conversation:
+{context}
+
+Current question:
+{question}
+
+Please provide your answer based on Saudi legal framework, including relevant laws, regulations, and procedures. Consider the conversation context when answering."""
+        else:
+            saudi_prompt = f"""Answer this question based on Saudi law and regulations. Provide a comprehensive legal response:
 
 {question}
 
@@ -705,34 +737,39 @@ Please provide your answer based on Saudi legal framework, including relevant la
         
         logger.info(f"🚀 Launching {len(tasks)} parallel API calls...")
         
-        # Process responses as they complete
+        # Process responses as they complete with REAL reasoning flashes
         completed_responses = []
+        
         for i, task in enumerate(asyncio.as_completed(tasks), 1):
-            yield {"type": "status", "content": f"⏳ استلام إجابة من النموذج {i}/{len(tasks)}..."}
-            
+            # Check for cancellation before processing each model
+            if cancel_event and cancel_event.is_set():
+                logger.info("🛑 Processing cancelled by user")
+                yield {"type": "cancelled", "content": "تم إيقاف المعالجة"}
+                return
+                
             try:
                 response = await task
                 if response.success:
                     completed_responses.append(response)
-                    yield {"type": "status", "content": f"✅ {response.model_name}: {len(response.response)} حرف"}
+                    
+                    # Extract actual reasoning flash from the response
+                    reasoning_flash = self.extract_reasoning_flash(response.response)
+                    if reasoning_flash:
+                        yield {"type": "thinking", "content": f"💭 {reasoning_flash}"}
+                    
                     logger.info(f"✅ {response.model_name}: {len(response.response)} chars, ${response.cost:.4f}")
                 else:
-                    yield {"type": "status", "content": f"❌ {response.model_name}: فشل"}
+                    yield {"type": "thinking", "content": "🤔 أعيد تحليل المعلومات المتاحة..."}
                     logger.error(f"❌ {response.model_name}: {response.error}")
             except Exception as e:
-                yield {"type": "status", "content": f"❌ خطأ في أحد النماذج: {str(e)}"}
                 logger.error(f"❌ Model error: {e}")
         
         generation_cost = sum(r.cost for r in completed_responses)
         total_cost += generation_cost
-        yield {"type": "status", "content": f"💰 تكلفة النماذج: ${generation_cost:.4f}"}
         
         if not completed_responses:
-            yield {"type": "error", "content": "❌ فشل في الحصول على إجابات من النماذج"}
+            yield {"type": "error", "content": "❌ فشل في معالجة السؤال"}
             return
-        
-        # Step 2: Start streaming synthesis
-        yield {"type": "status", "content": "🔧 بدء دمج الإجابات في إجابة موحدة..."}
         
         async for synthesis_update in self.direct_synthesis_streaming(completed_responses):
             yield synthesis_update

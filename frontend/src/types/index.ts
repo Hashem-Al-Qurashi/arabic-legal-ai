@@ -92,6 +92,7 @@ export interface FormattedMessageProps {
   sidebarOpen: boolean;
   isLastMessage?: boolean;
   messages?: Message[];
+  message?: Message;  // Full message object for thinking support
   conversations?: Conversation[];
   selectedConversation?: string | null;
   isDark?: boolean;
@@ -142,6 +143,11 @@ export interface Message {
   content: string;
   timestamp: string;
   processing_time_ms?: number;
+  // DeepSeek-style thinking process
+  thinking?: string[];           // Array of thinking steps
+  thinkingActive?: boolean;      // Currently thinking/processing
+  thinkingStartTime?: number;    // For timer display
+  onCancel?: () => void;         // Cancel function for active processing
 }
 
 /**

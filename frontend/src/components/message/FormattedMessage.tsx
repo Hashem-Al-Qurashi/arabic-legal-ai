@@ -2,6 +2,7 @@ import React from 'react';
 import type { FormattedMessageProps } from '../../types';
 import { formatAIResponse } from '../../utils/messageParser';
 import { ActionsBar } from '../actions';
+import { ThinkingBubble } from './ThinkingBubble';
 
 export const FormattedMessage: React.FC<FormattedMessageProps> = ({ 
   content, 
@@ -9,6 +10,7 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
   sidebarOpen, 
   isLastMessage = false,
   messages = [],
+  message,  // Full message object for thinking
   conversations = [],
   selectedConversation = null,
   isDark = false
@@ -62,6 +64,16 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
           maxWidth: '100%',
         }}
       >
+        {/* DeepSeek-style thinking bubble */}
+        {message?.role === 'assistant' && (message.thinking || message.thinkingActive) && (
+          <ThinkingBubble 
+            thinking={message.thinking || []}
+            isActive={message.thinkingActive || false}
+            startTime={message.thinkingStartTime}
+            onCancel={message.onCancel}
+          />
+        )}
+        
         <div
           className="ai-response"
           dangerouslySetInnerHTML={{ __html: (() => {
@@ -202,6 +214,16 @@ export const FormattedMessage: React.FC<FormattedMessageProps> = ({
             borderRadius: '0 24px 24px 0',
             boxShadow: 'inset 1px 0 2px rgba(255, 255, 255, 0.3)'
           }}
+        />
+      )}
+
+      {/* DeepSeek-style thinking bubble for desktop */}
+      {!isMobile && message?.role === 'assistant' && (message.thinking || message.thinkingActive) && (
+        <ThinkingBubble 
+          thinking={message.thinking || []}
+          isActive={message.thinkingActive || false}
+          startTime={message.thinkingStartTime}
+          onCancel={message.onCancel}
         />
       )}
 

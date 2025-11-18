@@ -13,7 +13,7 @@ const getApiBaseUrl = () => {
   
   // Local development (localhost or 127.0.0.1)
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    return 'http://localhost:8890';
+    return 'http://localhost:8891';
   }
   
   // Local network IP (like 172.20.10.2, 192.168.x.x, 10.x.x.x)
@@ -257,6 +257,9 @@ export const legalAPI = {
     window.URL.revokeObjectURL(downloadUrl);
   }
 };
+// Add thinking callback type
+type ThinkingCallback = (thinking: string) => void;
+
 export const chatAPI = {
 async sendMessage(message: string, conversationId?: string, sessionId?: string): Promise<any> {
   const formData = new FormData();
@@ -305,7 +308,9 @@ async sendMessageStreaming(
   sessionId?: string,
   onChunk?: (chunk: string) => void,
   onComplete?: (response: any) => void,
-  onError?: (error: string) => void
+  onError?: (error: string) => void,
+  onThinking?: ThinkingCallback,
+  abortController?: AbortController  // Cancel support
 ): Promise<void> {
   const formData = new FormData();
   formData.append('message', message);
@@ -326,7 +331,8 @@ async sendMessageStreaming(
         'Accept': 'text/event-stream',
         ...(getToken() && { 'Authorization': `Bearer ${getToken()}` }),
       },
-      body: formData
+      body: formData,
+      signal: abortController?.signal  // Add abort signal for cancellation
     });
 
     if (!response.ok) {
@@ -359,7 +365,10 @@ async sendMessageStreaming(
             const parsed = JSON.parse(data);
             console.log('🔵 API: Parsed SSE data:', parsed);
             
-            if (parsed.type === 'chunk' && parsed.content && onChunk) {
+            if (parsed.type === 'thinking' && parsed.content && onThinking) {
+              console.log('🔵 API: Processing thinking:', parsed.content);
+              onThinking(parsed.content);
+            } else if (parsed.type === 'chunk' && parsed.content && onChunk) {
               console.log('🔵 API: Processing chunk:', parsed.content);
               fullResponse += parsed.content;
               onChunk(parsed.content);

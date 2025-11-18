@@ -6,7 +6,7 @@ import { showToast } from '../../utils/helpers';
 const getApiBaseUrl = () => {
   const hostname = window.location.hostname;
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    return 'http://localhost:8890';
+    return 'http://localhost:8891';
   }
   return `https://api.${hostname}`;
 };

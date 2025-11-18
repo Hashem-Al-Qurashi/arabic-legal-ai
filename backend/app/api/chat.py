@@ -28,6 +28,81 @@ def get_vanilla_ensemble():
         vanilla_ensemble = VanillaEnsemble()
     return vanilla_ensemble
 
+# ===== CONTEXT COMPRESSION FUNCTIONS =====
+async def extract_legal_facts_from_messages(messages: List[Dict]) -> str:
+    """Extract key legal facts from verbose conversation messages using GPT-3.5-turbo"""
+    
+    if not messages:
+        return ""
+    
+    # Build conversation text
+    conversation_text = "\n".join([
+        f"{msg['role']}: {msg['content'][:500]}..."  # Limit per message for summarization
+        for msg in messages
+    ])
+    
+    facts_prompt = f"""Extract ONLY the key legal facts from this conversation. Keep it concise:
+
+{conversation_text}
+
+Extract:
+- Client name/identity (if mentioned)
+- Legal issues/crimes mentioned
+- Key factual details (dates, amounts, locations)
+- Current legal status/situation
+
+Format as brief bullet points. Maximum 200 words total in Arabic."""
+
+    try:
+        import openai
+        client = openai.OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+        
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",  # Cheaper for summarization
+            messages=[{"role": "user", "content": facts_prompt}],
+            max_tokens=300
+        )
+        
+        facts = response.choices[0].message.content
+        print(f"📝 Compressed {len(conversation_text)} chars → {len(facts)} chars")
+        return facts
+        
+    except Exception as e:
+        print(f"❌ Fact extraction failed: {e}")
+        # Fallback: take first 200 chars of each message
+        return "\n".join([f"- {msg['content'][:100]}..." for msg in messages[-3:]])
+
+def build_progressive_context(context: List[Dict]) -> str:
+    """Build progressive context: recent full + older compressed"""
+    
+    if not context:
+        return ""
+    
+    # Split context into recent vs older
+    recent_messages = context[-2:] if len(context) >= 2 else context  # Last 2 full
+    older_messages = context[:-2] if len(context) > 2 else []          # Rest compressed
+    
+    progressive_context = ""
+    
+    # Add compressed older context
+    if older_messages:
+        # For now, use simple compression (will replace with AI extraction)
+        compressed_facts = "\n".join([
+            f"- {msg['role']}: {msg['content'][:150]}..."
+            for msg in older_messages
+        ])
+        progressive_context += f"المعلومات السابقة:\n{compressed_facts}\n\n"
+    
+    # Add recent full context  
+    if recent_messages:
+        recent_text = "\n".join([
+            f"{msg['role']}: {msg['content']}"
+            for msg in recent_messages
+        ])
+        progressive_context += f"المحادثة الحديثة:\n{recent_text}"
+    
+    return progressive_context
+
 # ===== UTILITY FUNCTIONS =====
 
 def _serialize_user_message(user_message) -> Dict[str, Any]:
@@ -308,17 +383,25 @@ async def _generate_streaming_response(
         
         print(f"🔄 Processing with Vanilla Ensemble - real-time streaming")
         
-        # Process question with vanilla ensemble (real-time streaming)
+        # Build progressive context for vanilla ensemble
+        progressive_context = build_progressive_context(context)
+        print(f"📚 Built progressive context: {len(progressive_context)} characters")
+        
+        # Process question with vanilla ensemble (real-time streaming + context)
         full_response = ""
-        async for update in ensemble_instance.process_question_streaming(message_content):
-            if update["type"] == "status":
-                # Stream status updates
-                status_data = {
-                    'type': 'status',
+        thinking_steps = []
+        
+        async for update in ensemble_instance.process_question_streaming(message_content, progressive_context):
+            if update["type"] == "thinking":
+                # Collect thinking steps for DeepSeek-style display
+                thinking_steps.append(update["content"])
+                thinking_data = {
+                    'type': 'thinking',
                     'content': update["content"],
+                    'thinking_steps': thinking_steps,
                     'chunk_id': chunk_count
                 }
-                yield f"data: {json.dumps(status_data)}\n\n"
+                yield f"data: {json.dumps(thinking_data)}\n\n"
                 
             elif update["type"] == "chunk":
                 # Stream actual content chunks
