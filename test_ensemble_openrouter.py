@@ -7,7 +7,8 @@ import time
 from vanilla_ensemble_openrouter import VanillaEnsemble
 
 # Set the OpenRouter API key
-os.environ['OPENROUTER_API_KEY'] = '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'
+# API key should be in .env file
+# os.environ['OPENROUTER_API_KEY'] is loaded from .env
 
 async def test_ensemble():
     print("="*80)

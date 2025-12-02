@@ -264,5 +264,7 @@ async def test_fast_ensemble():
             print(f"  • Speed improvement: {improvement:.1f}x faster!")
 
 if __name__ == "__main__":
-    os.environ['OPENROUTER_API_KEY'] = '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'
+    # Load from .env file
+    from dotenv import load_dotenv
+    load_dotenv()
     asyncio.run(test_fast_ensemble())

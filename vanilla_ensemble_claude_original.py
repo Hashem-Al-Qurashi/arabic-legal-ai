@@ -271,5 +271,7 @@ if __name__ == "__main__":
         print(f"\n📝 Response preview:")
         print(result['final_response'][:500] + "...")
     
-    os.environ['OPENROUTER_API_KEY'] = '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'
+    # Load from .env file
+    from dotenv import load_dotenv
+    load_dotenv()
     asyncio.run(test())
